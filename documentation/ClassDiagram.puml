@@ -5,141 +5,118 @@ class User {
 -int ID
 -String firstname
 -String surname
--String listorders
-+String email
-+int role
-+int membership
+-String email
+-int role
+-int membership
+-ArrayList<Order> orders
 }
 
 class Order {
 -int orderID
-+String timestamp
-+ArrayList status
-+ArrayList screwList
-+ArrayList woodList
-+ArrayList fittingList
-+ArrayList roofTileList
+-String timestamp
+-ArrayList status
+-ArrayList screwList
+-ArrayList woodList
+-ArrayList fittingList
+-ArrayList roofTileList
 }
 
 class UserMapper{
-+getAllUsers()
-+getUser()
-+updateUser()
-+deleteUser()
-+createUser()
++ {static} getAllUsers()
++ {static} getUser()
++ {static} updateUser()
++ {static} deleteUser()
++ {static} createUser()
 }
 
 class OrderFacade{
-updateOrder()
-deleteOrder()
-createOrder()
-approveOrder()
++ {static} updateOrder()
++ {static} deleteOrder()
++ {static} createOrder()
++ {static} approveOrder()
 }
 
 class MaterialFacade{
-addWood()
-addScrews()
-addRoofTiles()
-addFittings()
++ {static} addWood()
++ {static} addScrews()
++ {static} addRoofTiles()
++ {static} addFittings()
 }
 
 class UserFacade{
-updateUser()
-deleteUser()
-createUser()
-
-
++ {static} updateUser()
++ {static} deleteUser()
++ {static} createUser()
 }
 
 
 class OrderMapper{
-+getAllOrders()
-+getOrder()
-+updateOrder()
-+deleteOrder()
-+createOrder()
-+approveOrder()
++ {static} getAllOrders()
++ {static} getOrder()
++ {static} updateOrder()
++ {static} deleteOrder()
++ {static} createOrder()
++ {static} approveOrder()
 }
 
 class MaterialMapper{
-+getAllMaterials()
-+getMaterial()
-+addWood()
-+addScrews()
-+addRoofTiles()
-+addFittings()
++ {static} getAllMaterials()
++ {static} getMaterial()
++ {static} addWood()
++ {static} addScrews()
++ {static} addRoofTiles()
++ {static} addFittings()
 
 }
 
-class RoofTiles{
-+String name
-+int length
-+int width
-+double price
-+description
+class RoofTile{
+-String name
+-int length
+-int width
+-double price
+-String description
 }
 
 class Wood{
-+String name
-+int length
-+int height
-+int width
-+double price
-+String description
+-String name
+-int length
+-int height
+-int width
+-double price
+-String description
 }
 
-class Fittings{
-+String name
-+int length
-+int height
-+int width
-+double price
-+String description
+class Fitting{
+-String name
+-int length
+-int height
+-int width
+-double price
+-String description
 
 }
 
 interface AScrew{
-+String name
-+int length
-+double price
-+String description
+-String name
+-int length
+-double price
+-String description
 
 }
 
 class ScrewPack{
-+int quantity
+-int quantity
 }
 
 class Screw{
-+int name
-+double diameter
-+int length
-+double price
-+String description
 }
 
-
-User <-- Order
-
-
-User <-- UserFacade
-UserFacade <-- UserMapper
-
-
-
-OrderFacade <-- OrderMapper
-Order <--OrderFacade
-
-
-Order <-- MaterialFacade
-MaterialFacade <-- MaterialMapper
-
-MaterialMapper <-- Wood
-MaterialMapper <-- Screw
-MaterialMapper <-- Fittings
-MaterialMapper <-- RoofTiles
-
-
+Order *-- Screw
+Order *-- ScrewPack
+Order *-- Fitting
+Order *-- RoofTile
+Order *-- Wood
+User *-- Order
 AScrew <-- ScrewPack
 AScrew <-- Screw
 
