@@ -30,7 +30,7 @@ class UserMapper{
 }
 
 
-class orderMapper{
+class OrderMapper{
 +GetAllOrder()
 +GetOrder()
 +UpdateOrder()
@@ -97,9 +97,15 @@ class Screw{
 }
 
 
+User <-- Order
+MaterialMapper <-- Wood
+MaterialMapper <-- Screw
+MaterialMapper <-- Fittings
+MaterialMapper <-- RoofTiles
 
-
-
+User <-- UserMapper
+Order <-- MaterialMapper
+MaterialMapper <--OrderMapper
 
 
 
