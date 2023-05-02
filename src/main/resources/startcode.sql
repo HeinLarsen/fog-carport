@@ -49,9 +49,9 @@ UNLOCK TABLES;
 
 /* Create test database from startcode structure */
 
-CREATE DATABASE  IF NOT EXISTS `startcode_test` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `startcode_test`;
-CREATE TABLE startcode_test.user LIKE startcode.user;
+CREATE DATABASE  IF NOT EXISTS `carport_test` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `carport_test`;
+CREATE TABLE carport_test.user LIKE carport.user;
 
 
 
