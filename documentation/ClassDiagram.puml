@@ -1,0 +1,123 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class User {
+-int ID
+-String firstname
+-String surname
+-String email
+-int role
+-int membership
+-ArrayList<Order> orders
+}
+
+class Order {
+-int orderID
+-String timestamp
+-ArrayList status
+-ArrayList screwList
+-ArrayList woodList
+-ArrayList fittingList
+-ArrayList roofTileList
+}
+
+class UserMapper{
++ {static} getAllUsers()
++ {static} getUser()
++ {static} updateUser()
++ {static} deleteUser()
++ {static} createUser()
+}
+
+class OrderFacade{
++ {static} updateOrder()
++ {static} deleteOrder()
++ {static} createOrder()
++ {static} approveOrder()
+}
+
+class MaterialFacade{
++ {static} addWood()
++ {static} addScrews()
++ {static} addRoofTiles()
++ {static} addFittings()
+}
+
+class UserFacade{
++ {static} updateUser()
++ {static} deleteUser()
++ {static} createUser()
+}
+
+
+class OrderMapper{
++ {static} getAllOrders()
++ {static} getOrder()
++ {static} updateOrder()
++ {static} deleteOrder()
++ {static} createOrder()
++ {static} approveOrder()
+}
+
+class MaterialMapper{
++ {static} getAllMaterials()
++ {static} getMaterial()
++ {static} addWood()
++ {static} addScrews()
++ {static} addRoofTiles()
++ {static} addFittings()
+
+}
+
+class RoofTile{
+-String name
+-int length
+-int width
+-double price
+-String description
+}
+
+class Wood{
+-String name
+-int length
+-int height
+-int width
+-double price
+-String description
+}
+
+class Fitting{
+-String name
+-int length
+-int height
+-int width
+-double price
+-String description
+
+}
+
+interface AScrew{
+-String name
+-int length
+-double price
+-String description
+
+}
+
+class ScrewPack{
+-int quantity
+}
+
+class Screw{
+}
+
+Order *-- Screw
+Order *-- ScrewPack
+Order *-- Fitting
+Order *-- RoofTile
+Order *-- Wood
+User *-- Order
+AScrew <-- ScrewPack
+AScrew <-- Screw
+
+@enduml
