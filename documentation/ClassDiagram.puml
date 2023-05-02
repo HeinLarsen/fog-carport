@@ -99,6 +99,7 @@ class Fitting{
 interface AScrew{
 -String name
 -int length
+-double diameter
 -double price
 -String description
 
