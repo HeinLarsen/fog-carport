@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+|Customer|
+start
+:Customize;
+|System|
+:Order;
+|Admin|
+:Order confirmation;
+|System|
+:Material list + stl file;
+|Customer|
+:Download file;
+stop
+
+@enduml
