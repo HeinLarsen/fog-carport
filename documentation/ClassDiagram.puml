@@ -1,0 +1,109 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class User {
+-int ID
+-String firstname
+-String surname
+-List Orders
++String Email
++char Role
++char Membership
+}
+
+class Order {
+-int Order ID
++String TimeStamp
++String Status
++String ScrewList
++String WoodList
++String FittingList
++String RoofTileList
+}
+
+class UserMapper{
++GetAllUser()
++getUser()
++UpdateUser()
++DeleteUser()
++CreateUser()
+}
+
+
+class orderMapper{
++GetAllOrder()
++GetOrder()
++UpdateOrder()
++DeleteOrder()
++CreateOrder()
++ApproveOrder()
+}
+
+class MaterialMapper{
++GetAllMaterials()
++GetMaterial()
++AddWood()
++AddScrews()
++AddRoofTiles()
++AddFittings()
+
+}
+
+class RoofTiles{
++String name
++int length
++int width
++double price
++description
+}
+
+class Wood{
++String name
++int length
++int height
++int width
++double price
++String description
+}
+
+class Fittings{
++String name
++int length
++int height
++int width
++double price
++String description
+
+}
+
+interface AScrew{
++String name
++int length
++double price
++String description
+
+}
+
+class ScrewPack{
++int quantity
+}
+
+class Screw{
++int name
++double diameter
++int length
++double price
++String description
+}
+
+
+
+
+
+
+
+
+AScrew <-- ScrewPack
+AScrew <-- Screw
+
+@enduml
