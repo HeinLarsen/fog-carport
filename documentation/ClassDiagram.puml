@@ -5,47 +5,69 @@ class User {
 -int ID
 -String firstname
 -String surname
--List Orders
-+String Email
-+char Role
-+char Membership
+-String listorders
++String email
++int role
++int membership
 }
 
 class Order {
--int Order ID
-+String TimeStamp
-+String Status
-+String ScrewList
-+String WoodList
-+String FittingList
-+String RoofTileList
+-int orderID
++String timestamp
++ArrayList status
++ArrayList screwList
++ArrayList woodList
++ArrayList fittingList
++ArrayList roofTileList
 }
 
 class UserMapper{
-+GetAllUser()
++getAllUsers()
 +getUser()
-+UpdateUser()
-+DeleteUser()
-+CreateUser()
++updateUser()
++deleteUser()
++createUser()
+}
+
+class OrderFacade{
+updateOrder()
+deleteOrder()
+createOrder()
+approveOrder()
+}
+
+class MaterialFacade{
+addWood()
+addScrews()
+addRoofTiles()
+addFittings()
+}
+
+class UserFacade{
+updateUser()
+deleteUser()
+createUser()
+
+
 }
 
 
 class OrderMapper{
-+GetAllOrder()
-+GetOrder()
-+UpdateOrder()
-+DeleteOrder()
-+CreateOrder()
-+ApproveOrder()
++getAllOrders()
++getOrder()
++updateOrder()
++deleteOrder()
++createOrder()
++approveOrder()
 }
 
 class MaterialMapper{
-+GetAllMaterials()
-+GetMaterial()
-+AddWood()
-+AddScrews()
-+AddRoofTiles()
-+AddFittings()
++getAllMaterials()
++getMaterial()
++addWood()
++addScrews()
++addRoofTiles()
++addFittings()
 
 }
 
@@ -98,15 +120,24 @@ class Screw{
 
 
 User <-- Order
+
+
+User <-- UserFacade
+UserFacade <-- UserMapper
+
+
+
+OrderFacade <-- OrderMapper
+Order <--OrderFacade
+
+
+Order <-- MaterialFacade
+MaterialFacade <-- MaterialMapper
+
 MaterialMapper <-- Wood
 MaterialMapper <-- Screw
 MaterialMapper <-- Fittings
 MaterialMapper <-- RoofTiles
-
-User <-- UserMapper
-Order <-- MaterialMapper
-MaterialMapper <--OrderMapper
-
 
 
 AScrew <-- ScrewPack
