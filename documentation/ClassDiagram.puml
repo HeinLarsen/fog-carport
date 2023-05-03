@@ -2,59 +2,60 @@
 'https://plantuml.com/class-diagram
 
 class User {
--int ID
--String firstname
--String surname
--String email
--int role
--int membership
--ArrayList<Order> orders
+- int ID
+- String firstname
+- String surname
+- String email
+- int role
+- int membership
+- ArrayList<Order> orders
 }
 
 class Order {
--int orderID
--String timestamp
--Enum status
--ArrayList screwList
--ArrayList woodList
--ArrayList fittingList
--ArrayList roofTileList
+- int orderID
+- String timestamp
+- Enum status
+- ArrayList<Screw> screws
+- ArrayList<ScrewPack> screwPackages
+- ArrayList<Wood> wood
+- ArrayList<Fitting> fittings
+- ArrayList<RoofTile> roofTiles
 }
 
 class UserMapper{
-+ {static} getAllUsers()
-+ {static} getUser()
-+ {static} updateUser()
-+ {static} deleteUser()
-+ {static} createUser()
++ {static} ArrayList<User> getAllUsers()
++ {static} User getUser()
++ {static} void updateUser()
++ {static} void deleteUser()
++ {static} void createUser()
 }
 
 class OrderFacade{
-+ {static} updateOrder()
-+ {static} deleteOrder()
-+ {static} createOrder()
-+ {static} approveOrder()
++ {static} void updateOrder()
++ {static} void deleteOrder()
++ {static} void createOrder()
++ {static} void approveOrder()
 }
 
 class MaterialFacade{
-+ {static} addWood()
-+ {static} addScrews()
-+ {static} addRoofTiles()
-+ {static} addFittings()
++ {static} void addWood()
++ {static} void addScrews()
++ {static} void addRoofTiles()
++ {static} void addFittings()
 }
 
 class UserFacade{
-+ {static} updateUser()
-+ {static} deleteUser()
-+ {static} createUser()
++ {static} void updateUser()
++ {static} void deleteUser()
++ {static} void createUser()
 }
 
 class OrderMapper{
-+ {static} getAllOrders()
-+ {static} getOrder()
-+ {static} updateOrder()
-+ {static} deleteOrder()
-+ {static} createOrder()
++ {static} ArrayList<Order> getAllOrders()
++ {static} Order getOrder()
++ {static} void updateOrder()
++ {static} void deleteOrder()
++ {static} void createOrder()
 + {static} approveOrder()
 }
 
@@ -68,42 +69,44 @@ class MaterialMapper{
 }
 
 class RoofTile{
--String name
--int length
--int width
--double price
--String description
+- String name
+- int length
+- int width
+- double price
+- String description
 }
 
 class Wood{
--String name
--int length
--int height
--int width
--double price
--String description
+- String name
+- int length
+- int height
+- int width
+- double price
+- String description
 }
 
 class Fitting{
--String name
--int length
--int height
--int width
--double price
--String description
+- String name
+- int length
+- int height
+- int width
+- double price
+- String description
+}
 
+class GenerateStl {
++ {static} generateStl()
 }
 
 interface AScrew{
--String name
--int length
--double price
--String description
-
+- String name
+- int length
+- double price
+- String description
 }
 
 class ScrewPack{
--int quantity
+- int quantity
 }
 
 class Screw{
