@@ -10,7 +10,9 @@ start
 |Backend|
 |Database|
 :Create User;
+stop
 |Website|
+start
 :Login;
 |Backend|
 :Validate Credentials;
@@ -23,11 +25,10 @@ start
 |Website|
 :Approve Order;
 |Backend|
-:Generate Payment;
+:Generate Price;
+:Generate Invoice;
 |Website|
-:Payment;
-|Backend|
-:Validate Payment;
+:Invoice;
 |Backend|
 :Generate material list + stl file;
 |Website|
