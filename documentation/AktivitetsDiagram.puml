@@ -20,8 +20,6 @@ start
 :Generate Order;
 |Database|
 :Save Order;
-|Backend|
-:Storage Check;
 |Website|
 :Approve Order;
 |Backend|
