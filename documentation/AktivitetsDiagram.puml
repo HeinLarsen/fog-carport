@@ -13,7 +13,7 @@ start
 |Website|
 :Login;
 |Backend|
-:Login System;
+:Validate Credentials;
 |Website|
 :Make order;
 |Backend|
@@ -28,6 +28,8 @@ start
 :Generate Payment;
 |Website|
 :Payment;
+|Backend|
+:Validate Payment;
 |Backend|
 :Generate material list + stl file;
 |Website|
