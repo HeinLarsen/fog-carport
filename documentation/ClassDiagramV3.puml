@@ -1,0 +1,123 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class User {
+- int ID
+- String firstname
+- String surname
+- String email
+- int role
+- int membership
+- ArrayList<Order> orders
+}
+
+class Order {
+- int orderID
+- String timestamp
+- Enum status
+- ArrayList<Material> materials
+}
+
+class UserMapper{
++ {static} ArrayList<User> getAllUsers()
++ {static} User getUser()
++ {static} void updateUser()
++ {static} void deleteUser()
++ {static} void createUser()
+}
+
+class OrderFacade{
++ {static} void updateOrder()
++ {static} void deleteOrder()
++ {static} void createOrder()
++ {static} void approveOrder()
+}
+
+class MaterialFacade{
++ {static} void addWood()
++ {static} void addScrews()
++ {static} void addRoofTiles()
++ {static} void addFittings()
+}
+
+class UserFacade{
++ {static} void updateUser()
++ {static} void deleteUser()
++ {static} void createUser()
+}
+
+class OrderMapper{
++ {static} ArrayList<Order> getAllOrders()
++ {static} Order getOrder()
++ {static} void updateOrder()
++ {static} void deleteOrder()
++ {static} void createOrder()
++ {static} approveOrder()
+}
+
+class MaterialMapper{
++ {static} getAllMaterials()
++ {static} getMaterial()
++ {static} addWood()
++ {static} addScrews()
++ {static} addRoofTiles()
++ {static} addFittings()
+}
+
+class Material {
+    - String name
+    - int length
+    - double price
+    - String packaging
+    - String description
+}
+
+abstract class ExtraDimensionMaterial {
+    - int width
+    - int height
+}
+
+class RoofTile {
+}
+
+class Wood {
+}
+
+class Fitting {
+}
+
+abstract class ExtraDiameterMaterial {
+    - int diameter
+}
+
+class ScrewPack {
+    - int quantity
+}
+
+class Screw {
+}
+
+Enum Status {
+    PENDING
+    APPROVED
+    CANCELLED
+}
+
+Material <|-- ExtraDimensionMaterial
+ExtraDimensionMaterial <|-- RoofTile
+ExtraDimensionMaterial <|-- Wood
+ExtraDimensionMaterial <|-- Fitting
+Material <|-- ExtraDiameterMaterial
+ExtraDiameterMaterial <|-- ScrewPack
+ExtraDiameterMaterial <|-- Screw
+
+
+Order *-- Screw
+Order *-- ScrewPack
+Order *-- Fitting
+Order *-- RoofTile
+Order *-- Wood
+Order *-- Status
+User *-- Order
+
+@enduml
