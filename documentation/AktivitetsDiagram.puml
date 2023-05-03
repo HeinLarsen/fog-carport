@@ -7,20 +7,27 @@ start
 :Signup;
 |Backend|
 :User Data;
-|Admin|
 |Backend|
 |Database|
 :Create User;
 |Website|
 :Login;
-:Make order;
-|Database|
-:Order;
-|Admin|
-:Storage Check +
-Order confirmation;
+|Backend|
+:Login System;
 |Website|
-:Confirm order;
+:Make order;
+|Backend|
+:Generate Order;
+|Database|
+:Save Order;
+|Backend|
+:Storage Check;
+|Website|
+:Approve Order;
+|Backend|
+:Generate Payment;
+|Website|
+:Payment;
 |Backend|
 :Generate material list + stl file;
 |Website|
