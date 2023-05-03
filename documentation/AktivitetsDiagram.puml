@@ -1,16 +1,29 @@
 @startuml
 'https://plantuml.com/activity-diagram-beta
 
-|Customer|
+|Website|
 start
 :Customize;
-|System|
+:Signup;
+|Backend|
+:User Data;
+|Admin|
+|Backend|
+|Database|
+:Create User;
+|Website|
+:Login;
+:Make order;
+|Database|
 :Order;
 |Admin|
-:Order confirmation;
-|System|
-:Material list + stl file;
-|Customer|
+:Storage Check +
+Order confirmation;
+|Website|
+:Confirm order;
+|Backend|
+:Generate material list + stl file;
+|Website|
 :Download file;
 stop
 
