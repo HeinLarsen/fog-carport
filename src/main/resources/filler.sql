@@ -36,11 +36,10 @@ INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`) VALU
 // packaging;
 
 
-INSERT INTO `carport`.`packaging` (`type`) VALUES ('stk'):
-INSERT INTO `carport`.`packaging` (`type`) VALUES ('pakke'):
-INSERT INTO `carport`.`packaging` (`type`) VALUES ('rulle'):
-INSERT INTO `carport`.`packaging` (`type`) VALUES ('sæt'):
-
+INSERT INTO `carport`.`packaging` (`type`) VALUES ('stk');
+INSERT INTO `carport`.`packaging` (`type`) VALUES ('pakke');
+INSERT INTO `carport`.`packaging` (`type`) VALUES ('rulle');
+INSERT INTO `carport`.`packaging` (`type`) VALUES ('sæt');
 
 
 
