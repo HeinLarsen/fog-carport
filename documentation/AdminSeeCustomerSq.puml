@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Admin -> AdminHomepage.JSP: See customer list
+AdminHomepage.JSP -> Customer.JSP: Navigate to see customer list
+Customer.JSP -> CustomerServlet: Post
+CustomerServlet -> UserMapper: Valid
+UserMapper -> SQL: Query
+SQL --> UserMapper: ResultSet
+UserMapper -> CustomerServlet: Result
+CustomerServlet -> Customer.JSP: Navigate back to see customer list
+
+@enduml

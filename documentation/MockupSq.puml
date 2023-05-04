@@ -27,7 +27,7 @@ Orders.JSP -> OrderServlet: Generate Price & Invoice
 OrderServlet -> OrderMapper: Post
 OrderMapper -> SQL: Query
 SQL --> OrderMapper: ResultSet
-OrderMapper -> Invoice.JSP: Invoice + materiallist + stl file
+OrderMapper -> Invoice.JSP: Invoice + material list + stl file
 
 
 @enduml
