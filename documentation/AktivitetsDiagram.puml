@@ -18,12 +18,16 @@ start
 :Validate Credentials;
 |Website|
 :Make order;
+|Database|
+:Get Material Data;
 |Backend|
 :Generate Order;
 |Database|
 :Save Order;
 |Website|
 :Approve Order;
+|Database|
+:Calculate Price;
 |Backend|
 :Generate Price;
 :Generate Invoice;
