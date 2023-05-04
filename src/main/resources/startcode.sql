@@ -115,3 +115,48 @@ CREATE TABLE `user` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2023-05-02 11:58:45
+
+/* populate type table */
+insert into carport.type (type) values
+('trykimp. brædt'),
+('lægte ubh'),
+('regular ub.'),
+('spærtræ ubh.'),
+('trykimp. stolpe'),
+('Plastmo Ecolite blåtonet'),
+('Plastmo Trapez Bundskrue'),
+('hulbånd'),
+('universalbeslag højre'),
+('universalbeslag venstre'),
+('skruer'),
+('beslagskruer'),
+('bræddebolt'),
+('firkantskiver'),
+('stalddørsgreb'),
+('t-hængsel'),
+('vinkelbeslag');
+
+/* populate user, role and membership tables */
+
+insert into carport.membership (id, type) values
+(1, 'basic'),
+(2, 'member'),
+(3, 'worker');
+
+insert into carport.role (id, type) values
+(1, 'user'),
+(2, 'admin');
+
+
+insert into carport.zip(zip, city) VALUES
+(2800, 'lyngby'),
+(3200, 'helsinge');
+
+
+insert into carport.user (first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip) VALUES
+('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200 ),
+('user', 'user', 'user', '1234', '1', 1234, 1, 1, 3200),
+('memberuser', 'user', 'user', '1234', 'lærkevej 41', 1234, 1, 2, 2800 ),
+('workeruser', 'user', '1234', '1234', 'æøåvej', 1234, 1, 3, 3200);
+
+
