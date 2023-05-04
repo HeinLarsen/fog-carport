@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+User -> Homepage.JSP: Order Carport
+Homepage.JSP -> OrderServlet: Post
+OrderServlet -> OrderMapper: Valid
+OrderMapper -> SQL: Query
+SQL -> OrderMapper: ResultSet
+OrderMapper -> OrderServlet: Result
+OrderServlet -> Success.JSP: Forward
+
+@enduml
