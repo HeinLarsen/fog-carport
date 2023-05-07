@@ -20,7 +20,7 @@ class UserMapperTest
 
     private final static String USER = "dev";
     private final static String PASSWORD = "3r!DE32*/fDe";
-    private final static String URL = "jdbc:mysql://161.35.22.89/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
+    private final static String URL = "jdbc:mysql://167.71.46.141/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
 
     private static ConnectionPool connectionPool;
 
