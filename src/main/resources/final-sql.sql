@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `carport`.`order`
     `id`      INT                                       NOT NULL,
     `user_id` INT                                       NOT NULL,
     `created` TIMESTAMP                                 NULL DEFAULT CURRENT_TIMESTAMP,
-    `status`  ENUM ('PENDING', 'APPROVED', 'CANECLlED') NULL DEFAULT 'PENDING',
+    `status`  ENUM ('PENDING', 'APPROVED', 'CANCELlED') NULL DEFAULT 'PENDING',
     PRIMARY KEY (`id`),
     INDEX `id_idx` (`user_id` ASC) VISIBLE,
     CONSTRAINT `id`
