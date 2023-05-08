@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Admin -> homepage.jsp: Forward
+homepage.jsp --> login.jsp: Navigate to login
+login.jsp -> LoginServlet: Post
+LoginServlet -> UserMapper: Valid
+UserMapper -> SQL: Query
+SQL --> UserMapper: ResultSet
+UserMapper -> LoginServlet: Result
+LoginServlet -> AdminHomepageServlet: Forward
+
+AdminHomepageServlet -> OrderMapper: Post
+OrderMapper -> SQL: Query
+SQL --> OrderMapper: ResultSet
+OrderMapper -> AdminHomepageServlet: Result
+AdminHomepageServlet -> UserMapper: Post
+
+UserMapper -> SQL: Query
+SQL --> UserMapper: ResultSet
+UserMapper -> AdminHomepageServlet: Customer + Order Results
+AdminHomepageServlet -> adminHomepage.jsp: Forward to admin homepage
+
+@enduml

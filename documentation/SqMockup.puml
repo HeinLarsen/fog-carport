@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+User -> login.jsp: Username and Password
+login.jsp -> LoginServlet: Post
+LoginServlet -> UserMapper: Validate
+UserMapper -> SQL: Query
+SQL --> UserMapper: ResultSet
+UserMapper -> LoginServlet: Result
+LoginServlet -> homepage.jsp: Forward
+homepage.jsp -> User: Welcome
+
+User -> createorder.jsp: Navigate to make an order
+createOrder.jsp -> OrderServlet: Post
+OrderServlet -> OrderMapper: Validate
+OrderMapper -> SQL: Query
+SQL --> OrderMapper: ResultSet
+OrderMapper -> OrderServlet: Result
+OrderServlet -> createorder.jsp: Forward
+createorder.jsp -> orderdone.jsp: Order Done
+orderdone.jsp -> User: Thanks for your order
+
+User -> orders.jsp: Approve order
+orders.jsp -> OrderServlet: Generate Price & Invoice
+OrderServlet -> OrderMapper: Post
+OrderMapper -> SQL: Query
+SQL --> OrderMapper: ResultSet
+OrderMapper -> invoice.jsp: Invoice + material list + stl file
+
+
+@enduml
