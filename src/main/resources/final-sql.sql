@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `carport`.`packaging`
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 5
+    AUTO_INCREMENT = 1
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `carport`.`type`
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 18
+    AUTO_INCREMENT = 1
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `carport`.`material`
             REFERENCES `carport`.`type` (`id`)
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 29
+    AUTO_INCREMENT = 1
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `carport`.`membership`
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 4
+    AUTO_INCREMENT = 1
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `carport`.`user`
             REFERENCES `carport`.`zip` (`zip`)
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 6
+    AUTO_INCREMENT = 1
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
