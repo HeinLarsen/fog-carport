@@ -18,9 +18,9 @@ class UserMapperTest
 {
     // TODO: Change mysql login credentials if needed below
 
-    private final static String USER = "dev";
-    private final static String PASSWORD = "3r!DE32*/fDe";
-    private final static String URL = "jdbc:mysql://167.71.46.141/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
+    private final static String USER = "root";
+    private final static String PASSWORD = "password";
+    private final static String URL = "jdbc:mysql://localhost:3306/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
 
     private static ConnectionPool connectionPool;
 
@@ -46,7 +46,7 @@ class UserMapperTest
             fail("Database connection failed");
         }
     }
-
+    @Test
     @BeforeEach
     void setUp()
     {
@@ -56,10 +56,13 @@ class UserMapperTest
             {
                 // TODO: Remove all rows from all tables - add your own tables here
                 stmt.execute("delete from user");
+                stmt.execute("ALTER TABLE user AUTO_INCREMENT = 1;");
 
                 // TODO: Insert a few users - insert rows into your own tables here
-                stmt.execute("insert into user (username, password, role) " +
-                        "values ('user','1234','user'),('admin','1234','admin'), ('ben','1234','user')");
+                stmt.execute("insert into user (first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip) " +
+                        "values ('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200)," +
+                        "('user', 'user', 'user', '1234', '1', 1234, 1, 1, 3200), " +
+                        "('Tobias', 'Tonndorff', 'Tobias@Tonndorff.dk', '1234', 'kollegiebakken 15A', 21177311, 1, 2, 2800)");
             }
         }
         catch (SQLException throwables)
