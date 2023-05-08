@@ -19,6 +19,7 @@ class User {
 
 class UserFacade {
 + {static} ArrayList<User> getAllUsers()
++ {static} User login()
 + {static} User getUser()
 + {static} void updateUser()
 + {static} void deleteUser()
@@ -27,6 +28,7 @@ class UserFacade {
 
 class UserMapper {
 + {static} ArrayList<User> getAllUsers()
++ {static} User login()
 + {static} User getUser()
 + {static} void updateUser()
 + {static} void deleteUser()
