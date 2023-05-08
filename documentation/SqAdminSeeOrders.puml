@@ -10,13 +10,12 @@ LoginServlet -> UserMapper: Valid
 UserMapper -> SQL: Query
 SQL --> UserMapper: ResultSet
 UserMapper -> LoginServlet: Result
-LoginServlet -> AdminHomepage.JSP: Forward
-AdminHomepage.JSP -> OrdersServlet: Post
-OrdersServlet -> OrderMapper: Valid
-OrderMapper -> SQL: Query
-SQL --> OrderMapper: ResultSet
-OrderMapper -> OrdersServlet: Result
-OrdersServlet -> Orders.JSP: Forward to approve orders
-Orders.JSP -> AdminHomepage.JSP: Redirect to admin homepage
+LoginServlet -> AdminHomepageServlet: Forward
+
+AdminHomepageServlet -> OrdersMapper: Post
+OrdersMapper -> SQL: Query
+SQL --> OrdersMapper: ResultSet
+OrdersMapper -> OrdersServlet: Result
+OrdersServlet -> AdminHomepage.JSP: Redirect to admin homepage
 
 @enduml
