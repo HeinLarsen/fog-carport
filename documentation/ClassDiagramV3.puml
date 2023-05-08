@@ -3,9 +3,13 @@
 
 class User {
 - int ID
-- String firstname
-- String surname
+- String firstFame
+- String lastName
 - String email
+- int zip
+- int phone
+- String address
+- String city
 - int role
 - int membership
 - ArrayList<Order> orders
@@ -64,17 +68,21 @@ class MaterialMapper{
 + {static} addFittings()
 }
 
-class Material {
-    - String name
-    - int length
-    - double price
-    - String packaging
-    - String description
+class GenerateStl {
++ {static} generateStl()
+}
+
+interface Material {
+- String name
+- int length
+- double price
+- String packaging
+- String description
 }
 
 abstract class ExtraDimensionMaterial {
-    - int width
-    - int height
+- int width
+- int height
 }
 
 class RoofTile {
@@ -87,11 +95,11 @@ class Fitting {
 }
 
 abstract class ExtraDiameterMaterial {
-    - int diameter
+- int diameter
 }
 
 class ScrewPack {
-    - int quantity
+- int quantity
 }
 
 class Screw {
@@ -111,12 +119,7 @@ Material <|-- ExtraDiameterMaterial
 ExtraDiameterMaterial <|-- ScrewPack
 ExtraDiameterMaterial <|-- Screw
 
-
-Order *-- Screw
-Order *-- ScrewPack
-Order *-- Fitting
-Order *-- RoofTile
-Order *-- Wood
+Order *-- Material
 Order *-- Status
 User *-- Order
 

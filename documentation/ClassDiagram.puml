@@ -3,9 +3,13 @@
 
 class User {
 - int ID
-- String firstname
-- String surname
+- String firstFame
+- String lastName
 - String email
+- int zip
+- int phone
+- String address
+- String city
 - int role
 - int membership
 - ArrayList<Order> orders
@@ -13,7 +17,7 @@ class User {
 
 class Order {
 - int orderID
-- String timestamp
+- Timestamp timestamp
 - Enum status
 - ArrayList<Screw> screws
 - ArrayList<ScrewPack> screwPackages
@@ -60,12 +64,12 @@ class OrderMapper{
 }
 
 class MaterialMapper{
-+ {static} getAllMaterials()
-+ {static} getMaterial()
-+ {static} addWood()
-+ {static} addScrews()
-+ {static} addRoofTiles()
-+ {static} addFittings()
++ {static} ArrayList<Material> getAllMaterials()
++ {static} Material getMaterial()
++ {static} void addWood()
++ {static} void addScrews()
++ {static} void addRoofTiles()
++ {static} void addFittings()
 }
 
 class RoofTile{
