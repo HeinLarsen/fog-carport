@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+!pragma layout smetana
+
 class User {
 - int ID
 - String firstFame
@@ -41,6 +43,7 @@ class Order {
 class OrderFacade {
 + {static} ArrayList<Order> getAllOrders()
 + {static} Order getOrder()
++ {static} ArrayList<Order> getOrdersByUserId()
 + {static} void updateOrder()
 + {static} void deleteOrder()
 + {static} void createOrder()
@@ -50,6 +53,7 @@ class OrderFacade {
 class OrderMapper {
 + {static} ArrayList<Order> getAllOrders()
 + {static} Order getOrder()
++ {static} ArrayList<Order> getOrdersByUserId()
 + {static} void updateOrder()
 + {static} void deleteOrder()
 + {static} void createOrder()
