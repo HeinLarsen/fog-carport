@@ -3,9 +3,9 @@
 
 autonumber
 
-Admin -> Homepage.JSP: Forward
-Homepage.JSP --> Login.JSP: Navigate to login
-Login.JSP -> LoginServlet: Post
+Admin -> homepage.jsp: Forward
+homepage.jsp --> login.jsp: Navigate to login
+login.jsp -> LoginServlet: Post
 LoginServlet -> UserMapper: Valid
 UserMapper -> SQL: Query
 SQL --> UserMapper: ResultSet
@@ -21,6 +21,6 @@ AdminHomepageServlet -> UserMapper: Post
 UserMapper -> SQL: Query
 SQL --> UserMapper: ResultSet
 UserMapper -> AdminHomepageServlet: Customer + Order Results
-AdminHomepageServlet -> AdminHomepage.JSP: Forward to admin homepage
+AdminHomepageServlet -> adminHomepage.jsp: Forward to admin homepage
 
 @enduml

@@ -3,12 +3,12 @@
 
 autonumber
 
-User -> Homepage.JSP: Order Carport
-Homepage.JSP -> OrderServlet: Post
+User -> homepage.jsp: Order Carport
+homepage.jsp -> OrderServlet: Post
 OrderServlet -> OrderMapper: Valid
 OrderMapper -> SQL: Query
 SQL -> OrderMapper: ResultSet
 OrderMapper -> OrderServlet: Result
-OrderServlet -> Success.JSP: Forward
+OrderServlet -> success.jsp: Forward
 
 @enduml

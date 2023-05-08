@@ -3,8 +3,8 @@
 
 autonumber
 
-Admin -> AdminHomepage.JSP: Navigate to see specific order
-AdminHomepage.JSP -> OrderServlet: Forward
+Admin -> adminHomepage.jsp: Navigate to see specific order
+adminHomepage.jsp -> OrderServlet: Forward
 OrderServlet -> OrderMapper: Post
 OrderMapper -> SQL: Query
 SQL --> OrderMapper: ResultSet
@@ -13,6 +13,6 @@ OrderServlet -> UserMapper: Post
 UserMapper -> SQL: Query
 SQL --> UserMapper: ResultSet
 UserMapper -> OrderServlet: Customer + Order Results
-OrderServlet -> Order.JSP: Forward to see specific order
+OrderServlet -> order.jsp: Forward to see specific order
 
 @enduml

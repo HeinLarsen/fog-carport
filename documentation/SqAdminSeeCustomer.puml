@@ -3,8 +3,8 @@
 
 autonumber
 
-Admin -> AdminHomepage.JSP: See customer list
-AdminHomepage.JSP -> CustomerServlet: Post
+Admin -> adminHomepage.jsp: See customer list
+adminHomepage.jsp -> CustomerServlet: Post
 CustomerServlet -> UserMapper: Valid
 UserMapper -> SQL: Query
 SQL --> UserMapper: ResultSet
@@ -13,6 +13,6 @@ CustomerServlet -> OrderMapper: Post
 OrderMapper -> SQL: Query
 SQL --> OrderMapper: ResultSet
 OrderMapper -> OrderServlet: Customer + Orders results
-OrderServlet -> Customer.JSP: Navigate to see list of orders and customers
+OrderServlet -> customer.jsp: Navigate to see list of orders and customers
 
 @enduml

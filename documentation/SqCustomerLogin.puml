@@ -3,12 +3,12 @@
 
 autonumber
 
-User -> Homepage.JSP: Navigate to login
-Homepage.JSP -> Login.JSP: Login
-Login.JSP -> LoginServlet: Post
+User -> homepage.jsp: Navigate to login
+homepage.jsp -> login.jsp: Login
+login.jsp -> LoginServlet: Post
 LoginServlet -> UserMapper: Valid
 UserMapper -> SQL: Query
 SQL -> UserMapper: ResultSet
 UserMapper -> LoginServlet: Result
-LoginServlet -> Homepage.JSP: Redirect to success page
+LoginServlet -> homepage.jsp: Redirect to success page
 @enduml

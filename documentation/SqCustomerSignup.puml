@@ -3,13 +3,13 @@
 
 autonumber
 
-User -> Success.JSP: Navigate to signup
-Success.JSP -> Signup.JSP: Signup
-Signup.JSP -> SignupServlet: Post
+User -> success.jsp: Navigate to signup
+success.jsp -> signup.jsp: Signup
+signup.jsp -> SignupServlet: Post
 SignupServlet -> UserMapper: Valid
 UserMapper -> SQL: Query
 SQL -> UserMapper: ResultSet
 UserMapper -> SignupServlet: Result
-SignupServlet -> Success.JSP: Redirect to success page
+SignupServlet -> success.jsp: Redirect to success page
 
 @enduml
