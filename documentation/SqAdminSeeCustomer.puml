@@ -4,12 +4,15 @@
 autonumber
 
 Admin -> AdminHomepage.JSP: See customer list
-AdminHomepage.JSP -> Customer.JSP: Navigate to see customer list
-Customer.JSP -> CustomerServlet: Post
+AdminHomepage.JSP -> CustomerServlet: Post
 CustomerServlet -> UserMapper: Valid
 UserMapper -> SQL: Query
 SQL --> UserMapper: ResultSet
 UserMapper -> CustomerServlet: Result
-CustomerServlet -> Customer.JSP: Navigate back to see customer list
+CustomerServlet -> OrdersMapper: Post
+OrdersMapper -> SQL: Query
+SQL --> OrdersMapper: ResultSet
+OrdersMapper -> OrdersServlet: Customer + Orders results
+OrdersServlet -> Customer.JSP: Navigate to see list of orders and customers
 
 @enduml
