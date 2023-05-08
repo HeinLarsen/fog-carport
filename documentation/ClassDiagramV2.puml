@@ -3,13 +3,9 @@
 
 class User {
 - int ID
-- String firstFame
-- String lastName
+- String firstname
+- String surname
 - String email
-- int zip
-- int phone
-- String address
-- String city
 - int role
 - int membership
 - ArrayList<Order> orders
@@ -17,7 +13,7 @@ class User {
 
 class Order {
 - int orderID
-- Timestamp timestamp
+- String timestamp
 - Enum status
 - ArrayList<Screw> screws
 - ArrayList<ScrewPack> screwPackages
@@ -64,49 +60,45 @@ class OrderMapper{
 }
 
 class MaterialMapper{
-+ {static} ArrayList<Material> getAllMaterials()
-+ {static} Material getMaterial()
-+ {static} void addWood()
-+ {static} void addScrews()
-+ {static} void addRoofTiles()
-+ {static} void addFittings()
++ {static} getAllMaterials()
++ {static} getMaterial()
++ {static} addWood()
++ {static} addScrews()
++ {static} addRoofTiles()
++ {static} addFittings()
 }
 
-class RoofTile{
+interface Material{
 - String name
 - int length
-- int width
 - double price
+- String packaging
 - String description
+- int quantity
+}
+
+abstract class ExtraDimensionMaterial{
+- int width
+- int height
+}
+
+
+
+class RoofTile{
 }
 
 class Wood{
-- String name
-- int length
-- int height
-- int width
-- double price
-- String description
 }
 
 class Fitting{
-- String name
-- int length
-- int height
-- int width
-- double price
-- String description
 }
 
 class GenerateStl {
 + {static} generateStl()
 }
 
-interface AScrew{
-- String name
-- int length
-- double price
-- String description
+abstract ExtraDiameterMaterial{
+- int diameter
 }
 
 class ScrewPack{
@@ -122,6 +114,14 @@ Enum Status {
     CANCELLED
 }
 
+ExtraDimensionMaterial <|-- RoofTile
+Material <|-- ExtraDimensionMaterial
+ExtraDimensionMaterial <|-- Wood
+ExtraDimensionMaterial <|-- Fitting
+Material <|-- ExtraDiameterMaterial
+ExtraDiameterMaterial <|-- ScrewPack
+ExtraDiameterMaterial <|-- Screw
+
 Order *-- Screw
 Order *-- ScrewPack
 Order *-- Fitting
@@ -129,7 +129,5 @@ Order *-- RoofTile
 Order *-- Wood
 Order *-- Status
 User *-- Order
-AScrew <-- ScrewPack
-AScrew <-- Screw
 
 @enduml
