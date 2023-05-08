@@ -23,7 +23,6 @@ class UserFacade {
 + {static} void createUser()
 }
 
-
 class UserMapper {
 + {static} ArrayList<User> getAllUsers()
 + {static} User getUser()
