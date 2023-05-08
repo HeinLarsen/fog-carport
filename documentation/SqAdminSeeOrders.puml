@@ -11,8 +11,7 @@ UserMapper -> SQL: Query
 SQL --> UserMapper: ResultSet
 UserMapper -> LoginServlet: Result
 LoginServlet -> AdminHomepage.JSP: Forward
-AdminHomepage.JSP -> Orders.JSP: Navigate to orders
-Orders.JSP -> OrdersServlet: Post
+AdminHomepage.JSP -> OrdersServlet: Post
 OrdersServlet -> OrderMapper: Valid
 OrderMapper -> SQL: Query
 SQL --> OrderMapper: ResultSet
