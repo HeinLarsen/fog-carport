@@ -203,12 +203,24 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
+/* setup test database */
+CREATE DATABASE  IF NOT EXISTS `carport_test` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `carport_test`;
+CREATE TABLE carport_test.user LIKE carport.user;
+CREATE TABLE carport_test.zip LIKE carport.zip;
+CREATE TABLE carport_test.role LIKE carport.role;
+CREATE TABLE carport_test.membership LIKE carport.membership;
+CREATE TABLE carport_test.order LIKE carport.order;
+CREATE TABLE carport_test.packaging LIKE carport.packaging;
+CREATE TABLE carport_test.type LIKE carport.type;
+CREATE TABLE carport_test.material LIKE carport.material;
+CREATE TABLE carport_test.order_item LIKE carport.order_item;
 
 
 
 
 
-
+/* fill database */
 INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`, `packaging`) VALUES ('360', '200', '25', 'understærnbrædder til for og bag ende', '174.43', '1', '1');
 INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`, `packaging`) VALUES ('540', '200', '25', 'understærnbrædder til siderne', '262.03', '1', '1');
 INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`, `packaging`) VALUES ('360', '125', '25', 'overstærnbrædder til forenden', '108.90', '1', '1');
