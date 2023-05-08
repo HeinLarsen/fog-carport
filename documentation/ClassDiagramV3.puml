@@ -81,7 +81,7 @@ class GenerateStl {
 + {static} void generateStl()
 }
 
-interface Material {
+abstract class Material {
 - String name
 - int length
 - double price
