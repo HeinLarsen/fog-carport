@@ -8,11 +8,11 @@ AdminHomepage.JSP -> AdminHomepageServlet: Forward
 AdminHomepageServlet -> OrderMapper: Post
 OrderMapper -> SQL: Query
 SQL --> OrderMapper: ResultSet
-OrderMapper -> COServlet: Order data result
-COServlet -> CustomerMapper: Post
+OrderMapper -> AdminHomepageServlet: Order data result
+AdminHomepageServlet -> CustomerMapper: Post
 CustomerMapper -> SQL: Query
 SQL --> CustomerMapper: ResultSet
-CustomerMapper -> COServlet: Customer + Order Results
-COServlet -> Order.JSP: Forward to see specific order
+CustomerMapper -> AdminHomepageServlet: Customer + Order Results
+AdminHomepageServlet -> Order.JSP: Forward to see specific order
 
 @enduml

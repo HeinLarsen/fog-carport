@@ -15,12 +15,12 @@ LoginServlet -> AdminHomepageServlet: Forward
 AdminHomepageServlet -> OrdersMapper: Post
 OrdersMapper -> SQL: Query
 SQL --> OrdersMapper: ResultSet
-OrdersMapper -> COServlet: Result
-COServlet -> CustomerMapper: Post
+OrdersMapper -> AdminHomepageServlet: Result
+AdminHomepageServlet -> CustomerMapper: Post
 
 CustomerMapper -> SQL: Query
 SQL --> CustomerMapper: ResultSet
-CustomerMapper -> COServlet: Customer + Order Results
-COServlet -> AdminHomepage.JSP: Forward to admin homepage
+CustomerMapper -> AdminHomepageServlet: Customer + Order Results
+AdminHomepageServlet -> AdminHomepage.JSP: Forward to admin homepage
 
 @enduml

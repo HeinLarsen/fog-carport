@@ -9,10 +9,10 @@ CustomerServlet -> UserMapper: Valid
 UserMapper -> SQL: Query
 SQL --> UserMapper: ResultSet
 UserMapper -> CustomerServlet: Result
-CustomerServlet -> OrdersMapper: Post
-OrdersMapper -> SQL: Query
-SQL --> OrdersMapper: ResultSet
-OrdersMapper -> OrdersServlet: Customer + Orders results
-OrdersServlet -> Customer.JSP: Navigate to see list of orders and customers
+CustomerServlet -> OrderMapper: Post
+OrderMapper -> SQL: Query
+SQL --> OrderMapper: ResultSet
+OrderMapper -> OrderServlet: Customer + Orders results
+OrderServlet -> Customer.JSP: Navigate to see list of orders and customers
 
 @enduml
