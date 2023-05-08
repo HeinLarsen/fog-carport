@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/object-diagram
+!pragma layout smetana
+
+object User
+object Role
+object Membership
+object Order
+object Homepage
+object Enum
+object Fittings
+object Wood
+object Screws
+object RoofTiles
+
+ Order --> Enum
+ Order --> Fittings
+ Order --> Wood
+ Order --> Screws
+ Order --> RoofTiles
+
+ User --> Role
+ User --> Membership
+ User --> Order
+ User --> Homepage
+
+ Homepage --> LoginServlet
+ Homepage --> CreatUserServlet
+ Homepage --> OrderServlet
+
+ LoginServlet --> SQL
+ CreatUserServlet --> SQL
+ OrderServlet --> SQL
+
+ SQL --> OrderMapper
+ SQL --> UserMapper
+ SQL --> MaterialMapper
+
+object Homepage {
+Login Opret
+Order Customize
+ }
+
+@enduml
