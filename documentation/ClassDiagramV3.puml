@@ -15,66 +15,99 @@ class User {
 - int role
 - int membership
 - ArrayList<Order> orders
++ void addOrder(Order order)
++ void removeOrder(int id)
++ void addOrders(ArrayList<Order> orders)
 }
 
 class UserFacade {
 + {static} ArrayList<User> getAllUsers()
-+ {static} User login()
 + {static} User getUser()
 + {static} void updateUser()
-+ {static} void deleteUser()
 + {static} void createUser()
++ {static} void login()
 }
 
 class UserMapper {
-+ {static} ArrayList<User> getAllUsers()
-+ {static} User login()
-+ {static} User getUser()
-+ {static} void updateUser()
-+ {static} void deleteUser()
-+ {static} void createUser()
+# {static} ArrayList<User> getAllUsers()
+# {static} User getUser()
+# {static} void updateUser()
+# {static} void createUser()
+# {static} void login()
+}
+
+class OrderItem {
+- int ID
+- int amount
+- int price
+- Material material
++ void addMaterial(Material material)
+}
+
+class OrderItemFacade {
++ {static} ArrayList<OrderItem> getOrderItemByOrderId()
++ {static} void addOrderItem()
+}
+
+class OrderItemMapper {
+# {static} OrderItem getOrderItemByOrderId()
+# {static} void addOrderItem()
 }
 
 class Order {
-- int orderID
-- String timestamp
+- int ID
+- Timestamp timestamp
 - Enum status
-- ArrayList<Material> materials
+- ArrayList<OrderItem> OrderItems
++ void AddOrderItem(Order order)
++ void AddOrderItems(ArrayList<Order> orders)
 }
 
 class OrderFacade {
 + {static} ArrayList<Order> getAllOrders()
-+ {static} Order getOrder()
++ {static} Order getOrderById()
 + {static} ArrayList<Order> getOrdersByUserId()
 + {static} void updateOrder()
-+ {static} void deleteOrder()
 + {static} void createOrder()
 + {static} void approveOrder()
 }
 
 class OrderMapper {
-+ {static} ArrayList<Order> getAllOrders()
-+ {static} Order getOrder()
-+ {static} ArrayList<Order> getOrdersByUserId()
-+ {static} void updateOrder()
-+ {static} void deleteOrder()
-+ {static} void createOrder()
-+ {static} void approveOrder()
+# {static} ArrayList<Order> getAllOrders()
+# {static} Order getOrderById()
+# {static} ArrayList<Order> getOrdersByUserId()
+# {static} void updateOrder()
+# {static} void createOrder()
+# {static} void approveOrder()
 }
 
 class MaterialFacade {
 + {static} ArrayList<Material> getAllMaterials()
-+ {static} Material getMaterialByType()
++ {static} Material getMaterialById()
 }
 
 class MaterialMapper {
-+ {static} ArrayList<Material> getAllMaterials()
-+ {static} Material getMaterialByType()
-
+# {static} ArrayList<Material> getAllMaterials()
+# {static} Material getMaterialById()
 }
 
 class GenerateStl {
 + {static} void generateStl()
+}
+
+class OrderService {
++ {static} Order getOrderById()
++ {static} void createOrder()
++ {static} ArrayList<Order> getAllOrders()
++ {static} ArrayList<Order> getAllOrdersPending()
+}
+
+class UserService() {
++ {static} void createUser()
++ {static} void updateUser()
++ {static} User getUserById()
++ {static} ArrayList<User> getAllUsers()
++ {static} User login()
 }
 
 abstract class Material {
@@ -124,7 +157,8 @@ Material <|-- ExtraDiameterMaterial
 ExtraDiameterMaterial <|-- ScrewPack
 ExtraDiameterMaterial <|-- Screw
 
-Order *-- Material
+Order *-- OrderItem
+OrderItem *-- Material
 Order *-- Status
 User *-- Order
 

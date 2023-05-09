@@ -19,13 +19,7 @@ public abstract class AMaterial {
 
     }
 
-
-    public abstract String name();
-    public abstract int length();
-    public abstract double price();
-    public abstract String packaging();
-    public abstract String description();
-
+    
 
     public String getName(){
         return name;

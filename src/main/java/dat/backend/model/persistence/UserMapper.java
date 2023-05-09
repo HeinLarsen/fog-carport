@@ -10,8 +10,7 @@ import java.util.logging.Logger;
 
 class UserMapper
 {
-    static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException
-    {
+    protected static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
 
         User user = null;
@@ -43,7 +42,7 @@ class UserMapper
         return user;
     }
 
-    static User createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
+    protected static User createUser(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         User user;
         String sql = "insert into user (email, password) values (?,?)";
@@ -66,7 +65,7 @@ class UserMapper
     }
 
 
-    public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException {
+    protected static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException {
         String sql = "SELECT user.first_name, user.last_name, user.address, user.phone_number, user.role_id, user.membership_id, zip.zip, zip.city FROM user inner join zip on user.zip = zip.zip";
         ArrayList<User> users = new ArrayList<>();
 
@@ -93,7 +92,7 @@ class UserMapper
         return users;
     }
 
-    public static void updateUser(User user, ConnectionPool connectionPool) throws  DatabaseException {
+    protected static void updateUser(User user, ConnectionPool connectionPool) throws  DatabaseException {
         String sql = "UPDATE user SET first_name = ?, last_name = ?, phone_number = ?, zip = ? WHERE email = ?";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
