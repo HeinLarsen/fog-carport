@@ -1,6 +1,7 @@
 package dat.backend.model.entities;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Order {
@@ -50,11 +51,22 @@ public class Order {
 
         public void setOrderID(int orderID){
                 this.orderID=orderID;
+
         }
 
-        public void setTimeStamp()
+        public void setTimeStamp(String timeStamp) {
+                this.timeStamp = timeStamp;
 
+        }
 
+        public void setStatus(Status status){
+                this.status = status;
+
+        }
+
+        public void setOrderItems(ArrayList<OrderItem> orderItems){
+                this.orderItems = orderItems;
+        }
 
 
 
