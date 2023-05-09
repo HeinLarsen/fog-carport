@@ -7,4 +7,8 @@ public class ScrewPack extends ExtraDiameterMaterial{
         super(diameter);
         this.quantity = quantity;
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }

@@ -6,4 +6,8 @@ public abstract class ExtraDiameterMaterial {
     public ExtraDiameterMaterial(int diameter) {
         this.diameter = diameter;
     }
+
+    public int getDiameter() {
+        return diameter;
+    }
 }
