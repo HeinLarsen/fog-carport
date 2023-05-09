@@ -2,7 +2,7 @@ package dat.backend.model.entities;
 
 public class Wood extends ExtraDimensionMaterial{
 
-        public Wood(int width, int height) {
-            super(width, height);
+        public Wood(String name, int length, double price, String packaging, String description, int width, int height) {
+            super(name, length, price, packaging, description, width, height);
         }
 }
