@@ -12,8 +12,8 @@ public class MaterialFacade {
         return MaterialMapper.getAllMaterials(connectionPool);
     }
 
-    public static void addWood(Wood wood, ConnectionPool connectionPool) throws DatabaseException {
-        MaterialMapper.addWood(wood, connectionPool);
+    public static Material getMaterialByType(String type, ConnectionPool connectionPool) throws DatabaseException {
+        return MaterialMapper.getMaterialByType(type, connectionPool);
     }
 
 
