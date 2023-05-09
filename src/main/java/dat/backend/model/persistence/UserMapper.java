@@ -9,28 +9,34 @@ import java.util.logging.Logger;
 
 class UserMapper
 {
-    static User login(String username, String password, ConnectionPool connectionPool) throws DatabaseException
+
+    static User login(String email, String password, ConnectionPool connectionpool) throws DatabaseException
     {
         Logger.getLogger("web").log(Level.INFO, "");
-
         User user = null;
+        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
 
-        String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
-
-        try (Connection connection = connectionPool.getConnection())
+        try (Connection connection = connectionpool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
-                ps.setString(1, username);
-                ps.setString(2, password);
+               ps.setString(1, email);
+               ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next())
                 {
-                    String role = rs.getString("role");
-                    user = new User(username, password, role);
+                    int id = rs.getInt("id");
+                    String first_name = rs.getString("first_name");
+                    String last_name = rs.getString("last_name");
+                    String address = rs.getString("address");
+                    int phone_number = rs.getInt("phone_number");
+                    int role_id = rs.getInt("role_id");
+                    int membership_id = rs.getInt("membership_id");
+                    int zip = rs.getInt("zip");
+                    user = new User(id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip);
                 } else
                 {
-                    throw new DatabaseException("Wrong username or password");
+                    throw new DatabaseException("Wrong email or password");
                 }
             }
         } catch (SQLException ex)
@@ -40,31 +46,40 @@ class UserMapper
         return user;
     }
 
-    static User createUser(String username, String password, String role, ConnectionPool connectionPool) throws DatabaseException
+
+
+    static User createUser(int id, String first_name, String last_name, String email, String password, String address, int phone_number, int role_id, int membership_id, int zip, ConnectionPool connectionPool) throws DatabaseException
     {
         Logger.getLogger("web").log(Level.INFO, "");
         User user;
-        String sql = "insert into user (username, password, role) values (?,?,?)";
+        String sql = "insert into user (id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip) values (?,?,?,?,?,?,?,?,?,?)";
         try (Connection connection = connectionPool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
-                ps.setString(1, username);
-                ps.setString(2, password);
-                ps.setString(3, role);
+                ps.setInt(1, id);
+                ps.setString(2, first_name);
+                ps.setString(3, last_name);
+                ps.setString(4, email);
+                ps.setString(5, password);
+                ps.setString(6, address);
+                ps.setInt(7, phone_number);
+                ps.setInt(8, role_id);
+                ps.setInt(9, membership_id);
+                ps.setInt(10, zip);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1)
                 {
-                    user = new User(username, password, role);
-                } else
+                    user = new User(id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip);
+                }else
                 {
-                    throw new DatabaseException("The user with username = " + username + " could not be inserted into the database");
+                    throw new DatabaseException("the user with email = " + email + "could not be inserted into the database");
                 }
             }
         }
         catch (SQLException ex)
         {
-            throw new DatabaseException(ex, "Could not insert username into database");
+            throw new DatabaseException(ex, "Could not insert user into database");
         }
         return user;
     }

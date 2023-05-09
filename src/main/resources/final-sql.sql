@@ -370,3 +370,4 @@ VALUES ('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200),
 
 insert into carport.user (first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip)
 values ('admin', 'admin', 'admin', '1234', 'vejen', 1234, 2, 3, 3200);
+AUTO_INCREMENT = 1;
