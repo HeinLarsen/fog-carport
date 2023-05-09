@@ -11,6 +11,10 @@ public class OrderFacade {
         return OrderMapper.getAllOrders(connectionPool);
     }
 
+    public static ArrayList<Order> getOrdersByStatus(Order.Status status, ConnectionPool connectionPool) throws DatabaseException {
+        return OrderMapper.getOrdersByStatus(status, connectionPool);
+    }
+
     public static Order getOrderById(int id, ConnectionPool connectionPool) throws DatabaseException {
         return OrderMapper.getOrderById(id, connectionPool);
     }

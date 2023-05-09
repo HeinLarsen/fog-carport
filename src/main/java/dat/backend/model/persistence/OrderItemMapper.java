@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderItemMapper {
-    protected static ArrayList<OrderItem> getOrderItemByOrderId(int id, ConnectionPool connectionPool) throws DatabaseException {
+    protected static ArrayList<OrderItem> getOrderItemsByOrderId(int id, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "select * from order_item where order_id = ?";
         ArrayList<OrderItem> orderItems = new ArrayList<>();
         OrderItem orderItem = null;

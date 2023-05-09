@@ -45,13 +45,13 @@ class OrderItem {
 }
 
 class OrderItemFacade {
-+ {static} ArrayList<OrderItem> getOrderItemByOrderId()
-+ {static} void addOrderItem()
++ {static} ArrayList<OrderItem> getOrderItemsByOrderId()
++ {static} void createOrderItem()
 }
 
 class OrderItemMapper {
-# {static} OrderItem getOrderItemByOrderId()
-# {static} void addOrderItem()
+# {static} OrderItem getOrderItemsByOrderId()
+# {static} void createOrderItem()
 }
 
 class Order {
@@ -67,18 +67,18 @@ class OrderFacade {
 + {static} ArrayList<Order> getAllOrders()
 + {static} Order getOrderById()
 + {static} ArrayList<Order> getOrdersByUserId()
-+ {static} void updateOrder()
 + {static} void createOrder()
 + {static} void approveOrder()
++ {static} ArrayList<Order> getOrdersByStatus()
 }
 
 class OrderMapper {
 # {static} ArrayList<Order> getAllOrders()
 # {static} Order getOrderById()
 # {static} ArrayList<Order> getOrdersByUserId()
-# {static} void updateOrder()
 # {static} void createOrder()
 # {static} void approveOrder()
+# {static} ArrayList<Order> getOrdersByStatus()
 }
 
 class MaterialFacade {

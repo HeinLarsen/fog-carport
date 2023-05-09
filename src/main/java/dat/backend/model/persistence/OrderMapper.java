@@ -97,4 +97,25 @@ public class OrderMapper {
             throw new DatabaseException(e, "Error approving order");
         }
     }
+
+    protected static ArrayList<Order> getOrdersByStatus(Order.Status status, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "select * from order where status = ?";
+        ArrayList<Order> orders = new ArrayList<>();
+        Order order = null;
+        try(Connection connection = connectionPool.getConnection()) {
+            try(PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, status.toString());
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()) {
+                    int ID = rs.getInt("ID");
+                    Timestamp timestamp = rs.getTimestamp("created");
+                    Enum orderStatus = Order.Status.valueOf(rs.getString("status"));
+                    order = new Order(ID, timestamp, orderStatus);
+                }
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e, "Error getting all orders");
+        }
+    }
 }
