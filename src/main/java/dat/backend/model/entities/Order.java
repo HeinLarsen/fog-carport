@@ -6,20 +6,20 @@ import java.util.ArrayList;
 
 public class Order {
         private int orderID;
-        private String timeStamp;
+        private LocalDateTime timeStamp;
         private Status status;
         private ArrayList<OrderItem> orderItems;
 
 
-        public Order(int orderID, String timeStamp, Status status){
+        public Order(int orderID, LocalDateTime timeStamp, Status status){
                 this.orderID =orderID;
                 this.timeStamp = timeStamp;
                 this.status = status;
 
         }
 
-        public void addOrderItem(OrderItem orderItem){
-                orderItem.add(orderItem);
+        public void addOrderItem(OrderItem orderItems){
+                this.orderItems.add(orderItems);
 
         }
 
@@ -34,7 +34,7 @@ public class Order {
 
         }
 
-        public String getTimeStamp(){
+        public LocalDateTime getTimeStamp(){
                 return timeStamp;
 
         }
@@ -54,7 +54,7 @@ public class Order {
 
         }
 
-        public void setTimeStamp(String timeStamp) {
+        public void setTimeStamp(LocalDateTime timeStamp) {
                 this.timeStamp = timeStamp;
 
         }
