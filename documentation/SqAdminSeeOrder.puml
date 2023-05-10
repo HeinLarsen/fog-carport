@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Admin -> adminHomepage.jsp: Navigate to see specific order
+adminHomepage.jsp -> OrderServlet: Forward
+OrderServlet -> OrderMapper: Post
+OrderMapper -> SQL: Query
+SQL --> OrderMapper: ResultSet
+OrderMapper -> OrderServlet: Order data result
+OrderServlet -> UserMapper: Post
+UserMapper -> SQL: Query
+SQL --> UserMapper: ResultSet
+UserMapper -> OrderServlet: Customer + Order Results
+OrderServlet -> order.jsp: Forward to see specific order
+
+@enduml
