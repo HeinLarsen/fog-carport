@@ -269,35 +269,35 @@ VALUES ('540', '100', '19', 'vandbrædt på stern i sider', '51.84', '5', '1', '
 INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`, `packaging`, `material_type_id`)
 VALUES ('360', '100', '19', 'vandbrædt på stern i forende', '34.56', '5', '1', '1');
 INSERT INTO `carport`.`material` (`length`, `width`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('600', '300', 'tagplader monteres på spær', '633.00', '6', '1', '3');
+VALUES ('600', '300', 'tagplader monteres på spær', '633.00', '6', '1', '4');
 INSERT INTO `carport`.`material` (`length`, `width`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('360', '300', 'tagplader monteres på spær', '266.00', '6', '1', '3');
-INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('30', 'skruer til tagplader', '441.00', '7', '2', '2');
+VALUES ('360', '300', 'tagplader monteres på spær', '266.00', '6', '1', '4');
+INSERT INTO `carport`.`material` (`length`, `description`, `quantity`, `price`, `type`, `packaging`, `material_type_id`)
+VALUES ('30', 'skruer til tagplader', '200', '441.00', '7', '2', '3');
 INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('1000', '20', '1', 'til vindkryds og spær', '339.00', '8', '3', '4');
+VALUES ('1000', '20', '1', 'til vindkryds og spær', '339.00', '8', '3', '5');
 INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('190', 'til montering af spær på rem', '76.95', '9', '1', '4');
+VALUES ('190', 'til montering af spær på rem', '76.95', '9', '1', '5');
 INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('190', 'til montering af spær på rem', '76.95', '10', '1', '4');
-INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `description`, `price`, `type`, `packaging` , `material_type_id`)
-VALUES ('60', '60', '4.5', 'Til montering af stern&vandbrædt', '307.95', '11', '2', '2');
-INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('50', '50', '4', 'Til montering af universalbeslag + hulbånd', '263.95', '12', '2', '2');
+VALUES ('190', 'til montering af spær på rem', '76.95', '10', '1', '5');
+INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `description`, `quantity`, `price`, `type`, `packaging` , `material_type_id`)
+VALUES ('60', '60', '4.5', 'Til montering af stern&vandbrædt', '200', '307.95', '11', '2', '3');
+INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `description`, `quantity`, `price`, `type`, `packaging`, `material_type_id`)
+VALUES ('50', '50', '4', 'Til montering af universalbeslag + hulbånd', '250', '263.95', '12', '2', '3');
 INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `description`, `price`, `type`, `packaging`, `material_type_id`)
 VALUES ('120', '120', '10', 'Til montering af rem på stolper', '464.00', '13', '1', '2');
 INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `height`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('40', '40', '40', '11', 'Til montering af rem på stolper', '149.50', '14', '1', '4');
+VALUES ('40', '40', '40', '11', 'Til montering af rem på stolper', '149.50', '14', '1', '5');
+INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `description`, `quantity`, `price`, `type`, `packaging`, `material_type_id`)
+VALUES ('70', '70', '4.5', 'til montering af yderste beklædning', '400', '149.95', '11', '2', '3');
+INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `description`,  `quantity`, `price`, `type`, `packaging`, `material_type_id`)
+VALUES ('50', '50', '4.5', 'til montering af inderste beklædning', '300', '160.95', '11', '2', '3');
 INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('70', '70', '4.5', 'til montering af yderste beklædning', '149.95', '11', '2', '2');
-INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('50', '50', '4.5', 'til montering af inderste beklædning', '160.95', '11', '2', '2');
-INSERT INTO `carport`.`material` (`length`, `width`, `diameter`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('75', '75', '50', 'Til lås på dør i skur', '183.95', '15', '4', '5');
+VALUES ('75', '75', '50', 'Til lås på dør i skur', '183.95', '15', '4', '6');
 INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('390', 'til skurdør', '156.95', '16', '1', '4');
+VALUES ('390', 'til skurdør', '156.95', '16', '1', '5');
 INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('35', 'Til montering af løsholter i skur', '13.95', '17', '1', '3');
+VALUES ('35', 'Til montering af løsholter i skur', '13.95', '17', '1', '4');
 
 packaging;
 
