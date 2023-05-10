@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `carport`.`material` (
   `height` INT NULL DEFAULT NULL,
   `diameter` INT NULL DEFAULT NULL,
   `description` VARCHAR(45) NOT NULL,
+  `quantity` INT NULL,
   `price` DOUBLE NOT NULL,
   `type` INT NOT NULL,
   `packaging` INT NOT NULL,
@@ -225,6 +226,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 
+
 /* setup test database */
 CREATE DATABASE IF NOT EXISTS `carport_test` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `carport_test`;
@@ -373,6 +375,7 @@ VALUES ('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200),
 insert into material_type (material) values
 ("wood"),
 ("screw"),
+("screwpack")
 ("roof tile"),
 ("fitting"),
 ("door handle");
