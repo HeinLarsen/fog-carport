@@ -1,17 +1,19 @@
 package dat.backend.model.entities;
 
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Order {
         private int orderID;
-        private LocalDateTime timeStamp;
+        private Timestamp timeStamp;
         private Status status;
         private ArrayList<OrderItem> orderItems;
 
 
-        public Order(int orderID, LocalDateTime timeStamp, Status status){
+        public Order(int orderID, Timestamp timeStamp, Status status){
                 this.orderID =orderID;
                 this.timeStamp = timeStamp;
                 this.status = status;
@@ -24,7 +26,7 @@ public class Order {
         }
 
         public void addOrderItems(ArrayList<OrderItem> orderItems){
-                this.orderItems.addAll(orderItems);
+                this.orderItems = orderItems;
 
         }
 
@@ -34,7 +36,7 @@ public class Order {
 
         }
 
-        public LocalDateTime getTimeStamp(){
+        public Timestamp getTimeStamp(){
                 return timeStamp;
 
         }
@@ -54,7 +56,7 @@ public class Order {
 
         }
 
-        public void setTimeStamp(LocalDateTime timeStamp) {
+        public void setTimeStamp(Timestamp timeStamp) {
                 this.timeStamp = timeStamp;
 
         }
