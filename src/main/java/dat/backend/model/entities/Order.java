@@ -9,11 +9,13 @@ import java.util.ArrayList;
 public class Order {
         private int orderID;
         private Timestamp timeStamp;
-        private Status status;
+        private Enum status;
+
+
         private ArrayList<OrderItem> orderItems;
 
 
-        public Order(int orderID, Timestamp timeStamp, Status status){
+        public Order(int orderID, Timestamp timeStamp, Enum status){
                 this.orderID =orderID;
                 this.timeStamp = timeStamp;
                 this.status = status;
@@ -41,7 +43,7 @@ public class Order {
 
         }
 
-        public Status getStatus(){
+        public Enum getStatus(){
                 return status;
 
         }
@@ -50,28 +52,6 @@ public class Order {
                 return orderItems;
 
         }
-
-        public void setOrderID(int orderID){
-                this.orderID=orderID;
-
-        }
-
-        public void setTimeStamp(Timestamp timeStamp) {
-                this.timeStamp = timeStamp;
-
-        }
-
-        public void setStatus(Status status){
-                this.status = status;
-
-        }
-
-        public void setOrderItems(ArrayList<OrderItem> orderItems){
-                this.orderItems = orderItems;
-        }
-
-
-
 
 
 
