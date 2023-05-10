@@ -45,18 +45,18 @@ class OrderItem {
 }
 
 class OrderItemFacade {
-+ {static} OrderItem getOrderItemByOrderId()
-+ {static} void addOrderItem()
++ {static} ArrayList<OrderItem> getOrderItemsByOrderId()
++ {static} void createOrderItem()
 }
 
 class OrderItemMapper {
-# {static} OrderItem getOrderItemByOrderId()
-# {static} void addOrderItem()
+# {static} OrderItem getOrderItemsByOrderId()
+# {static} void createOrderItem()
 }
 
 class Order {
 - int ID
-- String timestamp
+- Timestamp timestamp
 - Enum status
 - ArrayList<OrderItem> OrderItems
 + void AddOrderItem(Order order)
@@ -67,18 +67,18 @@ class OrderFacade {
 + {static} ArrayList<Order> getAllOrders()
 + {static} Order getOrderById()
 + {static} ArrayList<Order> getOrdersByUserId()
-+ {static} void updateOrder()
 + {static} void createOrder()
 + {static} void approveOrder()
++ {static} ArrayList<Order> getOrdersByStatus()
 }
 
 class OrderMapper {
 # {static} ArrayList<Order> getAllOrders()
 # {static} Order getOrderById()
 # {static} ArrayList<Order> getOrdersByUserId()
-# {static} void updateOrder()
 # {static} void createOrder()
 # {static} void approveOrder()
+# {static} ArrayList<Order> getOrdersByStatus()
 }
 
 class MaterialFacade {
@@ -88,7 +88,7 @@ class MaterialFacade {
 
 class MaterialMapper {
 # {static} ArrayList<Material> getAllMaterials()
-# {static} Material getMaterial()
+# {static} Material getMaterialById()
 }
 
 class GenerateStl {
