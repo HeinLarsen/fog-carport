@@ -4,7 +4,7 @@ public class OrderItem {
     private int ID;
     private int amount;
     private int price;
-    private Material material;
+    private AMaterial material;
 
     public OrderItem(int ID, int amount, int price) {
         this.ID = ID;
@@ -24,11 +24,11 @@ public class OrderItem {
         return price;
     }
 
-    public void addMaterial(Material material) {
+    public void addMaterial(AMaterial material) {
         this.material = material;
     }
 
-    public Material getMaterial() {
+    public AMaterial getMaterial() {
         return material;
     }
 

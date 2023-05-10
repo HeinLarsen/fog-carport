@@ -1,6 +1,7 @@
 package dat.backend.model.persistence;
 
 import dat.backend.model.entities.Order;
+import dat.backend.model.entities.Status;
 import dat.backend.model.exceptions.DatabaseException;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class OrderFacade {
         return OrderMapper.getAllOrders(connectionPool);
     }
 
-    public static ArrayList<Order> getOrdersByStatus(Order.Status status, ConnectionPool connectionPool) throws DatabaseException {
+    public static ArrayList<Order> getOrdersByStatus(Status status, ConnectionPool connectionPool) throws DatabaseException {
         return OrderMapper.getOrdersByStatus(status, connectionPool);
     }
 
