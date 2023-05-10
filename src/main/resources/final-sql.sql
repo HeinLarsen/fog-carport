@@ -1,230 +1,397 @@
 -- MySQL Workbench Forward Engineering
 
-SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS, UNIQUE_CHECKS = 0;
-SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0;
-SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE =
-        'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
+-- Schema carport_test
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `carport_test` ;
+
+-- -----------------------------------------------------
+-- Schema carport_test
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `carport_test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+-- -----------------------------------------------------
 -- Schema carport
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `carport`;
+DROP SCHEMA IF EXISTS `carport` ;
 
 -- -----------------------------------------------------
 -- Schema carport
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `carport` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `carport`;
+CREATE SCHEMA IF NOT EXISTS `carport` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `carport_test` ;
+
+-- -----------------------------------------------------
+-- Table `carport_test`.`material`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `carport_test`.`material` ;
+
+CREATE TABLE IF NOT EXISTS `carport_test`.`material` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `length` INT NULL DEFAULT NULL,
+  `width` INT NULL DEFAULT NULL,
+  `height` INT NULL DEFAULT NULL,
+  `diameter` INT NULL DEFAULT NULL,
+  `description` VARCHAR(45) NOT NULL,
+  `price` DOUBLE NOT NULL,
+  `type` INT NOT NULL,
+  `packaging` INT NOT NULL,
+  PRIMARY KEY (`id`, `type`, `packaging`),
+  INDEX `fk_material_packaging1_idx` (`packaging` ASC) VISIBLE,
+  INDEX `fk_material_type1_idx` (`type` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `carport_test`.`membership`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `carport_test`.`membership` ;
+
+CREATE TABLE IF NOT EXISTS `carport_test`.`membership` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `carport_test`.`order`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `carport_test`.`order` ;
+
+CREATE TABLE IF NOT EXISTS `carport_test`.`order` (
+  `id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `created` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` TINYINT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  INDEX `id_idx` (`user_id` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `carport_test`.`order_item`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `carport_test`.`order_item` ;
+
+CREATE TABLE IF NOT EXISTS `carport_test`.`order_item` (
+  `id` INT NOT NULL,
+  `amount` INT NOT NULL,
+  `type` INT NOT NULL,
+  `total_price` DOUBLE NOT NULL,
+  `order_id` INT NOT NULL,
+  `material_id` INT NOT NULL,
+  `material_type_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `material_id`, `material_type_id`),
+  INDEX `fk_order_item_order1_idx` (`order_id` ASC) VISIBLE,
+  INDEX `fk_order_item_material1_idx` (`material_id` ASC, `material_type_id` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `carport_test`.`packaging`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `carport_test`.`packaging` ;
+
+CREATE TABLE IF NOT EXISTS `carport_test`.`packaging` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `carport_test`.`role`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `carport_test`.`role` ;
+
+CREATE TABLE IF NOT EXISTS `carport_test`.`role` (
+  `id` INT NOT NULL,
+  `type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `carport_test`.`type`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `carport_test`.`type` ;
+
+CREATE TABLE IF NOT EXISTS `carport_test`.`type` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `carport_test`.`user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `carport_test`.`user` ;
+
+CREATE TABLE IF NOT EXISTS `carport_test`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `address` VARCHAR(45) NOT NULL,
+  `phone_number` INT NOT NULL,
+  `role_id` INT NOT NULL,
+  `membership_id` INT NOT NULL,
+  `zip` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_user_role_idx` (`role_id` ASC) VISIBLE,
+  INDEX `fk_user_membership1_idx` (`membership_id` ASC) VISIBLE,
+  INDEX `fk_user_zip1_idx` (`zip` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `carport_test`.`zip`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `carport_test`.`zip` ;
+
+CREATE TABLE IF NOT EXISTS `carport_test`.`zip` (
+  `zip` INT NOT NULL,
+  `city` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`zip`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+USE `carport` ;
 
 -- -----------------------------------------------------
 -- Table `carport`.`packaging`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `carport`.`packaging`;
+DROP TABLE IF EXISTS `carport`.`packaging` ;
 
-CREATE TABLE IF NOT EXISTS `carport`.`packaging`
-(
-    `id`   INT         NOT NULL AUTO_INCREMENT,
-    `type` VARCHAR(45) NOT NULL,
-    PRIMARY KEY (`id`)
-)
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 1
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `carport`.`packaging` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
 -- Table `carport`.`type`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `carport`.`type`;
+DROP TABLE IF EXISTS `carport`.`type` ;
 
-CREATE TABLE IF NOT EXISTS `carport`.`type`
-(
-    `id`   INT         NOT NULL AUTO_INCREMENT,
-    `type` VARCHAR(45) NOT NULL,
-    PRIMARY KEY (`id`)
-)
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 1
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `carport`.`type` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `carport`.`material_type`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `carport`.`material_type` ;
+
+CREATE TABLE IF NOT EXISTS `carport`.`material_type` (
+  `id` INT NOT NULL,
+  `material` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `carport`.`material`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `carport`.`material`;
+DROP TABLE IF EXISTS `carport`.`material` ;
 
-CREATE TABLE IF NOT EXISTS `carport`.`material`
-(
-    `id`          INT         NOT NULL AUTO_INCREMENT,
-    `length`      INT         NULL DEFAULT NULL,
-    `width`       INT         NULL DEFAULT NULL,
-    `height`      INT         NULL DEFAULT NULL,
-    `diameter`    INT         NULL DEFAULT NULL,
-    `description` VARCHAR(45) NOT NULL,
-    `price`       DOUBLE      NOT NULL,
-    `type`        INT         NOT NULL,
-    `packaging`   INT         NOT NULL,
-    PRIMARY KEY (`id`, `type`, `packaging`),
-    INDEX `fk_material_packaging1_idx` (`packaging` ASC) VISIBLE,
-    INDEX `fk_material_type1_idx` (`type` ASC) VISIBLE,
-    CONSTRAINT `fk_material_packaging1`
-        FOREIGN KEY (`packaging`)
-            REFERENCES `carport`.`packaging` (`id`),
-    CONSTRAINT `fk_material_type1`
-        FOREIGN KEY (`type`)
-            REFERENCES `carport`.`type` (`id`)
-)
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 1
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `carport`.`material` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `length` INT NULL DEFAULT NULL,
+  `width` INT NULL DEFAULT NULL,
+  `height` INT NULL DEFAULT NULL,
+  `diameter` INT NULL DEFAULT NULL,
+  `description` VARCHAR(45) NOT NULL,
+  `price` DOUBLE NOT NULL,
+  `type` INT NOT NULL,
+  `packaging` INT NOT NULL,
+  `material_type_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `type`, `packaging`, `material_type_id`),
+  INDEX `fk_material_packaging1_idx` (`packaging` ASC) VISIBLE,
+  INDEX `fk_material_type1_idx` (`type` ASC) VISIBLE,
+  INDEX `fk_material_material_type1_idx` (`material_type_id` ASC) VISIBLE,
+  CONSTRAINT `fk_material_packaging1`
+    FOREIGN KEY (`packaging`)
+    REFERENCES `carport`.`packaging` (`id`),
+  CONSTRAINT `fk_material_type1`
+    FOREIGN KEY (`type`)
+    REFERENCES `carport`.`type` (`id`),
+  CONSTRAINT `fk_material_material_type1`
+    FOREIGN KEY (`material_type_id`)
+    REFERENCES `carport`.`material_type` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
 -- Table `carport`.`membership`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `carport`.`membership`;
+DROP TABLE IF EXISTS `carport`.`membership` ;
 
-CREATE TABLE IF NOT EXISTS `carport`.`membership`
-(
-    `id`   INT         NOT NULL AUTO_INCREMENT,
-    `type` VARCHAR(45) NOT NULL,
-    PRIMARY KEY (`id`)
-)
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 1
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `carport`.`membership` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
 -- Table `carport`.`role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `carport`.`role`;
+DROP TABLE IF EXISTS `carport`.`role` ;
 
-CREATE TABLE IF NOT EXISTS `carport`.`role`
-(
-    `id`   INT         NOT NULL,
-    `type` VARCHAR(45) NOT NULL,
-    PRIMARY KEY (`id`)
-)
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `carport`.`role` (
+  `id` INT NOT NULL,
+  `type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
 -- Table `carport`.`zip`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `carport`.`zip`;
+DROP TABLE IF EXISTS `carport`.`zip` ;
 
-CREATE TABLE IF NOT EXISTS `carport`.`zip`
-(
-    `zip`  INT         NOT NULL,
-    `city` VARCHAR(45) NOT NULL,
-    PRIMARY KEY (`zip`)
-)
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `carport`.`zip` (
+  `zip` INT NOT NULL,
+  `city` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`zip`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
 -- Table `carport`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `carport`.`user`;
+DROP TABLE IF EXISTS `carport`.`user` ;
 
-CREATE TABLE IF NOT EXISTS `carport`.`user`
-(
-    `id`            INT         NOT NULL AUTO_INCREMENT,
-    `first_name`    VARCHAR(45) NOT NULL,
-    `last_name`     VARCHAR(45) NOT NULL,
-    `email`         VARCHAR(45) NOT NULL,
-    `password`      VARCHAR(45) NOT NULL,
-    `address`       VARCHAR(45) NOT NULL,
-    `phone_number`  INT         NOT NULL,
-    `role_id`       INT         NOT NULL,
-    `membership_id` INT         NOT NULL,
-    `zip`           INT         NOT NULL,
-    PRIMARY KEY (`id`),
-    INDEX `fk_user_role_idx` (`role_id` ASC) VISIBLE,
-    INDEX `fk_user_membership1_idx` (`membership_id` ASC) VISIBLE,
-    INDEX `fk_user_zip1_idx` (`zip` ASC) VISIBLE,
-    CONSTRAINT `fk_user_membership1`
-        FOREIGN KEY (`membership_id`)
-            REFERENCES `carport`.`membership` (`id`),
-    CONSTRAINT `fk_user_role`
-        FOREIGN KEY (`role_id`)
-            REFERENCES `carport`.`role` (`id`),
-    CONSTRAINT `fk_user_zip1`
-        FOREIGN KEY (`zip`)
-            REFERENCES `carport`.`zip` (`zip`)
-)
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 1
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `carport`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `address` VARCHAR(45) NOT NULL,
+  `phone_number` INT NOT NULL,
+  `role_id` INT NOT NULL,
+  `membership_id` INT NOT NULL,
+  `zip` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_user_role_idx` (`role_id` ASC) VISIBLE,
+  INDEX `fk_user_membership1_idx` (`membership_id` ASC) VISIBLE,
+  INDEX `fk_user_zip1_idx` (`zip` ASC) VISIBLE,
+  CONSTRAINT `fk_user_membership1`
+    FOREIGN KEY (`membership_id`)
+    REFERENCES `carport`.`membership` (`id`),
+  CONSTRAINT `fk_user_role`
+    FOREIGN KEY (`role_id`)
+    REFERENCES `carport`.`role` (`id`),
+  CONSTRAINT `fk_user_zip1`
+    FOREIGN KEY (`zip`)
+    REFERENCES `carport`.`zip` (`zip`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
 -- Table `carport`.`order`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `carport`.`order`;
+DROP TABLE IF EXISTS `carport`.`order` ;
 
-CREATE TABLE IF NOT EXISTS `carport`.`order`
-(
-    `id`      INT                                       NOT NULL,
-    `user_id` INT                                       NOT NULL,
-    `created` TIMESTAMP                                 NULL DEFAULT CURRENT_TIMESTAMP,
-    `status`  ENUM ('PENDING', 'APPROVED', 'CANCELlED') NULL DEFAULT 'PENDING',
-    PRIMARY KEY (`id`),
-    INDEX `id_idx` (`user_id` ASC) VISIBLE,
-    CONSTRAINT `id`
-        FOREIGN KEY (`user_id`)
-            REFERENCES `carport`.`user` (`id`)
-)
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `carport`.`order` (
+  `id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `created` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` ENUM('PENDING', 'APPROVED', 'CANCELlED') NULL DEFAULT 'PENDING',
+  PRIMARY KEY (`id`),
+  INDEX `id_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `id`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `carport`.`user` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
 -- Table `carport`.`order_item`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `carport`.`order_item`;
+DROP TABLE IF EXISTS `carport`.`order_item` ;
 
-CREATE TABLE IF NOT EXISTS `carport`.`order_item`
-(
-    `id`               INT    NOT NULL,
-    `amount`           INT    NOT NULL,
-    `type`             INT    NOT NULL,
-    `total_price`      DOUBLE NOT NULL,
-    `order_id`         INT    NOT NULL,
-    `material_id`      INT    NOT NULL,
-    `material_type_id` INT    NOT NULL,
-    PRIMARY KEY (`id`, `material_id`, `material_type_id`),
-    INDEX `fk_order_item_order1_idx` (`order_id` ASC) VISIBLE,
-    INDEX `fk_order_item_material1_idx` (`material_id` ASC, `material_type_id` ASC) VISIBLE,
-    CONSTRAINT `fk_order_item_material1`
-        FOREIGN KEY (`material_id`)
-            REFERENCES `carport`.`material` (`id`),
-    CONSTRAINT `fk_order_item_order1`
-        FOREIGN KEY (`order_id`)
-            REFERENCES `carport`.`order` (`id`)
-)
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `carport`.`order_item` (
+  `id` INT NOT NULL,
+  `amount` INT NOT NULL,
+  `type` INT NOT NULL,
+  `total_price` DOUBLE NOT NULL,
+  `order_id` INT NOT NULL,
+  `material_id` INT NOT NULL,
+  `material_type_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `material_id`, `material_type_id`),
+  INDEX `fk_order_item_order1_idx` (`order_id` ASC) VISIBLE,
+  INDEX `fk_order_item_material1_idx` (`material_id` ASC, `material_type_id` ASC) VISIBLE,
+  CONSTRAINT `fk_order_item_material1`
+    FOREIGN KEY (`material_id`)
+    REFERENCES `carport`.`material` (`id`),
+  CONSTRAINT `fk_order_item_order1`
+    FOREIGN KEY (`order_id`)
+    REFERENCES `carport`.`order` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
-SET SQL_MODE = @OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 
 /* setup test database */
@@ -368,6 +535,13 @@ VALUES ('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200),
        ('memberuser', 'user', 'user', '1234', 'lærkevej 41', 1234, 1, 2, 2800),
        ('workeruser', 'user', '1234', '1234', 'æøåvej', 1234, 1, 3, 3200);
 
-insert into carport.user (first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip)
-values ('admin', 'admin', 'admin', '1234', 'vejen', 1234, 2, 3, 3200);
 AUTO_INCREMENT = 1;
+
+
+insert into carport.material_type (id, type) VALUES
+(1, "wood"),
+(2, "screw"),
+(3, "fitting"),
+(4, "roof tile"),
+(6, "door handle");
+
