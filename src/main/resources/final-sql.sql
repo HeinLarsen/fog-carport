@@ -239,9 +239,9 @@ CREATE TABLE carport_test.material LIKE carport.material;
 CREATE TABLE carport_test.order_item LIKE carport.order_item;
 CREATE TABLE carport_test.material_type LIKE carport.material_type;
 
-
+ALTER TABLE carport.material AUTO_INCREMENT = 1;
 INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`, `packaging`, `material_type_id`)
-VALUES ('360', '200', '25', 'understærnbrædder til for og bag ende', '174.43', '1', '1');
+VALUES ('360', '200', '25', 'understærnbrædder til for og bag ende', '174.43', '1', '1', '1 ');
 INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`, `packaging`, `material_type_id`)
 VALUES ('540', '200', '25', 'understærnbrædder til siderne', '262.03', '1', '1', '1');
 INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`, `packaging`, `material_type_id`)
