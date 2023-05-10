@@ -375,7 +375,7 @@ VALUES ('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200),
 insert into material_type (material) values
 ("wood"),
 ("screw"),
-("screwpack")
+("screwPack"),
 ("roof tile"),
 ("fitting"),
 ("door handle");
