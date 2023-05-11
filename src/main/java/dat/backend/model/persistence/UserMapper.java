@@ -81,7 +81,7 @@ public class UserMapper
         return user;
     }
 
-    public static void updateUser(int id, String first_name, String last_name, String email, String password, String address, int phone_number, int role_id, int membership_id, int zip, ConnectionPool connectionPool) throws DatabaseException
+    public static User updateUser(int id, String first_name, String last_name, String email, String password, String address, int phone_number, int role_id, int membership_id, int zip, ConnectionPool connectionPool) throws DatabaseException
     {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ?, address = ?, phone_number = ?, role_id = ?, membership_id = ?, zip = ? WHERE id = ?";
@@ -109,25 +109,29 @@ public class UserMapper
         {
             throw new DatabaseException(ex, "Could not update user in database");
         }
+        return new User(id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip);
     }
 
-    public static void createUser(String first_name, String last_name, String email, String password, String address, int phone_number, int role_id, int membership_id, int zip, ConnectionPool connectionPool) throws DatabaseException
+    public static User createUser( int id, String first_name, String last_name, String email, String password, String address, int phone_number, int role_id, int membership_id, int zip, ConnectionPool connectionPool) throws DatabaseException
     {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "INSERT INTO user (first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip) VALUES (?,?,?,?,?,?,?,?,?)";
+        User user;
         try (Connection connection = connectionPool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
-                ps.setString(1, first_name);
-                ps.setString(2, last_name);
-                ps.setString(3, email);
-                ps.setString(4, password);
-                ps.setString(5, address);
-                ps.setInt(6, phone_number);
-                ps.setInt(7, role_id);
-                ps.setInt(8, membership_id);
-                ps.setInt(9, zip);
+                ps.setInt(1, id);
+                ps.setString(2, first_name);
+                ps.setString(3, last_name);
+                ps.setString(4, email);
+                ps.setString(5, password);
+                ps.setString(6, address);
+                ps.setInt(7, phone_number);
+                ps.setInt(8, role_id);
+                ps.setInt(9, membership_id);
+                ps.setInt(10, zip);
+                user = new User(id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1)
                 {
@@ -138,29 +142,37 @@ public class UserMapper
         {
             throw new DatabaseException(ex, "Could not create user in database");
         }
+        return user;
     }
 
-    public static void login(String email, String password, ConnectionPool connectionPool) throws DatabaseException
-    {
+    //call this with a false login in userMapperTest
+    public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException, SQLException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
+        User user = null;
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
-                if (!rs.next())
-                {
-                    throw new DatabaseException("No user with email = " + email + " found in database");
-                }
-            }
-        } catch (SQLException ex)
-        {
-            throw new DatabaseException(ex, "Could not login user in database");
-        }
-    }
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String first_name = rs.getString("first_name");
+                    String last_name = rs.getString("last_name");
+                    String address = rs.getString("address");
+                    int phone_number = rs.getInt("phone_number");
+                    int role_id = rs.getInt("role_id");
+                    int membership_id = rs.getInt("membership_id");
+                    int zip = rs.getInt("zip");
+                    user = new User(id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip);
 
+
+                }
+            } catch (SQLException ex) {
+                throw new DatabaseException(ex, "Could not login user in database");
+            }
+        }
+        return user;
+    }
 
 }
