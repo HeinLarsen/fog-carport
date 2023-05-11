@@ -19,8 +19,6 @@ public class UserFacade {
         return UserMapper.getAllUsers(connectionPool);
     }
 
-    public static void updateUser(User user, ConnectionPool connectionPool) throws DatabaseException {
-        UserMapper.updateUser(user, connectionPool);
-    }
+
 
 }

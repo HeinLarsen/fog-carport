@@ -75,6 +75,7 @@ class UserMapperTest
         Connection connection = connectionPool.getConnection();
         assertNotNull(connection);
         if (connection != null)
+
         {
             connection.close();
         }
