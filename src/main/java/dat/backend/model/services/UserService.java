@@ -1,5 +1,9 @@
 package dat.backend.model.services;
 import dat.backend.model.entities.User;
+import dat.backend.model.exceptions.DatabaseException;
+import dat.backend.model.persistence.ConnectionPool;
+import dat.backend.model.persistence.UserFacade;
+import dat.backend.model.persistence.UserMapper;
 
 import java.util.ArrayList;
 
@@ -18,14 +22,18 @@ public class UserService {
         return null;
     }
 
-    public ArrayList<User> getAllUsers() {
-        // TODO implement here
+    public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException {
+        UserFacade.getAllUsers(connectionPool);
         return null;
     }
 
-    public User login(String email, String password) {
+    public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
+        UserFacade. login(email, password, connectionPool);
+
+        return null;
 
     }
+
 
 
 }
