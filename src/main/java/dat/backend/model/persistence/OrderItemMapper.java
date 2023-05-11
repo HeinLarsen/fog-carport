@@ -23,7 +23,8 @@ public class OrderItemMapper {
                     int ID = rs.getInt("ID");
                     int amount = rs.getInt("amount");
                     int price = rs.getInt("price");
-                    orderItem = new OrderItem(ID, amount, price);
+                    int materialID = rs.getInt("material_id");
+                    orderItem = new OrderItem(ID, amount, price, materialID);
                 }
                 orderItems.add(orderItem);
             }

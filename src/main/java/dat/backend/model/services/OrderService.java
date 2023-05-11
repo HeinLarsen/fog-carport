@@ -1,6 +1,5 @@
 package dat.backend.model.services;
 
-import dat.backend.model.entities.AMaterial;
 import dat.backend.model.entities.Order;
 import dat.backend.model.entities.OrderItem;
 import dat.backend.model.exceptions.DatabaseException;
@@ -10,7 +9,6 @@ import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.OrderItemFacade;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrderService {
 

@@ -4,12 +4,14 @@ public class OrderItem {
     private int ID;
     private int amount;
     private int price;
+    private int materialID;
     private AMaterial material;
 
-    public OrderItem(int ID, int amount, int price) {
+    public OrderItem(int ID, int amount, int price, int materialID) {
         this.ID = ID;
         this.amount = amount;
         this.price = price;
+        this.materialID = materialID;
     }
 
     public int getID() {
