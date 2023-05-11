@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class UserMapper
 {
 
-
+// TODO refactor return types to return the data we receive from the database instead of void
 
     public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException
     {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class UserFacade
 {
 
-
+// TODO refactor return types to return the data we receive from the database instead of void
     public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException
     {
         return UserMapper.getAllUsers(connectionPool);
