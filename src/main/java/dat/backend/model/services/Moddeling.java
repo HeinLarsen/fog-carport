@@ -1,5 +1,6 @@
 package dat.backend.model.services;
 
+import dat.backend.model.entities.User;
 import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
@@ -10,7 +11,7 @@ public class Moddeling
 {
     Geometry3D buildbar (int length, int width, int height){
         JavaCSG csg = JavaCSGFactory.createDefault();
-        Geometry3D bar = csg.box3D(length, width, 250, true);
+        Geometry3D bar = csg.box3D(length, width, height, true);
         Geometry3D finishedbar = csg.union3D(bar);
         csg.view(finishedbar);
         return finishedbar;
@@ -38,6 +39,16 @@ public class Moddeling
             e.printStackTrace();
         }
         return finishedproduct;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (!(o instanceof Moddeling)) return false;
+        Moddeling model = (Moddeling) o;
+        return ().equals(user.getUsername()) && getPassword().equals(user.getPassword()) &&
+                getRole().equals(user.getRole());
     }
 
 }
