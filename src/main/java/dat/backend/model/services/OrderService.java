@@ -1,50 +1,47 @@
 package dat.backend.model.services;
 
+import dat.backend.model.entities.AMaterial;
+import dat.backend.model.entities.Order;
+import dat.backend.model.entities.OrderItem;
+import dat.backend.model.exceptions.DatabaseException;
+import dat.backend.model.persistence.ConnectionPool;
+import dat.backend.model.persistence.MaterialFacade;
+import dat.backend.model.persistence.OrderFacade;
+import dat.backend.model.persistence.OrderItemFacade;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderService {
 
-    private List<Order> orders;
-    private map<String, List<OrderItem>> orderItems;
-    private MaterialFacade materialFacade;
-    private OrderFacade orderFacade;
+    public static Order getOrder(int id, ConnectionPool connectionPool) throws DatabaseException {
 
-    public OrderService() {
-        orders = new ArrayList<>();
-        orderItems = new HashMap<>();
-        orderFacade = new OrderFacade();
-        materialFacade = new MaterialFacade();
-    }
+        //Hente ÉN Order først, hente ved hjælp af OrderFacaden først:
+        Order order = OrderFacade.getOrderById(id, connectionPool);
 
-    //OBS om getOrder-metoden, skal indeholde ordreelementer og materialedata
-    public List<Order> getOrder() {
-        List<Order> OrderWithDetails = new ArrayList<>();
 
-        // Iterér gennem hver ordre i orders-listen
-        for (Order order : orders) {
-            // Hent ordreelementer for den aktuelle ordre
-            List<OrderItem> orderItem = orderItems.get(order.getId());
+        //Hente ordreelementerne ved hjælp af OrderItemFacaden (byID):
+        ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(id, connectionPool);
 
-            // Iterér gennem hvert ordreelement og hent materialedata ved hjælp af MaterialFacade
-            for (OrderItem item : orderItem) {
-                item.setMaterial(materialFacade.getMaterial(item.getMaterialId()));
-            }
-            // Opdater ordrens ordreelementer med de modtagne materialedata
-            order.setOrderItems(orderItem);
-            // Tilføj den fulde ordre (inklusive ordreelementer og materialedata) til orderWithDetails-listen
-            OrderWithDetajls.add(order);
+        //Loop igennem orderItems:
+        for(OrderItem item: orderItems){
+            item.addMaterial(MaterialFacade.getMaterialById(id,connectionPool));
         }
 
-        return OrderWithDetails;
+        //addOrderItems til denne order:
+        order.addOrderItems(orderItems);
+
+        //Returnere objektet.
+        return order;
     }
 
     //I dette metode skal vi have regnet carports bredde samt længde ud, beregningsmetode kommer her.
     public void addOrder(Order order) {
-        orders.add(order);
+
     }
 
     //Her kalder vi metoder fra Facaderne og Mapperne, for at Admin kan Approve en ordre.
     public void updateOrder(Order order) {
-        //TODO
+
     }
 }
