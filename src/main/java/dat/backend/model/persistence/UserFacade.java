@@ -30,8 +30,10 @@ public class UserFacade
         UserMapper.createUser(id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip, connectionPool);
     }
 
-    public static void login(String email, String password, ConnectionPool connectionPool) throws DatabaseException, SQLException {
-        UserMapper.login(email, password, connectionPool);
+    public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException, SQLException {
+        User user = null;
+       user = UserMapper.login(email, password, connectionPool);
+        return user;
     }
 
 
