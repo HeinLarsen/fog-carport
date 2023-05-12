@@ -9,9 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 public class MaterialMapper {
     protected static ArrayList<AMaterial> getAllMaterials(ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select * from material inner join type on material.type = type.id inner join packaging on material.packaging = packaging.id";
+        String sql = "select material.*, type.type as name, packaging.type as packaging, material_type.material as material_type from material inner join type on material.type = type.id inner join packaging on material.packaging = packaging.id inner join material_type on material.material_type_id = material_type.id";
         ArrayList<AMaterial> materials = new ArrayList<>();
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -40,7 +41,7 @@ public class MaterialMapper {
                         case "fitting":
                             materials.add(new Fitting(name, length, price, packaging, description, width, height));
                             break;
-                        case "screwpack":
+                        case "screwPack":
                             materials.add(new ScrewPack(name, length, price, packaging, description, diameter, quantity));
                             break;
                         default:
@@ -55,12 +56,11 @@ public class MaterialMapper {
     }
 
     protected static AMaterial getMaterialById(int id, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select material.*, type.type as name, packaging.type as packaging from material \n" +
+        String sql = "select material.*, type.type as name, packaging.type as packaging, material_type.material as material_type from material \n" +
                 "inner join type on material.type = type.id \n" +
                 "inner join packaging on material.packaging = packaging.id \n" +
                 "inner join material_type on material.material_type_id = material_type.id \n" +
-                "where id = ?";
-        AMaterial material = null;
+                "where material.id = ?";
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, id);
@@ -78,28 +78,25 @@ public class MaterialMapper {
                     String materialType = rs.getString("material_type");
                     switch(materialType) {
                         case "wood":
-                            material = new Wood(name, length, price, packaging, description, width, height);
-                            break;
+                           return new Wood(name, length, price, packaging, description, width, height);
                         case "screw":
-                            material = new Screw(name, length, price, packaging, description, diameter);
-                            break;
+                            return new Screw(name, length, price, packaging, description, diameter);
                         case "roof tile":
-                            material = new RoofTile(name, length, price, packaging, description, width, height);
-                            break;
+                            return new RoofTile(name, length, price, packaging, description, width, height);
                         case "fitting":
-                            material = new Fitting(name, length, price, packaging, description, width, height);
-                            break;
-                        case "screwpack":
-                            material = new ScrewPack(name, length, price, packaging, description, diameter, quantity);
-                            break;
+                            return new Fitting(name, length, price, packaging, description, width, height);
+                        case "screwPack":
+                            return new ScrewPack(name, length, price, packaging, description, diameter, quantity);
                         default:
                             throw new DatabaseException("Unknown material type");
                     }
                 }
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error getting all materials");
+            e.printStackTrace();
+            throw new DatabaseException(e, "Error getting a material");
         }
-        return material;
+
+        return null;
     }
 }

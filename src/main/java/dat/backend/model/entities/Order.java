@@ -10,8 +10,6 @@ public class Order {
         private int orderID;
         private Timestamp timeStamp;
         private Enum status;
-
-
         private ArrayList<OrderItem> orderItems;
 
 
