@@ -31,7 +31,7 @@ class UserMapper
                     int membership = rs.getInt("membership_id");
                     int zip = rs.getInt("zip");
                     String city = rs.getString("city");
-                    user = new User(email, password, role);
+                    user = new User(email, password, "role");
                 } else {
                     throw new DatabaseException("Wrong username or password");
                 }
@@ -52,9 +52,9 @@ class UserMapper
                 ps.setString(2, password);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1) {
-                    user = new User(email, password;
+                    user = new User(email, password,"user");
                 } else {
-                    throw new DatabaseException("The user with username = " + username + " could not be inserted into the database");
+                    throw new DatabaseException("The user with username = could not be inserted into the database");
                 }
             }
         }
@@ -82,8 +82,6 @@ class UserMapper
                     int membership = rs.getInt("membership_id");
                     int zip = rs.getInt("zip");
                     String city = rs.getString("city");
-                    User user = new User();
-                    users.add(user);
                 }
             }
         } catch (SQLException ex) {
@@ -96,11 +94,6 @@ class UserMapper
         String sql = "UPDATE user SET first_name = ?, last_name = ?, phone_number = ?, zip = ? WHERE email = ?";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setString(1, user.getFirstName());
-                ps.setString(2, user.getLastName());
-                ps.setInt(4, user.getPhoneNumber());
-                ps.setInt(7, user.getZip());
-                ps.setString(8, user.getEmail());
                 ps.executeUpdate();
             }
         } catch (SQLException ex) {
