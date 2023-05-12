@@ -16,6 +16,31 @@ public class UserService {
 
     }
 
+    public static User updateUser(int id, String first_name, String last_name, String email, String password, String address, int phone_number, int role_id, int membership_id, int zip, ConnectionPool connectionPool) throws DatabaseException
+    {
+       User user = UserFacade.updateUser(id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip, connectionPool);
+       return user;
+    }
+
+    public static User createUser( int id, String first_name, String last_name, String email, String password, String address, int phone_number, int role_id, int membership_id, int zip, ConnectionPool connectionPool) throws DatabaseException
+    {
+       User user = UserFacade.createUser(id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip, connectionPool);
+       return user;
+    }
+
+    public static User getUser(int id, ConnectionPool connectionPool) throws DatabaseException
+    {
+        return UserFacade.getUser(id, connectionPool);
+    }
+
+    public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException
+    {
+        return UserFacade.getAllUsers(connectionPool);
+    }
+
+
+
+
 
 
 }

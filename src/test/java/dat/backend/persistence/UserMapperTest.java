@@ -85,10 +85,9 @@ class UserMapperTest
     }
 
     @Test
-    void login() throws DatabaseException
-    {
+    void login() throws DatabaseException, SQLException {
         User expectedUser = new User(1, "user", "user", "user", "1234", "1", 1234, 1, 1, 3200);
-        User actualUser = UserFacade.getUser(1, connectionPool);
+        User actualUser = UserFacade.login("user", "1234", connectionPool);
         assertEquals(expectedUser, actualUser);
 
     }
@@ -96,7 +95,7 @@ class UserMapperTest
     @Test
     void invalidPasswordLogin() throws DatabaseException
     {
-        assertThrows(DatabaseException.class, () -> UserFacade.login("user", "123", connectionPool));
+        assertThrows(DatabaseException.class, () -> UserService.login("user", "123", connectionPool));
     }
 
     @Test
@@ -108,6 +107,7 @@ class UserMapperTest
     @Test
     void createUser() throws DatabaseException
     {
+
 
     }
 }
