@@ -32,5 +32,15 @@ public class OrderItem {
         return material;
     }
 
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "ID=" + ID +
+                ", amount=" + amount +
+                ", price=" + price +
+                ", material=" + material +
+                '}';
+    }
+
 
 }

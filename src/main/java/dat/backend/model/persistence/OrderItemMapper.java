@@ -14,18 +14,16 @@ public class OrderItemMapper {
     protected static ArrayList<OrderItem> getOrderItemsByOrderId(int id, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "select * from order_item where order_id = ?";
         ArrayList<OrderItem> orderItems = new ArrayList<>();
-        OrderItem orderItem = null;
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {
-                    int ID = rs.getInt("ID");
+                    int ID = rs.getInt("id");
                     int amount = rs.getInt("amount");
-                    int price = rs.getInt("price");
-                    orderItem = new OrderItem(ID, amount, price);
+                    int price = rs.getInt("total_price");
+                    orderItems.add(new OrderItem(ID, amount, price));
                 }
-                orderItems.add(orderItem);
             }
         } catch (SQLException e) {
             throw new DatabaseException(e, "Error getting all order items");
@@ -44,6 +42,7 @@ public class OrderItemMapper {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DatabaseException(e, "Error creating order item");
         }
     }

@@ -1,9 +1,6 @@
 package dat.backend.model.entities;
 
-
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Order {
@@ -48,7 +45,6 @@ public class Order {
 
         public ArrayList<OrderItem> getOrderItems(){
                 return orderItems;
-
         }
 
 
