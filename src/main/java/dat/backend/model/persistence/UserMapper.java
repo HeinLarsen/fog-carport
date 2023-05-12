@@ -112,38 +112,42 @@ public class UserMapper
         return new User(id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip);
     }
 
-    public static User createUser( int id, String first_name, String last_name, String email, String password, String address, int phone_number, int role_id, int membership_id, int zip, ConnectionPool connectionPool) throws DatabaseException
-    {
+
+
+    public static User createUser(String first_name, String last_name, String email, String password, String address, int phone_number, int role_id, int membership_id, int zip, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "INSERT INTO user (first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip) VALUES (?,?,?,?,?,?,?,?,?)";
         User user;
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
-                ps.setInt(1, id);
-                ps.setString(2, first_name);
-                ps.setString(3, last_name);
-                ps.setString(4, email);
-                ps.setString(5, password);
-                ps.setString(6, address);
-                ps.setInt(7, phone_number);
-                ps.setInt(8, role_id);
-                ps.setInt(9, membership_id);
-                ps.setInt(10, zip);
-                user = new User(id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip);
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, first_name);
+                ps.setString(2, last_name);
+                ps.setString(3, email);
+                ps.setString(4, password);
+                ps.setString(5, address);
+                ps.setInt(6, phone_number);
+                ps.setInt(7, role_id);
+                ps.setInt(8, membership_id);
+                ps.setInt(9, zip);
                 int rowsAffected = ps.executeUpdate();
-                if (rowsAffected != 1)
-                {
+                if (rowsAffected != 1) {
                     throw new DatabaseException("No user with email = " + email + " found in database");
                 }
+                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int id = generatedKeys.getInt(1);
+                        user = new User(id, first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip);
+                    } else {
+                        throw new DatabaseException("Failed to get ID for created user");
+                    }
+                }
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new DatabaseException(ex, "Could not create user in database");
         }
         return user;
     }
+
 
     //call this with a false login in userMapperTest
     public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException, SQLException {

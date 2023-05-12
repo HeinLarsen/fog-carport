@@ -15,5 +15,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/carport_test</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="carport_test@167.71.46.141" uuid="e1b02496-3878-47a4-99c9-7c9bf843698b">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://167.71.46.141:3306/carport_test</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
