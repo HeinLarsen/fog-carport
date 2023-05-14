@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MaterialMapperTest {
 
-    private final static String USER = "dev";
-    private final static String PASSWORD = "3r!DE32*/fDe";
-    private final static String URL = "jdbc:mysql://167.71.46.141/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
+    private final static String USER = "root";
+    private final static String PASSWORD = "password";
+    private final static String URL = "jdbc:mysql://localhost/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
 
     private static ConnectionPool connectionPool;
 

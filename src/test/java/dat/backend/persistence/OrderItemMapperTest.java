@@ -94,8 +94,8 @@ public class OrderItemMapperTest {
 
     @Test
     void createOrderItem() throws DatabaseException {
-        OrderItem orderItem = new OrderItem(1, 1, 1);
-        OrderItemFacade.createOrderItem(orderItem, 1, connectionPool);
+        OrderItem orderItem = new OrderItem(1, 1, 1, "test");
+        OrderItemFacade.createOrderItem(orderItem, 1, 2, connectionPool);
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
         assertEquals(3, orderItems.size());
     }
