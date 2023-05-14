@@ -52,7 +52,7 @@ class UserMapper
                 ps.setString(2, password);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1) {
-                    user = new User(email, password;
+                    user = new User(email, password, role);
                 } else {
                     throw new DatabaseException("The user with username = " + username + " could not be inserted into the database");
                 }
