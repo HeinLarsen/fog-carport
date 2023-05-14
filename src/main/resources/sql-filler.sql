@@ -1,87 +1,119 @@
-// material;
+-- unit;
 
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('360', '200', '25', 'understærnbrædder til for og bag ende', '174.43', '1');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('540', '200', '25', 'understærnbrædder til siderne', '261.63', '1');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('360', '125', '25', 'overstærnbrædder til forenden', '108.90', '1');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('540', '125', '25', 'oversternbrædder til siderne', '163.35', '1');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('420', '73', '38', 'til z på bagside af dør', '120.13', '2');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('270', '95', '45', 'løsholter til skur gavle', '5628', '3');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('240', '95', '45', 'løsholter til skur sider', '56.28', '3');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('480', '195', '45', 'Remme i sider, sadles ned i stolper', '205.44', '4');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('600', '195', '45', 'Spær, monteres på rem', '257.70', '4');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('300', '97', '97', 'Stolper nedgraves 90 cm. i jord', '134.85', '5');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('210', '100', '19', 'til beklædning af skur 1 på 2', '20.16', '5');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('540', '100', '19', 'vandbrædt på stern i sider', '51.84', '5');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('360', '100', '19', 'vandbrædt på stern i forende', '34.56', '5');
-INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`) VALUES ('600', 'tagplader monteres på spær', '633.00', '6');
-INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`) VALUES ('360', 'tagplader monteres på spær', '266', '6');
-INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`) VALUES ('30', 'skruer til tagplader', '441', '7');
-INSERT INTO `carport`.`material` (`length`, `width`, `width`, `description`, `price`, `type`) VALUES ('1000', '20', 'til vindkryds og spær', '339', '8');
-INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`) VALUES ('190', 'til montering af spær på rem', '76.95', '9');
-INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`) VALUES ('190', 'til montering af spær på rem', '76.95', '10');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('60', '60', '4.5', 'Til montering af stern&vandbrædt', '307.95', '11');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('50', '50', '4.0', 'Til montering af universalbeslag + hulbånd', '263.95', '12');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('120', '120', '10', 'Til montering af rem på stolper', '464', '13');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('40', '11', '40', 'Til montering af rem på stolper', '149.50', '14');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('70', '70', '4.5', 'til montering af yderste beklædning', '149.95', '11');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('50', '50', '4.5', 'til montering af inderste beklædning', '160.95', '11');
-INSERT INTO `carport`.`material` (`length`, `width`, `height`, `description`, `price`, `type`) VALUES ('75', '75', '50', 'Til lås på dør i skur', '183.95', '15');
-INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`) VALUES ('390', 'til skurdø', '156.95', '16');
-INSERT INTO `carport`.`material` (`length`, `description`, `price`, `type`) VALUES ('35', 'Til montering af løsholter i skur', '13.95', '17');
+INSERT INTO `carport`.`unit` (`unit`)
+VALUES ('stk');
+INSERT INTO `carport`.`unit` (`unit`)
+VALUES ('pakke');
+INSERT INTO `carport`.`unit` (`unit`)
+VALUES ('rulle');
+INSERT INTO `carport`.`unit` (`unit`)
+VALUES ('sæt');
 
 
+-- category;
+
+insert into carport.category(category)
+values ('brædt'),
+       ('lægte'),
+       ('reglar'),
+       ('spærtre'),
+       ('stolpe');
+
+-- membership;
+
+insert into carport.membership (id, membership)
+values (1, 'basic'),
+       (2, 'member'),
+       (3, 'worker');
+
+-- role;
+
+insert into carport.role (id, role)
+values (1, 'user'),
+       (2, 'admin');
+
+-- zip;
+
+insert into carport.zip(zip, city)
+VALUES (2800, 'lyngby'),
+       (3200, 'helsinge');
+
+-- user;
+
+insert into carport.user (first_name, last_name, email, password, address, phone_number, role, membership, zip)
+VALUES ('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200),
+       ('user', 'user', 'user', '1234', '1', 1234, 1, 1, 3200),
+       ('memberuser', 'user', 'user', '1234', 'lærkevej 41', 1234, 1, 2, 2800),
+       ('workeruser', 'user', '1234', '1234', 'æøåvej', 1234, 1, 3, 3200);
+
+
+-- material;
+
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (360, 200, 25, 1, 1, 1, 174.43);
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (540, 200, 25, 1, 1, 1, 262.03);
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (360, 125, 25, 1, 1, 1, 108.90);
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (540, 125, 25, 1, 1, 1, 163.35);
+
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (420, 73, 38, 0, 2, 1, 120.13);
+
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (270, 95, 45, 0, 3, 1, 5628);
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (240, 95, 45, 0, 3, 1, 56.28);
+
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (480, 195, 45, 0, 4, 1, 205.44);
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (600, 195, 45, 0, 4, 1, 257.70);
+
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (300, 97, 97, 1, 5, 1, 134.85);
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (210, 100, 19, 1, 5, 1, 20.16);
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (540, 100, 19, 1, 5, 1, 51.84);
+INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
+VALUES (360, 100, 19, 1, 5, 1, 34.56);
+
+INSERT INTO `carport`.`roof_tile` (`name`, `length`, `width`, `unit`, `price`)
+VALUES ('Plastmo Ecolite blåtonet', 600, 109, 1, 633.00);
+INSERT INTO `carport`.`roof_tile` (`name`, `length`, `width`, `unit`, `price`)
+VALUES ('Plastmo Ecolite blåtonet', 360, 109, 1, 266);
+
+INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
+VALUES ('plastmo bundskruer 200 stk', 0, 30, 2, 441);
+INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
+VALUES ('skruer 200 stk.', 4.5, 60, 2, 307.95); -- skruer
+INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
+VALUES ('Skruer 400 stk.', 4.5, 70, 2, 149.95); -- skruer
+INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
+VALUES ('beslagskruer 250 stk.', 4.5, 50, 2, 160.95); -- skruer
+INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
+VALUES ('Skruer 300 stk.', 4.0, 50, 2, 263.95); -- beslagskruer
+INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
+VALUES ('bræddebolt', 10, 120, 2, 464); -- bræddebolt
+
+INSERT INTO `carport`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`)
+VALUES ('firkantskiver', 40, 40, 11, 1, 149.50); -- firkantskiver
+INSERT INTO `carport`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`)
+VALUES ('hulbånd', 20, 10000, 1, 3, 339); -- hulbånd
+INSERT INTO `carport`.`fitting` (`height`, `unit`, `price`)
+VALUES (190, 1, 76.95); -- universal
+INSERT INTO `carport`.`fitting` (`height`, `unit`, `price`)
+VALUES (190, 1, 76.95); -- universal
+INSERT INTO `carport`.`fitting` (`name`, `width`, `height`, `unit`, `price`)
+VALUES ('stalddørsgreb', 75, 50, 4, 183.95); -- stalddørsgreb
+INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
+VALUES ('t hængsel', 390, 2, 156.95); -- t hængsel
+INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
+VALUES ('vinkelbeslag', 35, 1, 13.95); -- vinkelbeslag
 
 
 
-// packaging;
 
 
-INSERT INTO `carport`.`packaging` (`type`) VALUES ('stk');
-INSERT INTO `carport`.`packaging` (`type`) VALUES ('pakke');
-INSERT INTO `carport`.`packaging` (`type`) VALUES ('rulle');
-INSERT INTO `carport`.`packaging` (`type`) VALUES ('sæt');
-
-
-
-insert into carport.type (type) values
-('trykimp. brædt'),
-('lægte ubh'),
-('regular ub.'),
-('spærtræ ubh.'),
-('trykimp. stolpe'),
-('Plastmo Ecolite blåtonet'),
-('Plastmo Trapez Bundskrue'),
-('hulbånd'),
-('universalbeslag højre'),
-('universalbeslag venstre'),
-('skruer'),
-('beslagskruer'),
-('bræddebolt'),
-('firkantskiver'),
-('stalddørsgreb'),
-('t-hængsel'),
-('vinkelbeslag');
-
-
-
-
-insert into carport.membership (id, type) values
-(1, 'basic'),
-(2, 'member'),
-(3, 'worker');
-
-insert into carport.role (id, type) values
-(1, 'user'),
-(2, 'admin');
-
-
-insert into carport.zip(zip, city) VALUES
-(2800, 'lyngby'),
-(3200, 'helsinge');
-
-
-insert into carport.user (first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip) VALUES
-('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200 ),
-('user', 'user', 'user', '1234', '1', 1234, 1, 1, 3200),
-('memberuser', 'user', 'user', '1234', 'lærkevej 41', 1234, 1, 2, 2800 ),
-('workeruser', 'user', '1234', '1234', 'æøåvej', 1234, 1, 3, 3200);
