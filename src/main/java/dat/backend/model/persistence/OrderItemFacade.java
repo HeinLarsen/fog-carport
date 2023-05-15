@@ -10,7 +10,8 @@ public class OrderItemFacade {
     public static ArrayList<OrderItem> getOrderItemsByOrderId(int id, ConnectionPool connectionPool) throws DatabaseException {
         ArrayList<OrderItem> orderItems = OrderItemMapper.getOrderItemsWoodByOrderId(id, connectionPool);
         orderItems.addAll(OrderItemMapper.getOrderItemsFittingByOrderId(id, connectionPool));
-
+        orderItems.addAll(OrderItemMapper.getOrderItemsScrewByOrderId(id, connectionPool));
+        orderItems.addAll(OrderItemMapper.getOrderItemsRoofTileByOrderId(id, connectionPool));
         return orderItems;
     }
 

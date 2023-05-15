@@ -10,6 +10,11 @@ public abstract class ExtraDimensionMaterial extends AMaterial{
         this.height = height;
     }
 
+    public ExtraDimensionMaterial(String name, int length, double price, String unit, int width) {
+        super(name, length, price, unit);
+        this.width = width;
+    }
+
     public int getWidth() {
         return width;
     }
