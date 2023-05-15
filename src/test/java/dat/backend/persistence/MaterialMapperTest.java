@@ -138,66 +138,11 @@ public class MaterialMapperTest {
         assertEquals(2, fittingList.size());
     }
 
-//
-//    @Test
-//    void getRoofTile() throws DatabaseException
-//    {
-//        RoofTile mat = (RoofTile) MaterialFacade.getMaterialById(4, connectionPool);
-//        System.out.println(mat instanceof RoofTile);
-//        assertEquals(600, mat.getLength());
-//        assertEquals(300, mat.getWidth());
-//        assertEquals("tagplader monteres på spær", mat.getDescription());
-//        assertInstanceOf(RoofTile.class, mat);
-//    }
-//
-//    @Test
-//    void getScrew() throws DatabaseException {
-//        Screw mat = (Screw) MaterialFacade.getMaterialById(3, connectionPool);
-//        System.out.println(mat instanceof Screw);
-//        assertEquals(30, mat.getLength());
-//        assertEquals("skruer til tagplader", mat.getDescription());
-//        assertEquals(200, mat.getDiameter());
-//        assertInstanceOf(Screw.class, mat);
-//    }
-//
-//    @Test
-//    void getScrewPack() throws DatabaseException {
-//        ScrewPack mat = (ScrewPack) MaterialFacade.getMaterialById(3, connectionPool);
-//        System.out.println(mat instanceof ScrewPack);
-//        assertEquals(120, mat.getLength());
-//        assertEquals(300, mat.getQuantity());
-//        assertEquals(10, mat.getDiameter());
-//        assertInstanceOf(ScrewPack.class, mat);
-//    }
-//
-//    @Test
-//    void getFitting() throws DatabaseException {
-//        Fitting mat = (Fitting) MaterialFacade.getMaterialById(5, connectionPool);
-//        System.out.println(mat instanceof Fitting);
-//        assertEquals(1000, mat.getLength());
-//        assertEquals("til vindkryds og spær", mat.getDescription());
-//        assertInstanceOf(Fitting.class, mat);
-//    }
-//
-//    @Test
-//    void getAllMaterials() throws DatabaseException {
-//        ArrayList<AMaterial> materials = MaterialFacade.getAllMaterials(connectionPool);
-//        assertEquals(5, materials.size());
-//        for (AMaterial mat : materials) {
-//            if (mat instanceof Wood) {
-//                assertInstanceOf(Wood.class, mat);
-//            } else if(mat instanceof Screw) {
-//                assertInstanceOf(Screw.class, mat);
-//            } else if(mat instanceof ScrewPack) {
-//                assertInstanceOf(ScrewPack.class, mat);
-//            } else if(mat instanceof RoofTile) {
-//                assertInstanceOf(RoofTile.class, mat);
-//            } else if(mat instanceof Fitting) {
-//                assertInstanceOf(Fitting.class, mat);
-//            }
-//
-//        }
-//    }
+    @Test
+    void getAllMaterials() throws DatabaseException {
+        ArrayList<AMaterial> materialList = MaterialFacade.getAllMaterials(connectionPool);
+        assertEquals(8, materialList.size());
+    }
 
 
 }
