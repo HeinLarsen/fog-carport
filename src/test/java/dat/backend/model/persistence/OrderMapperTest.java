@@ -108,7 +108,7 @@ class OrderMapperTest
     {
         Order expectedorder = OrderFacade.getOrderById(1,connectionPool);
         OrderFacade.approveOrder(expectedorder,connectionPool);
-        Enum expected = expectedorder.getStatus();
+        String expected = String.valueOf(expectedorder.getStatus());
         String actual = "APPROVED";
         assertEquals(expected,actual);
 
