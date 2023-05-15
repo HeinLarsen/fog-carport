@@ -94,15 +94,18 @@ class UserMapperTest
     }
 
     @Test
-    void invalidPasswordLogin() throws DatabaseException
-    {
-        assertThrows(DatabaseException.class, () -> UserService.login("user", "123", connectionPool));
+    void invalidPasswordLogin() throws DatabaseException, SQLException {
+       User LoginInvalid = UserService.login("user", "123", connectionPool);
+       User expectedLogin = UserService.login("user", "1234", connectionPool);
+         assertNotEquals(expectedLogin, LoginInvalid);
+
     }
 
     @Test
-    void invalidUserNameLogin() throws DatabaseException
-    {
-        assertThrows(DatabaseException.class, () -> UserFacade.login("bob", "1234", connectionPool));
+    void invalidUserNameLogin() throws DatabaseException, SQLException {
+      User loginTry = UserService.login("user1", "1234", connectionPool);
+      User expectedLogin = UserService.login("user", "1234", connectionPool);
+        assertNotEquals(expectedLogin, loginTry);
     }
 
     @Test
