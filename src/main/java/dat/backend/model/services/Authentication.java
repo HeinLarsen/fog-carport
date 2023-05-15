@@ -6,13 +6,13 @@ import javax.servlet.http.HttpSession;
 
 public class Authentication
 {
-    public static boolean isRoleAllowed(String role, HttpServletRequest request)
+    public static boolean isRoleAllowed(int roleId, HttpServletRequest request)
     {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if (user != null)
+        if (user.getRoleId() == roleId)
         {
-            return user.getRole().equals(role);
+            return true;
         }
         return false;
     }
