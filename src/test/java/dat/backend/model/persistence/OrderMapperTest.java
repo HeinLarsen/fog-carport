@@ -1,6 +1,7 @@
 package dat.backend.model.persistence;
 
 import dat.backend.model.entities.Order;
+import dat.backend.model.entities.Status;
 import dat.backend.model.exceptions.DatabaseException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -74,8 +76,11 @@ class OrderMapperTest
 
 
     @Test
-    void getAllOrders()
+    void getAllOrders() throws DatabaseException
     {
+        ArrayList<Order> expected = OrderFacade.getAllOrders(connectionPool);
+        int actual = expected.size();
+        assertEquals(2,actual);
 
     }
 
@@ -111,8 +116,12 @@ class OrderMapperTest
     }
 
     @Test
-    void getOrdersByStatus()
+    void getOrdersByStatus() throws DatabaseException
     {
+        ArrayList<Order> orders = OrderFacade.getOrdersByStatus(Status.valueOf("PENDING"),connectionPool);
+        int expected = orders.get(0).getOrderID();
+        int actual = 1;
+        assertEquals(expected,actual);
 
     }
 }
