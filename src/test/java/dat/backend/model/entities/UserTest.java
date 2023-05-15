@@ -24,69 +24,69 @@ class UserTest
     @Test
     void getId() throws SQLException
     {
-        int expectedid = 1;
-        int actualid = user1.getId();
-        assertEquals(expectedid,actualid);
+        int expectedId = 1;
+        int actualId = user1.getId();
+        assertEquals(expectedId,actualId);
     }
 
 
     @Test
-    void getFirst_name() throws SQLException
+    void getFirstName() throws SQLException
     {
-        String expectedname = "John";
-        String actualname = user1.getFirst_name();
-        assertEquals(expectedname,actualname);
+        String expectedName = "John";
+        String actualName = user1.getFirstName();
+        assertEquals(expectedName,actualName);
     }
 
 
     @Test
-    void getLast_name() throws SQLException
+    void getLastName() throws SQLException
     {
-        String expectedname = "Doe";
-        String actualname = user1.getLast_name();
-        assertEquals(expectedname,actualname);
+        String expectedName = "Doe";
+        String actualName = user1.getLastName();
+        assertEquals(expectedName,actualName);
     }
 
 
     @Test
     void getEmail() throws SQLException
     {
-        String expectedemail = "test@gmail.com";
-        String actualemail = user1.getEmail();
-        assertEquals(expectedemail,actualemail);
+        String expectedEmail = "test@gmail.com";
+        String actualEmail = user1.getEmail();
+        assertEquals(expectedEmail,actualEmail);
     }
 
 
     @Test
     void getAddress() throws SQLException
     {
-        String expectedadress = "testvej 50";
-        String actualadress = user1.getAddress();
-        assertEquals(expectedadress,actualadress);
+        String expectedAdress = "testvej 50";
+        String actualAdress = user1.getAddress();
+        assertEquals(expectedAdress,actualAdress);
     }
 
     @Test
-    void getPhone_number() throws SQLException
+    void getPhoneNumber() throws SQLException
     {
-     String expectednumber = "12345678";
-     String actualnumber = String.valueOf(user1.getPhone_number());
-     assertEquals(expectednumber,actualnumber);
+     String expectedNumber = "12345678";
+     String actualNumber = String.valueOf(user1.getPhoneNumber());
+     assertEquals(expectedNumber,actualNumber);
     }
 
     @Test
-    void getRole_id() throws SQLException
+    void getRoleId() throws SQLException
     {
-        int expectedid = 2;
-        int actualid = user1.getRole_id();
-        assertEquals(expectedid,actualid);
+        int expectedId = 2;
+        int actualId = user1.getRoleId();
+        assertEquals(expectedId,actualId);
     }
 
     @Test
-    void getMembership_id() throws SQLException
+    void getMembershipId() throws SQLException
     {
-        int expectedid = 2;
-        int actualid = user1.getMembership_id();
-        assertEquals(expectedid,actualid);
+        int expectedId = 2;
+        int actualId = user1.getMembershipId();
+        assertEquals(expectedId,actualId);
     }
 
 
@@ -102,22 +102,19 @@ class UserTest
     @Test
     void getZip() throws SQLException
     {
-        int expectedzip = 1111;
-        int actualzip = user1.getZip();
-        assertEquals(expectedzip,actualzip);
+        int expectedZip = 1111;
+        int actualZip = user1.getZip();
+        assertEquals(expectedZip,actualZip);
     }
 
 
     @Test
     void testEquals()
     {
-      User expecteduser = user1;
-      User actualuser = user1;
-      assertEquals(expecteduser,actualuser);
+      User expectedUser = user1;
+      User actualUser = user1;
+      assertEquals(expectedUser,actualUser);
     }
 
-    @Test
-    void testHashCode()
-    {
-    }
+
 }
