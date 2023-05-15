@@ -15,6 +15,8 @@ public abstract class ExtraDimensionMaterial extends AMaterial{
         this.width = width;
     }
 
+
+
     public int getWidth() {
         return width;
     }
