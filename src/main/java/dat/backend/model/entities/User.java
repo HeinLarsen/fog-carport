@@ -4,68 +4,99 @@ import java.util.Objects;
 
 public class User
 {
-    private String username;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String email;
     private String password;
-    private String role;
+    private String address;
+    private int phoneNumber;
+    private int roleId;
+    private int membershipId;
+    private int zip;
 
-    public User(String username, String password, String role)
+
+
+
+
+    public User(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip)
     {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.roleId = roleId;
+        this.membershipId = membershipId;
+        this.zip = zip;
 
     }
 
-    public String getUsername()
-    {
-        return username;
+    public int getId() {
+        return id;
     }
 
-    public void setUsername(String username)
-    {
-        this.username = username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getPassword()
-    {
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public int getMembershipId() {
+        return membershipId;
+    }
+
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password)
-    {
-        this.password = password;
+    public int getZip() {
+        return zip;
     }
-
-    public String getRole()
-    {
-        return role;
-    }
-
-    public void setRole(String role)
-    {
-        this.role = role;
-    }
-
+    
     @Override
     public boolean equals(Object o)
     {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return getUsername().equals(user.getUsername()) && getPassword().equals(user.getPassword()) &&
-                getRole().equals(user.getRole());
+        return getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword()) && getRoleId() == user.getRoleId();
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(getUsername(), getPassword(), getRole());
+        return Objects.hash(getEmail(), getPassword(), getRoleId());
     }
 
     @Override
     public String toString()
     {
         return "User{" +
-                "brugerNavn='" + username + '\'' +
+                "brugerNavn='" + email + '\'' +
                 ", kodeord='" + password + '\'' +
-                ", rolle='" + role + '\'' +
+                ", rolle='" + roleId + '\'' +
+                ", medlemskab='" + membershipId + '\'' +
                 '}';
     }
 }
