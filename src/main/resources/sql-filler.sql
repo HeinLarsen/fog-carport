@@ -16,7 +16,7 @@ insert into carport.category(category)
 values ('brædt'),
        ('lægte'),
        ('reglar'),
-       ('spærtre'),
+       ('spærtræ'),
        ('stolpe');
 
 -- membership;
