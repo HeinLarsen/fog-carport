@@ -61,7 +61,7 @@ class UserMapperTest
                 stmt.execute("ALTER TABLE user AUTO_INCREMENT = 1;");
 
                 // TODO: Insert a few users - insert rows into your own tables here
-                stmt.execute("insert into user (first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip) " +
+                stmt.execute("insert into user (first_name, last_name, email, password, address, phone_number, role, membership, zip) " +
                         "values ('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200)," +
                         "('user', 'user', 'user', '1234', '1', 1234, 1, 1, 3200), " +
                         "('Tobias', 'Tonndorff', 'Tobias@Tonndorff.dk', '1234', 'kollegiebakken 15A', 21177311, 1, 2, 2800)");
@@ -116,7 +116,7 @@ class UserMapperTest
     @Test
     void createUser() throws DatabaseException
     {
-        User newUser = UserMapper.createUser( "Ralf", "liebermann", "Ralf@Liebermann.com", "alleForEn", "Politigaarden", 12345678, 1, 2, 3200, connectionPool);
+        User newUser = UserMapper.createUser(1, "Ralf", "liebermann", "Ralf@Liebermann.com", "alleForEn", "Politigaarden", 12345678,  3200, connectionPool);
         User expectedUser = UserMapper.getUser(4, connectionPool);
         assertEquals(expectedUser, newUser);
 
@@ -125,8 +125,8 @@ class UserMapperTest
 
     @Test
     void updateUser() throws DatabaseException {
-        User existing = new User(1, "Tobias", "Tonndorff", "Tobias@Tonndorff.dk", "1234", "Kollegiebakken 15A", 21177311, 1, 2, 2800);
-        User updated = UserMapper.updateUser(1, "Anders", "Hein", "Anders@Hein.dk", "Hein1234", "Somewhere in allerød", 12345678, 1, 2, 3200, connectionPool);
+        User existing = new User();
+        User updated = UserMapper.updateUser();
         assertNotEquals(existing, updated);
     }
 

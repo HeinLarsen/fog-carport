@@ -22,13 +22,13 @@ public class UserFacade
 
     public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, ConnectionPool connectionPool) throws DatabaseException
     {
-       User user = UserMapper.updateUser(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, connectionPool);
+       User user = UserMapper.updateUser(id, firstName, lastName, email, password, address, phoneNumber, zip, connectionPool);
        return user;
     }
 
    public static User createUser( String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, ConnectionPool connectionPool) throws DatabaseException
     {
-       User user = UserMapper.createUser(firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, connectionPool);
+       User user = UserMapper.createUser(firstName, lastName, email, password, address, phoneNumber, zip, connectionPool);
        return user;
     }
 
