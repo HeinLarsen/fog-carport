@@ -1,7 +1,7 @@
 package dat.backend.model.entities;
 
 public enum Status {
-    pending("pending"),aproved("aproved"),cancelled("cancelled");
+    pending("PENDING"),aproved("aproved"),cancelled("cancelled");
 
 
     private final String statusString;

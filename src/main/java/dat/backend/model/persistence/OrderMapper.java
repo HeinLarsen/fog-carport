@@ -33,7 +33,7 @@ public class OrderMapper {
     }
 
     protected static Order getOrderById(int id, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select * from 'order' where ID = ?";
+        String sql = "select * from `order` where ID = ?";
         Order order = null;
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -50,6 +50,7 @@ public class OrderMapper {
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DatabaseException(e, "Error getting all orders");
         }
         return order;
