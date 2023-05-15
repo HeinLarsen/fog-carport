@@ -17,10 +17,6 @@ public class OrderService {
 
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(id, connectionPool);
 
-        for (OrderItem item : orderItems) {
-            item.addMaterial(MaterialFacade.getMaterialById(id, connectionPool));
-        }
-
         orderById.addOrderItems(orderItems);
 
         return orderById;
@@ -32,9 +28,6 @@ public class OrderService {
 
         for (Order order : orderByStatus) {
             ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(order.getOrderID(), connectionPool);
-            for (OrderItem item : orderItems) {
-                item.addMaterial(MaterialFacade.getMaterialById(item.getID(), connectionPool));
-            }
             order.addOrderItems(orderItems);
         }
         return orderByStatus;
@@ -45,9 +38,6 @@ public class OrderService {
 
         for (Order order : allOrders) {
             ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(order.getOrderID(), connectionPool);
-            for (OrderItem item : orderItems) {
-                item.addMaterial(MaterialFacade.getMaterialById(item.getID(), connectionPool));
-            }
             order.addOrderItems(orderItems);
         }
         return allOrders;
@@ -59,9 +49,6 @@ public class OrderService {
 
         for (Order order : orderByUserId) {
             ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(order.getOrderID(), connectionPool);
-            for (OrderItem item : orderItems) {
-                item.addMaterial(MaterialFacade.getMaterialById(item.getID(), connectionPool));
-            }
             order.addOrderItems(orderItems);
         }
         return orderByUserId;
