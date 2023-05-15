@@ -1,12 +1,11 @@
 package dat.backend.model.entities;
 
 public enum Status {
-    pending("pending"),aproved("aproved"),cancelled("cancelled");
-
+    pending("PENDING"),approved("APPROVED"),cancelled("CANCELLED");
 
     private final String statusString;
 
-    private Status(String statusString) {
+    Status(String statusString) {
 
         this.statusString = statusString;
     }
@@ -15,3 +14,6 @@ public enum Status {
         return statusString;
     }
 }
+
+
+

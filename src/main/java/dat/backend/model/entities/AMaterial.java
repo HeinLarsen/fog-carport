@@ -4,22 +4,16 @@ public abstract class AMaterial {
     private String name;
     private int length;
     private double price;
-    private String packaging;
-    private String description;
+    private String unit;
 
-
-
-    public AMaterial(String name, int length, double price, String packaging, String description){
+    public AMaterial(String name, int length, double price, String unit){
         this.name = name;
         this.length = length;
         this.price = price;
-        this.packaging = packaging;
-        this.description = description;
+        this.unit = unit;
 
 
     }
-
-    
 
     public String getName(){
         return name;
@@ -33,17 +27,9 @@ public abstract class AMaterial {
         return price;
     }
 
-    public String getPackaging(){
-        return packaging;
+    public String getUnit(){
+        return unit;
     }
-
-    public String getDescription(){
-        return description;
-    }
-
-
-
-
 
 }
 
