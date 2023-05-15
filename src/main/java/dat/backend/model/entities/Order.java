@@ -1,24 +1,25 @@
 package dat.backend.model.entities;
 
-
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Order {
         private int orderID;
-        private Timestamp timeStamp;
+        private Timestamp created;
         private Enum status;
-
-
+        private int length;
+        private int width;
+        private boolean shed;
         private ArrayList<OrderItem> orderItems;
 
 
-        public Order(int orderID, Timestamp timeStamp, Enum status){
+        public Order(int orderID, Timestamp created, Enum status, int length, int width, boolean shed){
                 this.orderID =orderID;
-                this.timeStamp = timeStamp;
+                this.created = created;
                 this.status = status;
+                this.length = length;
+                this.width = width;
+                this.shed = shed;
 
         }
 
@@ -32,14 +33,25 @@ public class Order {
 
         }
 
+        public int getLength() {
+                return length;
+        }
+
+        public int getWidth() {
+                return width;
+        }
+
+        public boolean isShed() {
+                return shed;
+        }
 
         public int getOrderID(){
                 return orderID;
 
         }
 
-        public Timestamp getTimeStamp(){
-                return timeStamp;
+        public Timestamp getCreated(){
+                return created;
 
         }
 
@@ -50,7 +62,6 @@ public class Order {
 
         public ArrayList<OrderItem> getOrderItems(){
                 return orderItems;
-
         }
 
 
