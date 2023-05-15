@@ -113,8 +113,11 @@ public class OrdreServiceTest {
 
 
     @Test
+    void GetAllOrders() throws DatabaseException {
 
-
-    //Tjek om der er en ordre har en array af orderItems.
-    //
+        ArrayList<Order> expected = OrderService.getAllOrders(connectionPool);
+        int actual = expected.size();
+        assertEquals(0, actual);
+    }
+    
 }
