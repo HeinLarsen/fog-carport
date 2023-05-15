@@ -62,8 +62,10 @@ class OrderMapperTest
 
                 // TODO: Insert a few Orders - insert rows into your own tables here
                 stmt.execute("ALTER TABLE carport_test.order AUTO_INCREMENT = 1");
+
                 stmt.execute("insert into `order` (user_id, length,width, shed)values (1,1,1,true)");
                 stmt.execute("insert into `order` (user_id, length,width, shed)values (1,1,1,true)");
+
 
             }
         }
@@ -118,9 +120,11 @@ class OrderMapperTest
     @Test
     void getOrdersByStatus() throws DatabaseException
     {
+
         ArrayList<Order> orders = OrderFacade.getOrdersByStatus(Status.pending,connectionPool);
         int expected = orders.size();
         int actual = 2;
+
         assertEquals(expected,actual);
 
     }
