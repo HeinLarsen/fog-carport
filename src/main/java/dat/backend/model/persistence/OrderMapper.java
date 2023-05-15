@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class OrderMapper {
     protected static ArrayList<Order> getAllOrders(ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select * from 'order'";
+        String sql = "select * from `order`";
         ArrayList<Order> orders = new ArrayList<>();
         Order order = null;
         try(Connection connection = connectionPool.getConnection()) {
@@ -58,7 +58,7 @@ public class OrderMapper {
 
 
     protected static ArrayList<Order> getOrdersByUserId(int userId, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select * from 'order' where user_id = ?";
+        String sql = "select * from `order` where user_id = ?";
         ArrayList<Order> orders = new ArrayList<>();
         Order order = null;
         try(Connection connection = connectionPool.getConnection()) {
@@ -83,7 +83,7 @@ public class OrderMapper {
     }
 
     protected static void createOrder(Order order, int userId, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "insert into 'order' (created, status, user_id) values (?, ?, ?)";
+        String sql = "insert into `order` (created, status, user_id) values (?, ?, ?)";
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setTimestamp(1, order.getCreated());
@@ -97,7 +97,7 @@ public class OrderMapper {
     }
 
     protected static void approveOrder(Order order, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "update 'order' set status = ? where ID = ?";
+        String sql = "update `order` set status = ? where ID = ?";
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, order.getStatus().toString());
@@ -110,7 +110,7 @@ public class OrderMapper {
     }
 
     protected static ArrayList<Order> getOrdersByStatus(Status status, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select * from 'order' where status = ?";
+        String sql = "select * from `order` where status = ?";
         ArrayList<Order> orders = new ArrayList<>();
         Order order = null;
         try(Connection connection = connectionPool.getConnection()) {
