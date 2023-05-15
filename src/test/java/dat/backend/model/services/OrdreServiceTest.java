@@ -39,11 +39,11 @@ public class OrdreServiceTest {
                 //Create order_item table:
                 stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.order_item LIKE carport.order_item;");
 
-                stmt.execute("delete from order");
-                stmt.execute("delete from order_item");
+                //stmt.execute("delete from order");
+                //stmt.execute("delete from order_item");
 
-                stmt.execute("ALTER TABLE order AUTO_INCREMENT = 1;");
-                stmt.execute("ALTER TABLE order_item AUTO_INCREMENT = 1;");
+                //stmt.execute("ALTER TABLE order AUTO_INCREMENT = 1;");
+                //stmt.execute("ALTER TABLE order_item AUTO_INCREMENT = 1;");
 
                 //Create material table:
                 stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.material_type LIKE carport.material_type;");
@@ -105,7 +105,7 @@ public class OrdreServiceTest {
 
     @Test
     void GetOrdersByStatus() throws DatabaseException {
-        ArrayList<Order> ordersByStatus = OrderService.getOrdersByStatus(Status.pending, connectionPool);
+        ArrayList<Order> ordersByStatus = OrderService.getOrdersByStatus(Status.PENDING, connectionPool);
         int expectedId = ordersByStatus.get(0).getOrderID();
         int actualId = 1;
         assertEquals(expectedId, actualId);
