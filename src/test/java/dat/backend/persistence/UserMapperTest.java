@@ -95,10 +95,10 @@ class UserMapperTest
 
     @Test
     void invalidPasswordLogin() throws DatabaseException, SQLException {
-       User LoginInvalid = UserService.login("user", "123", connectionPool);
-       User expectedLogin = UserService.login("user", "1234", connectionPool);
-         assertNotEquals(expectedLogin, LoginInvalid);
 
+          User loginAttempt = UserService.login("user", "12345", connectionPool);
+          User expectedLogin = UserService.login("user", "1234", connectionPool);
+          assertNotEquals(expectedLogin, loginAttempt);
     }
 
     @Test
@@ -106,6 +106,11 @@ class UserMapperTest
       User loginTry = UserService.login("user1", "1234", connectionPool);
       User expectedLogin = UserService.login("user", "1234", connectionPool);
         assertNotEquals(expectedLogin, loginTry);
+        if(loginTry != expectedLogin){
+            DatabaseException exception = new DatabaseException("User not found");
+            exception.getMessage();
+        }
+
     }
 
     @Test
@@ -124,6 +129,9 @@ class UserMapperTest
         User updated = UserMapper.updateUser(1, "Anders", "Hein", "Anders@Hein.dk", "Hein1234", "Somewhere in allerød", 12345678, 1, 2, 3200, connectionPool);
         assertNotEquals(existing, updated);
     }
+
+
+
 
 
 

@@ -12,8 +12,13 @@ public class UserService {
     // TODO refactor return types to return the data we receive from the database instead of void
 
     public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException, SQLException {
-        return UserFacade.login(email, password, connectionPool);
-
+        try{
+            User user = UserFacade.login(email, password, connectionPool);
+            return user;
+        }catch (DatabaseException e){
+            e.getMessage();
+        }
+        return null;
     }
 
     public static User updateUser(int id, String first_name, String last_name, String email, String password, String address, int phone_number, int role_id, int membership_id, int zip, ConnectionPool connectionPool) throws DatabaseException
