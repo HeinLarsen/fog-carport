@@ -19,7 +19,10 @@ public class OrderMapper {
                     int ID = rs.getInt("ID");
                     Timestamp timestamp = rs.getTimestamp("created");
                     Status status = Status.valueOf(rs.getString("status"));
-                    order = new Order(ID, timestamp, status);
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    boolean shed = rs.getBoolean("shed");
+                    order = new Order(ID, timestamp, status, length, width, shed);
                 }
                 orders.add(order);
             }
@@ -40,10 +43,14 @@ public class OrderMapper {
                     int ID = rs.getInt("ID");
                     Timestamp timestamp = rs.getTimestamp("created");
                     Status status = Status.valueOf(rs.getString("status"));
-                    order = new Order(ID, timestamp, status);
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    boolean shed = rs.getBoolean("shed");
+                    order = new Order(ID, timestamp, status, length, width, shed);
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DatabaseException(e, "Error getting all orders");
         }
         return order;
@@ -62,7 +69,10 @@ public class OrderMapper {
                     int ID = rs.getInt("ID");
                     Timestamp timestamp = rs.getTimestamp("created");
                     Status status = Status.valueOf(rs.getString("status"));
-                    order = new Order(ID, timestamp, status);
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    boolean shed = rs.getBoolean("shed");
+                    order = new Order(ID, timestamp, status, length, width, shed);
                 }
                 orders.add(order);
             }
@@ -76,7 +86,7 @@ public class OrderMapper {
         String sql = "insert into `order` (created, status, user_id) values (?, ?, ?)";
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setTimestamp(1, order.getTimeStamp());
+                ps.setTimestamp(1, order.getCreated());
                 ps.setString(2, order.getStatus().toString());
                 ps.setInt(3, userId);
                 ps.executeUpdate();
@@ -111,7 +121,10 @@ public class OrderMapper {
                     int ID = rs.getInt("ID");
                     Timestamp timestamp = rs.getTimestamp("created");
                     Status orderStatus = Status.valueOf(rs.getString("status"));
-                    order = new Order(ID, timestamp, orderStatus);
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    boolean shed = rs.getBoolean("shed");
+                    order = new Order(ID, timestamp, orderStatus, length, width, shed);
                 }
                 orders.add(order);
             }
