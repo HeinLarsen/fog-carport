@@ -77,7 +77,9 @@ public class OrderMapper {
                 orders.add(order);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DatabaseException(e, "Error getting all user orders");
+
         }
         return orders;
     }
