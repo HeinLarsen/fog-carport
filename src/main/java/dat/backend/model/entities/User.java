@@ -5,31 +5,31 @@ import java.util.Objects;
 public class User
 {
     private int id;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
     private String address;
-    private int phone_number;
-    private int role_id;
-    private int membership_id;
+    private int phoneNumber;
+    private int roleId;
+    private int membershipId;
     private int zip;
 
 
 
 
 
-    public User(int id, String first_name, String last_name, String email, String password, String address, int phone_number, int role_id, int membership_id, int zip)
+    public User(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip)
     {
         this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.address = address;
-        this.phone_number = phone_number;
-        this.role_id = role_id;
-        this.membership_id = membership_id;
+        this.phoneNumber = phoneNumber;
+        this.roleId = roleId;
+        this.membershipId = membershipId;
         this.zip = zip;
 
     }
@@ -38,12 +38,12 @@ public class User
         return id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getEmail() {
@@ -54,16 +54,16 @@ public class User
         return address;
     }
 
-    public int getPhone_number() {
-        return phone_number;
+    public int getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public int getMembership_id() {
-        return membership_id;
+    public int getMembershipId() {
+        return membershipId;
     }
 
     public String getPassword() {
@@ -80,13 +80,13 @@ public class User
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword()) && getRole_id() == user.getRole_id();
+        return getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword()) && getRoleId() == user.getRoleId();
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(getEmail(), getPassword(), getRole_id());
+        return Objects.hash(getEmail(), getPassword(), getRoleId());
     }
 
     @Override
@@ -95,8 +95,8 @@ public class User
         return "User{" +
                 "brugerNavn='" + email + '\'' +
                 ", kodeord='" + password + '\'' +
-                ", rolle='" + role_id + '\'' +
-                ", medlemskab='" + membership_id + '\'' +
+                ", rolle='" + roleId + '\'' +
+                ", medlemskab='" + membershipId + '\'' +
                 '}';
     }
 }
