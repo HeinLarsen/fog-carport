@@ -103,6 +103,7 @@ class UserMapperTest
     @Test
     void createUser() throws DatabaseException
     {
+
         User logInUser = UserFacade.login("jill", "1234", connectionPool);
         User expectedUser = new User("jill", "1234", "user");
         assertEquals(expectedUser, logInUser);

@@ -31,7 +31,7 @@ class UserMapper
                     int membership = rs.getInt("membership_id");
                     int zip = rs.getInt("zip");
                     String city = rs.getString("city");
-                    user = new User(email, password, "user");
+                    user = new User(email, password, "role");
                 } else {
                     throw new DatabaseException("Wrong username or password");
                 }
@@ -52,7 +52,7 @@ class UserMapper
                 ps.setString(2, password);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1) {
-                    user = new User(email, password, "user");
+                    user = new User(email, password,"user");
                 } else {
                     throw new DatabaseException("The user with username = could not be inserted into the database");
                 }
