@@ -22,8 +22,8 @@ class OrderMapperTest
     private final static String USER = "dev";
     private final static String PASSWORD = "3r!DE32*/fDe";
     private final static String URL = "jdbc:mysql://167.71.46.141/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
-
     private static ConnectionPool connectionPool;
+    private static Status status;
 
 
 
@@ -118,7 +118,8 @@ class OrderMapperTest
     @Test
     void getOrdersByStatus() throws DatabaseException
     {
-        ArrayList<Order> orders = OrderFacade.getOrdersByStatus(Status.valueOf("PENDING"),connectionPool);
+
+        ArrayList<Order> orders = OrderFacade.getOrdersByStatus(Status.pending,connectionPool);
         int expected = orders.get(0).getOrderID();
         int actual = 1;
         assertEquals(expected,actual);
