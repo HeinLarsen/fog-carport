@@ -119,7 +119,7 @@ class OrderMapperTest
     void getOrdersByStatus() throws DatabaseException
     {
 
-        ArrayList<Order> orders = OrderFacade.getOrdersByStatus(Status.pending,connectionPool);
+        ArrayList<Order> orders = OrderFacade.getOrdersByStatus(Status.PENDING,connectionPool);
         int expected = orders.get(0).getOrderID();
         int actual = 1;
         assertEquals(expected,actual);
