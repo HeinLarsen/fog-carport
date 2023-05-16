@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+|Website|
+start
+:Customize;
+:Signup;
+|Backend|
+:User Data;
+|Backend|
+|Database|
+:Create User;
+stop
+|Website|
+start
+:Login;
+|Backend|
+:Validate Credentials;
+|Website|
+:Make order;
+|Database|
+:Get Material Data;
+|Backend|
+:Generate Order;
+|Database|
+:Save Order;
+|Website|
+:Approve Order;
+|Database|
+:Calculate Price;
+|Backend|
+:Generate Price;
+:Generate Invoice;
+|Website|
+:Invoice;
+|Backend|
+:Generate material list + stl file;
+|Website|
+:Download file;
+stop
+
+@enduml

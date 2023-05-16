@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+User -> homepage.jsp: Navigate to login
+homepage.jsp -> login.jsp: Login
+login.jsp -> LoginServlet: Post
+LoginServlet -> UserMapper: Valid
+UserMapper -> SQL: Query
+SQL -> UserMapper: ResultSet
+UserMapper -> LoginServlet: Result
+LoginServlet -> homepage.jsp: Redirect to success page
+@enduml
