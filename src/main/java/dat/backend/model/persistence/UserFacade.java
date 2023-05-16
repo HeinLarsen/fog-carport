@@ -26,10 +26,10 @@ public class UserFacade
        return user;
     }
 
-   public static User createUser( String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, ConnectionPool connectionPool) throws DatabaseException
+   public static void createUser( String firstName, String lastName, String email, String password, String address, int phoneNumber,  int zip, ConnectionPool connectionPool) throws DatabaseException
     {
-       User user = UserMapper.createUser(firstName, lastName, email, password, address, phoneNumber, zip, connectionPool);
-       return user;
+       UserMapper.createUser(firstName, lastName, email, password, address, phoneNumber, zip, connectionPool);
+
     }
 
     public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException, SQLException {
