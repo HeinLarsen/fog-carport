@@ -4,6 +4,7 @@ import dat.backend.model.entities.OrderItem;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.OrderItemFacade;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -58,8 +59,6 @@ public class OrderItemMapperTest {
                 stmt.execute("insert into carport_test.order_item_wood values (1, 1, 1, 'stolpe', 262.03, 2)");
                 stmt.execute("insert into carport_test.order_item_wood values (2, 2, 1,'brædt', 174.43, 1)");
 
-
-
             }
         }
         catch (SQLException e) {
@@ -67,6 +66,8 @@ public class OrderItemMapperTest {
             fail("Database connection failed");
         }
     }
+
+
 
     @Test
     void testConnection() throws SQLException {
@@ -82,8 +83,17 @@ public class OrderItemMapperTest {
 
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
         ArrayList<OrderItem> orderItems2 = OrderItemFacade.getOrderItemsByOrderId(2, connectionPool);
-        assertEquals(4, orderItems.size());
+        assertEquals(6, orderItems.size());
         assertEquals(4, orderItems2.size());
+        System.out.println("order items for order 1");
+        for (OrderItem orderItem : orderItems) {
+            System.out.println(orderItem);
+        }
+        System.out.println("order items for order 2");
+        for (OrderItem orderItem : orderItems2) {
+            System.out.println(orderItem);
+        }
+
     }
 
     @Test
@@ -91,6 +101,17 @@ public class OrderItemMapperTest {
         OrderItem orderItem = new OrderItem(1, 1, 1, "test");
         OrderItemFacade.createOrderItem(orderItem, 1, 2, connectionPool);
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
-        assertEquals(3, orderItems.size());
+        assertEquals(5, orderItems.size());
+    }
+
+    @Test
+    void createWrongOrderItem() throws DatabaseException{
+        OrderItem orderItem = new OrderItem(1, 1, 1, "test");
+        OrderItemFacade.createOrderItem(orderItem, 1, 1, connectionPool);
+        ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
+        assertEquals(6, orderItems.size());
+        for (OrderItem item : orderItems) {
+            System.out.println(item);
+        }
     }
 }

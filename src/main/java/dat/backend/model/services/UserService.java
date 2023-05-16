@@ -16,7 +16,7 @@ public class UserService {
             User user = UserFacade.login(email, password, connectionPool);
             return user;
         }catch (DatabaseException e){
-            e.getMessage();
+            e.printStackTrace();
         }
         return null;
     }

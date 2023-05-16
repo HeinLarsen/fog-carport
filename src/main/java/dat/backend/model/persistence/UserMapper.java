@@ -81,10 +81,10 @@ public class UserMapper
         return user;
     }
 
-    public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int zip, ConnectionPool connectionPool) throws DatabaseException
+    public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, ConnectionPool connectionPool) throws DatabaseException
     {
         Logger.getLogger("web").log(Level.INFO, "");
-        String sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ?, address = ?, phone_number = ?, zip = ? WHERE id = ?";
+        String sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ?, address = ?, phone_number = ?, zip = ?, membership = ? WHERE id = ?";
         try (Connection connection = connectionPool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
@@ -95,8 +95,9 @@ public class UserMapper
                 ps.setString(4, password);
                 ps.setString(5, address);
                 ps.setInt(6, phoneNumber);
-                ps.setInt(9, zip);
-                ps.setInt(10, id);
+                ps.setInt(7, zip);
+                ps.setInt(8, membershipId);
+                ps.setInt(9, id);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1)
                 {
@@ -105,9 +106,10 @@ public class UserMapper
             }
         } catch (SQLException ex)
         {
+            ex.printStackTrace();
             throw new DatabaseException(ex, "Could not update user in database");
         }
-        return new User(id, firstName, lastName, email, password, address, phoneNumber, zip);
+        return new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip);
     }
 
 
@@ -124,7 +126,7 @@ public class UserMapper
                 ps.setString(4, password);
                 ps.setString(5, address);
                 ps.setInt(6, phoneNumber);
-                ps.setInt(9, zip);
+                ps.setInt(7, zip);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1) {
                     throw new DatabaseException("No user with email = " + email + " found in database");
@@ -132,13 +134,16 @@ public class UserMapper
                 try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int id = generatedKeys.getInt(1);
-                        user = new User(id, firstName, lastName, email, password, address, phoneNumber, zip);
+                        int roleId = 1;
+                        int membershipId = 1;
+                        user = new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip);
                     } else {
                         throw new DatabaseException("Failed to get ID for created user");
                     }
                 }
             }
         } catch (SQLException ex) {
+            ex.printStackTrace();
             throw new DatabaseException(ex, "Could not create user in database");
         }
         return user;
@@ -161,14 +166,15 @@ public class UserMapper
                     String lastName = rs.getString("last_name");
                     String address = rs.getString("address");
                     int phoneNumber = rs.getInt("phone_number");
-                    int roleId = rs.getInt("role_id");
-                    int membershipId = rs.getInt("membership_id");
+                    int roleId = rs.getInt("role");
+                    int membershipId = rs.getInt("membership");
                     int zip = rs.getInt("zip");
                     user = new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip);
 
 
                 }
             } catch (SQLException ex) {
+                ex.printStackTrace();
                 throw new DatabaseException(ex, "Could not login user in database");
             }
         }

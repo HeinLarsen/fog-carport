@@ -102,33 +102,33 @@ class UserMapperTest
     }
 
     @Test
-    void invalidUserNameLogin() throws DatabaseException, SQLException {
-      User loginTry = UserService.login("user1", "1234", connectionPool);
-      User expectedLogin = UserService.login("user", "1234", connectionPool);
+    void invalidEmailLogin() throws DatabaseException, SQLException {
+      User loginTry = UserService.login("Tobias@Tonndorff.kd", "1234", connectionPool);
+      User expectedLogin = UserService.login("Tobias@Tonndorff.dk", "1234", connectionPool);
         assertNotEquals(expectedLogin, loginTry);
-        if(loginTry != expectedLogin){
-            DatabaseException exception = new DatabaseException("User not found");
-            exception.getMessage();
-        }
+
 
     }
 
     @Test
     void createUser() throws DatabaseException
     {
-        User newUser = UserMapper.createUser(1, "Ralf", "liebermann", "Ralf@Liebermann.com", "alleForEn", "Politigaarden", 12345678,  3200, connectionPool);
+        User newUser = UserMapper.createUser("Tobias", "Tonndorff", "Tobias@Tonndorff.dk", "1234", "kollegiebakken 15A", 21177311,  2800, connectionPool);
         User expectedUser = UserMapper.getUser(4, connectionPool);
         assertEquals(expectedUser, newUser);
 
 
     }
 
-    @Test
-    void updateUser() throws DatabaseException {
-        User existing = new User();
-        User updated = UserMapper.updateUser();
-        assertNotEquals(existing, updated);
-    }
+   @Test
+    void updateUserTest() throws DatabaseException
+   {
+         User expectedUser = UserService.getUser(3, connectionPool);
+         User updatedUser = UserService.updateUser(3, "Anders", "larsen", "Ander@Larsen.dk", "Lars1234", "Somewhere in allerød", 123456789, 1, 0, 2800, connectionPool);
+       System.out.println(expectedUser);
+         System.out.println(updatedUser);
+            assertNotEquals(expectedUser, updatedUser);
+   }
 
 
 
