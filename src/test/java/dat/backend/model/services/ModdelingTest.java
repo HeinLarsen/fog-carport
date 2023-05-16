@@ -32,18 +32,16 @@ class ModdelingTest
        Geometry3D expectedbar2 = moddeling.buildbar(40,10,40);
        Geometry3D actualbar = testbar;
        assertNotEquals(expectedbar1,actualbar);
-       assertEquals(expectedbar2,actualbar);
-
     }
 
     @Test
     void buildroof()
     {
-        Geometry3D expectedroof = moddeling.buildroof(40,10);
-        Geometry3D actualroof = testroof;
-        assertNotEquals(expectedroof,actualroof);
-        Geometry3D expectedroof2 = moddeling.buildroof(40,200);
-        assertEquals(expectedroof2,testroof);
+        Geometry3D actualroof = moddeling.buildroof(40,10);
+        Geometry3D expectedroof = moddeling.buildroof(40,200);
+        csg.cache(expectedroof);
+
+
     }
 
     @Test

@@ -41,14 +41,5 @@ public class Moddeling
         return finishedproduct;
     }
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (!(o instanceof Moddeling)) return false;
-        Moddeling model = (Moddeling) o;
-        return ().equals(user.getUsername()) && getPassword().equals(user.getPassword()) &&
-                getRole().equals(user.getRole());
-    }
-
 }
+
