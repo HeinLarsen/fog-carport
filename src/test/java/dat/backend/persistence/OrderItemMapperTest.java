@@ -4,6 +4,7 @@ import dat.backend.model.entities.OrderItem;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.OrderItemFacade;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OrderItemMapperTest {
     private final static String USER = "dev";
     private final static String PASSWORD = "3r!DE32*/fDe";
-    private final static String URL = "jdbc:mysql://167.71.46.141/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
+    private final static String URL = "jdbc:mysql://167.71.46.141/carport_test";
 
     private static ConnectionPool connectionPool;
 
@@ -30,44 +31,33 @@ public class OrderItemMapperTest {
             try (Statement stmt = testConnection.createStatement()) {
 
                 // Create test database - if not exist
-                stmt.execute("CREATE DATABASE  IF NOT EXISTS carport_test;");
 
-                stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.order LIKE carport.order;");
-                stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.order_item LIKE carport.order_item;");
-                stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.material_type LIKE carport.material_type;");
-                stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.packaging LIKE carport.packaging;");
-                stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.type LIKE carport.type;");
-                stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.material LIKE carport.material;");
 
                 stmt.execute("delete from `order`");
-                stmt.execute("delete from order_item");
-                stmt.execute("delete from material_type");
-                stmt.execute("delete from packaging");
-                stmt.execute("delete from type");
-                stmt.execute("delete from material");
+                stmt.execute("delete from order_item_fitting");
+                stmt.execute("delete from order_item_screw");
+                stmt.execute("delete from order_item_roof_tile");
+                stmt.execute("delete from order_item_wood");
 
                 stmt.execute("ALTER TABLE `order` AUTO_INCREMENT = 1;");
-                stmt.execute("ALTER TABLE order_item AUTO_INCREMENT = 1;");
-                stmt.execute("ALTER TABLE material AUTO_INCREMENT = 1;");
-                stmt.execute("ALTER TABLE material_type AUTO_INCREMENT = 1;");
-                stmt.execute("ALTER TABLE packaging AUTO_INCREMENT = 1;");
-                stmt.execute("ALTER TABLE type AUTO_INCREMENT = 1;");
+                stmt.execute("ALTER TABLE order_item_roof_tile AUTO_INCREMENT = 1;");
+                stmt.execute("ALTER TABLE order_item_screw AUTO_INCREMENT = 1;");
+                stmt.execute("ALTER TABLE order_item_wood AUTO_INCREMENT = 1;");
+                stmt.execute("ALTER TABLE order_item_fitting AUTO_INCREMENT = 1;");
 
-                stmt.execute("INSERT INTO packaging (type) VALUES ('stk'), ('pakke'), ('rulle'), ('sæt');");
-                stmt.execute("INSERT INTO type (type) VALUES ('trykimp. brædt'), ('lægte'), ('reglar ub.'), ('spærtræ ubh.'), ('trykimp. Brædt'), ('Plastmo Ecolite blåtonet'), ('Plastmo Trapez Brundskrue'), ('hulbånd'), ('universal'), ('universal'), ('skruer'), ('beslagskruer'), ('bræddebolt'), ('firkantskiver'), ('stalddørsgreb'), ('t hængse'), ('vinkelbeslag');");
-                stmt.execute("insert into material_type (material) value ('wood'), ('screw'), ('screwPack'), ('roof tile'), ('fitting'),('door handle');");
+                //order_item_fitting
+                stmt.execute("insert into carport_test.order_item_fitting values (1, 1, 1, 'firkantskiver', 149.5, 1)");
+                stmt.execute("insert into carport_test.order_item_fitting values (2, 2, 1, 'firkantskiver', 149.5, 1)");
+                //order_item_screw
+                stmt.execute("insert into carport_test.order_item_screw values (1, 1, 1, 'skruer 200', 307.95, 2)");
+                stmt.execute("insert into carport_test.order_item_screw values (2, 2, 1, 'skruer 200', 307.95, 2)");
+                //order_item_roof_tile
+                stmt.execute("insert into carport_test.order_item_roof_tile values (1, 1, 1, 'Plastmo Ecolite blåtonet', 633, 1)");
+                stmt.execute("insert into carport_test.order_item_roof_tile values (2, 2, 1, 'Plastmo Ecolite blåtonet', 266, 2)");
 
-                stmt.execute("INSERT INTO `material` (`length`, `width`, `height`, `description`, `price`, `type`, `packaging`, `material_type_id`) VALUES ('360', '200', '25', 'understærnbrædder til for og bag ende', '174.43', '1', '1', '1 ');");
-                stmt.execute("INSERT INTO `material` (`length`, `width`, `diameter`, `description`, `price`, `type`, `packaging`, `material_type_id`) VALUES ('120', '120', '10', 'Til montering af rem på stolper', '464.00', '13', '1', '2');");
-                stmt.execute("INSERT INTO `material` (`length`, `description`, `quantity`, `price`, `type`, `packaging`, `material_type_id`) VALUES ('30', 'skruer til tagplader', '200', '441.00', '7', '2', '3');");
-                stmt.execute("INSERT INTO `material` (`length`, `width`, `description`, `price`, `type`, `packaging`, `material_type_id`) VALUES ('600', '300', 'tagplader monteres på spær', '633.00', '6', '1', '4');");
-                stmt.execute("INSERT INTO `material` (`length`, `width`, `diameter`, `description`, `price`, `type`, `packaging`, `material_type_id`) VALUES ('1000', '20', '1', 'til vindkryds og spær', '339.00', '8', '3', '5');");
-
-                stmt.execute("INSERT INTO `order` (user_id) VALUES (1);");
-                stmt.execute("INSERT INTO `order` (user_id) VALUES (2);");
-
-                stmt.execute("INSERT INTO `order_item` (order_id, type, total_price, material_id, material_type_id, amount) VALUES (1, 1, 200, 1, 1, 2);");
-                stmt.execute("INSERT INTO `order_item` (order_id, type, total_price, material_id, material_type_id, amount) VALUES (1, 2, 200, 1, 1, 2);");
+                //order_item_wood
+                stmt.execute("insert into carport_test.order_item_wood values (1, 1, 1, 'stolpe', 262.03, 2)");
+                stmt.execute("insert into carport_test.order_item_wood values (2, 2, 1,'brædt', 174.43, 1)");
 
             }
         }
@@ -76,6 +66,8 @@ public class OrderItemMapperTest {
             fail("Database connection failed");
         }
     }
+
+
 
     @Test
     void testConnection() throws SQLException {
@@ -88,8 +80,20 @@ public class OrderItemMapperTest {
 
     @Test
     void getAllOrderItemsByOrderId() throws DatabaseException {
+
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
-        assertEquals(2, orderItems.size());
+        ArrayList<OrderItem> orderItems2 = OrderItemFacade.getOrderItemsByOrderId(2, connectionPool);
+        assertEquals(6, orderItems.size());
+        assertEquals(4, orderItems2.size());
+        System.out.println("order items for order 1");
+        for (OrderItem orderItem : orderItems) {
+            System.out.println(orderItem);
+        }
+        System.out.println("order items for order 2");
+        for (OrderItem orderItem : orderItems2) {
+            System.out.println(orderItem);
+        }
+
     }
 
     @Test
@@ -97,6 +101,17 @@ public class OrderItemMapperTest {
         OrderItem orderItem = new OrderItem(1, 1, 1, "test");
         OrderItemFacade.createOrderItem(orderItem, 1, 2, connectionPool);
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
-        assertEquals(3, orderItems.size());
+        assertEquals(5, orderItems.size());
+    }
+
+    @Test
+    void createWrongOrderItem() throws DatabaseException{
+        OrderItem orderItem = new OrderItem(1, 1, 1, "test");
+        OrderItemFacade.createOrderItem(orderItem, 1, 1, connectionPool);
+        ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
+        assertEquals(6, orderItems.size());
+        for (OrderItem item : orderItems) {
+            System.out.println(item);
+        }
     }
 }
