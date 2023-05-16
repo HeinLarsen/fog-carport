@@ -38,7 +38,7 @@ public class Signup extends HttpServlet {
         int phoneNumber = Integer.parseInt(request.getParameter("phone_number"));
         int zip = Integer.parseInt(request.getParameter("zip"));
         try {
-            UserService.createUser(firstName, lastname, email, password, address, phoneNumber, zip, connectionPool);
+            UserService.createUser2(firstName, lastname, email, password, address, phoneNumber, zip, connectionPool);
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         } catch (DatabaseException e) {
             request.setAttribute("errormessage", e.getMessage());
