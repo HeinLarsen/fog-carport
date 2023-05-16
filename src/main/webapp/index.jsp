@@ -13,36 +13,12 @@
     <jsp:body>
 
 
-
         <div>
-            <div>
-                <div>
-
-                    <t2>Kunde Liste</t2>
-
-                </div>
-
-                <div>
-
-                    <t2>ordre list</t2>
-
-                </div>
-            </div>
-
-
-
-            <div>
-
-                <t2>Ubehandlet Ordrer <Liste></Liste> </t2>
-
-            </div>
-
-          </div>
-
-
-
-
-        <p>Startcode for 2nd semester </p>
+            <t2> betalings form </t2>
+            <form>
+                <button type="submit" class="btn btn-success">Sign Up</button>
+            </form>
+        </div>
 
         <c:if test="${sessionScope.user != null}">
             <p>You are logged in with the role of "${sessionScope.user.role_id}".</p>

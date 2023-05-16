@@ -31,7 +31,7 @@
 
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
+                <div class="navbar-nav box">
 
 
                     <c:if test="${sessionScope.user.role == 2}">
