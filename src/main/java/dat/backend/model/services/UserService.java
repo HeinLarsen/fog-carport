@@ -27,10 +27,10 @@ public class UserService {
        return user;
     }
 
-    public static User createUser(String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, ConnectionPool connectionPool) throws DatabaseException
+    public static void createUser2(String firstName, String lastName, String email, String password, String address, int phoneNumber,  int zip, ConnectionPool connectionPool) throws DatabaseException
     {
-     User user = UserFacade.createUser(firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, connectionPool);
-     return user;
+      UserFacade.createUser2( firstName, lastName, email, password, address, phoneNumber, zip, connectionPool);
+
 
     }
 

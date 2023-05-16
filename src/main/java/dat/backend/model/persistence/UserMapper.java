@@ -149,6 +149,29 @@ public class UserMapper
         return user;
     }
 
+    public static void createUser2(String firstName, String lastName, String email, String password, String address, int phoneNumber, int zip, ConnectionPool connectionPool) throws DatabaseException{
+        Logger.getLogger("web").log(Level.INFO, "");
+        String sql = "INSERT INTO user (first_name, last_name, email, password, address, phone_number, zip) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = connectionPool.getConnection()){
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+                ps.setString(1, firstName);
+                ps.setString(2, lastName);
+                ps.setString(3, email);
+                ps.setString(4, password);
+                ps.setString(5, address);
+                ps.setInt(6, phoneNumber);
+                ps.setInt(7, zip);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected == 0){
+                    throw new DatabaseException("User with email" + email + "was not created");
+                }
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();
+            throw new DatabaseException(ex, "Could not create user in database");
+        }
+    }
+
 
     //call this with a false login in userMapperTest
     public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException, SQLException {
