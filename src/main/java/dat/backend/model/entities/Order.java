@@ -64,13 +64,8 @@ public class Order {
                 return orderItems;
         }
 
-
-
-
-
-
-
-
-
+        public void setStatus(String status) {
+                this.status = Status.valueOf(status);
+        }
 }
 
