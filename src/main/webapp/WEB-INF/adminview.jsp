@@ -18,6 +18,8 @@
         Adresse: ${user.address}
         <br>
         Postnummer: ${user.zip}
+        <br>
+        Medlemskab: ${user.membership}
         <br/>
 
         Order:
@@ -37,10 +39,11 @@
             <td>
                 <p>${order.length}</p>
                 <p>${order.width}</p>
-            <td>
-                <p>${order.created}</p>
+                <p>${order.shed}</p>
             <td>
                 <p>${order.status}</p>
+            <td>
+                <p>${order.created}</p>
             <td>
                 <p>${order.totalPrice}kr,-</p>
             </td>

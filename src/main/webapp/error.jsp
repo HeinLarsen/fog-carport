@@ -6,7 +6,7 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-             Error page
+             Hov! Error page
     </jsp:attribute>
 
 

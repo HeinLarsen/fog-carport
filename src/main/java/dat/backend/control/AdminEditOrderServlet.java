@@ -1,7 +1,6 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
-import dat.backend.model.entities.User;
 import dat.backend.model.persistence.ConnectionPool;
 
 import javax.servlet.*;
@@ -9,8 +8,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "AdminBrugerViewServlet", value = "/adminbrugerview")
-public class AdminBrugerViewServlet extends HttpServlet {
+@WebServlet(name = "AdminEditOrderServlet", value = "/admineditorder")
+public class AdminEditOrderServlet extends HttpServlet {
 
     private ConnectionPool connectionPool;
 

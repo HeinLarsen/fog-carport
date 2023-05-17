@@ -6,6 +6,7 @@ import dat.backend.model.entities.User;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.OrderItemFacade;
+import dat.backend.model.services.OrderService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -27,14 +28,17 @@ public class ShowOrderByUserIDServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+
+
         User u = (User) session.getAttribute("user");
         int userId = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("user",u);
+
         try {
-            if (u != null && u.getRole() == 2) {
-                List<Order> orderList = OrderFacade.getOrdersByUserId(userId, connectionPool);
+            if (u != null && u.getRoleId() == 2) {
+                List<Order> orderList = OrderService.getOrdersByUserId(userId, connectionPool);
                 for (Order o : orderList) {
                     System.out.println(o);
-                    o.addOrderItemList(OrderItemFacade.getAllOrderItemsByOrderId(o.getId(), connectionPool));
                 }
                 request.setAttribute("orderList", orderList);
                 request.getRequestDispatcher("WEB-INF/admineditorder.jsp").forward(request, response);
