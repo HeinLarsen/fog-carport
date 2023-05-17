@@ -1,0 +1,22 @@
+name: Maven Unit Tests
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11' # Set the desired Java version
+
+    - name: Build with Maven
+      run: mvn clean install
+
+    - name: Run unit tests
+      run: mvn test
