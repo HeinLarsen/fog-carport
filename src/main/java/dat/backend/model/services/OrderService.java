@@ -3,6 +3,7 @@ package dat.backend.model.services;
 import dat.backend.model.entities.Order;
 import dat.backend.model.entities.OrderItem;
 import dat.backend.model.entities.Status;
+import dat.backend.model.entities.Wood;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.*;
 
@@ -54,7 +55,9 @@ public class OrderService {
         return orderByUserId;
     }
 
-    public static void generateOrder(int length, int height) {
+    public static void generateOrder(int length, int height, ConnectionPool connectionPool) throws DatabaseException {
+        ArrayList<Wood> woods = MaterialFacade.getAllWood(connectionPool);
+
 
     }
 
