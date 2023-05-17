@@ -51,7 +51,7 @@ class UserTest
     @Test
     void getEmail() throws SQLException
     {
-        String expectedEmail = "test@gmail.com";
+        String expectedEmail = "test@email.com";
         String actualEmail = user1.getEmail();
         assertEquals(expectedEmail,actualEmail);
     }
