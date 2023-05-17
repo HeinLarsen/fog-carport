@@ -8,6 +8,8 @@ import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class OrderService {
@@ -55,8 +57,32 @@ public class OrderService {
         return orderByUserId;
     }
 
-    public static void generateOrder(int length, int height, ConnectionPool connectionPool) throws DatabaseException {
+    public static void generateOrder(int length, int width, ConnectionPool connectionPool) throws DatabaseException {
         ArrayList<Wood> woods = MaterialFacade.getAllWood(connectionPool);
+        HashMap<Integer, ArrayList<Wood>> woodHashMap = new HashMap<>();
+        for (int i = 0; i < woods.size(); i++) {
+            if (woods.get(i).isPressureTreated() && woods.get(i).getCategory().equals("brædt")) {
+                if (woods.get(i).getLength() >= length) {
+                    int difference = woods.get(i).getLength() - length;
+                    ArrayList<Wood> woodList = new ArrayList<>();
+                    woodList.add(woods.get(i));
+                    woodHashMap.put(difference, woodList);
+                } else {
+                    for (int j = 0; j < woods.get(i).getLength(); j++) {
+                        if (woods.get(j).isPressureTreated() && woods.get(j).getCategory().equals("brædt")) {
+                            if(woods.get(i).getLength() + woods.get(j).getLength() >= length && woods.get(i).getWidth() == woods.get(j).getWidth() && woods.get(i).getHeight() == woods.get(j).getHeight()) {
+                                int difference = woods.get(i).getLength() + woods.get(j).getLength() - length;
+                                ArrayList<Wood> woodList = new ArrayList<>();
+                                woodList.add(woods.get(i));
+                                woodList.add(woods.get(j));
+                                woodHashMap.put(difference, woodList);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
 
 
     }
