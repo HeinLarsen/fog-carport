@@ -11,26 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderItemMapper {
-    protected static ArrayList<OrderItem> getOrderItemsByOrderId(int id, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select * from order_item where order_id = ?";
-        ArrayList<OrderItem> orderItems = new ArrayList<>();
-        try(Connection connection = connectionPool.getConnection()) {
-            try(PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1, id);
-                ResultSet rs = ps.executeQuery();
-                while(rs.next()) {
-                    int ID = rs.getInt("id");
-                    int quantity = rs.getInt("quantity");
-                    int price = rs.getInt("price");
-                    String description = rs.getString("description");
-                    orderItems.add(new OrderItem(ID, quantity, price, description));
-                }
-            }
-        } catch (SQLException e) {
-            throw new DatabaseException(e, "Error getting all order items");
-        }
-        return orderItems;
-    }
+
 
     protected static ArrayList<OrderItem> getOrderItemsWoodByOrderId(int id, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "select order_item_wood.id, order_item_wood.quantity, order_item_wood.price, order_item_wood.description, wood.name, wood.length, wood.width, wood.height, wood.is_pressure_treated, c.category, u.unit from order_item_wood join wood on order_item_wood.item_id = wood.id join category c on wood.category = c.id join unit u on wood.unit = u.id where order_id = ?";

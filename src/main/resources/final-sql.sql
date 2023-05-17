@@ -379,6 +379,24 @@ CREATE TABLE IF NOT EXISTS `carport`.`order_item_fitting`
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
 )
+create database if not exists carport_test;
+create table if not exists carport_test.category like carport.category;
+create table if not exists carport_test.fitting like carport.fitting;
+create table  if not exists carport_test.membership like carport.membership;
+create table  if not exists carport_test.order like carport.order;
+create table if not exists carport_test.order_item_fitting like carport.order_item_fitting;
+create table if not exists carport_test.order_item_roof_tile like carport.order_item_roof_tile;
+create table if not exists carport_test.order_item_screw like carport.order_item_screw;
+create table if not exists carport_test.order_item_wood like carport.order_item_wood;
+create table if not exists carport_test.role like carport.role;
+create table if not exists carport_test.roof_tile like carport.roof_tile;
+create table if not exists carport_test.screw like carport.screw;
+create table if not exists carport_test.unit like carport.unit;
+create table if not exists carport_test.user like carport.user;
+create table if not exists carport_test.wood like carport.wood;
+create table if not exists carport_test.zip like carport.zip;
+
+
     ENGINE = InnoDB;
 
 
