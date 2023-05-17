@@ -54,6 +54,10 @@ public class OrderService {
         return orderByUserId;
     }
 
+    public static void generateOrder(int length, int height) {
+
+    }
+
 
     //I dette metode skal vi have regnet carports bredde samt længde ud, beregningsmetode kommer her.
     public void addOrder(Order order) {
