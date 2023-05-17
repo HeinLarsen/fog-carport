@@ -14,11 +14,45 @@
 
 
         <div>
-            <t2> betalings form </t2>
-            <form>
-                <button type="submit" class="btn btn-success">Sign Up</button>
-            </form>
+            <t2> Bestillings form </t2>
+                <div class="dropdown">
+                    <select>
+                        <option value="" selected disabled> Carport bredde</option>
+                        <option value="option1">200cm</option>
+                        <option value="option2">250cm</option>
+                        <option value="option3">300cm</option>
+                </select>
+            </div>
+
+            <div>
+                <div class="dropdown">
+                    <select>
+                        <option value="" selected disabled> Carport længde</option>
+                        <option value="option1">500cm</option>
+                        <option value="option2">550cm</option>
+                        <option value="option3">600cm</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="dropdown">
+                    <select>
+                        <option value="" selected disabled> Carport højde</option>
+                        <option value="option1">400cm</option>
+                        <option value="option2">450cm</option>
+                        <option value="option3">500cm</option>
+                    </select>
+                </div>
+
+            </div>
+
+
         </div>
+
+
+
 
         <c:if test="${sessionScope.user != null}">
             <p>You are logged in with the role of "${sessionScope.user.role_id}".</p>

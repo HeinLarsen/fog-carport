@@ -29,7 +29,6 @@ public class Signup extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-
         String firstName =request.getParameter("first_name");
         String lastname = request.getParameter("last_name");
         String email = request.getParameter("email");
