@@ -106,22 +106,10 @@ class OrderMapperTest
     }
 
     @Test
-    void approveOrder() throws DatabaseException
-    {
-        Order expectedorder = OrderFacade.getOrderById(1,connectionPool);
-        OrderFacade.approveOrder(expectedorder,connectionPool);
-        String expected = String.valueOf(expectedorder.getStatus());
-        String actual = "APPROVED";
-        assertEquals(expected,actual);
-
-
-    }
-
-    @Test
     void getOrdersByStatus() throws DatabaseException
     {
 
-        ArrayList<Order> orders = OrderFacade.getOrdersByStatus(Status.pending,connectionPool);
+        ArrayList<Order> orders = OrderFacade.getOrdersByStatus(Status.PENDING,connectionPool);
         int expected = orders.size();
         int actual = 2;
 

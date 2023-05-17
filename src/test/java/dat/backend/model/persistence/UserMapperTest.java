@@ -1,4 +1,4 @@
-package dat.backend.persistence;
+package dat.backend.model.persistence;
 
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
@@ -61,7 +61,7 @@ class UserMapperTest
                 stmt.execute("ALTER TABLE user AUTO_INCREMENT = 1;");
 
                 // TODO: Insert a few users - insert rows into your own tables here
-                stmt.execute("insert into user (first_name, last_name, email, password, address, phone_number, role_id, membership_id, zip) " +
+                stmt.execute("insert into user (first_name, last_name, email, password, address, phone_number, role, membership, zip) " +
                         "values ('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200)," +
                         "('user', 'user', 'user', '1234', '1', 1234, 1, 1, 3200), " +
                         "('Tobias', 'Tonndorff', 'Tobias@Tonndorff.dk', '1234', 'kollegiebakken 15A', 21177311, 1, 2, 2800)");
@@ -102,33 +102,33 @@ class UserMapperTest
     }
 
     @Test
-    void invalidUserNameLogin() throws DatabaseException, SQLException {
-      User loginTry = UserService.login("user1", "1234", connectionPool);
-      User expectedLogin = UserService.login("user", "1234", connectionPool);
+    void invalidEmailLogin() throws DatabaseException, SQLException {
+      User loginTry = UserService.login("Tobias@Tonndorff.kd", "1234", connectionPool);
+      User expectedLogin = UserService.login("Tobias@Tonndorff.dk", "1234", connectionPool);
         assertNotEquals(expectedLogin, loginTry);
-        if(loginTry != expectedLogin){
-            DatabaseException exception = new DatabaseException("User not found");
-            exception.getMessage();
-        }
+
 
     }
 
     @Test
     void createUser() throws DatabaseException
     {
-        User newUser = UserMapper.createUser( "Ralf", "liebermann", "Ralf@Liebermann.com", "alleForEn", "Politigaarden", 12345678, 1, 2, 3200, connectionPool);
+        User newUser = UserMapper.createUser("Tobias", "Tonndorff", "Tobias@Tonndorff.dk", "1234", "kollegiebakken 15A", 21177311,  2800, connectionPool);
         User expectedUser = UserMapper.getUser(4, connectionPool);
         assertEquals(expectedUser, newUser);
 
 
     }
 
-    @Test
-    void updateUser() throws DatabaseException {
-        User existing = new User(1, "Tobias", "Tonndorff", "Tobias@Tonndorff.dk", "1234", "Kollegiebakken 15A", 21177311, 1, 2, 2800);
-        User updated = UserMapper.updateUser(1, "Anders", "Hein", "Anders@Hein.dk", "Hein1234", "Somewhere in allerød", 12345678, 1, 2, 3200, connectionPool);
-        assertNotEquals(existing, updated);
-    }
+   @Test
+    void updateUserTest() throws DatabaseException
+   {
+         User expectedUser = UserService.getUser(3, connectionPool);
+         User updatedUser = UserService.updateUser(3, "Anders", "larsen", "Ander@Larsen.dk", "Lars1234", "Somewhere in allerød", 123456789, 1, 0, 2800, connectionPool);
+       System.out.println(expectedUser);
+         System.out.println(updatedUser);
+            assertNotEquals(expectedUser, updatedUser);
+   }
 
 
 
