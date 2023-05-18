@@ -4,8 +4,6 @@ import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.persistence.ConnectionPool;
-import dat.backend.model.persistence.OrderFacade;
-import dat.backend.model.persistence.OrderItemFacade;
 import dat.backend.model.services.OrderService;
 
 import javax.servlet.*;
@@ -14,8 +12,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ShowOrderByUserIDServlet", value = "/showorderbyuserid")
-public class ShowOrderByUserIDServlet extends HttpServlet {
+@WebServlet(name = "ShowUsersOrderServlet", value = "/showusersorder")
+public class ShowUsersOrderServlet extends HttpServlet {
 
     private ConnectionPool connectionPool;
 

@@ -1,6 +1,7 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.entities.User;
 import dat.backend.model.persistence.ConnectionPool;
 
 import javax.servlet.*;
@@ -22,7 +23,11 @@ public class AdminEditOrderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
 
+        User u = (User) session.getAttribute("user");
+        int userId = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("user",u);
 
     }
 

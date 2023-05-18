@@ -48,7 +48,7 @@
                 <p>${order.totalPrice}kr,-</p>
             </td>
 
-            <a href="showallorderitemsbyorderid?id=${user.id}" value="${user.id}" class="btn btn-primary">Se ordren</a>
+            <a href="showusersorder?id=${order.orderID}" value="${order.orderID}" class="btn btn-primary">Redigere</a>
 
             </thead>
         </table>

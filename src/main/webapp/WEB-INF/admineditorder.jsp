@@ -1,16 +1,35 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: x-drive
-  Date: 16/05/2023
-  Time: 12.24
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Ordre menu</title>
 </head>
 <body>
+
+<br>
+Bruger info:
+<br>
+Navn: ${user.firstName} ${user.lastName}
+<br>
+Email: ${user.email}
+<br>
+Telefon nummer: ${user.phoneNumber}
+<br>
+Adresse: ${user.address}
+<br>
+Postnummer: ${user.zip}
+<br>
+Medlemskab: ${user.membership}
+<br/>
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
