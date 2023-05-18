@@ -6,52 +6,57 @@
     </jsp:attribute>
 
     <jsp:body>
-        <br>
-        Bruger info:
-        <br>
-        Navn: ${user.firstName} ${user.lastName}
-        <br>
-        Email: ${user.email}
-        <br>
-        Telefon nummer: ${user.phoneNumber}
-        <br>
-        Adresse: ${user.address}
-        <br>
-        Postnummer: ${user.zip}
-        <br>
-        Medlemskab: ${user.membership}
-        <br/>
+        <div class="box">
+            <br>
+            <t2>Bruger info:</t2>
+            <br>
+            Navn: ${user.firstName} ${user.lastName}
+            <br>
+            Email: ${user.email}
+            <br>
+            Telefon nummer: ${user.phoneNumber}
+            <br>
+            Adresse: ${user.address}
+            <br>
+            Postnummer: ${user.zip}
+            <br>
+            Medlemskab: ${user.membership}
+            <br/>
+        </div>
 
-        Order:
-        <table class="table table-striped table-bordered">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Bestilt:</th>
-                <th>Oprettelses dato</th>
-                <th>Status</th>
-                <th>Pris</th>
-                <th>Se Ordre</th>
-            </tr>
+        <div class="box">
+            <t2>Order:</t2>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Bestilt:</th>
+                    <th>Oprettelses dato</th>
+                    <th>Status</th>
+                    <th>Pris</th>
+                    <th>Se Ordre</th>
+                </tr>
 
-            <td>
-                <p>${order.orderID}</p>
-            <td>
-                <p>${order.length}</p>
-                <p>${order.width}</p>
-                <p>${order.shed}</p>
-            <td>
-                <p>${order.status}</p>
-            <td>
-                <p>${order.created}</p>
-            <td>
-                <p>${order.totalPrice}kr,-</p>
-            </td>
+                <td>
+                    <p>${order.orderID}</p>
+                <td>
+                    <p>${order.length}</p>
+                    <p>${order.width}</p>
+                    <p>${order.shed}</p>
+                <td>
+                    <p>${order.status}</p>
+                <td>
+                    <p>${order.created}</p>
+                <td>
+                    <p>${order.totalPrice}kr,-</p>
+                </td>
 
-            <a href="showusersorder?id=${order.orderID}" value="${order.orderID}" class="btn btn-primary">Redigere</a>
+                <a href="showusersorder?id=${order.orderID}" value="${order.orderID}"
+                   class="btn btn-primary">Redigere</a>
 
-            </thead>
-        </table>
+                </thead>
+            </table>
+        </div>
 
     </jsp:body>
 

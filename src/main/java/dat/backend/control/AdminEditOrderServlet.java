@@ -1,13 +1,16 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.persistence.ConnectionPool;
+import dat.backend.model.services.OrderService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "AdminEditOrderServlet", value = "/admineditorder")
 public class AdminEditOrderServlet extends HttpServlet {
@@ -15,8 +18,7 @@ public class AdminEditOrderServlet extends HttpServlet {
     private ConnectionPool connectionPool;
 
     @Override
-    public void init() throws ServletException
-    {
+    public void init() throws ServletException {
         this.connectionPool = ApplicationStart.getConnectionPool();
     }
 
@@ -26,8 +28,22 @@ public class AdminEditOrderServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         User u = (User) session.getAttribute("user");
+        Order o = (Order) session.getAttribute("order");
         int userId = Integer.parseInt(request.getParameter("id"));
-        request.setAttribute("user",u);
+        int orderId = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("user", u);
+        request.setAttribute("order", o);
+
+        try {
+            if (u != null && u.getRoleId() == 2) {
+                Order order = OrderService.getOrderById(orderId, connectionPool);
+                request.setAttribute("orderbyid", order);
+            } else {
+                request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
