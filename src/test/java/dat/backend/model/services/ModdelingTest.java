@@ -3,14 +3,25 @@ package dat.backend.model.services;
 import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
+import org.abstractica.javacsg.Vector3D;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ModdelingTest
 {
-/*
+
+
+
+    /*
+    Moddeling model = new Moddeling();
+
+
+
+
     JavaCSG csg = JavaCSGFactory.createDefault();
     Moddeling moddeling = new Moddeling();
     Geometry3D testbar;
@@ -39,27 +50,8 @@ class ModdelingTest
     {
         Geometry3D actualroof = moddeling.buildroof(40,10);
         Geometry3D expectedroof = moddeling.buildroof(40,200);
-        csg.cache(expectedroof);
 
 
     }
-
-    @Test
-    void buildproduct()
-    {
-        Geometry3D expectedproduct = moddeling.buildproduct("test",testroof,testbar);
-        Geometry3D expectedbar = moddeling.buildbar(40,10,30);
-        Geometry3D expectedroof = moddeling.buildroof(40,10);
-        Geometry3D actualproduct = moddeling.buildproduct("test",expectedroof,expectedbar);
-        assertNotEquals(expectedproduct,actualproduct);
-
-        Geometry3D expectedproduct2 = moddeling.buildproduct("test2",testroof,testbar);
-        Geometry3D expectedbar2 = moddeling.buildbar(40,10,40);
-        Geometry3D expectedroof2 = moddeling.buildroof(40,200);
-        Geometry3D actualproduct2 = moddeling.buildproduct("test2",expectedroof2,expectedbar2);
-        assertEquals(expectedproduct2,actualproduct2);
-
-    }
-
- */
+*/
 }

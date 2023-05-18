@@ -23,8 +23,8 @@ public class OrderMapper {
                     int width = rs.getInt("width");
                     boolean shed = rs.getBoolean("shed");
                     order = new Order(ID, timestamp, status, length, width, shed);
+                    orders.add(order);
                 }
-                orders.add(order);
             }
         } catch (SQLException e) {
             throw new DatabaseException(e, "Error getting all orders");
@@ -73,8 +73,9 @@ public class OrderMapper {
                     int width = rs.getInt("width");
                     boolean shed = rs.getBoolean("shed");
                     order = new Order(ID, timestamp, status, length, width, shed);
+                    orders.add(order);
                 }
-                orders.add(order);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -127,8 +128,8 @@ public class OrderMapper {
                     int width = rs.getInt("width");
                     boolean shed = rs.getBoolean("shed");
                     order = new Order(ID, timestamp, orderStatus, length, width, shed);
+                    orders.add(order);
                 }
-                orders.add(order);
             }
         } catch (SQLException e) {
             throw new DatabaseException(e, "Error getting all orders");

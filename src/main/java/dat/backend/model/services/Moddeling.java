@@ -7,44 +7,48 @@ import org.abstractica.javacsg.JavaCSGFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class Moddeling
-{
 
+public class Moddeling{
+
+
+public static void main(String[] args) throws IOException
+
+    {
+        Moddeling model = new Moddeling();
+        model.buildbar(40,10,40);
+    }
 
     Geometry3D buildbar (int length, int width, int height) throws IOException
     {
-        Wood wood = new Wood("test", 40, 50, "stk", "test", 10, 10, true);
-        ArrayList<Wood> woodlist;
         JavaCSG csg = JavaCSGFactory.createDefault();
-        int carportlength = 7;
-        double woodamount = carportlength / 0.9;
-        Geometry3D finishedbar = null;
-        double x= 12;
-        double y=0;
-        for (double i = 0; i < woodamount; i++)
+        double x = 10;
+        double y = 30;
+        List<Geometry3D> bars = new ArrayList<>();
+        Geometry3D bar = null;
+        for (double i = 0; i < 10; i++)
         {
-            Geometry3D bar = csg.box3D(length, width, height, true);
-            bar = csg.translate3D(x, y, 0).transform(bar);
-            finishedbar = csg.union3D(bar);
-
+            bars.add(csg.box3D(length, width, height, true));
+            y += 40;
+            csg.translate3D(x, y, 0).transform();
         }
-        csg.view(finishedbar);
+        Geometry3D finishedbar = csg.union3D(bar);
         csg.saveSTL("src/main/webapp/3d-Models\\test.stl", finishedbar);
         return finishedbar;
     }
 
 
 
-   /* Geometry3D buildroof (int length, int width){
+   Geometry3D buildroof (int length, int width){
         JavaCSG csg = JavaCSGFactory.createDefault();
         Geometry3D roof = csg.box3D(length, width, 0.3, true);
         Geometry3D finishedroof = csg.union3D(roof);
         csg.view(finishedroof);
         return finishedroof;
     }
-
+/*
 
     Geometry3D buildproduct(String filename, Geometry3D roof, Geometry3D bar){
         JavaCSG csg = JavaCSGFactory.createDefault();
@@ -58,7 +62,9 @@ public class Moddeling
             e.printStackTrace();
         }
         return finishedproduct;
-    }
-*/
+  }
+
+ */
 }
+
 
