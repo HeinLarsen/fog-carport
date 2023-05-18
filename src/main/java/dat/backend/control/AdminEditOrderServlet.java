@@ -10,7 +10,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "AdminEditOrderServlet", value = "/admineditorder")
 public class AdminEditOrderServlet extends HttpServlet {
@@ -18,7 +17,7 @@ public class AdminEditOrderServlet extends HttpServlet {
     private ConnectionPool connectionPool;
 
     @Override
-    public void init() throws ServletException {
+    public void init() throws ServletException{
         this.connectionPool = ApplicationStart.getConnectionPool();
     }
 
@@ -29,7 +28,7 @@ public class AdminEditOrderServlet extends HttpServlet {
 
         User u = (User) session.getAttribute("user");
         Order o = (Order) session.getAttribute("order");
-        int userId = Integer.parseInt(request.getParameter("id"));
+        int roleId = Integer.parseInt(request.getParameter("id"));
         int orderId = Integer.parseInt(request.getParameter("id"));
         request.setAttribute("user", u);
         request.setAttribute("order", o);
@@ -39,7 +38,7 @@ public class AdminEditOrderServlet extends HttpServlet {
                 Order order = OrderService.getOrderById(orderId, connectionPool);
                 request.setAttribute("orderbyid", order);
             } else {
-                request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
