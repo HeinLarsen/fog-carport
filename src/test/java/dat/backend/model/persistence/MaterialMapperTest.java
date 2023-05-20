@@ -4,13 +4,15 @@ import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.MaterialFacade;
+import dat.backend.model.services.OrderService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -60,6 +62,21 @@ public class MaterialMapperTest {
 
                 stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (360, 200, 25, 1, 1, 1, 174.43);");
                 stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (540, 200, 25, 1, 1, 1, 262.03);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (360, 125, 25, 1, 1, 1, 108.90);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (540, 125, 25, 1, 1, 1, 163.35);");
+
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (420, 73, 38, 0, 2, 1, 120.13);");
+
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (270, 95, 45, 0, 3, 1, 5628);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (240, 95, 45, 0, 3, 1, 56.28);");
+
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (480, 195, 45, 0, 4, 1, 205.44);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (600, 195, 45, 0, 4, 1, 257.70);");
+
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (300, 97, 97, 1, 5, 1, 134.85);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (210, 100, 19, 1, 5, 1, 20.16);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (540, 100, 19, 1, 5, 1, 51.84);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (360, 100, 19, 1, 5, 1, 34.56);");
 
                 stmt.execute("INSERT INTO `carport_test`.`roof_tile` (`name`, `length`, `width`, `unit`, `price`) VALUES ('Plastmo Ecolite blåtonet', 600, 109, 1, 633.00);");
                 stmt.execute("INSERT INTO `carport_test`.`roof_tile` (`name`, `length`, `width`, `unit`, `price`) VALUES ('Plastmo Ecolite blåtonet', 360, 109, 1, 266);");
@@ -88,6 +105,39 @@ public class MaterialMapperTest {
         {
             connection.close();
         }
+    }
+
+//    @Test
+//    void getPlank() throws DatabaseException {
+//        TreeMap<Integer, ArrayList<Wood>> res = OrderService.generateOrder(780, connectionPool);
+//        System.out.println(res.size());
+//        for (Map.Entry<Integer, ArrayList<Wood>> entry : res.entrySet()) {
+//            System.out.println(entry.getKey() + " " + entry.getValue());
+//        }
+//    }
+
+//    @Test
+//    void getPlank() throws DatabaseException {
+//        TreeMap<Integer, ArrayList<Wood>> res = OrderService.getSterns(780, connectionPool);
+//        System.out.println(res.size());
+//        for (Map.Entry<Integer, ArrayList<Wood>> entry : res.entrySet()) {
+//            System.out.print(entry.getKey() + " ");
+//            for (Wood wood : entry.getValue()) {
+//                System.out.print(wood.getId() + " " + wood.getLength() + "|");
+//            }
+//            System.out.println();
+//        }
+//    }
+
+    @Test
+    void generateOrder() throws DatabaseException {
+        HashMap<String, ArrayList<Wood>> list = OrderService.generateOrder(780, 600, false, connectionPool);
+        ArrayList<Wood> woods = list.get("spars");
+        System.out.println(woods.size());
+        for (Wood wood : woods) {
+            System.out.println(wood);
+        }
+
     }
 
     @Test

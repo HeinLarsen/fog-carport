@@ -14,6 +14,12 @@ public class OrderItem {
         this.description = description;
     }
 
+    public OrderItem(int quantity, int price, String description) {
+        this.quantity = quantity;
+        this.price = price;
+        this.description = description;
+    }
+
     public int getID() {
         return ID;
     }
