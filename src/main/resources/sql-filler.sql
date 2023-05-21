@@ -74,7 +74,7 @@ VALUES (600, 195, 45, 0, 4, 1, 257.70);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
 VALUES (300, 97, 97, 1, 5, 1, 134.85);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (210, 100, 19, 1, 5, 1, 20.16);
+VALUES (210, 100, 19, 1, 1, 1, 20.16);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
 VALUES (540, 100, 19, 1, 5, 1, 51.84);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)

@@ -3,18 +3,18 @@ package dat.backend.model.entities;
 public class OrderItem {
     private int ID;
     private int quantity;
-    private int price;
+    private double price;
     private String description;
     private AMaterial material;
 
-    public OrderItem(int ID, int quantity, int price, String description) {
+    public OrderItem(int ID, int quantity, double price, String description) {
         this.ID = ID;
         this.quantity = quantity;
         this.price = price;
         this.description = description;
     }
 
-    public OrderItem(int quantity, int price, String description) {
+    public OrderItem(int quantity, double price, String description) {
         this.quantity = quantity;
         this.price = price;
         this.description = description;
@@ -28,7 +28,7 @@ public class OrderItem {
         return quantity;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -48,8 +48,9 @@ public class OrderItem {
     public String toString() {
         return "OrderItem{" +
                 "ID=" + ID +
-                ", amount=" + quantity +
+                ", quantity=" + quantity +
                 ", price=" + price +
+                ", description='" + description + '\'' +
                 ", material=" + material +
                 '}';
     }

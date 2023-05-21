@@ -139,7 +139,7 @@ public class OrderItemMapper {
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, orderItem.getQuantity());
-                ps.setInt(2, orderItem.getPrice());
+                ps.setDouble(2, orderItem.getPrice());
                 ps.setInt(3, orderId);
                 ps.setString(4, orderItem.getDescription());
                 ps.setInt(5, woodId);

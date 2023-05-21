@@ -74,7 +74,7 @@ public class MaterialMapperTest {
                 stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (600, 195, 45, 0, 4, 1, 257.70);");
 
                 stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (300, 97, 97, 1, 5, 1, 134.85);");
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (210, 100, 19, 1, 5, 1, 20.16);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (210, 100, 19, 1, 1, 1, 20.16);");
                 stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (540, 100, 19, 1, 5, 1, 51.84);");
                 stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (360, 100, 19, 1, 5, 1, 34.56);");
 
@@ -107,35 +107,14 @@ public class MaterialMapperTest {
         }
     }
 
-//    @Test
-//    void getPlank() throws DatabaseException {
-//        TreeMap<Integer, ArrayList<Wood>> res = OrderService.generateOrder(780, connectionPool);
-//        System.out.println(res.size());
-//        for (Map.Entry<Integer, ArrayList<Wood>> entry : res.entrySet()) {
-//            System.out.println(entry.getKey() + " " + entry.getValue());
-//        }
-//    }
-
-//    @Test
-//    void getPlank() throws DatabaseException {
-//        TreeMap<Integer, ArrayList<Wood>> res = OrderService.getSterns(780, connectionPool);
-//        System.out.println(res.size());
-//        for (Map.Entry<Integer, ArrayList<Wood>> entry : res.entrySet()) {
-//            System.out.print(entry.getKey() + " ");
-//            for (Wood wood : entry.getValue()) {
-//                System.out.print(wood.getId() + " " + wood.getLength() + "|");
-//            }
-//            System.out.println();
-//        }
-//    }
-
     @Test
     void generateOrder() throws DatabaseException {
-        HashMap<String, ArrayList<Wood>> list = OrderService.generateOrder(780, 600, false, connectionPool);
-        ArrayList<Wood> woods = list.get("spars");
-        System.out.println(woods.size());
-        for (Wood wood : woods) {
-            System.out.println(wood);
+        Carport carport = new Carport(780, 600, new Shed(210, 530));
+//        Carport carport = new Carport(480, 300);
+
+        ArrayList<OrderItem> list = OrderService.generateOrder(carport, connectionPool);
+        for (OrderItem orderItem : list) {
+            System.out.println(orderItem);
         }
 
     }
