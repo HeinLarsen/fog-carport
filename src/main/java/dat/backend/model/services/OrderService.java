@@ -77,21 +77,6 @@ public class OrderService {
         return orderItems;
     }
 
-//    private static OrderItem getShedClothing(Shed shed, ArrayList<Wood> woods, OrderItemTask shedClothing) {
-//        ArrayList<Wood> filteredWoods = new ArrayList<>();
-//        for (Wood wood : woods) {
-//            if (wood.isPressureTreated() && wood.getCategory().equals("brædt") && wood.getLength() == 210) {
-//                filteredWoods.add(wood);
-//            }
-//        }
-//        int totalLength = shed.getLength() * 2 + shed.getWidth() * 2;
-//        int amountOfClothing = totalLength / 210;
-//
-//
-//
-//
-//        return null;
-//    }
 
     private static OrderItem getShedClothing(Shed shed, ArrayList<Wood> woods, OrderItemTask shedClothing) {
         ArrayList<Wood> filteredWoods = new ArrayList<>();
@@ -108,27 +93,6 @@ public class OrderService {
         OrderItem orderItem = new OrderItem(amountOfClothing, price, shedClothing.getTask());
         orderItem.setMaterial(filteredWoods.get(0));
         return orderItem;
-    }
-
-    private static Wood findBestMatchingWood(ArrayList<Wood> woods, int desiredLength) {
-        Wood bestWood = null;
-        int closestLengthDiff = Integer.MAX_VALUE;
-
-        for (Wood wood : woods) {
-            int lengthDiff = Math.abs(wood.getLength() - desiredLength);
-            if (lengthDiff < closestLengthDiff) {
-                closestLengthDiff = lengthDiff;
-                bestWood = wood;
-            }
-        }
-
-        return bestWood;
-    }
-
-    private static int calculateWoodQuantity(Wood wood, int desiredLength) {
-        int length = wood.getWidth();
-        int quantity = desiredLength / length;
-        return quantity;
     }
 
     private static OrderItem getPoles(Carport carport, ArrayList<Wood> woods, OrderItemTask task) {
@@ -180,7 +144,7 @@ public class OrderService {
 
     }
 
-    public static OrderItem getSpars(int length, int width, ArrayList<Wood> woods, OrderItemTask task) {
+    private static OrderItem getSpars(int length, int width, ArrayList<Wood> woods, OrderItemTask task) {
         ArrayList<Wood> filteredWoods = new ArrayList<>();
         for (Wood wood : woods) {
             if (wood.getCategory().equals("spærtræ")) {
@@ -207,7 +171,7 @@ public class OrderService {
         return orderItem;
     }
 
-    public static ArrayList<OrderItem> getSterns(int target, ArrayList<Wood> woods, OrderItemTask task)  {
+    private static ArrayList<OrderItem> getSterns(int target, ArrayList<Wood> woods, OrderItemTask task)  {
         ArrayList<Wood> filteredWoods = new ArrayList<>();
         for (Wood wood : woods) {
             if (wood.isPressureTreated() && wood.getCategory().equals("brædt")) {
