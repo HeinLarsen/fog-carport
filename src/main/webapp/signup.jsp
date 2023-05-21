@@ -4,15 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page errorPage="error.jsp" isErrorPage="false" %>
 
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Sign up
+        <p class="align-center">Sign up</p>
     </jsp:attribute>
 
     <jsp:body>
-        <form action="signup" method="post">
+        <form class ="box" action="signup" method="post" >
             <div class="row justify-content-center mt-5">
 
 
@@ -51,12 +49,12 @@
                     <input class="m_left" type="text" id="phone_number" name="phone_number">
                 </div>
 
-                <div class="zip col-4">
+                <div class="zip col-5">
                     <label for="zip">by:</label>
                     <input class="m_left" type="text" id="zip" name="zip">
                 </div>
 
-                <div class="signup col-8">
+                <div class="signup col-5">
                     <button type="submit" class="btn btn-success">Opret</button>
                 </div>
             </div>
