@@ -6,6 +6,8 @@ import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.*;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 public class OrderService {
@@ -53,63 +55,59 @@ public class OrderService {
         return orderByUserId;
     }
 
-    public static ArrayList<OrderItem> generateOrder(Carport carport, ConnectionPool connectionPool) throws DatabaseException {
-        ArrayList<Wood> woods = MaterialFacade.getAllWood(connectionPool);
-        ArrayList<OrderItem> orderItems = new ArrayList<>();
+    public static List<OrderItem> generateOrder(Carport carport, ConnectionPool connectionPool) throws DatabaseException {
+        List<Wood> woods = MaterialFacade.getAllWood(connectionPool);
+        List<OrderItem> orderItems = new ArrayList<>();
 
-        // get and put sterns
+        // Get and put sterns
         orderItems.addAll(getSterns(carport.getLength(), woods, OrderItemTask.STERN_UPPER_SIDES));
         orderItems.addAll(getSterns(carport.getWidth(), woods, OrderItemTask.STERN_UPPER_ENDS));
-
         orderItems.addAll(getSterns(carport.getLength(), woods, OrderItemTask.STERN_LOWER_SIDES));
         orderItems.addAll(getSterns(carport.getWidth(), woods, OrderItemTask.STERN_LOWER_ENDS));
 
-        // get and put spars
-       orderItems.add(getSpars(carport.getLength(), carport.getWidth(), woods, OrderItemTask.SPAR));
+        // Get and put spars
+        orderItems.add(getSpars(carport.getLength(), carport.getWidth(), woods, OrderItemTask.SPAR));
 
-       // get and put poles
-       orderItems.add(getPoles(carport, woods, OrderItemTask.POLE));
+        // Get and put poles
+        orderItems.add(getPoles(carport, woods, OrderItemTask.POLE));
 
-       if (carport.hasShed()) {
-           orderItems.add(getShedClothing(carport.getShed(), woods, OrderItemTask.SHED_CLOTHING));
-       }
+        if (carport.hasShed()) {
+            orderItems.add(getShedClothing(carport.getShed(), woods, OrderItemTask.SHED_CLOTHING));
+        }
 
         return orderItems;
     }
 
+    private static OrderItem getShedClothing(Shed shed, List<Wood> woods, OrderItemTask task) {
+        List<Wood> filteredWoods = filterWoods(woods, wood ->
+                wood.isPressureTreated() && wood.getCategory().equals("brædt") && wood.getLength() == 210
+        );
 
-    private static OrderItem getShedClothing(Shed shed, ArrayList<Wood> woods, OrderItemTask shedClothing) {
-        ArrayList<Wood> filteredWoods = new ArrayList<>();
-        for (Wood wood : woods) {
-            if (wood.isPressureTreated() && wood.getCategory().equals("brædt") && wood.getLength() == 210) {
-                filteredWoods.add(wood);
-            }
-        }
         int roofOverhang = 30; // 15 cm overlap on each side
         int totalLength = shed.getLength() * 2 + ((shed.getWidth() * 2) - roofOverhang);
         double overlap = 7.5; // 3.75 cm overlap on each side
         int amountOfClothing = (int) Math.ceil(totalLength / overlap);
         double price = filteredWoods.get(0).getPrice() * amountOfClothing;
-        OrderItem orderItem = new OrderItem(amountOfClothing, price, shedClothing.getTask());
+
+        OrderItem orderItem = new OrderItem(amountOfClothing, price, task.getTask());
         orderItem.setMaterial(filteredWoods.get(0));
+
         return orderItem;
     }
 
-    private static OrderItem getPoles(Carport carport, ArrayList<Wood> woods, OrderItemTask task) {
-        ArrayList<Wood> filteredWoods = new ArrayList<>();
-        for (Wood wood : woods) {
-            if (wood.getCategory().equals("stolpe")) {
-                filteredWoods.add(wood);
-            }
-        }
+    private static OrderItem getPoles(Carport carport, List<Wood> woods, OrderItemTask task) {
+        List<Wood> filteredWoods = filterWoods(woods, wood -> wood.getCategory().equals("stolpe"));
+
+        List<Wood> poles = new ArrayList<>();
+        int amountOfPoles;
+        double price = 0;
 
         if (carport.hasShed()) {
             Shed shed = carport.getShed();
             int shedPoles = 5;
             int actualLength = carport.getLength() - shed.getLength();
-            int amountOfPoles = ((actualLength/180) * 2) + shedPoles;
-            double price = 0;
-            ArrayList<Wood> poles = new ArrayList<>();
+            amountOfPoles = ((actualLength / 180) * 2) + shedPoles;
+
             for (Wood filteredWood : filteredWoods) {
                 if (filteredWood.getLength() >= shed.getLength()) {
                     for (int i = 0; i < amountOfPoles; i++) {
@@ -119,14 +117,9 @@ public class OrderService {
                     break;
                 }
             }
-            OrderItem orderItem = new OrderItem(poles.size(), price, task.getTask());
-            orderItem.setMaterial(poles.get(0));
-
-            return orderItem;
         } else {
-            int amountOfPoles = (carport.getLength()/180) * 2;
-            double price = 0;
-            ArrayList<Wood> poles = new ArrayList<>();
+            amountOfPoles = (carport.getLength() / 180) * 2;
+
             for (Wood filteredWood : filteredWoods) {
                 if (filteredWood.getLength() >= carport.getLength()) {
                     for (int i = 0; i < amountOfPoles; i++) {
@@ -136,26 +129,22 @@ public class OrderService {
                     break;
                 }
             }
-            OrderItem orderItem = new OrderItem(poles.size(), price, task.getTask());
-            orderItem.setMaterial(poles.get(0));
-
-            return orderItem;
         }
 
+        OrderItem orderItem = new OrderItem(poles.size(), price, task.getTask());
+        orderItem.setMaterial(poles.get(0));
+
+        return orderItem;
     }
 
-    private static OrderItem getSpars(int length, int width, ArrayList<Wood> woods, OrderItemTask task) {
-        ArrayList<Wood> filteredWoods = new ArrayList<>();
-        for (Wood wood : woods) {
-            if (wood.getCategory().equals("spærtræ")) {
-                filteredWoods.add(wood);
-            }
-        }
+    private static OrderItem getSpars(int length, int width, List<Wood> woods, OrderItemTask task) {
+        List<Wood> filteredWoods = filterWoods(woods, wood -> wood.getCategory().equals("spærtræ"));
 
-        double amountOfSpars = length/90.0;
+        double amountOfSpars = length / 90.0;
         int actualAmountOfSpars = (int) Math.ceil(amountOfSpars);
-        ArrayList<Wood> spars = new ArrayList<>();
+        List<Wood> spars = new ArrayList<>();
         double price = 0;
+
         for (Wood filteredWood : filteredWoods) {
             if (filteredWood.getLength() >= width) {
                 for (int i = 0; i < actualAmountOfSpars; i++) {
@@ -165,58 +154,51 @@ public class OrderService {
                 break;
             }
         }
+
         OrderItem orderItem = new OrderItem(spars.size(), price, task.getTask());
         orderItem.setMaterial(spars.get(0));
 
         return orderItem;
     }
 
-    private static ArrayList<OrderItem> getSterns(int target, ArrayList<Wood> woods, OrderItemTask task)  {
-        ArrayList<Wood> filteredWoods = new ArrayList<>();
-        for (Wood wood : woods) {
-            if (wood.isPressureTreated() && wood.getCategory().equals("brædt")) {
-                filteredWoods.add(wood);
-            }
-        }
-        ArrayList<Wood> result = findSterns(target, filteredWoods);
-        ArrayList<OrderItem> orderItems = new ArrayList<>();
+    private static List<OrderItem> getSterns(int target, List<Wood> woods, OrderItemTask task) {
+        List<Wood> filteredWoods = filterWoods(woods, wood ->
+                wood.isPressureTreated() && wood.getCategory().equals("brædt")
+        );
+
+        List<Wood> result = findSterns(target, filteredWoods);
+        List<OrderItem> orderItems = new ArrayList<>();
 
         Set<Wood> processedWoods = new HashSet<>();
-        // count duplicates in result set that as quantity in a new OrderItem object
-        if (result != null) {
-            for (Wood wood : result) {
-                // Skip if the wood has already been processed
-                if (processedWoods.contains(wood)) {
-                    continue;
-                }
-
-                // Count the occurrence of the wood in the result set
-                int quantity = Collections.frequency(result, wood);
-                double price = wood.getPrice() * quantity;
-                OrderItem orderItem = new OrderItem(quantity, price, task.getTask());
-                orderItem.setMaterial(wood);
-                orderItems.add(orderItem);
-
-                // Add the wood to the set of processed woods
-                processedWoods.add(wood);
+        for (Wood wood : result) {
+            if (processedWoods.contains(wood)) {
+                continue;
             }
+
+            int quantity = Collections.frequency(result, wood);
+            double price = wood.getPrice() * quantity;
+
+            OrderItem orderItem = new OrderItem(quantity, price, task.getTask());
+            orderItem.setMaterial(wood);
+            orderItems.add(orderItem);
+
+            processedWoods.add(wood);
         }
 
         return orderItems;
     }
 
-    private static ArrayList<Wood> findSterns(int target, ArrayList<Wood> woods) {
-        TreeMap<Integer, ArrayList<Wood>> woodMap = new TreeMap<>();
+    private static List<Wood> findSterns(int target, List<Wood> woods) {
+        TreeMap<Integer, List<Wood>> woodMap = new TreeMap<>();
+
         for (Wood wood : woods) {
-            // single wood plank is enough for both sides
             if (wood.getLength() >= (target * 2)) {
-                ArrayList<Wood> woodCombination = new ArrayList<>();
+                List<Wood> woodCombination = new ArrayList<>();
                 woodCombination.add(wood);
                 int difference = wood.getLength() - (target * 2);
                 woodMap.put(difference, woodCombination);
-            } // single wood plank is enough for each side
-            else if (wood.getLength() >= target) {
-                ArrayList<Wood> woodCombination = new ArrayList<>();
+            } else if (wood.getLength() >= target) {
+                List<Wood> woodCombination = new ArrayList<>();
                 woodCombination.add(wood);
                 woodCombination.add(wood);
                 int difference = (wood.getLength() * 2) - (target * 2);
@@ -225,33 +207,34 @@ public class OrderService {
 
             for (Wood wood2 : woods) {
                 if (wood2.getHeight() == wood.getHeight() && wood2.getWidth() == wood.getWidth()) {
-                int remaining = target - wood.getLength();
-                ArrayList<Wood> woodCombination = new ArrayList<>();
-                // check if one wood plank can cover the remaining on both sides
-                if ((wood2.getLength() - remaining) >= remaining) {
-                    woodCombination.add(wood);
-                    woodCombination.add(wood);
-                    woodCombination.add(wood2);
-                    int difference = ((wood.getLength() * 2) + wood2.getLength()) - (target * 2);
-                    woodMap.put(difference, woodCombination);
-                }
-                // find full combo
-                else if (wood.getLength() + wood2.getLength() >= target) {
-                    woodCombination.add(wood);
-                    woodCombination.add(wood);
-                    woodCombination.add(wood2);
-                    woodCombination.add(wood2);
-                    int difference = ((wood.getLength() * 2) + (wood2.getLength() * 2)) - (target * 2);
-                    woodMap.put(difference, woodCombination);
-                }
-                }
+                    int remaining = target - wood.getLength();
+                    List<Wood> woodCombination = new ArrayList<>();
 
-
+                    if ((wood2.getLength() - remaining) >= remaining) {
+                        woodCombination.add(wood);
+                        woodCombination.add(wood);
+                        woodCombination.add(wood2);
+                        int difference = ((wood.getLength() * 2) + wood2.getLength()) - (target * 2);
+                        woodMap.put(difference, woodCombination);
+                    } else if (wood.getLength() + wood2.getLength() >= target) {
+                        woodCombination.add(wood);
+                        woodCombination.add(wood);
+                        woodCombination.add(wood2);
+                        woodCombination.add(wood2);
+                        int difference = ((wood.getLength() * 2) + (wood2.getLength() * 2)) - (target * 2);
+                        woodMap.put(difference, woodCombination);
+                    }
+                }
             }
-
         }
-        return woodMap.firstEntry().getValue();
 
+        return woodMap.firstEntry().getValue();
+    }
+
+    private static List<Wood> filterWoods(List<Wood> woods, Predicate<Wood> predicate) {
+        return woods.stream()
+                .filter(predicate)
+                .collect(Collectors.toList());
     }
 
 

@@ -112,7 +112,7 @@ public class MaterialMapperTest {
         Carport carport = new Carport(780, 600, new Shed(210, 530));
 //        Carport carport = new Carport(480, 300);
 
-        ArrayList<OrderItem> list = OrderService.generateOrder(carport, connectionPool);
+        List<OrderItem> list = OrderService.generateOrder(carport, connectionPool);
         for (OrderItem orderItem : list) {
             System.out.println(orderItem);
         }
