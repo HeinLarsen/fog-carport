@@ -7,10 +7,6 @@ import org.abstractica.javacsg.JavaCSGFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 
 
@@ -20,16 +16,9 @@ public class Moddeling
 
     public static void main(String[] args) throws IOException
     {
-       /* Moddeling model = new Moddeling();
-        model.buildbar(40, 10, 40); */
-        String scadFilePath = "src/main/webapp/3d-Models\\test.scad";
+        Moddeling model = new Moddeling();
+        model.buildbar2(40, 10, 40);
 
-        try{
-            generateScadFile(scadFilePath);
-            System.out.println("File created: " + scadFilePath);
-        }catch (IOException e){
-            System.err.println("Error writing file: " + e.getMessage());
-        }
     }
 
 
@@ -52,15 +41,58 @@ public class Moddeling
             finishedbar2 = csg.union3D(bars.get(i));
 
         }
-        csg.saveSTL("src/main/webapp/3d-Models\\test.stl", finishedbar2);
+        csg.saveSTL("src/main/webapp/3d-Models\\test.scad", finishedbar2);
         return finishedbar;
 
+    }
+
+    Geometry3D buildbar2(int length, int width, int height) throws IOException {
+        JavaCSG csg = JavaCSGFactory.createDefault();
+        ArrayList<Geometry3D> planks = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            csg = JavaCSGFactory.createDefault();
+            Geometry3D plank = csg.box3D(length, width, height, true);
+            double x = i * (length + 2); // Adjust the spacing between planks
+            double y = 0;
+            double z = 0;
+            csg.translate3D(x, y, z).transform(plank);
+            planks.add(plank);
+        }
+
+        Geometry3D finishedBar = csg.union3D(planks);
+
+        csg.saveSTL("path/to/output.stl", finishedBar);
+        return finishedBar;
+    }
+
+
+    Geometry3D buildbar3(int length, int width, int height, int quantity) throws IOException {
+        JavaCSG csg = JavaCSGFactory.createDefault();
+        ArrayList<Geometry3D> planks = new ArrayList<>();
+
+        for (int i = 0; i < quantity; i++) {
+            csg = JavaCSGFactory.createDefault();
+            Geometry3D plank = csg.box3D(length, width, height, true);
+            double x = i * (length + 2); // Adjust the spacing between planks
+            double y = 0;
+            double z = 0;
+            csg.translate3D(x, y, z).transform(plank);
+            planks.add(plank);
+        }
+
+        Geometry3D finishedBar = csg.union3D(planks);
+
+        csg.saveSTL("path/to/output.stl", finishedBar);
+        return finishedBar;
     }
 
 
 
 
-   Geometry3D buildroof (int length, int width){
+
+
+    Geometry3D buildroof (int length, int width){
         JavaCSG csg = JavaCSGFactory.createDefault();
         Geometry3D roof = csg.box3D(length, width, 0.3, true);
         Geometry3D finishedroof = csg.union3D(roof);
@@ -84,15 +116,7 @@ public class Moddeling
   }
 
  */
-public static void generateScadFile(String scadFilePath) throws IOException {
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(scadFilePath))) {
-            writer.println("for (i = [1:10:360])");
-            writer.println("  rotate(i,[0,0,1]){");
-            writer.println("     translate([10,0,0]) sphere([1],$fn=25);");
-            writer.println("  }");
-        }
-    }
 
 }
 
