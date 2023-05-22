@@ -14,7 +14,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AdminHomepage", value = "/adminHomepage")
+@WebServlet(name = "AdminHomepage", value = "/adminhomepage")
 public class AdminHomepage extends HttpServlet {
 
 
