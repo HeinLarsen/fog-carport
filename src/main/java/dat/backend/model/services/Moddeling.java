@@ -1,14 +1,12 @@
 package dat.backend.model.services;
 
-import dat.backend.model.entities.Wood;
+
 import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-
 
 public class Moddeling
 {
@@ -17,7 +15,7 @@ public class Moddeling
     public static void main(String[] args) throws IOException
     {
         Moddeling model = new Moddeling();
-        model.buildbar2(40, 10, 40);
+        model.buildbar(40, 10, 40);
 
     }
 
@@ -41,7 +39,8 @@ public class Moddeling
             finishedbar2 = csg.union3D(bars.get(i));
 
         }
-        csg.saveSTL("src/main/webapp/3d-Models\\test.scad", finishedbar2);
+        //csg.saveSTL("src/main/webapp/3d-Models\\test.stl", finishedbar2);
+        csg.view(finishedbar2);
         return finishedbar;
 
     }
