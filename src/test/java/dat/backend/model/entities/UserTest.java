@@ -1,5 +1,6 @@
 package dat.backend.model.entities;
 
+import dat.backend.model.exceptions.DatabaseException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ class UserTest
 
 
     @Test
-    void getId() throws SQLException
+    void getId()
     {
         int expectedId = 1;
         int actualId = user1.getId();
@@ -31,7 +32,7 @@ class UserTest
 
 
     @Test
-    void getFirstName() throws SQLException
+    void getFirstName()
     {
         String expectedName = "John";
         String actualName = user1.getFirstName();
@@ -40,7 +41,7 @@ class UserTest
 
 
     @Test
-    void getLastName() throws SQLException
+    void getLastName()
     {
         String expectedName = "Doe";
         String actualName = user1.getLastName();
@@ -49,16 +50,16 @@ class UserTest
 
 
     @Test
-    void getEmail() throws SQLException
+    void getEmail()
     {
-        String expectedEmail = "test@gmail.com";
+        String expectedEmail = "test@email.com";
         String actualEmail = user1.getEmail();
         assertEquals(expectedEmail,actualEmail);
     }
 
 
     @Test
-    void getAddress() throws SQLException
+    void getAddress()
     {
         String expectedAdress = "testvej 50";
         String actualAdress = user1.getAddress();
@@ -66,7 +67,7 @@ class UserTest
     }
 
     @Test
-    void getPhoneNumber() throws SQLException
+    void getPhoneNumber()
     {
      String expectedNumber = "12345678";
      String actualNumber = String.valueOf(user1.getPhoneNumber());
@@ -74,7 +75,7 @@ class UserTest
     }
 
     @Test
-    void getRoleId() throws SQLException
+    void getRoleId()
     {
         int expectedId = 2;
         int actualId = user1.getRoleId();
@@ -82,7 +83,7 @@ class UserTest
     }
 
     @Test
-    void getMembershipId() throws SQLException
+    void getMembershipId()
     {
         int expectedId = 2;
         int actualId = user1.getMembershipId();
@@ -91,7 +92,7 @@ class UserTest
 
 
     @Test
-    void getPassword() throws SQLException
+    void getPassword()
     {
         String expectedpassword = "1234";
         String actualpassword = user1.getPassword();
@@ -100,7 +101,7 @@ class UserTest
 
 
     @Test
-    void getZip() throws SQLException
+    void getZip()
     {
         int expectedZip = 1111;
         int actualZip = user1.getZip();

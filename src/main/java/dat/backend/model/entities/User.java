@@ -19,6 +19,19 @@ public class User
 
 
 
+    public User(String firstName, String lastName, String email, String password, String address, int phoneNumber, int zip)
+    {
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.zip = zip;
+
+    }
+
     public User(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip)
     {
         this.id = id;

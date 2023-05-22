@@ -75,7 +75,6 @@ public class OrderMapper {
                     order = new Order(ID, timestamp, status, length, width, shed);
                     orders.add(order);
                 }
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
