@@ -11,33 +11,41 @@ import java.util.List;
 
 
 
-public class Moddeling{
+public class Moddeling
+{
 
 
-public static void main(String[] args) throws IOException
-
+    public static void main(String[] args) throws IOException
     {
         Moddeling model = new Moddeling();
-        model.buildbar(40,10,40);
+        model.buildbar(40, 10, 40);
     }
 
-    Geometry3D buildbar (int length, int width, int height) throws IOException
+
+
+    Geometry3D buildbar(int length, int width, int height) throws IOException
     {
         JavaCSG csg = JavaCSGFactory.createDefault();
-        double x = 10;
-        double y = 30;
-        List<Geometry3D> bars = new ArrayList<>();
-        Geometry3D bar = null;
-        for (double i = 0; i < 10; i++)
+        Geometry3D finishedbar = null;
+        ArrayList<Geometry3D> bars = new ArrayList<>();
+        Geometry3D finishedbar2 = null;
+        for (int i = 0; i < 10; i++)
         {
-            bars.add(csg.box3D(length, width, height, true));
-            y += 40;
-            csg.translate3D(x, y, 0).transform();
+            csg = JavaCSGFactory.createDefault();
+            Geometry3D bar = csg.box3D(length, width, height, true);
+            finishedbar = csg.union3D(bar);
+            double x = 0;
+            double y = 40;
+            csg.translate3D(x, y, 0).transform(finishedbar);
+            bars.add(finishedbar);
+            finishedbar2 = csg.union3D(bars.get(i));
+
         }
-        Geometry3D finishedbar = csg.union3D(bar);
-        csg.saveSTL("src/main/webapp/3d-Models\\test.stl", finishedbar);
+        csg.saveSTL("src/main/webapp/3d-Models\\test.stl", finishedbar2);
         return finishedbar;
+
     }
+
 
 
 
