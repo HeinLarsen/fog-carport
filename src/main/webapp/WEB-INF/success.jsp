@@ -13,16 +13,18 @@
     </jsp:attribute>
     <jsp:body>
 
+        <div class="box">
+            <br>
+            <t2>Tak for din ordre!</t2>
+            <br>
+            <br>
+            <t2>Din ordre er nu sendt til behandling.</t2>
+            <br>
+            <br>
+            <t2>Admin vil nu behandle din ordre. Der vil være lidt behandlingstid.</t2>
+            <br>
+        </div>
 
-<br>
-<t2>Tak for din ordre! </t2>
-<br>
-<br>
-<t2>Din ordre er nu sendt til behandling. </t2>
-<br>
-<br>
-<t2>Admin vil nu behandle din ordre. Der vil være lidt behandlingstid. </t2>
-<br>
 
     </jsp:body>
 </t:pagetemplate>

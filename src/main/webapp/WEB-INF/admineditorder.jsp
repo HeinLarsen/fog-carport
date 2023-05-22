@@ -25,8 +25,7 @@
         </c:forEach>
 
         <c:forEach items="${requestScope.orders}" var="order">
-            <t2>Stykliste:
-            <t2/>
+            <t2>Stykliste:<t2/>
 
             <div class="box">
                     ${order.getOrderItems()}

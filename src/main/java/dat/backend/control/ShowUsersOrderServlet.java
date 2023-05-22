@@ -27,7 +27,6 @@ public class ShowUsersOrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-
         User u = (User) session.getAttribute("user");
         int userId = Integer.parseInt(request.getParameter("id"));
         request.setAttribute("user",u);
@@ -41,7 +40,7 @@ public class ShowUsersOrderServlet extends HttpServlet {
                 request.setAttribute("orderList", orderList);
                 request.getRequestDispatcher("WEB-INF/admineditorder.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
