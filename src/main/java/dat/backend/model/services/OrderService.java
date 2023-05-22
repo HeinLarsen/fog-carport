@@ -85,11 +85,36 @@ public class OrderService {
             orderItems.add(getRims(carport.getShed().getLength(), woods, OrderItemTask.RIM_SHED));
             orderItems.addAll(getShedSupports(carport.getShed().getLength(), woods, OrderItemTask.SHED_SUPPORT_POSTS_SIDES));
             orderItems.addAll(getShedSupports(carport.getWidth(), woods, OrderItemTask.SHED_SUPPORT_POSTS_GABLE));
+            orderItems.add(calculateWoodPlankLengthForZShape(woods, OrderItemTask.SHED_Z));
         } else {
             orderItems.add(getRims(carport.getLength(), woods, OrderItemTask.RIM));
         }
 
         return orderItems;
+    }
+
+    private static OrderItem calculateWoodPlankLengthForZShape(List<Wood> woods, OrderItemTask task) {
+        // Constants for door height and width
+        int height = 210; // cm
+        int width = 50; // cm
+
+        // Calculate the length of the horizontal sections
+        int horizontalLength = width * 2;
+
+        // Calculate the length of the vertical section
+        int verticalLength = height - width;
+
+        // Calculate the total length of the wood plank
+        int totalLength = horizontalLength + verticalLength;
+
+        List<Wood> filteredWoods = filterWoods(woods, wood -> wood.getCategory().equals("lægte") && wood.getLength() >= totalLength);
+
+        // Find the shortest wood plank that can be used
+        Wood wood = Collections.min(filteredWoods, Comparator.comparing(Wood::getLength));
+        OrderItem orderItem = new OrderItem(1, wood.getPrice(), task.getTask());
+        orderItem.setMaterial(wood);
+        return  orderItem;
+
     }
 
 
