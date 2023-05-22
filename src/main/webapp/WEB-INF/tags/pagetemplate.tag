@@ -53,26 +53,6 @@
     <jsp:doBody/>
 </div>
 
-<!-- Footer -->
-<div class="container mt-3">
-    <hr/>
-    <div class="row mt-4">
-        <div class="col">
-            Nørgaardsvej 30<br/>
-            2800 Lyngby
-        </div>
-        <div class="col">
-            <jsp:invoke fragment="footer"/><br/>
-            <p>&copy; 2022 Cphbusiness</p>
-        </div>
-        <div class="col">
-            Datamatikeruddannelsen<br/>
-            2. semester efterår 2022
-        </div>
-    </div>
-
-</div>
-
 </div>
 
 <!-- Bootstrap Bundle with Popper -->
