@@ -52,11 +52,12 @@ public class Login extends HttpServlet
                 session = request.getSession();
                 session.setAttribute("user", user); // adding user object to session scope
                 request.getRequestDispatcher("WEB-INF/adminhome.jsp").forward(request, response);
-            }
+            }else {
 
-            session = request.getSession();
-            session.setAttribute("user", user); // adding user object to session scope
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+                session = request.getSession();
+                session.setAttribute("user", user); // adding user object to session scope
+                request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
+            }
         }
         catch (DatabaseException e)
         {
