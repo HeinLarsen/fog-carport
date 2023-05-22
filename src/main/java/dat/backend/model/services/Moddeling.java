@@ -85,15 +85,15 @@ public class Moddeling
 
  */
 public static void generateScadFile(String scadFilePath) throws IOException {
-    try (PrintWriter writer = new PrintWriter(new FileWriter(scadFilePath))) {
-        // Write the OpenSCAD code
-        writer.println("union() {");
-        writer.println("    // Add your 3D object definitions here");
-        writer.println("    cube([10, 20, 30]);");
-        writer.println("    sphere(15);");
-        writer.println("}");
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(scadFilePath))) {
+            writer.println("for (i = [1:10:360])");
+            writer.println("  rotate(i,[0,0,1]){");
+            writer.println("     translate([10,0,0]) sphere([1],$fn=25);");
+            writer.println("  }");
+        }
     }
-}
+
 }
 
 
