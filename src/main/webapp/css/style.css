@@ -55,4 +55,17 @@ padding-left: 3%;
 .signup{
     margin-top: 2%;
     padding-left: 9%;
+    margin-left: 8%;
+}
+
+/* stylling for login */
+
+
+.login{
+    margin-top: 3%;
+    padding-left: 5%;
+}
+
+.btn{
+    margin-left: 20%;
 }
