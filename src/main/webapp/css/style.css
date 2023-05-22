@@ -11,5 +11,26 @@ th, td {
     padding:15px;
 }
 
+.box{
+    background-color: lightgray;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* stilling for signup page */
+
+.align-center{
+    text-align: center;
+}
+
+.first_name{
+    padding-left: 6%;
+}
 
 
+.email{
+    padding-left: 7%;
+}
+
+.password{
+    padding-left: 2.5%;
+}
