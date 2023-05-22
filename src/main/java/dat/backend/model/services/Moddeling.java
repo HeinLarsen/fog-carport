@@ -61,7 +61,8 @@ public class Moddeling
 
         Geometry3D finishedBar = csg.union3D(planks);
 
-        csg.saveSTL("path/to/output.stl", finishedBar);
+        //csg.saveSTL("path/to/output.stl", finishedBar);
+        csg.view(finishedBar);
         return finishedBar;
     }
 
@@ -82,7 +83,8 @@ public class Moddeling
 
         Geometry3D finishedBar = csg.union3D(planks);
 
-        csg.saveSTL("path/to/output.stl", finishedBar);
+        //csg.saveSTL("path/to/output.stl", finishedBar);
+        csg.view(finishedBar);
         return finishedBar;
     }
 
