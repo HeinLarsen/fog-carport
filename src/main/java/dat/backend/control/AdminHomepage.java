@@ -22,47 +22,39 @@ public class AdminHomepage extends HttpServlet {
 
 
     @Override
-    public void init() throws ServletException{
+    public void init() throws ServletException {
         this.connectionPool = ApplicationStart.getConnectionPool();
     }
 
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    HttpSession session = request.getSession();
-    User u = (User) session.getAttribute("user");
-    try {
-        if (u != null && u.getRoleId() == 2){
-            List<Order> orders = OrderService.getAllOrders(connectionPool);
-            List<User> users = UserService.getAllUsers(connectionPool);
-            List<Order> ordersPending = OrderService.getOrdersByStatus(Status.PENDING, connectionPool);
-            request.setAttribute("userOrders", orders);
-            request.setAttribute("usersList", users);
-            request.setAttribute("ordersPending", ordersPending);
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
+        Order o = (Order) session.getAttribute("order");
+        try {
+            if (u != null && u.getRoleId() == 2) {
+                List<Order> orders = OrderService.getAllOrders(connectionPool);
+                List<User> users = UserService.getAllUsers(connectionPool);
+                List<Order> ordersPending = OrderService.getOrdersByStatus(Status.PENDING, connectionPool);
+                request.setAttribute("userOrders", orders);
+                request.setAttribute("usersList", users);
+                request.setAttribute("ordersPending", ordersPending);
+            } else if (u != null && u.getRoleId() == 1) {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
 
-        }else if (u != null && u.getRoleId() == 1){
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }else{
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-    }catch (Exception e){
-        e.printStackTrace();
-    }
 
 
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        HttpSession session = request.getSession();
-
-        //dont know if this is necessary
-        Order order = (Order) session.getAttribute("order");
-        User user = (User) session.getAttribute("user");
-        String status = request.getParameter("status");
-
 
 
 
