@@ -32,9 +32,10 @@ public class UserFacade
 
     }
 
-    public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException, SQLException {
-        return UserMapper.login(email, password, connectionPool);
-
+    public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
+        User user = null;
+       user = UserMapper.login(email, password, connectionPool);
+        return user;
     }
 
 
