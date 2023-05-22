@@ -43,7 +43,7 @@ public class AdminHomepage extends HttpServlet {
         }else if (u != null && u.getRoleId() == 1){
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }else{
-            request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
 
     }catch (Exception e){

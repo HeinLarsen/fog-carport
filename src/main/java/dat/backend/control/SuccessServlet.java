@@ -9,7 +9,8 @@ import java.io.IOException;
 public class SuccessServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     @Override
