@@ -86,7 +86,7 @@ class UserMapperTest
     }
 
     @Test
-    void login() throws DatabaseException, SQLException {
+    void login() throws DatabaseException {
 
           User expectedUser = UserService.login("user", "1234", connectionPool);
           User actualUser = UserService.login("user", "1234", connectionPool);
@@ -97,7 +97,7 @@ class UserMapperTest
     }
 
     @Test
-    void invalidPasswordLogin() throws DatabaseException, SQLException {
+    void invalidPasswordLogin() throws DatabaseException {
 
           User loginAttempt = UserService.login("user", "12345", connectionPool);
           User expectedLogin = UserService.login("user", "1234", connectionPool);
@@ -105,7 +105,7 @@ class UserMapperTest
     }
 
     @Test
-    void invalidEmailLogin() throws DatabaseException, SQLException {
+    void invalidEmailLogin() throws DatabaseException {
       User loginTry = UserService.login("Tobias@Tonndorff.kd", "1234", connectionPool);
       User expectedLogin = UserService.login("Tobias@Tonndorff.dk", "1234", connectionPool);
         assertNotEquals(expectedLogin, loginTry);
