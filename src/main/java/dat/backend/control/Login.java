@@ -38,12 +38,22 @@ public class Login extends HttpServlet
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // invalidating user object in session scope
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
+
         try
         {
+
             User user = UserService.login(email, password, connectionPool);
+
+            if (user.getRoleId() == 2){
+                session = request.getSession();
+                session.setAttribute("user", user); // adding user object to session scope
+                request.getRequestDispatcher("WEB-INF/adminhome.jsp").forward(request, response);
+            }
+
             session = request.getSession();
             session.setAttribute("user", user); // adding user object to session scope
             request.getRequestDispatcher("index.jsp").forward(request, response);
