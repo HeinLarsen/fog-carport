@@ -8,23 +8,18 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserMapper
-{
+public class UserMapper {
 
 // TODO refactor return types to return the data we receive from the database instead of void
 
-    public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException
-    {
+    public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         ArrayList<User> users = new ArrayList<>();
         String sql = "SELECT * FROM user";
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
-                while (rs.next())
-                {
+                while (rs.next()) {
                     int id = rs.getInt("id");
                     String firstName = rs.getString("first_name");
                     String lastName = rs.getString("last_name");
@@ -39,26 +34,21 @@ public class UserMapper
                     users.add(user);
                 }
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new DatabaseException(ex, "Could not get all users from database");
         }
         return users;
     }
 
-    public static User getUser(int id, ConnectionPool connectionPool) throws DatabaseException
-    {
+    public static User getUser(int id, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         User user = null;
         String sql = "SELECT * FROM user WHERE id = ?";
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next())
-                {
+                if (rs.next()) {
                     String firstName = rs.getString("first_name");
                     String lastName = rs.getString("last_name");
                     String email = rs.getString("email");
@@ -69,26 +59,21 @@ public class UserMapper
                     int membershipId = rs.getInt("membership");
                     int zip = rs.getInt("zip");
                     user = new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip);
-                } else
-                {
+                } else {
                     throw new DatabaseException("No user with id = " + id + " found in database");
                 }
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new DatabaseException(ex, "Could not get user from database");
         }
         return user;
     }
 
-    public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, ConnectionPool connectionPool) throws DatabaseException
-    {
+    public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ?, address = ?, phone_number = ?, zip = ?, membership = ? WHERE id = ?";
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, firstName);
                 ps.setString(2, lastName);
                 ps.setString(3, email);
@@ -99,19 +84,16 @@ public class UserMapper
                 ps.setInt(8, membershipId);
                 ps.setInt(9, id);
                 int rowsAffected = ps.executeUpdate();
-                if (rowsAffected != 1)
-                {
+                if (rowsAffected != 1) {
                     throw new DatabaseException("No user with id = " + id + " found in database");
                 }
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             ex.printStackTrace();
             throw new DatabaseException(ex, "Could not update user in database");
         }
         return new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip);
     }
-
 
 
     public static User createUser(String firstName, String lastName, String email, String password, String address, int phoneNumber, int zip, ConnectionPool connectionPool) throws DatabaseException {
@@ -149,11 +131,11 @@ public class UserMapper
         return user;
     }
 
-    public static void createUser2(String firstName, String lastName, String email, String password, String address, int phoneNumber, int zip, ConnectionPool connectionPool) throws DatabaseException{
+    public static void createUser2(String firstName, String lastName, String email, String password, String address, int phoneNumber, int zip, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "INSERT INTO user (first_name, last_name, email, password, address, phone_number, zip) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (Connection connection = connectionPool.getConnection()){
-            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, firstName);
                 ps.setString(2, lastName);
                 ps.setString(3, email);
@@ -162,11 +144,11 @@ public class UserMapper
                 ps.setInt(6, phoneNumber);
                 ps.setInt(7, zip);
                 int rowsAffected = ps.executeUpdate();
-                if (rowsAffected == 0){
+                if (rowsAffected == 0) {
                     throw new DatabaseException("User with email" + email + "was not created");
                 }
             }
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             throw new DatabaseException(ex, "Could not create user in database");
         }
@@ -174,7 +156,7 @@ public class UserMapper
 
 
     //call this with a false login in userMapperTest
-    public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException, SQLException {
+    public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
         User user = null;
@@ -196,12 +178,14 @@ public class UserMapper
 
 
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                throw new DatabaseException(ex, "Could not login user in database");
             }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DatabaseException(ex, "Could not login user in database");
+
         }
         return user;
-    }
 
+    }
 }
