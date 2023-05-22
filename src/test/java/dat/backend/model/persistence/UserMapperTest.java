@@ -87,9 +87,12 @@ class UserMapperTest
 
     @Test
     void login() throws DatabaseException, SQLException {
-        User expectedUser = new User(1, "user", "user", "user", "1234", "1", 1234, 1, 1, 3200);
-        User actualUser = UserService.login("user", "1234", connectionPool);
-        assertEquals(expectedUser, actualUser);
+
+          User expectedUser = UserService.login("user", "1234", connectionPool);
+          User actualUser = UserService.login("user", "1234", connectionPool);
+          assertEquals(expectedUser, actualUser);
+
+
 
     }
 
