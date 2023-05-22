@@ -8,6 +8,9 @@ import org.abstractica.javacsg.JavaCSGFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 
 
@@ -17,8 +20,16 @@ public class Moddeling
 
     public static void main(String[] args) throws IOException
     {
-        Moddeling model = new Moddeling();
-        model.buildbar(40, 10, 40);
+       /* Moddeling model = new Moddeling();
+        model.buildbar(40, 10, 40); */
+        String scadFilePath = "src/main/webapp/3d-Models\\test.scad";
+
+        try{
+            generateScadFile(scadFilePath);
+            System.out.println("File created: " + scadFilePath);
+        }catch (IOException e){
+            System.err.println("Error writing file: " + e.getMessage());
+        }
     }
 
 
@@ -73,6 +84,16 @@ public class Moddeling
   }
 
  */
+public static void generateScadFile(String scadFilePath) throws IOException {
+    try (PrintWriter writer = new PrintWriter(new FileWriter(scadFilePath))) {
+        // Write the OpenSCAD code
+        writer.println("union() {");
+        writer.println("    // Add your 3D object definitions here");
+        writer.println("    cube([10, 20, 30]);");
+        writer.println("    sphere(15);");
+        writer.println("}");
+    }
+}
 }
 
 
