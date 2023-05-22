@@ -57,6 +57,7 @@ public class OrderService {
 
     public static List<OrderItem> generateOrder(Carport carport, ConnectionPool connectionPool) throws DatabaseException {
         List<Wood> woods = MaterialFacade.getAllWood(connectionPool);
+        List<Screw> screws = MaterialFacade.getAllScrews(connectionPool);
         List<OrderItem> orderItems = new ArrayList<>();
 
         // Get and put sterns
@@ -71,9 +72,16 @@ public class OrderService {
         // Get and put poles
         orderItems.add(getPoles(carport, woods, OrderItemTask.POLE));
 
+        // get and put screws for the roof
+
+        orderItems.add(getRoofScrews(carport, screws, OrderItemTask.ROOF_TILE_SCREWS);
+
+
         if (carport.hasShed()) {
             orderItems.add(getShedClothing(carport.getShed(), woods, OrderItemTask.SHED_CLOTHING));
         }
+
+
 
         return orderItems;
     }
@@ -231,6 +239,22 @@ public class OrderService {
         return woodMap.firstEntry().getValue();
     }
 
+    private static List<OrderItem> getRoofScrews(int target, List<Screw> screws, OrderItemTask task) {
+        List<Screw> roofscrews = filterScrews(screws, screw -> screw.getName().equals("plastmo bundskruer 200 stk"));
+        int amountOfScrews = target * 12;
+        double price = 0;
+        price = screws.get(0).getPrice();
+
+
+
+    }
+
+    private static List<Screw> filterScrews(List<Screw> screws, Predicate<Screw> predicate) {
+        return screws.stream()
+                .filter(predicate)
+                .collect(Collectors.toList());
+    }
+
     private static List<Wood> filterWoods(List<Wood> woods, Predicate<Wood> predicate) {
         return woods.stream()
                 .filter(predicate)
@@ -238,7 +262,7 @@ public class OrderService {
     }
 
 
-    //I dette metode skal vi have regnet carports bredde samt længde ud, beregningsmetode kommer her.
+    //I denne metode skal vi have regnet carports bredde samt længde ud, beregningsmetode kommer her.
     public void addOrder(Order order) {
 
     }
@@ -248,5 +272,7 @@ public class OrderService {
 
         OrderFacade.approveOrder(order, connectionPool);
     }
+
+
 
 }
