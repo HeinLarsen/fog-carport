@@ -73,9 +73,39 @@ public class OrderService {
 
         if (carport.hasShed()) {
             orderItems.add(getShedClothing(carport.getShed(), woods, OrderItemTask.SHED_CLOTHING));
+            orderItems.add(getRims(carport.getLength() - carport.getShed().getLength(), woods, OrderItemTask.RIM));
+            orderItems.add(getRims(carport.getShed().getLength(), woods, OrderItemTask.RIM_SHED));
+        } else {
+            orderItems.add(getRims(carport.getLength(), woods, OrderItemTask.RIM));
         }
 
         return orderItems;
+    }
+
+    private static OrderItem getRims(int length, List<Wood> woods, OrderItemTask task) {
+        List<Wood> filteredWoods = filterWoods(woods, wood -> wood.getCategory().equals("spærtræ"));
+
+        TreeMap<Integer, Wood> woodMap = new TreeMap<>();
+        // loop through all woods and find the one with the shortest amount above the length
+        for (Wood filteredWood : filteredWoods) {
+            if (filteredWood.getLength() / 2 >= length) {
+                int difference = filteredWood.getLength() - length;
+                woodMap.put(difference, filteredWood);
+            } else if (filteredWood.getLength() >= length) {
+                int difference = filteredWood.getLength() - length;
+                woodMap.put(difference, filteredWood);
+            }
+        }
+        OrderItem orderItem = null;
+        Wood bestWood = woodMap.firstEntry().getValue();
+        if (bestWood.getLength()/2 >= length) {
+            orderItem = new OrderItem(1, woodMap.firstEntry().getValue().getPrice(), task.getTask());
+        } else {
+            orderItem = new OrderItem(2, woodMap.firstEntry().getValue().getPrice() * 2, task.getTask());
+        }
+
+        orderItem.setMaterial(woodMap.firstEntry().getValue());
+        return orderItem;
     }
 
     private static OrderItem getShedClothing(Shed shed, List<Wood> woods, OrderItemTask task) {
