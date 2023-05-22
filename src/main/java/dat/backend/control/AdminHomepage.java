@@ -31,22 +31,22 @@ public class AdminHomepage extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
-        Order o = (Order) session.getAttribute("order");
         try {
-            if (u != null && u.getRoleId() == 2) {
+            if (u != null && u.getRoleId() == 2){
                 List<Order> orders = OrderService.getAllOrders(connectionPool);
                 List<User> users = UserService.getAllUsers(connectionPool);
                 List<Order> ordersPending = OrderService.getOrdersByStatus(Status.PENDING, connectionPool);
                 request.setAttribute("userOrders", orders);
                 request.setAttribute("usersList", users);
                 request.setAttribute("ordersPending", ordersPending);
-            } else if (u != null && u.getRoleId() == 1) {
+
+            }else if (u != null && u.getRoleId() == 1){
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }else{
+                request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
             }
 
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
 
@@ -55,6 +55,14 @@ public class AdminHomepage extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+
+        //dont know if this is necessary
+        Order order = (Order) session.getAttribute("order");
+        User user = (User) session.getAttribute("user");
+        String status = request.getParameter("status");
+
 
 
 
