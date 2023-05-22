@@ -57,6 +57,7 @@ public class OrderService {
 
     public static List<OrderItem> generateOrder(Carport carport, ConnectionPool connectionPool) throws DatabaseException {
         List<Wood> woods = MaterialFacade.getAllWood(connectionPool);
+        List<RoofTile> roofTiles = MaterialFacade.getAllRoofTiles(connectionPool);
         List<OrderItem> orderItems = new ArrayList<>();
 
         // Get and put sterns
@@ -71,6 +72,9 @@ public class OrderService {
         // Get and put poles
         orderItems.add(getPoles(carport, woods, OrderItemTask.POLE));
 
+        // Get and put roof tiles
+        orderItems.add(getRoofTiles(carport, roofTiles, OrderItemTask.ROOF_TILE));
+
         if (carport.hasShed()) {
             orderItems.add(getShedClothing(carport.getShed(), woods, OrderItemTask.SHED_CLOTHING));
             orderItems.add(getRims(carport.getLength() - carport.getShed().getLength(), woods, OrderItemTask.RIM));
@@ -80,6 +84,34 @@ public class OrderService {
         }
 
         return orderItems;
+    }
+
+    private static OrderItem getRoofTiles(Carport carport, List<RoofTile> roofTiles, OrderItemTask task) {
+        int carportArea = carport.getLength() * carport.getWidth();
+        int maxCoverage = 0;
+        RoofTile bestRoofTile = null;
+
+        for (RoofTile roofTile : roofTiles) {
+            int tilesRequired = (int) Math.ceil((double) carportArea / (roofTile.getHeight() * roofTile.getWidth()));
+            int coverage = tilesRequired * roofTile.getHeight() * roofTile.getWidth();
+
+            if (coverage > maxCoverage) {
+                maxCoverage = coverage;
+                bestRoofTile = roofTile;
+            }
+        }
+
+        if (bestRoofTile != null) {
+            int tilesRequired = (int) Math.ceil((double) carportArea / (bestRoofTile.getHeight() * bestRoofTile.getWidth()));
+            double totalPrice = tilesRequired * bestRoofTile.getPrice();
+
+            // Create the OrderItem with the calculated values
+            OrderItem orderItem = new OrderItem(tilesRequired, totalPrice, task.getTask());
+            orderItem.setMaterial(bestRoofTile);
+            return orderItem;
+        }
+
+        return null;
     }
 
     private static OrderItem getRims(int length, List<Wood> woods, OrderItemTask task) {
