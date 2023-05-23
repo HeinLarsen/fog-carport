@@ -239,33 +239,7 @@ public class OrderService {
         return woodMap.firstEntry().getValue();
     }
 
-    private static List<OrderItem> getRoofScrews(int target, List<Screw> screws, OrderItemTask task) {
-        List<Screw> filteredScrews = filterScrews(screws, screw -> screw.getName().equals("plastmo bundskruer 200 stk"));
-        int amountOfScrews = target * 12;
-        double price = 0;
-        price = filteredScrews.get(0).getPrice();
-
-
-
-
-
-
-
-        OrderItem orderItem = new OrderItem(spars.size(), price, task.getTask());
-        orderItem.setMaterial(spars.get(0));
-
-        return orderItem;
-    }
-
-
-
-    }
-
-    private static List<Screw> filterScrews(List<Screw> screws, Predicate<Screw> predicate) {
-        return screws.stream()
-                .filter(predicate)
-                .collect(Collectors.toList());
-    }
+    
 
     private static List<Wood> filterWoods(List<Wood> woods, Predicate<Wood> predicate) {
         return woods.stream()
