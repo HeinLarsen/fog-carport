@@ -74,7 +74,7 @@ public class OrderService {
 
         // get and put screws for the roof
 
-        orderItems.add(getRoofScrews(carport, screws, OrderItemTask.ROOF_TILE_SCREWS);
+        //orderItems.add(getRoofScrews(carport, screws, OrderItemTask.ROOF_TILE_SCREWS);
 
 
         if (carport.hasShed()) {
