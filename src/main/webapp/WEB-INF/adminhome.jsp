@@ -11,19 +11,19 @@
     <jsp:body>
 
         <t2>Kunde liste:</t2>
-        <div class="box">
+        <div class="box kunde">
             <table class="table table-striped table-bordered">
                 <tr>
                     <th>ID</th>
                     <th>Email</th>
                     <th>Navn</th>
                 </tr>
-                <c:forEach items="${requestScope.users}" var="user">
+                <c:forEach items="${requestScope.usersList}" var="user">
                     <tr>
                         <td>${user.id}</td>
                         <td>${user.email}</td>
                         <td>${user.firstName} ${user.lastName}</td>
-                        <td><a href="showusersorder?id=${user.id}">${user.email} ${user.firstName} ${user.lastName}</a></td>
+                        <td><a href="/showusersorder?id=${user.id}"  value="${user.id}">Se brugerens ordre</a></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -31,7 +31,7 @@
 
 
         <t2>Order liste:</t2>
-        <div class="box">
+        <div class="box order">
             <table class="table table-striped table-bordered">
                 <tr>
                     <th>ID</th>
@@ -50,19 +50,19 @@
         </div>
 
         <t2>Ubehandlet order liste:</t2>
-        <div class="box">
+        <div class="box ubehandletorder">
             <table class="table table-striped table-bordered">
                 <tr>
                     <th>ID</th>
                     <th>Order</th>
                     <th>Status</th>
                 </tr>
-                <c:forEach items="${requestScope.orders}" var="order">
+                <c:forEach items="${requestScope.ordersPending}" var="ordersstatus">
                     <tr>
                         <td>ID</td>
                         <td>Ordre</td>
                         <td>Status</td>
-                        <td><a href="/admineditorder?id=${order.orderID}">${order.orderID} ${order.length} ${order.width} ${order.shed} ${order.status}</a></td>
+                        <td><a href="/admineditorder?id=${ordersstatus.orderID}">${order.orderID} ${order.length} ${order.width} ${order.shed} ${order.status}</a></td>
                     </tr>
                 </c:forEach>
             </table>

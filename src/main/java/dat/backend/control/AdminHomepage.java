@@ -12,6 +12,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "AdminHomepage", value = "/adminhomepage")
@@ -29,42 +30,34 @@ public class AdminHomepage extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User u = (User) session.getAttribute("user");
-        try {
-            if (u != null && u.getRoleId() == 2){
-                List<Order> orders = OrderService.getAllOrders(connectionPool);
-                List<User> users = UserService.getAllUsers(connectionPool);
-                List<Order> ordersPending = OrderService.getOrdersByStatus(Status.PENDING, connectionPool);
-                request.setAttribute("userOrders", orders);
-                request.setAttribute("usersList", users);
-                request.setAttribute("ordersPending", ordersPending);
-
-            }else if (u != null && u.getRoleId() == 1){
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }else{
-                request.getRequestDispatcher("error.jsp").forward(request, response);
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
 
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
+        try {
+            if (u != null && u.getRoleId() == 2){
+                List<Order> orders = OrderService.getAllOrders(connectionPool);
+                List<User> usersList = UserService.getAllUsers(connectionPool);
+                List<Order> ordersPending = OrderService.getOrdersByStatus(Status.PENDING, connectionPool);
+                request.setAttribute("ordersList", orders);
+                request.setAttribute("usersList", usersList);
+                request.setAttribute("ordersPending", ordersPending);
+                request.getRequestDispatcher("WEB-INF/adminhome.jsp").forward(request, response);
+            }else if (u != null && u.getRoleId() == 1){
+                request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
+            }else{
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
 
-        //dont know if this is necessary
-        Order order = (Order) session.getAttribute("order");
-        User user = (User) session.getAttribute("user");
-        String status = request.getParameter("status");
 
-
-
+        }catch (Exception e){
+            request.setAttribute("errormessage", e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
 
     }
 }
