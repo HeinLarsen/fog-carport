@@ -240,10 +240,22 @@ public class OrderService {
     }
 
     private static List<OrderItem> getRoofScrews(int target, List<Screw> screws, OrderItemTask task) {
-        List<Screw> roofscrews = filterScrews(screws, screw -> screw.getName().equals("plastmo bundskruer 200 stk"));
+        List<Screw> filteredScrews = filterScrews(screws, screw -> screw.getName().equals("plastmo bundskruer 200 stk"));
         int amountOfScrews = target * 12;
         double price = 0;
-        price = screws.get(0).getPrice();
+        price = filteredScrews.get(0).getPrice();
+        
+
+
+
+
+
+
+        OrderItem orderItem = new OrderItem(spars.size(), price, task.getTask());
+        orderItem.setMaterial(spars.get(0));
+
+        return orderItem;
+    }
 
 
 
