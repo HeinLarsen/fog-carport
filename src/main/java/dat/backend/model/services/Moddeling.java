@@ -5,6 +5,7 @@ import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -118,6 +119,56 @@ public class Moddeling
 
  */
 
+    public static void generatePlankRow(int quantity, double gap) throws IOException {
+        StringBuilder scadCodeBuilder = new StringBuilder();
+
+        // Define the Plank module
+        scadCodeBuilder.append("module Plank() {\n");
+        scadCodeBuilder.append("\tlinear_extrude(height = 100.0, twist = 0.0, scale = [1.0, 0.5, 0.5], slices = 1, center = true)\n");
+        scadCodeBuilder.append("\t{\n");
+        scadCodeBuilder.append("\t\tscale([10.0, 10.0])\n");
+        scadCodeBuilder.append("\t\t{\n");
+        scadCodeBuilder.append("\t\t\tpolygon(points =\n");
+        scadCodeBuilder.append("\t\t\t[\n");
+        scadCodeBuilder.append("\t\t\t\t[-0.5, -0.5],\n");
+        scadCodeBuilder.append("\t\t\t\t[0.5, -0.5],\n");
+        scadCodeBuilder.append("\t\t\t\t[0.5, 0.5],\n");
+        scadCodeBuilder.append("\t\t\t\t[-0.5, 0.5]\n");
+        scadCodeBuilder.append("\t\t\t],\n");
+        scadCodeBuilder.append("\t\t\tpaths =\n");
+        scadCodeBuilder.append("\t\t\t[\n");
+        scadCodeBuilder.append("\t\t\t\t[0, 1, 2, 3]\n");
+        scadCodeBuilder.append("\t\t\t]\n");
+        scadCodeBuilder.append("\t\t}\n");
+        scadCodeBuilder.append("\t}\n");
+        scadCodeBuilder.append("}\n");
+
+        // Define the PlankRow module
+        scadCodeBuilder.append("module PlankRow() {\n");
+        scadCodeBuilder.append("\tfor (i = [0:" + (quantity - 1) + "]) {\n");
+        scadCodeBuilder.append("\t\ttranslate([i * (20 + " + gap + "), 0, 0]) {\n");
+        scadCodeBuilder.append("\t\t\tPlank();\n");
+        scadCodeBuilder.append("\t\t}\n");
+        scadCodeBuilder.append("\t}\n");
+        scadCodeBuilder.append("}\n");
+
+        // Set the desired gap between planks
+        scadCodeBuilder.append("\n");
+        scadCodeBuilder.append("// Set the desired gap between planks\n");
+        scadCodeBuilder.append("gap = " + gap + ";\n");
+
+        // Invoke the PlankRow module
+        scadCodeBuilder.append("\n");
+        scadCodeBuilder.append("PlankRow();\n");
+
+        String FILENAME = "src/main/webapp/3d-Models\\test.scad";
+        FileWriter fw = new FileWriter(FILENAME);
+        fw.write(scadCodeBuilder.toString());
+        fw.close();
+
+        System.out.println("OpenScad file written to: " + FILENAME);
+
+    }
 
 }
 
