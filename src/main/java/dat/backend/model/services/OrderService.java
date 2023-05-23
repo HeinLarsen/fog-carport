@@ -328,6 +328,42 @@ public class OrderService {
         return woodMap.firstEntry().getValue();
     }
 
+//TODO: Use the woodMap from the method above to find the cufOffLength when given a target length
+    private static List<Wood> findSternsCutOffLength(int target, List<Wood> woods) {
+        TreeMap<Integer, List<Wood>> woodMap = new TreeMap<>();
+
+
+        for (Wood wood : woods) {
+            int lengthDifference = wood.getLength() - target;
+
+            if (lengthDifference >= 0) {
+                List<Wood> woodCombination = new ArrayList<>();
+                woodCombination.add(wood);
+                int cutOffLength = wood.getLength() - target;
+                woodMap.put(lengthDifference, woodCombination);
+            }
+
+            for (Wood wood2 : woods) {
+                if (wood2.getWidth() == wood.getWidth()) {
+                    int remaining = target - wood.getLength();
+                    int wood2Length = wood2.getLength();
+
+                    if (remaining <= wood2Length) {
+                        List<Wood> woodCombination = new ArrayList<>();
+                        woodCombination.add(wood);
+                        int cutOffLength = wood2Length - remaining;
+                        woodMap.put(Math.abs(lengthDifference), woodCombination);
+                    }
+                }
+            }
+        }
+
+        return woodMap.firstEntry().getValue();
+    }
+
+
+
+
     private static List<Wood> filterWoods(List<Wood> woods, Predicate<Wood> predicate) {
         return woods.stream()
                 .filter(predicate)
