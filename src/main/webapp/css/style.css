@@ -11,5 +11,48 @@ th, td {
     padding:15px;
 }
 
+.box{
+    background-color: lightgray;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* stilling for signup page */
+
+.signup_form{
+    max-width: 550px;
+    margin-inline: auto;
+}
+
+.align-center{
+    text-align: center;
+}
+
+.address{
+padding-left: 3%;
+}
+
+.last_name{
+    padding-left: 2%;
+}
+
+.first_name{
+    padding-left: 3%;
+}
 
 
+.email{
+    padding-left: 3%;
+}
+
+.password{
+    padding-left: 2%;
+}
+
+.zip{
+    padding-left: 3%;
+}
+
+.signup{
+    margin-top: 2%;
+    padding-left: 9%;
+}
