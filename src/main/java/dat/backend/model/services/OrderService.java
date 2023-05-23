@@ -58,6 +58,8 @@ public class OrderService {
     public static List<OrderItem> generateOrder(Carport carport, ConnectionPool connectionPool) throws DatabaseException {
         List<Wood> woods = MaterialFacade.getAllWood(connectionPool);
         List<RoofTile> roofTiles = MaterialFacade.getAllRoofTiles(connectionPool);
+        List<Screw> screws = MaterialFacade.getAllScrews(connectionPool);
+        List<Fitting> fittings = MaterialFacade.getAllFittings(connectionPool);
         List<OrderItem> orderItems = new ArrayList<>();
 
         // Get and put sterns
@@ -78,6 +80,18 @@ public class OrderService {
         // Get and put water board
         orderItems.addAll(getWaterBoard(carport.getLength(), woods, OrderItemTask.WATERBOARD_SIDES));
         orderItems.addAll(getWaterBoard(carport.getWidth(), woods, OrderItemTask.WATERBOARD_ENDS));
+
+        // Get screws for roof tile
+        orderItems.add(getRoofScrews(screws , OrderItemTask.ROOF_TILE_SCREWS));
+
+        // Get metalbands for spars
+        orderItems.add(getMetalBand(fittings, OrderItemTask.CROSSWIND));
+
+
+
+
+
+
 
         if (carport.hasShed()) {
             orderItems.add(getShedClothing(carport.getShed(), woods, OrderItemTask.SHED_CLOTHING));
@@ -162,21 +176,40 @@ public class OrderService {
         return orderItem;
     }
 
-    private static List<OrderItem> getRoofScrews(int target, List<Screw> screws, OrderItemTask task) {
+    private static OrderItem getRoofScrews(List<Screw> screws, OrderItemTask task) {
         List<Screw> filteredScrews = filterScrews(screws, screw -> screw.getName().equals("plastmo bundskruer 200 stk"));
-        int amountOfScrews = target * 12;
+        int amountOfTiles = 4;
+        int amountOfScrews = amountOfTiles* 12;
+        List<Screw> roofscrews = new ArrayList<>();
         double price = 0;
         price = filteredScrews.get(0).getPrice();
 
+        for (Screw filteredscrews2 : filteredScrews)
+        {
+            for (int i = 0; i < amountOfScrews; i++)
+            {
+                roofscrews.add(filteredscrews2);
+            }
+        }
 
+        OrderItem orderItem = new OrderItem(filteredScrews.size(), price, task.getTask());
+        orderItem.setMaterial(filteredScrews.get(0));
+        return orderItem;
+    }
 
-
-
-
-
-        OrderItem orderItem = new OrderItem(spars.size(), price, task.getTask());
-        orderItem.setMaterial(spars.get(0));
-
+    private static OrderItem getMetalBand(List<Fitting> fittings, OrderItemTask task){
+        List<Fitting> filteredFittings = filterFittings(fittings, fitting -> fitting.getName().equals("hulbånd"));
+        double amountOfMetalBand = 7.25;
+        double totalAmountOfMetalBand = amountOfMetalBand * 2;
+        double price = 0;
+        List<Fitting> metalBand = new ArrayList<>();
+        price = filteredFittings.get(0).getPrice();
+        for (Fitting filteredFitting : filteredFittings)
+        {
+            metalBand.add(filteredFitting);
+        }
+        OrderItem orderItem = new OrderItem(filteredFittings.size(), price, task.getTask());
+        orderItem.setMaterial(filteredFittings.get(0));
         return orderItem;
     }
 
@@ -354,6 +387,12 @@ public class OrderService {
 
     private static List<Screw> filterScrews(List<Screw> screws, Predicate<Screw> predicate) {
         return screws.stream()
+                .filter(predicate)
+                .collect(Collectors.toList());
+    }
+
+    private static List<Fitting> filterFittings(List<Fitting> fittings, Predicate<Fitting> predicate) {
+        return fittings.stream()
                 .filter(predicate)
                 .collect(Collectors.toList());
     }
