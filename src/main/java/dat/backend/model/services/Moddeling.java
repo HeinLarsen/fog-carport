@@ -16,7 +16,7 @@ public class Moddeling
     public static void main(String[] args) throws IOException
     {
         Moddeling model = new Moddeling();
-        model.buildbar(40, 10, 40);
+        model.buildbar3(40, 10, 40, 10);
 
     }
 
