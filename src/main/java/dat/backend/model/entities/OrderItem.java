@@ -6,6 +6,8 @@ public class OrderItem {
     private double price;
     private String description;
     private AMaterial material;
+    private int length;
+    private int width;
 
     public OrderItem(int ID, int quantity, double price, String description) {
         this.ID = ID;
@@ -18,6 +20,14 @@ public class OrderItem {
         this.quantity = quantity;
         this.price = price;
         this.description = description;
+    }
+
+    public OrderItem(int quantity, double price, String description, int length, int width){
+        this.quantity = quantity;
+        this.price = price;
+        this.description = description;
+        this.length = length;
+        this.width = width;
     }
 
     public int getID() {
