@@ -10,8 +10,9 @@
 
     <jsp:body>
 
+    <div class="temp">
+        <div class="box homepage_grid_box">
         <t2>Kunde liste:</t2>
-        <div class="box kunde">
             <table class="table table-striped table-bordered">
                 <tr>
                     <th>ID</th>
@@ -23,15 +24,16 @@
                         <td>${user.id}</td>
                         <td>${user.email}</td>
                         <td>${user.firstName} ${user.lastName}</td>
-                        <td><a href="/showusersorder?id=${user.id}"  value="${user.id}">Se brugerens ordre</a></td>
+                        <td><a href="/showusersorder?id=${user.id}" value="${user.id}">Se brugerens ordre</a></td>
                     </tr>
                 </c:forEach>
             </table>
         </div>
 
 
-        <t2>Order liste:</t2>
-        <div class="box order">
+
+        <div class="box homepage_grid_box">
+            <t2>Order liste:</t2>
             <table class="table table-striped table-bordered">
                 <tr>
                     <th>ID</th>
@@ -49,8 +51,9 @@
             </table>
         </div>
 
-        <t2>Ubehandlet order liste:</t2>
-        <div class="box ubehandletorder">
+
+        <div class="box homepage_grid_box">
+            <t2>Ubehandlet order liste:</t2>
             <table class="table table-striped table-bordered">
                 <tr>
                     <th>ID</th>
@@ -67,6 +70,7 @@
                 </c:forEach>
             </table>
         </div>
+    </div>
 
 
     </jsp:body>

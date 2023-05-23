@@ -49,7 +49,7 @@
 </header>
 
 <div id="body" class="container mt-4" style="min-height: 400px;">
-    <h1><jsp:invoke fragment="header"/></h1>
+    <h1 class="align-center"><jsp:invoke fragment="header"/></h1>
     <jsp:doBody/>
 </div>
 
