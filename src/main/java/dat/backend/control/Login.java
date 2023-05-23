@@ -42,7 +42,6 @@ public class Login extends HttpServlet
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-
         try
         {
 
@@ -51,7 +50,7 @@ public class Login extends HttpServlet
             if (user.getRoleId() == 2){
                 session = request.getSession();
                 session.setAttribute("user", user); // adding user object to session scope
-                request.getRequestDispatcher("WEB-INF/adminhome.jsp").forward(request, response);
+                request.getRequestDispatcher("/adminhomepage").forward(request, response);
             }else {
 
                 session = request.getSession();
