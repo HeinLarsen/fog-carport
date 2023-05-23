@@ -1,4 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page errorPage="../error.jsp" isErrorPage="false" %>
 
 <t:pagetemplate>
     <jsp:attribute name="header">
@@ -6,10 +10,10 @@
     </jsp:attribute>
 
     <jsp:body>
-        <c:forEach items="${requestScope.users}" var="user">
-            <div class="box">
-                <br>
-                <t2>Bruger info:</t2>
+
+        <h2>Bruger info:</h2>
+        <c:forEach items="${requestScope.userinfo}" var="user">
+            <div class="box kunde">
                 <br>
                 Navn: ${user.firstName} ${user.lastName}
                 <br>
@@ -26,9 +30,10 @@
             </div>
         </c:forEach>
 
+
+        <h2>Order:</h2>
         <c:forEach items="${requestScope.orders}" var="order">
             <div class="box">
-                <t2>Order:</t2>
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
