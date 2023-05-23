@@ -6,14 +6,16 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Brugeren og Order
+         Bruger ordre oversigt
     </jsp:attribute>
 
     <jsp:body>
 
         <h2>Bruger info:</h2>
-        <c:forEach items="${requestScope.userinfo}" var="user">
+        <c:forEach items="${requestScope.usersList}" var="user">
             <div class="box kunde">
+                <br>
+                ID: ${user.id}
                 <br>
                 Navn: ${user.firstName} ${user.lastName}
                 <br>
