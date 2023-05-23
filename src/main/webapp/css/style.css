@@ -84,3 +84,20 @@ padding-left: 3%;
 
 
 /* styling for admin homepage */
+
+.temp{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+
+.homepage_grid_box{
+    background-color: lightgray;
+}
+
+
+.test1:nth-child(3){
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+}

@@ -6,7 +6,7 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-        <h1 class="align-center">Sign up</h1>
+       Sign up
     </jsp:attribute>
 
     <jsp:body>
