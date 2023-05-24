@@ -15,23 +15,27 @@
                 <h2>Bruger info:</h2>
                 <div class="box kunde">
                     <br>
-                    Navn: ${requestScope.userinfo.firstName} ${requestScope.userinfo.lastName}
+                    Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
+
+
                     <br>
-                    Email: ${requestScope.userinfo.email}
+                    Email: ${requestScope.user.email}
                     <br>
-                    Telefon nummer: ${requestScope.userinfo.phoneNumber}
+                    Telefon nummer: ${requestScope.user.phoneNumber}
                     <br>
-                    Adresse: ${requestScope.userinfo.address}
+                    Adresse: ${requestScope.user.address}
                     <br>
-                    Postnummer: ${requestScope.userinfo.zip}
+                    Postnummer: ${requestScope.user.zip}
                     <br>
-                    Medlemskab: ${requestScope.userinfo.membership}
+                    Medlemskab: ${requestScope.user.membershipId}
                     <br/>
+
                 </div>
             </div>
 
             <div class="box">
                 <h2>Order:</h2>
+
                 <c:forEach items="${requestScope.orders}" var="order">
                 <table class="table table-striped table-bordered">
                     <thead>
