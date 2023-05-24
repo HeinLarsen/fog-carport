@@ -285,7 +285,7 @@ public class OrderService {
         return orderItems;
     }
 
-    private static List<Wood> findSterns(int target, List<Wood> woods) {
+   public static List<Wood> findSterns(int target, List<Wood> woods) {
         TreeMap<Integer, List<Wood>> woodMap = new TreeMap<>();
 
         for (Wood wood : woods) {
