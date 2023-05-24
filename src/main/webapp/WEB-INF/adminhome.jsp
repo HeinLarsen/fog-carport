@@ -2,6 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page errorPage="../error.jsp" isErrorPage="false" %>
 
 <t:pagetemplate>
     <jsp:attribute name="header">
@@ -10,7 +11,7 @@
 
     <jsp:body>
 
-    <div class="temp">
+    <div class="griddy">
         <div class="box homepage_grid_box">
         <t2>Kunde liste:</t2>
             <table class="table table-striped table-bordered">
@@ -20,12 +21,11 @@
                     <th>Navn</th>
                 </tr>
                 <c:forEach items="${requestScope.usersList}" var="user">
-                    <tr>
-                        <td>${user.id}</td>
-                        <td>${user.email}</td>
-                        <td>${user.firstName} ${user.lastName}</td>
-                        <td><a href="/showusersorder?id=${user.id}" value="${user.id}">Se brugerens ordre</a></td>
-                    </tr>
+                    <tr onclick="location.href='adminviewuser?id=${user.id}'">
+                            <td>${user.id}</td>
+                            <td>${user.email}</td>
+                            <td>${user.firstName} ${user.lastName}</td>
+                        </tr>
                 </c:forEach>
             </table>
         </div>
@@ -45,7 +45,7 @@
                         <td>${order.orderID}</td>
                         <td>${order.length} ${order.width} ${order.shed}</td>
                         <td>${order.status}</td>
-                        <td><a href="/admineditorder?id=${order.orderID}">${order.orderID} ${order.length} ${order.width} ${order.shed} ${order.status}</a></td>
+                        <td><a href="/admineditorder?id=${order.orderID}">Se ordre </a></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -65,12 +65,11 @@
                         <td>ID</td>
                         <td>Ordre</td>
                         <td>Status</td>
-                        <td><a href="/admineditorder?id=${ordersstatus.orderID}">${order.orderID} ${order.length} ${order.width} ${order.shed} ${order.status}</a></td>
+                        <td><a href="/admineditorder?id=${ordersstatus.orderID}">Redigerer ordre</a></td>
                     </tr>
                 </c:forEach>
             </table>
         </div>
-    </div>
 
 
     </jsp:body>

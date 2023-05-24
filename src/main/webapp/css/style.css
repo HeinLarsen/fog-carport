@@ -85,7 +85,7 @@ padding-left: 3%;
 
 /* styling for admin homepage */
 
-.temp{
+.griddy{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
@@ -101,3 +101,9 @@ padding-left: 3%;
     grid-column: 2 / 3;
     grid-row: 1 / 3;
 }
+
+
+/* styling for admingviewuser */
+
+/* har fået griddy klassen fra admin homepage */
+

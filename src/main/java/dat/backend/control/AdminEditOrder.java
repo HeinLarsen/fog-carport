@@ -11,8 +11,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "AdminEditOrderServlet", value = "/admineditorder")
-public class AdminEditOrderServlet extends HttpServlet {
+@WebServlet(name = "AdminEditOrder", value = "/admineditorder")
+public class AdminEditOrder extends HttpServlet {
 
     private ConnectionPool connectionPool;
 
@@ -37,6 +37,7 @@ public class AdminEditOrderServlet extends HttpServlet {
             if (u != null && u.getRoleId() == 2) {
                 Order order = OrderService.getOrderById(orderId, connectionPool);
                 request.setAttribute("orderbyid", order);
+                request.getRequestDispatcher("WEB-INF/admineditorder.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
