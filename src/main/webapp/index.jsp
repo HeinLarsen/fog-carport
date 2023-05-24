@@ -1,30 +1,30 @@
-    <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@page errorPage="error.jsp" isErrorPage="false" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page errorPage="error.jsp" isErrorPage="false" %>
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the frontpage
+         Bestil carport
     </jsp:attribute>
-
-
 
     <jsp:body>
 
 
-        <div>
-            <t2> Bestillings form </t2>
+        <div class="align-center">
+            <div class="dropdown-container">
                 <div class="dropdown">
                     <select>
                         <option value="" selected disabled> Carport bredde</option>
                         <option value="option1">200cm</option>
                         <option value="option2">250cm</option>
                         <option value="option3">300cm</option>
-                </select>
+                    </select>
+                </div>
             </div>
 
-            <div>
+
+            <div class="dropdown-container">
                 <div class="dropdown">
                     <select>
                         <option value="" selected disabled> Carport længde</option>
@@ -33,10 +33,9 @@
                         <option value="option3">600cm</option>
                     </select>
                 </div>
-
             </div>
 
-            <div>
+            <div class="dropdown-container">
                 <div class="dropdown">
                     <select>
                         <option value="" selected disabled> Carport højde</option>
@@ -45,13 +44,9 @@
                         <option value="option3">500cm</option>
                     </select>
                 </div>
-
             </div>
 
-
         </div>
-
-
 
 
         <c:if test="${sessionScope.user != null}">

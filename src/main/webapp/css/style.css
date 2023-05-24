@@ -82,9 +82,6 @@ padding-left: 3%;
     padding-left: 5%;
 }
 
-
-/* styling for admin homepage */
-
 .griddy{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -107,3 +104,7 @@ padding-left: 3%;
 
 /* har fået griddy klassen fra admin homepage */
 
+/* styling for index homepage */
+.dropdown-container {
+    margin-bottom: 15px; /* Juster dette til den ønskede mellemrumshøjde */
+}
