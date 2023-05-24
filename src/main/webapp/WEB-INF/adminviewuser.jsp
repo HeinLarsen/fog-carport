@@ -6,7 +6,7 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Brugeren og Order
+         Bruger ordre oversigt
     </jsp:attribute>
 
     <jsp:body>
@@ -67,9 +67,7 @@
                 </table>
             </div>
         </c:forEach>
-</div>
 
-    </div>
     </jsp:body>
 
 </t:pagetemplate>
