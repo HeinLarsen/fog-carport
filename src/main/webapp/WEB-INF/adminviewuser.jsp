@@ -10,8 +10,8 @@
     </jsp:attribute>
 
     <jsp:body>
-    <div>
-        <div>
+    <div class="griddy mt-5 align-center">
+        <div class="box">
             <h2>Bruger info:</h2>
             <c:forEach items="${requestScope.userinfo}" var="user">
                 <div class="box kunde">
@@ -31,10 +31,10 @@
                 </div>
             </c:forEach>
         </div>
-    <div>
-        <h2>Order:</h2>
-        <c:forEach items="${requestScope.orders}" var="order">
+
             <div class="box">
+                <h2>Order:</h2>
+                <c:forEach items="${requestScope.orders}" var="order">
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
@@ -67,6 +67,7 @@
                 </table>
             </div>
         </c:forEach>
+    </div>
 
     </jsp:body>
 
