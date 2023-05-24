@@ -361,7 +361,7 @@ public class OrderService {
 
 
 
-    private static OrderItem getUniversialFitting(List<Fitting> fittings, OrderItemTask task){
+    private static OrderItem getUniversalFitting(List<Fitting> fittings, OrderItemTask task){
         List<Fitting> filteredFittings = filterFittings(fittings, fitting -> fitting.getName().equals("4,5 x 60 mm. skruer 200 stk."));
         double amountOfUniversialFitting = 3;
         double price = 0;
