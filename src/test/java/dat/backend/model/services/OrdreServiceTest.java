@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import static dat.backend.model.services.OrderService.calculateWoodWaste;
 import static dat.backend.model.services.OrderService.findSterns;
@@ -176,7 +177,7 @@ public class OrdreServiceTest {
     }
 
 
-
+//this method calculates the woodWaste for the sterns of the carport but i cant get it return the best combination of wood..
     @Test
     public void testCalculateWoodWaste2() {
         // Create a sample list of Wood objects
@@ -184,18 +185,23 @@ public class OrdreServiceTest {
         woods.add(new Wood(1, "testbrædt", 360, 174.43, "stk", "brædt", 200, 25, true));  // Wood with length 10
         woods.add(new Wood(2, "testbrædt2", 540, 262.03, "stk", "brædt", 200, 25, true));  // Wood with length 20
         woods.add(new Wood(3, "testbrædt3", 360, 108.9, "stk", "brædt", 125, 25, true));  // Wood with length 30
-
+        OutputStream outputStreamCaptor = new ByteArrayOutputStream();
         // Set the target length
-        int targetLength = 750;
+        int targetLength = 1000;
 
         // Call the method being tested
         List<Wood> bestCombination = findSterns(targetLength, woods);
-        int woodWaste = Math.abs(targetLength - bestCombination.stream().mapToInt(Wood::getLength).sum());
+        int totalLength = bestCombination.stream().mapToInt(Wood::getLength).sum();
+        int woodWaste = Math.abs(targetLength - totalLength);
 
         // Assert the expected output
-        Assertions.assertEquals(2, bestCombination.size());  // Assert the size of the bestCombination list
-        // Add more specific assertions based on the expected wood entities in the bestCombination list if needed
+        String expectedOutput = "Best Wood Combination: " + bestCombination + ". Your wood waste will be " + woodWaste + ".";
+        Assertions.assertEquals(expectedOutput, outputStreamCaptor.toString());
         Assertions.assertEquals(0, woodWaste);
+
+
+
+
     }
 
 }
