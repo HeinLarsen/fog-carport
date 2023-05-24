@@ -11,7 +11,7 @@
 
     <jsp:body>
 
-    <div class="temp">
+    <div class="griddy">
         <div class="box homepage_grid_box">
         <t2>Kunde liste:</t2>
             <table class="table table-striped table-bordered">
