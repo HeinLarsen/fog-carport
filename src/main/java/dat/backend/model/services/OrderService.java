@@ -331,6 +331,8 @@ public class OrderService {
 //TODO: Use the woodMap from the method above to find the cufOffLength when given a target length
 public static void calculateWoodWaste(int targetLength, List<Wood> woods) {
     List<Wood> bestCombination = findSterns(targetLength, woods);
+
+    //figure out to insert order.getLength() instead of 0
     int totalLength = 0;
 
     // Calculate the total length of the best wood combination
