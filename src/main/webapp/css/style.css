@@ -1,5 +1,4 @@
 /* CSS stylesheet  for application */
-
 table {
     border-collapse: collapse;
     border: 1px solid silver;
@@ -11,5 +10,100 @@ th, td {
     padding:15px;
 }
 
+.box{
+    background-color: lightgray;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
+/* stilling for signup page */
+.signup_form{
+    max-width: 550px;
+    margin-inline: auto;
+}
+
+.align-center{
+    text-align: center;
+}
+
+.address{
+padding-left: 3%;
+}
+
+.last_name{
+    padding-left: 2%;
+}
+
+.first_name{
+    padding-left: 3%;
+}
+
+
+.email{
+    padding-left: 3%;
+}
+
+.password{
+    padding-left: 2%;
+}
+
+.zip{
+    padding-left: 3%;
+}
+
+.signup{
+    margin-top: 2%;
+    padding-left: 9%;
+    margin-left: 8%;
+}
+
+/* stylling for login */
+.login{
+    margin-top: 3%;
+    padding-left: 5%;
+}
+
+.btn{
+    margin-left: 20%;
+}
+
+/* styling for admin homepage */
+.kunde{
+    margin-top: 3%;
+    padding-left: 5%;
+}
+
+.order{
+    margin-top: 3%;
+    padding-left: 5%;
+}
+
+.ubehandletorder{
+    margin-top: 3%;
+    padding-left: 5%;
+}
+
+
+/* styling for admin homepage */
+
+.griddy{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+
+.homepage_grid_box{
+    background-color: lightgray;
+}
+
+
+.test1:nth-child(3){
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+}
+
+
+/* styling for admingviewuser */
+
+/* har fået griddy klassen fra admin homepage */
 

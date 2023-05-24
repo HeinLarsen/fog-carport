@@ -6,24 +6,46 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-             Login
+        Login
     </jsp:attribute>
 
-    <jsp:attribute name="footer">
-            Login
-    </jsp:attribute>
 
     <jsp:body>
 
-        <h3>You can log in here</h3>
 
-        <form action="login" method="post">
-            <label for="email">Email: </label>
-            <input type="text" id="email" name="email"/>
-            <label for="password">Password: </label>
-            <input type="password" id="password" name="password"/>
-            <input type="submit"  value="Log in"/>
+
+        <form class="box signup_form" action="login" method="post">
+
+            <div class="row justify-content-center mt-5">
+                <div class=" col-5">
+                    <label for="email">Email: </label>
+                    <input type="text" id="email" name="email"/>
+                </div>
+
+                <div class="col-5">
+                    <label for="password">Adgangskode: </label>
+                    <input type="password" id="password" name="password"/>
+                </div>
+
+                <div class="login col-3">
+                    <input type="submit" class="btn btn-primary mb-2" value="Log in"/>
+                </div>
+
+            </div>
+
+
+            <div class="row justify-content-center mt-3">
+
+                <div class="signupKnap col-auto">
+                    <p class="d-inline">Du kan oprette dig her: </p>
+                        <a href="signup.jsp" class="btn btn-primary mb-2">Opret profil</a>
+                    </p>
+                </div>
+
+            </div>
+
         </form>
+
 
     </jsp:body>
 </t:pagetemplate>
