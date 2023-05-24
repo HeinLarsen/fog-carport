@@ -10,27 +10,28 @@
     </jsp:attribute>
 
     <jsp:body>
-
-        <h2>Bruger info:</h2>
-        <c:forEach items="${requestScope.userinfo}" var="user">
-            <div class="box kunde">
-                <br>
-                Navn: ${user.firstName} ${user.lastName}
-                <br>
-                Email: ${user.email}
-                <br>
-                Telefon nummer: ${user.phoneNumber}
-                <br>
-                Adresse: ${user.address}
-                <br>
-                Postnummer: ${user.zip}
-                <br>
-                Medlemskab: ${user.membership}
-                <br/>
-            </div>
-        </c:forEach>
-
-
+    <div>
+        <div>
+            <h2>Bruger info:</h2>
+            <c:forEach items="${requestScope.userinfo}" var="user">
+                <div class="box kunde">
+                    <br>
+                    Navn: ${user.firstName} ${user.lastName}
+                    <br>
+                    Email: ${user.email}
+                    <br>
+                    Telefon nummer: ${user.phoneNumber}
+                    <br>
+                    Adresse: ${user.address}
+                    <br>
+                    Postnummer: ${user.zip}
+                    <br>
+                    Medlemskab: ${user.membership}
+                    <br/>
+                </div>
+            </c:forEach>
+        </div>
+    <div>
         <h2>Order:</h2>
         <c:forEach items="${requestScope.orders}" var="order">
             <div class="box">
@@ -66,7 +67,9 @@
                 </table>
             </div>
         </c:forEach>
+</div>
 
+    </div>
     </jsp:body>
 
 </t:pagetemplate>
