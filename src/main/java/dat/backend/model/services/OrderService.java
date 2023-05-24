@@ -499,7 +499,7 @@ public class OrderService {
         return orderItems;
     }
 
-    private static List<Wood> findSterns(int target, List<Wood> woods) {
+   public static List<Wood> findSterns(int target, List<Wood> woods) {
         TreeMap<Integer, List<Wood>> woodMap = new TreeMap<>();
 
         for (Wood wood : woods) {
@@ -541,6 +541,29 @@ public class OrderService {
 
         return woodMap.firstEntry().getValue();
     }
+
+//TODO: Use the woodMap from the method above to find the cufOffLength when given a target length
+public static void calculateWoodWaste(int targetLength, List<Wood> woods) {
+    List<Wood> bestCombination = findSterns(targetLength, woods);
+
+    //figure out to insert order.getLength() instead of 0
+    int totalLength = 0;
+
+    // Calculate the total length of the best wood combination
+    for (Wood wood : bestCombination) {
+        totalLength += wood.getLength();
+    }
+
+    // Calculate the difference between the target length and the total length
+    int woodWaste = Math.abs(targetLength - totalLength);
+
+    System.out.println("Best Wood Combination: " + bestCombination);
+    System.out.println("Wood Waste: " + woodWaste);
+}
+
+
+
+
 
     private static List<Wood> filterWoods(List<Wood> woods, Predicate<Wood> predicate) {
         return woods.stream()
