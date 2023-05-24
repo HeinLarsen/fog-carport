@@ -10,32 +10,29 @@
     </jsp:attribute>
 
     <jsp:body>
-
-        <h2>Bruger info:</h2>
-        <c:forEach items="${requestScope.usersList}" var="user">
-            <div class="box kunde">
-                <br>
-                ID: ${user.id}
-                <br>
-                Navn: ${user.firstName} ${user.lastName}
-                <br>
-                Email: ${user.email}
-                <br>
-                Telefon nummer: ${user.phoneNumber}
-                <br>
-                Adresse: ${user.address}
-                <br>
-                Postnummer: ${user.zip}
-                <br>
-                Medlemskab: ${user.membership}
-                <br/>
-            </div>
-        </c:forEach>
-
-
-        <h2>Order:</h2>
-        <c:forEach items="${requestScope.orders}" var="order">
+        <div class="griddy mt-5 align-center">
             <div class="box">
+                <h2>Bruger info:</h2>
+                <div class="box kunde">
+                    <br>
+                    Navn: ${requestScope.userinfo.firstName} ${requestScope.userinfo.lastName}
+                    <br>
+                    Email: ${requestScope.userinfo.email}
+                    <br>
+                    Telefon nummer: ${requestScope.userinfo.phoneNumber}
+                    <br>
+                    Adresse: ${requestScope.userinfo.address}
+                    <br>
+                    Postnummer: ${requestScope.userinfo.zip}
+                    <br>
+                    Medlemskab: ${requestScope.userinfo.membership}
+                    <br/>
+                </div>
+            </div>
+
+            <div class="box">
+                <h2>Order:</h2>
+                <c:forEach items="${requestScope.orders}" var="order">
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
@@ -61,13 +58,14 @@
                         <p>${order.totalPrice}kr,-</p>
                     </td>
 
-                    <a href="showusersorder?id=${order.orderID}" value="${order.orderID}"
+                    <a href="showuserinfosorder?id=${order.orderID}" value="${order.orderID}"
                        class="btn btn-primary">Redigere</a>
 
                     </thead>
                 </table>
             </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
 
     </jsp:body>
 

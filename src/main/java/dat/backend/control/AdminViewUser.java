@@ -32,15 +32,18 @@ public class AdminViewUser extends HttpServlet {
 
         try {
             if (u != null && u.getRoleId() == 2) {
+                User userinfo = UserService.getUser(userId, connectionPool);
                 List<Order> orderList = OrderService.getOrdersByUserId(userId, connectionPool);
                 for (Order o : orderList) {
                     System.out.println(o);
                 }
                 request.setAttribute("orderList", orderList);
+                request.setAttribute("user", userinfo);
 
                 request.getRequestDispatcher("WEB-INF/adminviewuser.jsp").forward(request, response);
+                return;
             } else {
-                request.getRequestDispatcher("error.jsp").forward(request, response);
+                //request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
