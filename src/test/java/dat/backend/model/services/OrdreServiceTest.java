@@ -162,7 +162,8 @@ public class OrdreServiceTest {
         woods.add(new Wood(1, "testbrædt4", 480, 174.43, "stk", "brædt", 200, 25, true));  // Wood with length 10
         woods.add(new Wood(2, "testbrædt5", 540, 262.03, "stk", "brædt", 200, 25, true));  // Wood with length 20
         OrderItem orderItemBrædt1 = new OrderItem
-        List<Wood> woodList = getSterns(1000, , OrderItemTask.STERN_UPPER_SIDES);
+                //HJÆÆÆÆÆÆÆÆÆÆÆÆÆLP
+        List<Wood> woodList = getSterns();
 
 
     }
@@ -172,7 +173,7 @@ public class OrdreServiceTest {
 
 
     @Test
-    public void testCalculateWoodWaste3() {
+    public void testCalculateWoodWaste() {
         // Create a sample list of Wood objects
         List<Wood> woods = new ArrayList<>();
 

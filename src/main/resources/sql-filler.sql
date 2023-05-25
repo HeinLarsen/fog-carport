@@ -128,10 +128,10 @@ INSERT INTO `carport`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `p
 VALUES ('firkantskiver', 40, 40, 11, 1, 149.50); -- firkantskiver
 INSERT INTO `carport`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`)
 VALUES ('hulbånd', 20, 10000, 1, 3, 339); -- hulbånd
-INSERT INTO `carport`.`fitting` (`height`, `unit`, `price`)
-VALUES (190, 1, 76.95); -- universal
-INSERT INTO `carport`.`fitting` (`height`, `unit`, `price`)
-VALUES (190, 1, 76.95); -- universal
+INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
+VALUES ('universal', 190, 1, 76.95); -- universal
+INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
+VALUES ('universal', 190, 1, 76.95); -- universal
 INSERT INTO `carport`.`fitting` (`name`, `width`, `height`, `unit`, `price`)
 VALUES ('stalddørsgreb', 75, 50, 4, 183.95); -- stalddørsgreb
 INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
@@ -237,10 +237,10 @@ INSERT INTO `carport_test`.`fitting` (`name`, `width`, `length`, `height`, `unit
 VALUES ('firkantskiver', 40, 40, 11, 1, 149.50); -- firkantskiver
 INSERT INTO `carport_test`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`)
 VALUES ('hulbånd', 20, 10000, 1, 3, 339); -- hulbånd
-INSERT INTO `carport_test`.`fitting` (`height`, `unit`, `price`)
-VALUES (190, 1, 76.95); -- universal
-INSERT INTO `carport_test`.`fitting` (`height`, `unit`, `price`)
-VALUES (190, 1, 76.95); -- universal
+INSERT INTO `carport_test`.`fitting` (`name`,`height`, `unit`, `price`)
+VALUES ('universal',190, 1, 76.95); -- universal
+INSERT INTO `carport_test`.`fitting` (`name`,`height`, `unit`, `price`)
+VALUES ('universal', 190, 1, 76.95); -- universal
 INSERT INTO `carport_test`.`fitting` (`name`, `width`, `height`, `unit`, `price`)
 VALUES ('stalddørsgreb', 75, 50, 4, 183.95); -- stalddørsgreb
 INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`)
