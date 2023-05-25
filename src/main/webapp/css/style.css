@@ -91,7 +91,8 @@ padding-left: 3%;
 
 /* styling for admin homepage */
 
-.gridbox{
+.griddy {
+
     text-align: center;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -103,8 +104,3 @@ padding-left: 3%;
     background-color: lightgray;
 }
 
-
-.test1:nth-child(3){
-    grid-column: 2 / 3;
-    grid-row: 1 / 3;
-}

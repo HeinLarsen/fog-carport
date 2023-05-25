@@ -11,8 +11,7 @@
 
     <jsp:body>
 
-        <div class="gridbox">
-        <div class="griddy mt-5 align-center">
+        <div class="mt-5 align-center griddy">
             <div class="box">
                 <h2>Bruger info:</h2>
                 <div class="box">
@@ -73,6 +72,7 @@
             </c:forEach>
         </div>
         </div>
+
     </jsp:body>
 
 </t:pagetemplate>
