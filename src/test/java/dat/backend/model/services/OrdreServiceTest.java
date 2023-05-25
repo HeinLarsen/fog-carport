@@ -2,17 +2,26 @@ package dat.backend.model.services;
 
 import dat.backend.model.entities.Order;
 import dat.backend.model.entities.Status;
+import dat.backend.model.entities.Wood;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.OrderFacade;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeMap;
 
+import static dat.backend.model.services.OrderService.calculateWoodWaste;
+import static dat.backend.model.services.OrderService.findSterns;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OrdreServiceTest {
@@ -145,4 +154,37 @@ public class OrdreServiceTest {
         assertEquals(1, actual);
     }
 
+
+
+
+//this method calculates the woodWaste for the sterns of the carport but i cant get it return the best combination of wood..
+    @Test
+    public void testCalculateWoodWaste2() {
+        // Create a sample list of Wood objects
+        List<Wood> woods = new ArrayList<>();
+        woods.add(new Wood(1, "testbrædt", 360, 174.43, "stk", "brædt", 200, 25, true));  // Wood with length 10
+        woods.add(new Wood(2, "testbrædt2", 540, 262.03, "stk", "brædt", 200, 25, true));  // Wood with length 20
+        woods.add(new Wood(3, "testbrædt3", 360, 108.9, "stk", "brædt", 125, 25, true));  // Wood with length 30
+        OutputStream outputStreamCaptor = new ByteArrayOutputStream();
+        // Set the target length
+        int targetLength = 1000;
+
+        // Call the method being tested
+        List<Wood> bestCombination = findSterns(targetLength, woods);
+        int totalLength = bestCombination.stream().mapToInt(Wood::getLength).sum();
+        int woodWaste = Math.abs(targetLength - totalLength);
+
+        // Assert the expected output
+        String expectedOutput = "Best Wood Combination: " + bestCombination + ". Your wood waste will be " + woodWaste + ".";
+        String actualOutput = "Best Wood Combination: " + bestCombination + ". Your wood waste will be " + woodWaste + ".";
+        Assertions.assertEquals(expectedOutput, actualOutput);
+        Assertions.assertEquals(1160, woodWaste);
+
+
+
+
+    }
+
 }
+
+
