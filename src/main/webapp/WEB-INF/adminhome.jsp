@@ -32,41 +32,51 @@
 
 
         <div class="box homepage_grid_box">
-            <t2>Order liste:</t2>
+            <t2>Ubehandlet order liste:</t2>
             <table class="table table-striped table-bordered">
+
                 <tr>
                     <th>ID</th>
                     <th>Order</th>
                     <th>Status</th>
+                    <th>User</th>
                 </tr>
-                <c:forEach items="${requestScope.orders}" var="order">
-                    <tr>
+
+                <c:forEach items="${requestScope.ordersList}" var="order">
+                    <tr onclick="location.href='admineditorder?id=${order.orderID}'">
                         <td>${order.orderID}</td>
-                        <td>${order.length} ${order.width} ${order.shed}</td>
+                        <td> ${order.length} cm  x  ${order.width} cm,  shed: ${order.shed}</td>
                         <td>${order.status}</td>
-                        <td><a href="/admineditorder?id=${order.orderID}">Se ordre </a></td>
+                        <td>${user.lastName}</td>
+                        <td><a href="/admineditorder?id=${order.orderID}">Se ubehandlet order </a></td>
                     </tr>
                 </c:forEach>
+
             </table>
         </div>
 
 
         <div class="box homepage_grid_box">
-            <t2>Ubehandlet order liste:</t2>
+            <t2>Order liste:</t2>
             <table class="table table-striped table-bordered">
+
                 <tr>
                     <th>ID</th>
                     <th>Order</th>
                     <th>Status</th>
+                    <th>User</th>
                 </tr>
-                <c:forEach items="${requestScope.ordersPending}" var="ordersstatus">
+
+                <c:forEach items="${requestScope.ordersList}" var="order">
                     <tr>
-                        <td>ID</td>
-                        <td>Ordre</td>
-                        <td>Status</td>
-                        <td><a href="/admineditorder?id=${ordersstatus.orderID}">Redigerer ordre</a></td>
+                        <td>${order.orderID}</td>
+                        <td> ${order.length} cm  x  ${order.width} cm,  shed: ${order.shed}</td>
+                        <td>${order.status}</td>
+                        <td>${user.lastName}</td>
+                        <td><a href="/admineditorder?id=${order.orderID}">Se ordre </a></td>
                     </tr>
                 </c:forEach>
+
             </table>
         </div>
 </div>

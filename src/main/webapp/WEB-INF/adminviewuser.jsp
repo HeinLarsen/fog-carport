@@ -15,10 +15,10 @@
             <div class="box">
                 <h2>Bruger info:</h2>
                 <div class="box">
+
+
                     <br>
                     Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
-
-
                     <br>
                     Email: ${requestScope.user.email}
                     <br>
@@ -37,7 +37,6 @@
             <div class="box">
                 <h2>Order:</h2>
 
-                <c:forEach items="${requestScope.orders}" var="order">
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
@@ -50,17 +49,17 @@
                     </tr>
 
                     <td>
-                        <p>${order.orderID}</p>
+                        <p>${requestScope.order.orderID}</p>
                     <td>
-                        <p>${order.length}</p>
-                        <p>${order.width}</p>
-                        <p>${order.shed}</p>
+                        <p>${requestScope.order.length}</p>
+                        <p>${requestScope.order.width}</p>
+                        <p>${requestScope.order.shed}</p>
                     <td>
-                        <p>${order.status}</p>
+                        <p>${requestScope.order.status}</p>
                     <td>
-                        <p>${order.created}</p>
+                        <p>${requestScope.order.created}</p>
                     <td>
-                        <p>${order.totalPrice}kr,-</p>
+                        <p>${requestScope.order.totalPrice}kr,-</p>
                     </td>
 
                     <a href="showuserinfosorder?id=${order.orderID}" value="${order.orderID}"
@@ -69,7 +68,7 @@
                     </thead>
                 </table>
             </div>
-            </c:forEach>
+
         </div>
         </div>
 
