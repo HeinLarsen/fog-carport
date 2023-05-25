@@ -60,7 +60,7 @@ public class MaterialMapper {
     }
 
     protected static ArrayList<RoofTile> getAllRoofTiles(ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select roof_tile.name, roof_tile.length, roof_tile.price, roof_tile.width, u.unit from roof_tile join unit u on roof_tile.unit = u.id";
+        String sql = "select roof_tile.id, roof_tile.name, roof_tile.length, roof_tile.price, roof_tile.width, u.unit from roof_tile join unit u on roof_tile.unit = u.id";
         ArrayList<RoofTile> roofTiles = new ArrayList<>();
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {

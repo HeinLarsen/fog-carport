@@ -57,6 +57,7 @@ public class OrderService {
 
     public static List<OrderItem> generateOrder(Carport carport, ConnectionPool connectionPool) throws DatabaseException {
         List<Wood> woods = MaterialFacade.getAllWood(connectionPool);
+        List<RoofTile> roofTiles = MaterialFacade.getAllRoofTiles(connectionPool);
         List<OrderItem> orderItems = new ArrayList<>();
 
         // Get and put sterns
@@ -71,10 +72,20 @@ public class OrderService {
         // Get and put poles
         orderItems.add(getPoles(carport, woods, OrderItemTask.POLE));
 
+        // Get and put roof tiles
+        orderItems.add(getRoofTiles(carport, roofTiles, OrderItemTask.ROOF_TILE));
+
+        // Get and put water board
+        orderItems.addAll(getWaterBoard(carport.getLength(), woods, OrderItemTask.WATERBOARD_SIDES));
+        orderItems.addAll(getWaterBoard(carport.getWidth(), woods, OrderItemTask.WATERBOARD_ENDS));
+
         if (carport.hasShed()) {
             orderItems.add(getShedClothing(carport.getShed(), woods, OrderItemTask.SHED_CLOTHING));
             orderItems.add(getRims(carport.getLength() - carport.getShed().getLength(), woods, OrderItemTask.RIM));
             orderItems.add(getRims(carport.getShed().getLength(), woods, OrderItemTask.RIM_SHED));
+            orderItems.addAll(getShedSupports(carport.getShed().getLength(), woods, OrderItemTask.SHED_SUPPORT_POSTS_SIDES));
+            orderItems.addAll(getShedSupports(carport.getWidth(), woods, OrderItemTask.SHED_SUPPORT_POSTS_GABLE));
+            orderItems.add(calculateWoodPlankLengthForZShape(woods, OrderItemTask.SHED_Z));
         } else {
             orderItems.add(getRims(carport.getLength(), woods, OrderItemTask.RIM));
         }
@@ -82,29 +93,90 @@ public class OrderService {
         return orderItems;
     }
 
+    private static OrderItem calculateWoodPlankLengthForZShape(List<Wood> woods, OrderItemTask task) {
+        // Constants for door height and width
+        int height = 210; // cm
+        int width = 50; // cm
+
+        // Calculate the length of the horizontal sections
+        int horizontalLength = width * 2;
+
+        // Calculate the length of the vertical section
+        int verticalLength = height - width;
+
+        // Calculate the total length of the wood plank
+        int totalLength = horizontalLength + verticalLength;
+
+        List<Wood> filteredWoods = filterWoods(woods, wood -> wood.getCategory().equals("lægte") && wood.getLength() >= totalLength);
+
+        // Find the shortest wood plank that can be used
+        Wood wood = Collections.min(filteredWoods, Comparator.comparing(Wood::getLength));
+        OrderItem orderItem = new OrderItem(1, wood.getPrice(), task.getTask());
+        orderItem.setMaterial(wood);
+        return  orderItem;
+
+    }
+
+
+
+    private static List<OrderItem> getShedSupports(int target, List<Wood> woods, OrderItemTask task) {
+        List<Wood> filteredWoods = filterWoods(woods, wood -> wood.getCategory().equals("brædt"));
+        List<Wood> result = findSterns(target, filteredWoods);
+        List<OrderItem> orderItems = new ArrayList<>();
+        Set<Wood> processedWoods = new LinkedHashSet<>();
+
+        for (Wood wood : result) {
+            if (processedWoods.contains(wood)) {
+                continue;
+            }
+
+            int quantity = Collections.frequency(result, wood);
+            double price = wood.getPrice() * quantity;
+            OrderItem orderItem = new OrderItem(quantity, price, task.getTask());
+            orderItem.setMaterial(wood);
+            orderItems.add(orderItem);
+
+            processedWoods.add(wood);
+        }
+
+        return orderItems;
+    }
+
+    private static List<OrderItem> getWaterBoard(int target, List<Wood> woods, OrderItemTask task) {
+        List<Wood> filteredWoods = filterWoods(woods, wood -> wood.isPressureTreated() && wood.getCategory().equals("brædt") && wood.getWidth() == 100);
+        return getShedSupports(target, filteredWoods, task);
+    }
+
+    private static OrderItem getRoofTiles(Carport carport, List<RoofTile> roofTiles, OrderItemTask task) {
+        TreeMap<Integer, RoofTile> roofTileMap = new TreeMap<>();
+        for (RoofTile roofTile : roofTiles) {
+            int tilesRequired = (int) Math.ceil((double) carport.getLength() / roofTile.getWidth());
+            int coverage = tilesRequired * roofTile.getLength() * roofTile.getWidth();
+            roofTileMap.put(coverage, roofTile);
+        }
+        RoofTile bestRoofTile = roofTileMap.firstEntry().getValue();
+        int tilesRequired = (int) Math.ceil((double) carport.getLength() / bestRoofTile.getWidth());
+        double totalPrice = tilesRequired * bestRoofTile.getPrice();
+        OrderItem orderItem = new OrderItem(tilesRequired, totalPrice, task.getTask());
+        orderItem.setMaterial(bestRoofTile);
+        return orderItem;
+    }
+
     private static OrderItem getRims(int length, List<Wood> woods, OrderItemTask task) {
         List<Wood> filteredWoods = filterWoods(woods, wood -> wood.getCategory().equals("spærtræ"));
 
         TreeMap<Integer, Wood> woodMap = new TreeMap<>();
-        // loop through all woods and find the one with the shortest amount above the length
         for (Wood filteredWood : filteredWoods) {
-            if (filteredWood.getLength() / 2 >= length) {
-                int difference = filteredWood.getLength() - length;
-                woodMap.put(difference, filteredWood);
-            } else if (filteredWood.getLength() >= length) {
-                int difference = filteredWood.getLength() - length;
-                woodMap.put(difference, filteredWood);
-            }
-        }
-        OrderItem orderItem = null;
-        Wood bestWood = woodMap.firstEntry().getValue();
-        if (bestWood.getLength()/2 >= length) {
-            orderItem = new OrderItem(1, woodMap.firstEntry().getValue().getPrice(), task.getTask());
-        } else {
-            orderItem = new OrderItem(2, woodMap.firstEntry().getValue().getPrice() * 2, task.getTask());
+            int difference = Math.abs(filteredWood.getLength() - length);
+            woodMap.put(difference, filteredWood);
         }
 
-        orderItem.setMaterial(woodMap.firstEntry().getValue());
+        Wood bestWood = woodMap.firstEntry().getValue();
+        int quantity = (bestWood.getLength() / 2 >= length) ? 1 : 2;
+        double price = bestWood.getPrice() * quantity;
+
+        OrderItem orderItem = new OrderItem(quantity, price, task.getTask());
+        orderItem.setMaterial(bestWood);
         return orderItem;
     }
 
@@ -115,13 +187,11 @@ public class OrderService {
 
         int roofOverhang = 30; // 15 cm overlap on each side
         int totalLength = shed.getLength() * 2 + ((shed.getWidth() * 2) - roofOverhang);
-        double overlap = 7.5; // 3.75 cm overlap on each side
-        int amountOfClothing = (int) Math.ceil(totalLength / overlap);
-        double price = filteredWoods.get(0).getPrice() * amountOfClothing;
+        int amountOfClothing = (int) Math.ceil(totalLength / 7.5);
+        double price = calculatePrice(filteredWoods.get(0), amountOfClothing);
 
         OrderItem orderItem = new OrderItem(amountOfClothing, price, task.getTask());
         orderItem.setMaterial(filteredWoods.get(0));
-
         return orderItem;
     }
 
@@ -163,15 +233,13 @@ public class OrderService {
 
         OrderItem orderItem = new OrderItem(poles.size(), price, task.getTask());
         orderItem.setMaterial(poles.get(0));
-
         return orderItem;
     }
 
     private static OrderItem getSpars(int length, int width, List<Wood> woods, OrderItemTask task) {
         List<Wood> filteredWoods = filterWoods(woods, wood -> wood.getCategory().equals("spærtræ"));
 
-        double amountOfSpars = length / 90.0;
-        int actualAmountOfSpars = (int) Math.ceil(amountOfSpars);
+        int actualAmountOfSpars = (int) Math.ceil(length / 90.0);
         List<Wood> spars = new ArrayList<>();
         double price = 0;
 
@@ -187,7 +255,6 @@ public class OrderService {
 
         OrderItem orderItem = new OrderItem(spars.size(), price, task.getTask());
         orderItem.setMaterial(spars.get(0));
-
         return orderItem;
     }
 
@@ -218,7 +285,7 @@ public class OrderService {
         return orderItems;
     }
 
-    private static List<Wood> findSterns(int target, List<Wood> woods) {
+   public static List<Wood> findSterns(int target, List<Wood> woods) {
         TreeMap<Integer, List<Wood>> woodMap = new TreeMap<>();
 
         for (Wood wood : woods) {
@@ -261,10 +328,37 @@ public class OrderService {
         return woodMap.firstEntry().getValue();
     }
 
+//TODO: Use the woodMap from the method above to find the cufOffLength when given a target length
+public static void calculateWoodWaste(int targetLength, List<Wood> woods) {
+    List<Wood> bestCombination = findSterns(targetLength, woods);
+
+    //figure out to insert order.getLength() instead of 0
+    int totalLength = 0;
+
+    // Calculate the total length of the best wood combination
+    for (Wood wood : bestCombination) {
+        totalLength += wood.getLength();
+    }
+
+    // Calculate the difference between the target length and the total length
+    int woodWaste = Math.abs(targetLength - totalLength);
+
+    System.out.println("Best Wood Combination: " + bestCombination);
+    System.out.println("Wood Waste: " + woodWaste);
+}
+
+
+
+
+
     private static List<Wood> filterWoods(List<Wood> woods, Predicate<Wood> predicate) {
         return woods.stream()
                 .filter(predicate)
                 .collect(Collectors.toList());
+    }
+
+    private static double calculatePrice(Wood wood, int quantity) {
+        return wood.getPrice() * quantity;
     }
 
 
