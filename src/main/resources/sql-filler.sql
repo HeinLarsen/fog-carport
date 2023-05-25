@@ -1,3 +1,19 @@
+alter table carport.order_item_fitting AUTO_INCREMENT = 0;
+alter table carport.order_item_wood AUTO_INCREMENT = 0;
+alter table carport.order_item_roof_tile AUTO_INCREMENT = 0;
+alter table carport.membership AUTO_INCREMENT = 0;
+alter table carport.category AUTO_INCREMENT = 0;
+alter table carport.order_item_screw AUTO_INCREMENT = 0;
+alter table carport.order AUTO_INCREMENT = 0;
+alter table carport.fitting AUTO_INCREMENT = 0;
+alter table carport.user AUTO_INCREMENT = 0;
+alter table carport.wood AUTO_INCREMENT = 0;
+alter table carport.roof_tile AUTO_INCREMENT = 0;
+alter table carport.screw AUTO_INCREMENT = 0;
+alter table carport.role AUTO_INCREMENT = 0;
+alter table carport.unit AUTO_INCREMENT = 0;
+
+
 -- unit;
 
 INSERT INTO `carport`.`unit` (`unit`)
@@ -45,6 +61,16 @@ VALUES ('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200),
        ('user', 'user', 'user', '1234', '1', 1234, 1, 1, 3200),
        ('memberuser', 'user', 'user', '1234', 'lærkevej 41', 1234, 1, 2, 2800),
        ('workeruser', 'user', '1234', '1234', 'æøåvej', 1234, 1, 3, 3200);
+
+       -- category;
+
+       insert into carport_test.category(category)
+       values ('brædt'),
+              ('lægte'),
+              ('reglar'),
+              ('spærtræ'),
+              ('stolpe');
+
 
 
 -- material;
@@ -127,14 +153,6 @@ INSERT INTO `carport_test`.`unit` (`unit`)
 VALUES ('sæt');
 
 
--- category;
-
-insert into carport_test.category(category)
-values ('brædt'),
-       ('lægte'),
-       ('reglar'),
-       ('spærtræ'),
-       ('stolpe');
 
 -- membership;
 
