@@ -52,7 +52,7 @@
                         <option value="option3">280cm</option>
                     </select>
                 </div>
-
+            </div>
             <div class="dropdown-container">
                 <div class="dropdown">
                     <select>

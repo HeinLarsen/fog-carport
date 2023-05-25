@@ -61,7 +61,7 @@
                     </td>
 
                     <a href="showusersorder?id=${order.orderID}" value="${order.orderID}"
-                       class="btn btn-primary">Redigere</a>
+                       class="btn btn-primary mar">Redigere</a>
 
                     </thead>
                 </table>

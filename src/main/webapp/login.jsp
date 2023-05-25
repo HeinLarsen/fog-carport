@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="login col-3">
-                    <input type="submit" class="btn btn-primary mb-2" value="Log in"/>
+                    <input type="submit" class="btn btn-primary mb-2 mar" value="Log in"/>
                 </div>
 
             </div>
@@ -38,7 +38,7 @@
 
                 <div class="signupKnap col-auto">
                     <p class="d-inline">Du kan oprette dig her: </p>
-                        <a href="signup.jsp" class="btn btn-primary mb-2">Opret profil</a>
+                        <a href="signup.jsp" class="btn btn-primary mb-2 mar">Opret profil</a>
                     </p>
                 </div>
 

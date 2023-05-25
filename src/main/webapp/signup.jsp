@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="signup col-5">
-                    <button type="submit" class="btn btn-success">Opret</button>
+                    <button type="submit" class="btn btn-success mar">Opret</button>
                 </div>
             </div>
         </form>
