@@ -112,7 +112,7 @@ public class ModellingTest {
 
         Carport carport = new Carport(780, 600, new Shed(210, 530));
 //        Carport carport = new Carport(480, 300);
-
+//        Carport carport = new Carport(780, 600);
         List<OrderItem> list = OrderService.generateOrder(carport, connectionPool);
 
         Modelling.generate3D(list);

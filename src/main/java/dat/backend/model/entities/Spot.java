@@ -29,5 +29,18 @@ public class Spot {
 
     public void addWood(Wood wood) {
         this.woods.add(wood);
+        calculateMaxWidth();
+    }
+
+    private void calculateMaxWidth() {
+        double maxWidth = 0;
+        for (Wood wood : woods) {
+            if (wood.getWidth() > maxWidth) {
+                maxWidth = wood.getWidth() + 100;
+            }
+        }
+        if (maxWidth > this.width) {
+            this.width = maxWidth;
+        }
     }
 }

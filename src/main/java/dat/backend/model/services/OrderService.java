@@ -218,15 +218,12 @@ public class OrderService {
             }
         } else {
             amountOfPoles = (carport.getLength() / 180) * 2;
-
             for (Wood filteredWood : filteredWoods) {
-                if (filteredWood.getLength() >= carport.getLength()) {
                     for (int i = 0; i < amountOfPoles; i++) {
                         price += filteredWood.getPrice();
                         poles.add(filteredWood);
                     }
                     break;
-                }
             }
         }
 

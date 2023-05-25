@@ -18,35 +18,10 @@ public class Modelling {
         // get max length;
         int maxSpotLength = 0;
         for (OrderItem orderItem : orderItems) {
-            if (orderItem.getMaterial().getLength() > maxSpotLength) {
-                maxSpotLength = orderItem.getMaterial().getLength() * 10;
+            if (cmToMm(orderItem.getMaterial().getLength()) > maxSpotLength) {
+                maxSpotLength = cmToMm(orderItem.getMaterial().getLength());
             }
         }
-//        // create spot list
-//        List<Spot> spots = new ArrayList<>();
-//        for (OrderItem orderItem : orderItems) {
-//            for (int i = 0; i < orderItem.getQuantity(); i++) {
-//                Wood wood = (Wood) orderItem.getMaterial();
-//                for (Spot spot : spots) {
-//                   List<Wood> spotWoods = spot.getWoods();
-//                   // calculate length of spot
-//                     double spotLength = 0;
-//                        for (Wood spotWood : spotWoods) {
-//                            spotLength += spotWood.getLength();
-//                        }
-//                        if (spotLength + wood.getLength() < maxSpotLength) {
-//                            spot.addWood(wood);
-//                        } else {
-//                            // create new spot
-//                            Spot newSpot = new Spot(maxSpotLength, wood.getWidth(), wood);
-//                            spots.add(newSpot);
-//                        }
-//
-//                }
-//                Spot spot = new Spot(maxSpotLength, wood.getWidth(), wood);
-//                spots.add(spot);
-//            }
-//        }
 
         List<Spot> spots = new ArrayList<>();
         for (OrderItem orderItem : orderItems) {
@@ -63,10 +38,10 @@ public class Modelling {
                     // calculate length of spot
                     double spotLength = 0;
                     for (Wood spotWood : spotWoods) {
-                        spotLength += spotWood.getLength() * 10;
+                        spotLength += cmToMm(spotWood.getLength());
                     }
 
-                    if (spotLength + (wood.getLength() * 10) < maxSpotLength) {
+                    if (spotLength + cmToMm(wood.getLength()) + 50 < maxSpotLength) {
                         spot.addWood(wood);
                         addedToExistingSpot = true;
                         break; // Exit the loop since wood was added to an existing spot
@@ -82,74 +57,45 @@ public class Modelling {
         }
 
         JavaCSG csg = JavaCSGFactory.createDefault();
-        var shape = csg.box3D(0,0, 0, true); // var must be initialized but cannot be null: solution = create empty box
+        var shape = csg.box3D(0,0, 0, false); // var must be initialized but cannot be null: solution = create empty box
 
         double horizontalGap = 0;
+        double spotRow = 0;
 
         for (int i = 0; i < spots.size(); i++) {
-            horizontalGap += spots.get(i).getWidth();
+            if (horizontalGap + spots.get(i).getWidth() > 15000) {
+                spotRow += maxSpotLength + 25;
+                horizontalGap = 0;
+            }
+
 
             double verticalGap = 0;
             List<Wood> woods = spots.get(i).getWoods();
             if (woods.size() > 1) {
                 for (int j = 0; j < woods.size(); j++) {
                     Wood wood = woods.get(j);
-                    double spotLength = ((wood.getLength()*10)/maxSpotLength) * maxSpotLength;
-                    Geometry3D box = csg.box3D(wood.getWidth(), wood.getLength() * 10, wood.getHeight(), false);
-                    var square = csg.translate3D(horizontalGap, (wood.getLength()*10/2) + (maxSpotLength/2) /maxSpotLength + verticalGap, 0).transform(box);
-                    verticalGap -= (woods.get(j).getLength() * 10) + 5;
+                    double spotLength = (cmToMm(wood.getLength())/2) + (maxSpotLength/2)/maxSpotLength;
+                    Geometry3D box = csg.box3D(wood.getWidth(), cmToMm(wood.getLength()), wood.getHeight(), false);
+                    var square = csg.translate3D(horizontalGap, spotLength + verticalGap + spotRow, 0).transform(box);
+                    verticalGap += cmToMm(woods.get(j).getLength()) + 25;
                     shape = csg.union3D(shape, square);
                 }
             } else {
                 Wood wood = spots.get(i).getWoods().get(0);
-                Geometry3D box = csg.box3D(wood.getWidth(), wood.getLength() * 10, wood.getHeight(), false);
-                var square = csg.translate3D(horizontalGap, 0, 0).transform(box);
+                double spotLength = (cmToMm(wood.getLength())/2) + (maxSpotLength/2)/maxSpotLength;
+                Geometry3D box = csg.box3D(wood.getWidth(), cmToMm(wood.getLength()), wood.getHeight(), false);
+                var square = csg.translate3D(horizontalGap, spotLength + spotRow, 0).transform(box);
                 shape = csg.union3D(shape, square);
             }
-
-
-
-
+                horizontalGap += spots.get(i).getWidth();
         }
-
-//        double horizontalGap = 0;
-//        for (int i = 0; i < spots.size(); i++) {
-//            horizontalGap += spots.get(i).getWidth();
-//            for (int j = 0; j < spots.get(i).getWoods().size(); j++) {
-//                Wood wood = spots.get(i).getWoods().get(j);
-//                double materialLength = 0;
-//                for (Wood wood2 : spots.get(i).getWoods()) {
-//                    materialLength += wood2.getLength() * 10;
-//                }
-//                double verticalGap = materialLength + 2.5;
-//                Geometry3D box = csg.box3D(wood.getLength() * 10, wood.getWidth(), wood.getHeight(), true);
-//                if ((wood.getLength() * 10 + materialLength) > maxSpotLength) {
-//                    var square = csg.translate3D(0, verticalGap, 0).transform(box);
-//                }
-//                var square = csg.translate3D(0, horizontalGap, 0).transform(box);
-//                shape = csg.union3D(shape, square);
-////                Geometry3D box = csg.box3D(wood.getLength(), wood.getWidth(), wood.getHeight(), true);
-////                var square = csg.translate3D(200, 0, 0).transform(box);
-////                shape = csg.union3D(shape, square);
-//            }
-//
-//
-//        }
-//        csg.view(shape);
-//        Geometry3D box = csg.box3D(10, 10, 10, true);
-//        var shape = box;
-//        double x = 2.5;
-//        for (int i = 0; i < 10; i++) {
-//            var square = csg.translate3D(x, 0, 0).transform(box);
-//            shape = csg.union3D(shape, square);
-//            x += 20;
-//        }
-//
-//
-//
-//
-//
+        double scaleFactor = 0.015;
+        shape = csg.scale3D(scaleFactor, scaleFactor, scaleFactor).transform(shape);
         csg.view(shape);
+    }
+
+    private static int cmToMm(int cm) {
+        return cm * 10;
     }
 }
 
