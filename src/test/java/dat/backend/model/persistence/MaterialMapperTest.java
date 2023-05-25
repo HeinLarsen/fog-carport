@@ -81,12 +81,26 @@ public class MaterialMapperTest {
                 stmt.execute("INSERT INTO `carport_test`.`roof_tile` (`name`, `length`, `width`, `unit`, `price`) VALUES ('Plastmo Ecolite blåtonet', 600, 109, 1, 633.00);");
                 stmt.execute("INSERT INTO `carport_test`.`roof_tile` (`name`, `length`, `width`, `unit`, `price`) VALUES ('Plastmo Ecolite blåtonet', 360, 109, 1, 266);");
 
-                stmt.execute("INSERT INTO `carport_test`.`screw` (`name`, `diameter`, `length`, `unit`, `price`) VALUES ('plastmo bundskruer 200 stk', 0, 30, 2, 441);");
-                stmt.execute("INSERT INTO `carport_test`.`screw` (`name`, `diameter`, `length`, `unit`, `price`) VALUES ('skruer 200 stk.', 4.5, 60, 2, 307.95);");
+                stmt.execute( "INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`) VALUES ('plastmo bundskruer 200 stk', 0, 30, 2, 441");
+                stmt.execute( "INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`) VALUES ('skruer 200 stk.', 4.5, 60, 2, 307.95");
+                stmt.execute( "INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`) VALUES ('Skruer 400 stk.', 4.5, 70, 2, 149.95");
+                stmt.execute( "INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`) VALUES ('beslagskruer 250 stk.', 4.5, 50, 2, 160.95");
+                stmt.execute( "INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`) VALUES ('Skruer 300 stk.', 4.0, 50, 2, 263.95");
+                stmt.execute( "INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`) VALUES ('bræddebolt', 10, 120, 2, 464");
+                stmt.execute( "INSERT INTO `carport`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`) VALUES ('firkantskiver', 40, 40, 11, 1, 149.50");
+                stmt.execute( "INSERT INTO `carport`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`)VALUES ('hulbånd', 20, 10000, 1, 3, 339");
+                stmt.execute( "INSERT INTO `carport`.`fitting` (`name`,`height`, `unit`, `price`) VALUES ('hulbånd',190, 1, 76.95");
+                stmt.execute( "INSERT INTO `carport`.`fitting` (`name`,`height`, `unit`, `price`) VALUES ('hulbånd',190, 1, 76.95");
+                stmt.execute( "INSERT INTO `carport`.`fitting` (`name`, `width`, `height`, `unit`, `price`) VALUES ('stalddørsgreb', 75, 50, 4, 183.95");
+                stmt.execute( "INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`) VALUES ('t hængsel', 390, 2, 156.95");
+                stmt.execute( "INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`) VALUES ('vinkelbeslag', 35, 1, 13.95");
+
+                /*stmt.execute("INSERT INTO `carport_test`.`screw` (`name`, `diameter`, `length`, `unit`, `price`) VALUES ('plastmo bundskruer 200 stk', 0, 30, 2, 441);");
+                  stmt.execute("INSERT INTO `carport_test`.`screw` (`name`, `diameter`, `length`, `unit`, `price`) VALUES ('skruer 200 stk.', 4.5, 60, 2, 307.95);");
 
                 stmt.execute("INSERT INTO `carport_test`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`) VALUES ('firkantskiver', 40, 40, 11, 1, 149.50);");
                 stmt.execute("INSERT INTO `carport_test`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`) VALUES ('hulbånd', 20, 10000, 1, 3, 339);");
-
+               */
             }
         }
         catch (SQLException throwables)

@@ -64,7 +64,7 @@ public class OrderService {
         List<OrderItem> orderItems = new ArrayList<>();
 
         // Get and put sterns
-        orderItems.addAll(getSterns(carport.getLength(), woods, OrderItemTask.STERN_UPPER_SIDES));
+       /* orderItems.addAll(getSterns(carport.getLength(), woods, OrderItemTask.STERN_UPPER_SIDES));
         orderItems.addAll(getSterns(carport.getWidth(), woods, OrderItemTask.STERN_UPPER_ENDS));
         orderItems.addAll(getSterns(carport.getLength(), woods, OrderItemTask.STERN_LOWER_SIDES));
         orderItems.addAll(getSterns(carport.getWidth(), woods, OrderItemTask.STERN_LOWER_ENDS));
@@ -81,12 +81,44 @@ public class OrderService {
         // Get and put water board
         orderItems.addAll(getWaterBoard(carport.getLength(), woods, OrderItemTask.WATERBOARD_SIDES));
         orderItems.addAll(getWaterBoard(carport.getWidth(), woods, OrderItemTask.WATERBOARD_ENDS));
+        */
 
         // Get screws for roof tile
-        orderItems.add(getRoofScrews(screws , OrderItemTask.ROOF_TILE_SCREWS));
-
+        orderItems.add(getRoofScrews(carport,screws,roofTiles, OrderItemTask.ROOF_TILE_SCREWS));
+/*
         // Get metalbands for spars
         orderItems.add(getMetalBand(fittings, OrderItemTask.CROSSWIND));
+
+        // Get universal fittings for spars
+        orderItems.add(getUniversalFitting(fittings, OrderItemTask.FITTING_SPAR_RIM));
+
+        // Get screws for stern and water board
+        orderItems.add(getSternScrews(screws, OrderItemTask.SCREW_STERN_WATERBOARD));
+
+        // Get screws for metalbands and universal fittings
+        orderItems.add(getFittingScrews(screws, OrderItemTask.SCREW_UNIVERSAL_CROWSSWIND));
+
+        // Get bolts for mounting rims
+        orderItems.add(getBolts(carport, screws, OrderItemTask.SCREW_RIM_POLE));
+
+        // Get discs for mounting rims
+        orderItems.add(getDiscs(carport, fittings, OrderItemTask.SCREW_RIM_POLE));
+
+        // Get screws for outer and inner clothing
+        orderItems.add(getScrewsForInnerClothing(screws, OrderItemTask.SCREW_INNER_CLOTHING));
+        orderItems.add(getScrewsForOuterClothing(screws, OrderItemTask.SCREW_OUTER_CLOTHING));
+
+        // Get doorhandle
+        orderItems.add(getDoorHandle(fittings, OrderItemTask.SHED_DOOR_LOCK));
+
+        // Get doorhinges
+        orderItems.add(getHinges(fittings, OrderItemTask.SHED_T_HINGE));
+
+        // Get Angeled fittings
+        orderItems.add(getAngleFittings(fittings, OrderItemTask.SHED_ANGLE_BRACKET));
+        */
+
+
 
 
 
@@ -225,7 +257,7 @@ public class OrderService {
 
     private static OrderItem getSternScrews(List<Screw> screws, OrderItemTask task){
     List<Screw> fliteredScrews = filterScrews(screws, screw -> screw.getName().equals("skruer 200 stk."));
-    double amountOfSternScrews = 3;
+    int amountOfSternScrews = 1 ;
     double price = 0;
     List<Screw> sternScrews = new ArrayList<>();
     price = fliteredScrews.get(0).getPrice();
@@ -233,14 +265,15 @@ public class OrderService {
         sternScrews.add(filteredScrew);
     }
 
-    OrderItem orderItem = new OrderItem(fliteredScrews.size(), price, task.getTask());
+    OrderItem orderItem = new OrderItem(amountOfSternScrews, price, task.getTask());
     orderItem.setMaterial(fliteredScrews.get(0));
     return orderItem;
     }
 
     private static OrderItem getFittingScrews(List<Screw> screws, OrderItemTask task){
         List<Screw> filteredScrews = filterScrews(screws, screw -> screw.getName().equals("beslagskruer 250 stk."));
-        double amountOfFittingScrews = 2;
+        int amountOfFittings = 30;
+        int amountOfFittingScrews = amountOfFittings * 3;
         double price = 0;
         List<Screw> fittingScrews = new ArrayList<>();
         price = filteredScrews.get(0).getPrice();
@@ -249,15 +282,16 @@ public class OrderService {
             fittingScrews.add(filteredScrew);
         }
 
-        OrderItem orderItem = new OrderItem(filteredScrews.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfFittingScrews, price, task.getTask());
         orderItem.setMaterial(filteredScrews.get(0));
         return orderItem;
     }
 
-    private static OrderItem getBolts(List<Screw> screws, OrderItemTask task){
+    private static OrderItem getBolts(Carport carport ,List<Screw> screws, OrderItemTask task){
         List<Screw> filteredScrews = filterScrews(screws, screw -> screw.getName().equals("bræddebolt"));
-        double amountOfBolts = 18;
         double price = 0;
+        double amountOfPoles = (carport.getLength() / 180) * 2;
+        int amountOfBolts = (int) Math.ceil(amountOfPoles * 2);
         List<Screw> bolts = new ArrayList<>();
         price = filteredScrews.get(0).getPrice();
         for (Screw filteredScrew : filteredScrews)
@@ -265,14 +299,16 @@ public class OrderService {
             bolts.add(filteredScrew);
         }
 
-        OrderItem orderItem = new OrderItem(filteredScrews.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfBolts, price, task.getTask());
         orderItem.setMaterial(filteredScrews.get(0));
         return orderItem;
     }
 
-    private static OrderItem getDiscs(List<Fitting> fittings, OrderItemTask task){
+    private static OrderItem getDiscs(Carport carport, List<Fitting> fittings, OrderItemTask task){
         List<Fitting> fittings1 = filterFittings(fittings, fitting -> fitting.getName().equals("firkantskiver"));
-        double amountOfDiscs = 12;
+        double amountOfPoles = (carport.getLength() / 180) * 2;
+        int amountOfBolts = (int) Math.ceil(amountOfPoles * 2);
+        int amountOfDiscs = amountOfBolts;
         double price = 0;
         List<Fitting> discs = new ArrayList<>();
         price = fittings1.get(0).getPrice();
@@ -281,14 +317,14 @@ public class OrderService {
             discs.add(fitting);
         }
 
-        OrderItem orderItem = new OrderItem(fittings1.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfDiscs, price, task.getTask());
         orderItem.setMaterial(fittings1.get(0));
         return orderItem;
     }
 
     private static OrderItem getScrewsForOuterClothing(List<Screw> screws, OrderItemTask task){
         List<Screw> filteredScrews = filterScrews(screws, screw -> screw.getName().equals("Skruer 400 stk."));
-        double amountOfScrews = 800;
+        int amountOfScrews = 2;
         double price = 0;
         List<Screw> screwsForOuterClothing = new ArrayList<>();
         price = filteredScrews.get(0).getPrice();
@@ -297,14 +333,14 @@ public class OrderService {
             screwsForOuterClothing.add(filteredScrew);
         }
 
-        OrderItem orderItem = new OrderItem(filteredScrews.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfScrews, price, task.getTask());
         orderItem.setMaterial(filteredScrews.get(0));
         return orderItem;
     }
 
     private static OrderItem getScrewsForInnerClothing(List<Screw> screws, OrderItemTask task){
         List<Screw> filteredScrews = filterScrews(screws, screw -> screw.getName().equals("Skruer 300 stk."));
-        double amountOfScrews = 600;
+        int amountOfScrews = 2;
         double price = 0;
         List<Screw> screwsForOuterClothing = new ArrayList<>();
         price = filteredScrews.get(0).getPrice();
@@ -313,7 +349,7 @@ public class OrderService {
             screwsForOuterClothing.add(filteredScrew);
         }
 
-        OrderItem orderItem = new OrderItem(filteredScrews.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfScrews, price, task.getTask());
         orderItem.setMaterial(filteredScrews.get(0));
         return orderItem;
     }
@@ -337,7 +373,7 @@ public class OrderService {
 
     private static OrderItem getHinges(List<Fitting> fittings, OrderItemTask task){
         List<Fitting> filteredFittings = filterFittings(fittings, fitting -> fitting.getName().equals("t hængsel"));
-        double amountOfHinges = 2;
+        int amountOfHinges = 2;
         double price = 0;
         List<Fitting> hinges = new ArrayList<>();
         price = filteredFittings.get(0).getPrice();
@@ -346,7 +382,7 @@ public class OrderService {
             hinges.add(filteredFitting);
         }
 
-        OrderItem orderItem = new OrderItem(filteredFittings.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfHinges, price, task.getTask());
         orderItem.setMaterial(filteredFittings.get(0));
         return orderItem;
 
@@ -354,7 +390,7 @@ public class OrderService {
 
     private static OrderItem getAngleFittings(List<Fitting> fittings, OrderItemTask task){
         List<Fitting> filteredFittings = filterFittings(fittings, fitting -> fitting.getName().equals("vinkelbeslag"));
-        double amountOfAngleFittings = 8;
+        int amountOfAngleFittings = 32;
         double price = 0;
         List<Fitting> angleFittings = new ArrayList<>();
         price = filteredFittings.get(0).getPrice();
@@ -363,7 +399,7 @@ public class OrderService {
             angleFittings.add(filteredFitting);
         }
 
-        OrderItem orderItem = new OrderItem(filteredFittings.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfAngleFittings, price, task.getTask());
         orderItem.setMaterial(filteredFittings.get(0));
         return orderItem;
     }
@@ -371,8 +407,8 @@ public class OrderService {
 
 
     private static OrderItem getUniversalFitting(List<Fitting> fittings, OrderItemTask task){
-        List<Fitting> filteredFittings = filterFittings(fittings, fitting -> fitting.getName().equals("4,5 x 60 mm. skruer 200 stk."));
-        double amountOfUniversialFitting = 3;
+        List<Fitting> filteredFittings = filterFittings(fittings, fitting -> fitting.getName().equals("universal"));
+        int amountOfUniversialFitting = 30;
         double price = 0;
         List<Fitting> universialFitting = new ArrayList<>();
         price = filteredFittings.get(0).getPrice();
@@ -380,7 +416,7 @@ public class OrderService {
         {
             universialFitting.add(filteredFitting);
         }
-        OrderItem orderItem = new OrderItem(filteredFittings.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfUniversialFitting, price, task.getTask());
         orderItem.setMaterial(filteredFittings.get(0));
         return orderItem;
     }
