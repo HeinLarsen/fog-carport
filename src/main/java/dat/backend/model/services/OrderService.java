@@ -178,10 +178,16 @@ public class OrderService {
         return orderItem;
     }
 
-    private static OrderItem getRoofScrews(List<Screw> screws, OrderItemTask task) {
+    private static OrderItem getRoofScrews(Carport carport,List<Screw> screws, List<RoofTile> roofTiles, OrderItemTask task) {
         List<Screw> filteredScrews = filterScrews(screws, screw -> screw.getName().equals("plastmo bundskruer 200 stk"));
-        int amountOfTiles = 4;
-        int amountOfScrews = amountOfTiles* 12;
+        TreeMap<Integer, RoofTile> roofTileMap = new TreeMap<>();
+        int amountOfTiles = 0
+        for (RoofTile roofTile : roofTiles)
+        {
+            amountOfTiles = (int) Math.ceil((double) carport.getLength() / roofTile.getWidth());
+        }
+
+        int amountOfScrews = amountOfTiles * 12;
         List<Screw> roofscrews = new ArrayList<>();
         double price = 0;
         price = filteredScrews.get(0).getPrice();
