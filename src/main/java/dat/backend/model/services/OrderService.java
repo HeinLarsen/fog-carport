@@ -197,7 +197,6 @@ public class OrderService {
 
     private static OrderItem getPoles(Carport carport, List<Wood> woods, OrderItemTask task) {
         List<Wood> filteredWoods = filterWoods(woods, wood -> wood.getCategory().equals("stolpe"));
-
         List<Wood> poles = new ArrayList<>();
         int amountOfPoles;
         double price = 0;
