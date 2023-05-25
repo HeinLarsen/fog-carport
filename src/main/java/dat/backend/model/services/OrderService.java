@@ -180,8 +180,7 @@ public class OrderService {
 
     private static OrderItem getRoofScrews(Carport carport,List<Screw> screws, List<RoofTile> roofTiles, OrderItemTask task) {
         List<Screw> filteredScrews = filterScrews(screws, screw -> screw.getName().equals("plastmo bundskruer 200 stk"));
-        TreeMap<Integer, RoofTile> roofTileMap = new TreeMap<>();
-        int amountOfTiles = 0
+        int amountOfTiles = 0;
         for (RoofTile roofTile : roofTiles)
         {
             amountOfTiles = (int) Math.ceil((double) carport.getLength() / roofTile.getWidth());
@@ -200,15 +199,18 @@ public class OrderService {
             }
         }
 
-        OrderItem orderItem = new OrderItem(filteredScrews.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfScrews, price, task.getTask());
         orderItem.setMaterial(filteredScrews.get(0));
         return orderItem;
     }
 
     private static OrderItem getMetalBand(List<Fitting> fittings, OrderItemTask task){
         List<Fitting> filteredFittings = filterFittings(fittings, fitting -> fitting.getName().equals("hulbånd"));
-        double amountOfMetalBand = 7.25;
-        double totalAmountOfMetalBand = amountOfMetalBand * 2;
+        double a = 5.30;
+        double b = 4.95;
+        double c = (a * a) + (b * b);
+        double amountOfMetalBand = Math.sqrt(c);
+        int totalAmountOfMetalBand = (int) Math.ceil(amountOfMetalBand * 2);
         double price = 0;
         List<Fitting> metalBand = new ArrayList<>();
         price = filteredFittings.get(0).getPrice();
@@ -216,7 +218,7 @@ public class OrderService {
         {
             metalBand.add(filteredFitting);
         }
-        OrderItem orderItem = new OrderItem(filteredFittings.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(totalAmountOfMetalBand , price, task.getTask());
         orderItem.setMaterial(filteredFittings.get(0));
         return orderItem;
     }
