@@ -143,19 +143,19 @@ public class OrderService {
     }
 
     private static List<OrderItem> getWaterBoard(int target, List<Wood> woods, OrderItemTask task) {
-        List<Wood> filteredWoods = filterWoods(woods, wood -> wood.isPressureTreated() && wood.getCategory().equals("brædt") && wood.getWidth() == 100);
+        List<Wood> filteredWoods = filterWoods(woods, wood -> wood.isPressureTreated() && wood.getCategory().equals("brædt") && wood.getWidthDouble() == 100);
         return getShedSupports(target, filteredWoods, task);
     }
 
     private static OrderItem getRoofTiles(Carport carport, List<RoofTile> roofTiles, OrderItemTask task) {
         TreeMap<Integer, RoofTile> roofTileMap = new TreeMap<>();
         for (RoofTile roofTile : roofTiles) {
-            int tilesRequired = (int) Math.ceil((double) carport.getLength() / roofTile.getWidth());
-            int coverage = tilesRequired * roofTile.getLength() * roofTile.getWidth();
+            int tilesRequired = (int) Math.ceil((double) carport.getLength() / roofTile.getWidthInt());
+            int coverage = tilesRequired * roofTile.getLength() * roofTile.getWidthInt();
             roofTileMap.put(coverage, roofTile);
         }
         RoofTile bestRoofTile = roofTileMap.firstEntry().getValue();
-        int tilesRequired = (int) Math.ceil((double) carport.getLength() / bestRoofTile.getWidth());
+        int tilesRequired = (int) Math.ceil((double) carport.getLength() / bestRoofTile.getWidthInt());
         double totalPrice = tilesRequired * bestRoofTile.getPrice();
         OrderItem orderItem = new OrderItem(tilesRequired, totalPrice, task.getTask());
         orderItem.setMaterial(bestRoofTile);
@@ -258,7 +258,7 @@ public class OrderService {
         return orderItem;
     }
 
-    private static List<OrderItem> getSterns(int target, List<Wood> woods, OrderItemTask task) {
+    public static List<OrderItem> getSterns(int target, List<Wood> woods, OrderItemTask task) {
         List<Wood> filteredWoods = filterWoods(woods, wood ->
                 wood.isPressureTreated() && wood.getCategory().equals("brædt")
         );
@@ -303,7 +303,7 @@ public class OrderService {
             }
 
             for (Wood wood2 : woods) {
-                if (wood2.getHeight() == wood.getHeight() && wood2.getWidth() == wood.getWidth()) {
+                if (wood2.getHeight() == wood.getHeight() && wood2.getWidthDouble() == wood.getWidthDouble()) {
                     int remaining = target - wood.getLength();
                     List<Wood> woodCombination = new ArrayList<>();
 
