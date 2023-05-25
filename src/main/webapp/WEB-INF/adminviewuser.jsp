@@ -17,8 +17,6 @@
                 <div class="box">
                     <br>
                     Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
-
-
                     <br>
                     Email: ${requestScope.user.email}
                     <br>

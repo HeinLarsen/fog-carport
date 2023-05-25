@@ -8,44 +8,54 @@
 <jsp:attribute name="header">
          Order Menu
     </jsp:attribute>
+
     <jsp:body>
-        <c:forEach items="${requestScope.users}" var="user">
+
+        <div class="mt-5 align-center griddy">
             <div class="box">
+                <h2>Stykliste:</h2>
+
+                    ${requestScope.order.getOrderItems()}
+
+            </div>
+
+
+            <div class="box">
+                <h2>Bruger info:</h2>
                 <br>
-                <t2>Bruger info:</t2>
+                Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
                 <br>
-                Navn: ${user.firstName} ${user.lastName}
+                Email: ${requestScope.user.email}
                 <br>
-                Email: ${user.email}
+                Telefon nummer: ${requestScope.user.phoneNumber}
                 <br>
-                Telefon nummer: ${user.phoneNumber}
+                Adresse: ${requestScope.user.address}
                 <br>
-                Adresse: ${user.address}
+                Postnummer: ${requestScope.user.zip}
                 <br>
-                Postnummer: ${user.zip}
-                <br>
-                Medlemskab: ${user.membership}
+                Medlemskab: ${requestScope.user.membershipId}
                 <br/>
-            </div>
-        </c:forEach>
 
-        <c:forEach items="${requestScope.orders}" var="order">
-            <t2>Stykliste:<t2/>
-
-            <div class="box">
-                    ${order.getOrderItems()}
             </div>
 
             <div class="box">
-                    ${order.getOrderItems()}
-            </div>
-        </c:forEach>
+                <h2>Kontrolpanel:</h2>
+                <button type="submit">Godkend</button>
+                <button type="submit">Annuller</button>
+                <button type="submit">Slet ordre</button>
 
-        <div class="box">
-        <button type="submit">Godkend</button>
-        <button type="submit">Annuller</button>
-        <button type="submit">Slet ordre</button>
+            </div>
+
+            <div class="box">
+                <h2>Pris: </h2>
+
+            </div>
+
+            <div class="box">
+                <h2>Filer: </h2>
+            </div>
         </div>
+
 
     </jsp:body>
 </t:pagetemplate>
