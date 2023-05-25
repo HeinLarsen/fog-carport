@@ -10,10 +10,12 @@
     </jsp:attribute>
 
     <jsp:body>
+
+        <div class="gridbox">
         <div class="griddy mt-5 align-center">
             <div class="box">
                 <h2>Bruger info:</h2>
-                <div class="box kunde">
+                <div class="box">
                     <br>
                     Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
 
@@ -70,7 +72,7 @@
             </div>
             </c:forEach>
         </div>
-
+        </div>
     </jsp:body>
 
 </t:pagetemplate>

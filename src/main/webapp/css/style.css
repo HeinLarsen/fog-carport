@@ -59,11 +59,17 @@ padding-left: 3%;
 /* stylling for login */
 .login{
     margin-top: 3%;
-    padding-left: 5%;
 }
 
 .btn{
     margin-left: 20%;
+}
+
+.signupKnap{
+    padding-left: 10%;
+}
+.d-inline{
+    padding-left: 10%;
 }
 
 /* styling for admin homepage */
@@ -85,7 +91,8 @@ padding-left: 3%;
 
 /* styling for admin homepage */
 
-.temp{
+.gridbox{
+    text-align: center;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
