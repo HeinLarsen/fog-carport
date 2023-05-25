@@ -170,8 +170,6 @@ public class OrdreServiceTest {
 
 
 
-
-
     @Test
     public void testCalculateWoodWaste() {
         // Create a sample list of Wood objects
