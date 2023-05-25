@@ -10,7 +10,6 @@
     </jsp:attribute>
 
     <jsp:body>
-
     <div class="griddy">
         <div class="box homepage_grid_box">
         <t2>Kunde liste:</t2>
@@ -70,8 +69,7 @@
                 </c:forEach>
             </table>
         </div>
-
-
+</div>
     </jsp:body>
 
 </t:pagetemplate>
