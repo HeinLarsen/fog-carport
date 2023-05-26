@@ -2,6 +2,7 @@ package dat.backend.model.persistence;
 
 import dat.backend.model.entities.Order;
 import dat.backend.model.entities.Status;
+import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
 import java.sql.*;
@@ -136,20 +137,31 @@ public class OrderMapper {
         return orders;
     }
 
-   protected static void insertorder(int id, int userId, double length, double width, boolean shed, ConnectionPool connectionPool) throws DatabaseException{
+   protected static int insertorder(int id, int userId, double length, double width, boolean shed, ConnectionPool connectionPool) throws DatabaseException{
         String sql = "insert into `order` (id, length, width, shed, user_id) values (?, ?, ?, ?)";
         try(Connection connection = connectionPool.getConnection()) {
-            try(PreparedStatement ps = connection.prepareStatement(sql)) {
+            try(PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, id);
                 ps.setDouble(2, length);
                 ps.setDouble(3, width);
                 ps.setBoolean(4, shed);
                 ps.setInt(5, userId);
-                ps.executeUpdate();
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected != 1) {
+                    throw new DatabaseException("No order with id = " + id + " found in database");
+                }
+                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        id = generatedKeys.getInt(1);
+                    } else {
+                        throw new DatabaseException("Failed to get ID for created order");
+                    }
+                }
             }
-        } catch (SQLException e) {
-            throw new DatabaseException(e, "Error creating order");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DatabaseException(ex, "Could not create user in database");
         }
-
+       return id;
    }
 }

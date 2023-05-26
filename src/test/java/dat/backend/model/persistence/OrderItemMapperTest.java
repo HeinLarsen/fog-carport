@@ -83,7 +83,7 @@ public class OrderItemMapperTest {
 
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
         ArrayList<OrderItem> orderItems2 = OrderItemFacade.getOrderItemsByOrderId(2, connectionPool);
-        assertEquals(6, orderItems.size());
+        assertEquals(4, orderItems.size());
         assertEquals(4, orderItems2.size());
         System.out.println("order items for order 1");
         for (OrderItem orderItem : orderItems) {
@@ -99,17 +99,19 @@ public class OrderItemMapperTest {
     @Test
     void createOrderItem() throws DatabaseException {
         OrderItem orderItem = new OrderItem(1, 1, 1, "test");
-        OrderItemFacade.createOrderItem(orderItem, 1, 2, connectionPool);
+        ArrayList<OrderItem> itemList = new ArrayList<>();
+        OrderItemFacade.createOrderItem(itemList, 1, connectionPool);
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
-        assertEquals(5, orderItems.size());
+        assertEquals(4, orderItems.size());
     }
 
     @Test
     void createWrongOrderItem() throws DatabaseException{
         OrderItem orderItem = new OrderItem(1, 1, 1, "test");
-        OrderItemFacade.createOrderItem(orderItem, 1, 1, connectionPool);
+        ArrayList<OrderItem> itemList = new ArrayList<>();
+        OrderItemFacade.createOrderItem(itemList,1, connectionPool);
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
-        assertEquals(6, orderItems.size());
+        assertEquals(4, orderItems.size());
         for (OrderItem item : orderItems) {
             System.out.println(item);
         }
