@@ -178,6 +178,28 @@ public class OrdreServiceTest {
         assertEquals(20, woodWaste);
     }
 
+
+
+
+    @Test
+    void calcWoodWasteTest2() {
+        List<Wood> woods = new ArrayList<>();
+        woods.add(new Wood(1, "testbrædt1", 270, 174.43, "stk", "brædt", 200, 25, true));  // Wood with length 10
+        woods.add(new Wood(2, "testbrædt2", 240, 262.03, "stk", "brædt", 200, 25, true));  // Wood with length 20
+        woods.add(new Wood(3, "testbrædt3", 360, 108.9, "stk", "brædt", 125, 25, true));  // Wood with length 30
+        woods.add(new Wood(1, "testbrædt4", 480, 174.43, "stk", "brædt", 200, 25, true));  // Wood with length 10
+        woods.add(new Wood(2, "testbrædt5", 540, 262.03, "stk", "brædt", 200, 25, true));  // Wood with length 20
+        OrderItemTask testTask = OrderItemTask.STERN_UPPER_SIDES;
+        int targetLength = 750;
+
+        List<OrderItem> orderItemList = getSterns(targetLength, woods, testTask);
+        Assertions.assertNotNull(orderItemList);
+        for (OrderItem orderItem : orderItemList) {
+            System.out.println(orderItem);
+        }
+
+        calculateWoodWaste(targetLength, woods);
+    }
 }
 
 
