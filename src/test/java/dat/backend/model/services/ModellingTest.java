@@ -1,8 +1,6 @@
 package dat.backend.model.services;
 
-import dat.backend.model.entities.Carport;
-import dat.backend.model.entities.OrderItem;
-import dat.backend.model.entities.Shed;
+import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -60,23 +59,24 @@ public class ModellingTest {
 
                 stmt.execute("insert into carport_test.category(category) values ('brædt'), ('lægte'), ('reglar'), ('spærtræ'), ('stolpe');");
 
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (360, 200, 25, 1, 1, 1, 174.43);");
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (540, 200, 25, 1, 1, 1, 262.03);");
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (360, 125, 25, 1, 1, 1, 108.90);");
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (540, 125, 25, 1, 1, 1, 163.35);");
 
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (420, 73, 38, 0, 2, 1, 120.13);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (360, 20.0, 2.5, 1, 1, 1, 174.43);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (540, 20.0, 2.5, 1, 1, 1, 262.03);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (360, 12.5, 2.5, 1, 1, 1, 108.90);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (540, 12.5, 25, 1, 1, 1, 163.35);");
 
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (270, 95, 45, 0, 3, 1, 5628);");
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (240, 95, 45, 0, 3, 1, 56.28);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (420, 7.3, 3.8, 0, 2, 1, 120.13);");
 
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (480, 195, 45, 0, 4, 1, 205.44);");
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (600, 195, 45, 0, 4, 1, 257.70);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (270, 9.5, 4.5, 0, 3, 1, 5628);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (240, 9.5, 4.5, 0, 3, 1, 56.28);");
 
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (300, 97, 97, 1, 5, 1, 134.85);");
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (210, 100, 19, 1, 1, 1, 20.16);");
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (540, 100, 19, 1, 1, 1, 51.84);");
-                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (360, 100, 19, 1, 1, 1, 34.56);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (480, 19.5, 4.5, 0, 4, 1, 205.44);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (600, 19.5, 4.5, 0, 4, 1, 257.70);");
+
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (300, 9.7, 97, 1, 5, 1, 134.85);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (210, 10.0, 1.9, 1, 1, 1, 20.16);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (540, 10.0, 1.9, 1, 1, 1, 51.84);");
+                stmt.execute("INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`) VALUES (360, 10.0, 1.9, 1, 1, 1, 34.56);");
 
                 stmt.execute("INSERT INTO `carport_test`.`roof_tile` (`name`, `length`, `width`, `unit`, `price`) VALUES ('Plastmo Ecolite blåtonet', 600, 109, 1, 633.00);");
                 stmt.execute("INSERT INTO `carport_test`.`roof_tile` (`name`, `length`, `width`, `unit`, `price`) VALUES ('Plastmo Ecolite blåtonet', 360, 109, 1, 266);");
@@ -113,8 +113,12 @@ public class ModellingTest {
         Carport carport = new Carport(780, 600, new Shed(210, 530));
 //        Carport carport = new Carport(480, 300);
 //        Carport carport = new Carport(780, 600);
-        List<OrderItem> list = OrderService.generateOrder(carport, connectionPool);
+        ArrayList<OrderItem> list = (ArrayList<OrderItem>) OrderService.generateOrder(carport, connectionPool);
+        java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-23 10:10:10.0");
 
-        Modelling.generate3D(list);
+        Order order = new Order(1, timestamp, Status.APPROVED, 780, 600, true, 210, 530);
+        order.addOrderItems(list);
+
+        Modelling.generateFiles(order);
     }
 }

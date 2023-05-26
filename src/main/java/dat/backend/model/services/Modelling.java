@@ -1,8 +1,6 @@
 package dat.backend.model.services;
 
-import dat.backend.model.entities.OrderItem;
-import dat.backend.model.entities.Spot;
-import dat.backend.model.entities.Wood;
+import dat.backend.model.entities.*;
 import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
@@ -10,11 +8,55 @@ import org.abstractica.javacsg.JavaCSGFactory;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Modelling {
+    private static JavaCSG csg = JavaCSGFactory.createDefault();;
 
 
-    public static void generate3D(List<OrderItem> orderItems) {
+    public static void generateFiles(Order order) {
+        generateBuildList(order);
+
+//        generateMaterialList(order.getOrderItems());
+
+    }
+
+    private static void generateBuildList(Order order) {
+        var shape = csg.box3D(0,0, 0, false);
+        generateCarportPoles(getItem(order.getOrderItems(), item -> item.getDescription().equals(OrderItemTask.POLE.getTask())));
+
+
+    }
+
+    private static Geometry3D generateCarportPoles(OrderItem item) {
+        int cutOff = 90;
+        Wood wood = (Wood) item.getMaterial();
+        Geometry3D pole = csg.box3D(wood.getHeight(), wood.getWidth(), wood.getLength() - cutOff, false);
+        Geometry3D cutter = csg.box3D(wood.getHeight()/2, wood.getWidth(), 45, false);
+//        csg.translate3D(0, 0, cutOff/2 + 45);
+//        var shape = csg.union3D(pole, cutter);
+        csg.view(pole);
+        return pole;
+
+    }
+
+    private static void generateSterns(List<OrderItem> items) {
+
+    }
+
+    private static OrderItem getItem(List<OrderItem> orderItems, Predicate<OrderItem> predicate) {
+        for (OrderItem orderItem : orderItems) {
+            if (predicate.test(orderItem)) {
+                return orderItem;
+            }
+        }
+        return null;
+    }
+
+
+
+
+    public static void generateMaterialList(List<OrderItem> orderItems) {
         // get max length;
         int maxSpotLength = 0;
         for (OrderItem orderItem : orderItems) {
@@ -97,6 +139,7 @@ public class Modelling {
     private static int cmToMm(int cm) {
         return cm * 10;
     }
+
 }
 
 
