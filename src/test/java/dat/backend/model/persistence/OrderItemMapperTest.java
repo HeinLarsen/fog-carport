@@ -100,7 +100,7 @@ public class OrderItemMapperTest {
     void createOrderItem() throws DatabaseException {
         OrderItem orderItem = new OrderItem(1, 1, 1, "test");
         ArrayList<OrderItem> itemList = new ArrayList<>();
-        OrderItemFacade.createOrderItem(orderItem, itemList, 1, connectionPool);
+        OrderItemFacade.createOrderItem(itemList, 1, connectionPool);
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
         assertEquals(4, orderItems.size());
     }
@@ -109,7 +109,7 @@ public class OrderItemMapperTest {
     void createWrongOrderItem() throws DatabaseException{
         OrderItem orderItem = new OrderItem(1, 1, 1, "test");
         ArrayList<OrderItem> itemList = new ArrayList<>();
-        OrderItemFacade.createOrderItem(orderItem, itemList,1, connectionPool);
+        OrderItemFacade.createOrderItem(itemList,1, connectionPool);
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
         assertEquals(4, orderItems.size());
         for (OrderItem item : orderItems) {
