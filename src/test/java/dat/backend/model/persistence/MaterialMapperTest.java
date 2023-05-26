@@ -166,7 +166,7 @@ public class MaterialMapperTest {
     @Test
     void getScrewList() throws DatabaseException {
         ArrayList<Screw> screwList = MaterialFacade.getAllScrews(connectionPool);
-        assertEquals(2, screwList.size());
+        assertEquals(6, screwList.size());
     }
 
     @Test
@@ -178,13 +178,13 @@ public class MaterialMapperTest {
     @Test
     void getFittingList() throws DatabaseException {
         ArrayList<Fitting> fittingList = MaterialFacade.getAllFittings(connectionPool);
-        assertEquals(2, fittingList.size());
+        assertEquals(7, fittingList.size());
     }
 
     @Test
     void getAllMaterials() throws DatabaseException {
         ArrayList<AMaterial> materialList = MaterialFacade.getAllMaterials(connectionPool);
-        assertEquals(19, materialList.size());
+        assertEquals(28, materialList.size());
     }
 
 
