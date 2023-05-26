@@ -31,40 +31,29 @@
 
                 </div>
             </div>
-
-            <div class="box">
-                <h2>Order:</h2>
-
-                <c:forEach items="${requestScope.orders}" var="order">
-                <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th class="sticky-header">ID</th>
-                        <th class="sticky-header">Bestilling</th>
-                        <th class="sticky-header">Oprettelses dato</th>
-                        <th class="sticky-header">Status</th>
-                        <th class="sticky-header">Pris</th>
-                    </tr>
-
-                    <td>
-                        <p>${order.orderID}</p>
-                    <td>
-                        <p>${order.length}</p>
-                        <p>${order.width}</p>
-                        <p>${order.shed}</p>
-                    <td>
-                        <p>${order.status}</p>
-                    <td>
-                        <p>${order.created}</p>
-                    <td>
-                        <p>${order.totalPrice}kr,-</p>
-                    </td>
-
-                    <a href="showuserinfosorder?id=${order.orderID}" value="${order.orderID}"
-                       class="btn btn-primary">Redigere</a>
-
-                    </thead>
-                </table>
+            <div class="box homepage_grid_box box_width">
+                <h3>Order liste:</h3>
+                <div class="scrollable-table">
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th class="sticky-header">ID</th>
+                            <th class="sticky-header">Order</th>
+                            <th class="sticky-header">Oprettelses dato</th>
+                            <th class="sticky-header">Status</th>
+                            <th class="sticky-header">Kunde</th>
+                        </tr>
+                        <c:forEach items="${requestScope.ordersList}" var="order">
+                            <tr onclick="location.href='admineditorder?id=${order.orderID}'">
+                                <td>${order.orderID}</td>
+                                <td>${order.length} cm x ${order.width} cm, shed: ${order.shed}</td>
+                                <td>${order.created}</td>
+                                <td>${order.status}</td>
+                                <td>${user.firstName} ${user.lastName}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
             </div>
             </c:forEach>
         </div>

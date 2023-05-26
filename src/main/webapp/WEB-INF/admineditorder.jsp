@@ -61,6 +61,7 @@
                             <th class="sticky-header"></th>
                             <th class="sticky-header"></th>
                             <th class="sticky-header"></th>
+
                             <c:forEach items="${requestScope.orderItemScrew}" var="screw">
                             <td>${screw.diameter}</td>
                             <td>${screw.name}</td>
@@ -76,17 +77,14 @@
                             <th class="sticky-header"></th>
                             <th class="sticky-header"></th>
                             <th class="sticky-header"></th>
+
                             <c:forEach items="${requestScope.orderItemFitting}" var="fitting">
-                            <td>${fitting.name}</td>
-                            <td>${fitting.width} ${fitting.hight}</td>
-                            <td>${fitting.diameter}</td>
-                            <td>${fitting.amount}</td>
-                            <td>${fitting.description}</td>
+                                <td>${fitting.name}</td>
+                                <td>${fitting.width} ${fitting.hight}</td>
+                                <td>${fitting.diameter}</td>
+                                <td>${fitting.amount}</td>
+                                <td>${fitting.description}</td>
                             </c:forEach>
-
-                        <tr>
-
-
                         </tr>
 
                     </table>
