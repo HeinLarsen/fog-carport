@@ -134,14 +134,14 @@ public class OrderItemMapper {
     }
 
     protected static void createOrderItemWood(OrderItem orderItem, int orderId, int woodId, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "insert into order_item_wood (quantity, price, order_id, description, item_id) values (?, ?, ?, ?, ?)";
+        String sql = "insert into order_item_wood (order_id, quantity, description, price, item_id) values (?, ?, ?, ?, ?)";
 
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1, orderItem.getQuantity());
-                ps.setDouble(2, orderItem.getPrice());
-                ps.setInt(3, orderId);
-                ps.setString(4, orderItem.getDescription());
+                ps.setInt(1, orderId);
+                ps.setInt(2, orderItem.getQuantity());
+                ps.setString(3, orderItem.getDescription());
+                ps.setDouble(4, orderItem.getPrice());
                 ps.setInt(5, woodId);
                 ps.executeUpdate();
             }
@@ -150,4 +150,61 @@ public class OrderItemMapper {
             throw new DatabaseException(e, "Error creating order item");
         }
     }
+
+    protected static void createOrderItemScrew(OrderItem orderItem, int orderId, int screwId, ConnectionPool connectionPool) throws DatabaseException
+    {
+        String sql = "insert into order_item_screw (quantity, price, order_id, description, item_id) values (?, ?, ?, ?, ?)";
+
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ps.setInt(1, orderId);
+                ps.setInt(2, orderItem.getQuantity());
+                ps.setString(3, orderItem.getDescription());
+                ps.setDouble(4, orderItem.getPrice());
+                ps.setInt(5, screwId);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new DatabaseException(e, "Error creating order item");
+        }
+    }
+        protected static void createOrderItemFitting(OrderItem orderItem, int orderId, int fittingId, ConnectionPool connectionPool) throws DatabaseException {
+            String sql = "insert into order_item_fitting (quantity, price, order_id, description, item_id) values (?, ?, ?, ?, ?)";
+
+            try(Connection connection = connectionPool.getConnection()) {
+                try(PreparedStatement ps = connection.prepareStatement(sql)) {
+                    ps.setInt(1, orderId);
+                    ps.setInt(2, orderItem.getQuantity());
+                    ps.setString(3, orderItem.getDescription());
+                    ps.setDouble(4, orderItem.getPrice());
+                    ps.setInt(5, fittingId);
+                    ps.executeUpdate();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new DatabaseException(e, "Error creating order item");
+            }
+        }
+    protected static void createOrderItemRoofTile(OrderItem orderItem, int orderId, int rooftileId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "insert into order_item_roof_tile (quantity, price, order_id, description, item_id) values (?, ?, ?, ?, ?)";
+
+        try(Connection connection = connectionPool.getConnection()) {
+            try(PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, orderId);
+                ps.setInt(2, orderItem.getQuantity());
+                ps.setString(3, orderItem.getDescription());
+                ps.setDouble(4, orderItem.getPrice());
+                ps.setInt(5, rooftileId);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException(e, "Error creating order item");
+        }
+    }
 }
+

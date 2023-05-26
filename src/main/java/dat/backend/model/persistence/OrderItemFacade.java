@@ -16,6 +16,8 @@ public class OrderItemFacade {
     }
 
     public static void createOrderItem(OrderItem orderItem, int orderId, int woodId, ConnectionPool connectionPool) throws DatabaseException {
+        ArrayList<OrderItem> orderItems;
         OrderItemMapper.createOrderItemWood(orderItem, orderId, woodId, connectionPool);
+
     }
 }
