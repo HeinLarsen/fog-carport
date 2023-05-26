@@ -4,8 +4,8 @@ public class Wood extends ExtraDimensionMaterial{
     private String category;
     private boolean isPressureTreated;
 
-    public Wood(String name, int length, double price, String unit, String category, int width, int height, boolean isPressureTreated) {
-        super(name, length, price, unit, width, height);
+    public Wood(int id, String name, int length, double price, String unit, String category, double width, double height, boolean isPressureTreated) {
+        super(id, name, length, price, unit, width, height);
         this.category = category;
         this.isPressureTreated = isPressureTreated;
     }
@@ -16,5 +16,13 @@ public class Wood extends ExtraDimensionMaterial{
 
     public boolean isPressureTreated() {
         return isPressureTreated;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Wood{" +
+                "category='" + category + '\'' +
+                ", isPressureTreated=" + isPressureTreated +
+                '}';
     }
 }

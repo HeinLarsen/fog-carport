@@ -135,4 +135,21 @@ public class OrderMapper {
         }
         return orders;
     }
+
+   protected static void insertorder(int id, int userId, double length, double width, boolean shed, ConnectionPool connectionPool) throws DatabaseException{
+        String sql = "insert into `order` (id, length, width, shed, user_id) values (?, ?, ?, ?)";
+        try(Connection connection = connectionPool.getConnection()) {
+            try(PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ps.setDouble(2, length);
+                ps.setDouble(3, width);
+                ps.setBoolean(4, shed);
+                ps.setInt(5, userId);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e, "Error creating order");
+        }
+
+   }
 }

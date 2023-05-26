@@ -13,12 +13,13 @@ import java.util.ArrayList;
 
 public class MaterialMapper {
     protected static ArrayList<Wood> getAllWood(ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select wood.name, wood.height, wood.width, wood.length, wood.is_pressure_treated, wood.price, c.category, u.unit from wood join category c on wood.category = c.id join unit u on wood.unit = u.id";
+        String sql = "select wood.id, wood.name, wood.height, wood.width, wood.length, wood.is_pressure_treated, wood.price, c.category, u.unit from wood join category c on wood.category = c.id join unit u on wood.unit = u.id";
         ArrayList<Wood> wood = new ArrayList<>();
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {
+                    int id = rs.getInt("id");
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
                     String category = rs.getString("category");
@@ -27,7 +28,7 @@ public class MaterialMapper {
                     int height = rs.getInt("height");
                     double price = rs.getInt("price");
                     boolean isPressureTreated = rs.getBoolean("is_pressure_treated");
-                    wood.add(new Wood(name, length, price, unit, category, width, height, isPressureTreated));
+                    wood.add(new Wood(id, name, length, price, unit, category, width, height, isPressureTreated));
                 }
             }
         } catch (SQLException e) {
@@ -37,18 +38,19 @@ public class MaterialMapper {
     }
 
     protected static ArrayList<Screw> getAllScrews(ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select screw.name, screw.length, screw.price, screw.diameter, u.unit from screw join unit u on screw.unit = u.id";
+        String sql = "select screw.id, screw.name, screw.length, screw.price, screw.diameter, u.unit from screw join unit u on screw.unit = u.id";
         ArrayList<Screw> screws = new ArrayList<>();
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {
+                    int id = rs.getInt("id");
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
                     int length = rs.getInt("length");
                     double price = rs.getInt("price");
                     int diameter = rs.getInt("diameter");
-                    screws.add(new Screw(name, length, price, unit, diameter));
+                    screws.add(new Screw(id, name, length, price, unit, diameter));
                 }
             }
         } catch(SQLException e) {
@@ -58,18 +60,19 @@ public class MaterialMapper {
     }
 
     protected static ArrayList<RoofTile> getAllRoofTiles(ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select roof_tile.name, roof_tile.length, roof_tile.price, roof_tile.width, u.unit from roof_tile join unit u on roof_tile.unit = u.id";
+        String sql = "select roof_tile.id, roof_tile.name, roof_tile.length, roof_tile.price, roof_tile.width, u.unit from roof_tile join unit u on roof_tile.unit = u.id";
         ArrayList<RoofTile> roofTiles = new ArrayList<>();
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {
+                    int id = rs.getInt("id");
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
                     double price = rs.getInt("price");
                     int width = rs.getInt("width");
                     int length = rs.getInt("length");
-                    roofTiles.add(new RoofTile(name, length, price, unit, width));
+                    roofTiles.add(new RoofTile(id, name, length, price, unit, width));
                 }
             }
         } catch(SQLException e) {
@@ -79,19 +82,20 @@ public class MaterialMapper {
     }
 
     protected static ArrayList<Fitting> getAllFittings(ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select fitting.name, fitting.length, fitting.height, fitting.price, fitting.width, u.unit from fitting join unit u on fitting.unit = u.id";
+        String sql = "select fitting.id, fitting.name, fitting.length, fitting.height, fitting.price, fitting.width, u.unit from fitting join unit u on fitting.unit = u.id";
         ArrayList<Fitting> fittings = new ArrayList<>();
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {
+                    int id = rs.getInt("id");
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
                     double price = rs.getInt("price");
                     int width = rs.getInt("width");
                     int length = rs.getInt("length");
                     int height = rs.getInt("height");
-                    fittings.add(new Fitting(name, length, price, unit, width, height));
+                    fittings.add(new Fitting(id, name, length, price, unit, width, height));
                 }
             }
         } catch(SQLException e) {
@@ -116,7 +120,7 @@ public class MaterialMapper {
                     int height = rs.getInt("height");
                     double price = rs.getInt("price");
                     boolean isPressureTreated = rs.getBoolean("is_pressure_treated");
-                    wood = new Wood(name, length, price, unit, category, width, height, isPressureTreated);
+                    wood = new Wood(id, name, length, price, unit, category, width, height, isPressureTreated);
                 }
             }
         } catch (SQLException e) {
@@ -139,7 +143,7 @@ public class MaterialMapper {
                     int length = rs.getInt("length");
                     double price = rs.getInt("price");
                     int diameter = rs.getInt("diameter");
-                    screw = new Screw(name, length, price, unit, diameter);
+                    screw = new Screw(id, name, length, price, unit, diameter);
                 }
             }
         } catch(SQLException e) {
@@ -161,7 +165,7 @@ public class MaterialMapper {
                     double price = rs.getInt("price");
                     int width = rs.getInt("width");
                     int length = rs.getInt("length");
-                    roofTile = new RoofTile(name, length, price, unit, width);
+                    roofTile = new RoofTile(id, name, length, price, unit, width);
                 }
             }
         } catch(SQLException e) {
@@ -184,7 +188,7 @@ public class MaterialMapper {
                     int width = rs.getInt("width");
                     int length = rs.getInt("length");
                     int height = rs.getInt("height");
-                    fitting = new Fitting(name, length, price, unit, width, height);
+                    fitting = new Fitting(id, name, length, price, unit, width, height);
                 }
             }
         } catch(SQLException e) {
