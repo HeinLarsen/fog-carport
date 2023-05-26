@@ -17,26 +17,27 @@ public class OrderItemFacade
         return orderItems;
     }
 
-    public static void createOrderItem(OrderItem orderItem, ArrayList<OrderItem> orderItems, int orderId, ConnectionPool connectionPool) throws DatabaseException
+    public static void createOrderItem( ArrayList<OrderItem> orderItems, int orderId, ConnectionPool connectionPool) throws DatabaseException
     {
         for (OrderItem item : orderItems)
         {
             int itemId = item.getMaterial().getId();
             if (item.getMaterial() instanceof Wood)
             {
-                OrderItemMapper.createOrderItemWood(orderItem, orderItems, orderId, itemId, connectionPool);
+                OrderItemMapper.createOrderItemWood(item, orderId, itemId, connectionPool);
             } else if (item.getMaterial() instanceof Screw)
             {
-                OrderItemMapper.createOrderItemScrew(orderItem ,orderItems, orderId, itemId, connectionPool);
+                OrderItemMapper.createOrderItemScrew(item, orderId, itemId, connectionPool);
             } else if (item.getMaterial() instanceof Fitting)
             {
-                OrderItemMapper.createOrderItemFitting(orderItem, orderItems, orderId, itemId, connectionPool);
+                OrderItemMapper.createOrderItemFitting(item, orderId, itemId, connectionPool);
             } else if (item.getMaterial() instanceof RoofTile)
             {
-                OrderItemMapper.createOrderItemRoofTile(orderItem, orderItems, orderId, itemId, connectionPool);
+                OrderItemMapper.createOrderItemRoofTile(item, orderId, itemId, connectionPool);
             }
 
 
         }
+
     }
 }
