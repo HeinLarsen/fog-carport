@@ -3,7 +3,6 @@ package dat.backend.model.persistence;
 import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -133,7 +132,7 @@ public class OrderItemMapper {
         return orderItems;
     }
 
-    protected static void createOrderItemWood(OrderItem orderItem, int orderId, int woodId, ConnectionPool connectionPool) throws DatabaseException {
+    protected static void createOrderItemWood(OrderItem orderItem, ArrayList<OrderItem> orderItems, int orderId, int woodId, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "insert into order_item_wood (order_id, quantity, description, price, item_id) values (?, ?, ?, ?, ?)";
 
         try(Connection connection = connectionPool.getConnection()) {
@@ -151,7 +150,7 @@ public class OrderItemMapper {
         }
     }
 
-    protected static void createOrderItemScrew(OrderItem orderItem, int orderId, int screwId, ConnectionPool connectionPool) throws DatabaseException
+    protected static void createOrderItemScrew(OrderItem orderItem, ArrayList<OrderItem> orderItems, int orderId, int screwId, ConnectionPool connectionPool) throws DatabaseException
     {
         String sql = "insert into order_item_screw (quantity, price, order_id, description, item_id) values (?, ?, ?, ?, ?)";
 
@@ -172,13 +171,12 @@ public class OrderItemMapper {
             throw new DatabaseException(e, "Error creating order item");
         }
     }
-        protected static void createOrderItemFitting(OrderItem orderItem, int orderId, int fittingId, ConnectionPool connectionPool) throws DatabaseException {
+        protected static void createOrderItemFitting(OrderItem orderItem, ArrayList<OrderItem> orderItems, int orderId, int fittingId, ConnectionPool connectionPool) throws DatabaseException {
             String sql = "insert into order_item_fitting (quantity, price, order_id, description, item_id) values (?, ?, ?, ?, ?)";
-
             try(Connection connection = connectionPool.getConnection()) {
                 try(PreparedStatement ps = connection.prepareStatement(sql)) {
                     ps.setInt(1, orderId);
-                    ps.setInt(2, orderItem.getQuantity());
+                    ps.setDouble(2, orderItem.getPrice());
                     ps.setString(3, orderItem.getDescription());
                     ps.setDouble(4, orderItem.getPrice());
                     ps.setInt(5, fittingId);
@@ -189,7 +187,7 @@ public class OrderItemMapper {
                 throw new DatabaseException(e, "Error creating order item");
             }
         }
-    protected static void createOrderItemRoofTile(OrderItem orderItem, int orderId, int rooftileId, ConnectionPool connectionPool) throws DatabaseException {
+    protected static void createOrderItemRoofTile(OrderItem orderItem, ArrayList<OrderItem> orderItems, int orderId, int rooftileId, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "insert into order_item_roof_tile (quantity, price, order_id, description, item_id) values (?, ?, ?, ?, ?)";
 
         try(Connection connection = connectionPool.getConnection()) {
