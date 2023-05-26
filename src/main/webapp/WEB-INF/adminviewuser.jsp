@@ -10,30 +10,33 @@
     </jsp:attribute>
 
     <jsp:body>
-    <div class="griddy mt-5 align-center">
-        <div class="box">
-            <h2>Bruger info:</h2>
-            <c:forEach items="${requestScope.userinfo}" var="user">
-                <div class="box kunde">
+
+        <div class="mt-5 align-center griddy">
+            <div class="box">
+                <h2>Bruger info:</h2>
+                <div class="box">
                     <br>
-                    Navn: ${user.firstName} ${user.lastName}
+                    Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
+
+
                     <br>
-                    Email: ${user.email}
+                    Email: ${requestScope.user.email}
                     <br>
-                    Telefon nummer: ${user.phoneNumber}
+                    Telefon nummer: ${requestScope.user.phoneNumber}
                     <br>
-                    Adresse: ${user.address}
+                    Adresse: ${requestScope.user.address}
                     <br>
-                    Postnummer: ${user.zip}
+                    Postnummer: ${requestScope.user.zip}
                     <br>
-                    Medlemskab: ${user.membership}
+                    Medlemskab: ${requestScope.user.membershipId}
                     <br/>
+
                 </div>
-            </c:forEach>
-        </div>
+            </div>
 
             <div class="box">
                 <h2>Order:</h2>
+
                 <c:forEach items="${requestScope.orders}" var="order">
                 <table class="table table-striped table-bordered">
                     <thead>
@@ -60,14 +63,15 @@
                         <p>${order.totalPrice}kr,-</p>
                     </td>
 
-                    <a href="showusersorder?id=${order.orderID}" value="${order.orderID}"
+                    <a href="showuserinfosorder?id=${order.orderID}" value="${order.orderID}"
                        class="btn btn-primary">Redigere</a>
 
                     </thead>
                 </table>
             </div>
-        </c:forEach>
-    </div>
+            </c:forEach>
+        </div>
+        </div>
 
     </jsp:body>
 
