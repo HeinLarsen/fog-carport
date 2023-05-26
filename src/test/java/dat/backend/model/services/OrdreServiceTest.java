@@ -156,7 +156,7 @@ public class OrdreServiceTest {
 
 
     @Test
-    void calcWoodWasteTest2() {
+    void calcWoodWasteTest() {
         List<Wood> woods = new ArrayList<>();
         woods.add(new Wood(1, "testbrædt1", 270, 174.43, "stk", "brædt", 200, 25, true));  // Wood with length 10
         woods.add(new Wood(2, "testbrædt2", 240, 262.03, "stk", "brædt", 200, 25, true));  // Wood with length 20
