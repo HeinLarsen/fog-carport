@@ -39,12 +39,11 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Bestilt:</th>
-                        <th>Oprettelses dato</th>
-                        <th>Status</th>
-                        <th>Pris</th>
-                        <th>Se Ordre</th>
+                        <th class="sticky-header">ID</th>
+                        <th class="sticky-header">Bestilling</th>
+                        <th class="sticky-header">Oprettelses dato</th>
+                        <th class="sticky-header">Status</th>
+                        <th class="sticky-header">Pris</th>
                     </tr>
 
                     <td>
