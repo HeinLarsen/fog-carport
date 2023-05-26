@@ -6,10 +6,11 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-        <p class="align-center">Sign up</p>
+       Sign up
     </jsp:attribute>
 
     <jsp:body>
+
         <form class ="box signup_form" action="signup" method="post" >
             <div class="row justify-content-center mt-5">
 
