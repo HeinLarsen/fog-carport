@@ -128,7 +128,7 @@ public class MaterialMapperTest {
     @Test
     void getWoodList() throws DatabaseException {
         ArrayList<Wood> woodList = MaterialFacade.getAllWood(connectionPool);
-        assertEquals(2, woodList.size());
+        assertEquals(13, woodList.size());
     }
 
     @Test
@@ -170,7 +170,7 @@ public class MaterialMapperTest {
     @Test
     void getAllMaterials() throws DatabaseException {
         ArrayList<AMaterial> materialList = MaterialFacade.getAllMaterials(connectionPool);
-        assertEquals(8, materialList.size());
+        assertEquals(19, materialList.size());
     }
 
 
