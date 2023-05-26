@@ -64,7 +64,7 @@ public class OrderService {
         List<OrderItem> orderItems = new ArrayList<>();
 
         // Get and put sterns
-       /* orderItems.addAll(getSterns(carport.getLength(), woods, OrderItemTask.STERN_UPPER_SIDES));
+        orderItems.addAll(getSterns(carport.getLength(), woods, OrderItemTask.STERN_UPPER_SIDES));
         orderItems.addAll(getSterns(carport.getWidth(), woods, OrderItemTask.STERN_UPPER_ENDS));
         orderItems.addAll(getSterns(carport.getLength(), woods, OrderItemTask.STERN_LOWER_SIDES));
         orderItems.addAll(getSterns(carport.getWidth(), woods, OrderItemTask.STERN_LOWER_ENDS));
@@ -81,11 +81,11 @@ public class OrderService {
         // Get and put water board
         orderItems.addAll(getWaterBoard(carport.getLength(), woods, OrderItemTask.WATERBOARD_SIDES));
         orderItems.addAll(getWaterBoard(carport.getWidth(), woods, OrderItemTask.WATERBOARD_ENDS));
-        */
+
 
         // Get screws for roof tile
         orderItems.add(getRoofScrews(carport,screws,roofTiles, OrderItemTask.ROOF_TILE_SCREWS));
-/*
+
         // Get metalbands for spars
         orderItems.add(getMetalBand(fittings, OrderItemTask.CROSSWIND));
 
@@ -116,9 +116,6 @@ public class OrderService {
 
         // Get Angeled fittings
         orderItems.add(getAngleFittings(fittings, OrderItemTask.SHED_ANGLE_BRACKET));
-        */
-
-
 
 
 
