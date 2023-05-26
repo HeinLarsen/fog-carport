@@ -1,3 +1,19 @@
+alter table carport.order_item_fitting AUTO_INCREMENT = 0;
+alter table carport.order_item_wood AUTO_INCREMENT = 0;
+alter table carport.order_item_roof_tile AUTO_INCREMENT = 0;
+alter table carport.membership AUTO_INCREMENT = 0;
+alter table carport.category AUTO_INCREMENT = 0;
+alter table carport.order_item_screw AUTO_INCREMENT = 0;
+alter table carport.order AUTO_INCREMENT = 0;
+alter table carport.fitting AUTO_INCREMENT = 0;
+alter table carport.user AUTO_INCREMENT = 0;
+alter table carport.wood AUTO_INCREMENT = 0;
+alter table carport.roof_tile AUTO_INCREMENT = 0;
+alter table carport.screw AUTO_INCREMENT = 0;
+alter table carport.role AUTO_INCREMENT = 0;
+alter table carport.unit AUTO_INCREMENT = 0;
+
+
 -- unit;
 
 INSERT INTO `carport`.`unit` (`unit`)
@@ -46,39 +62,49 @@ VALUES ('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200),
        ('memberuser', 'user', 'user', '1234', 'lærkevej 41', 1234, 1, 2, 2800),
        ('workeruser', 'user', '1234', '1234', 'æøåvej', 1234, 1, 3, 3200);
 
+       -- category;
+
+       insert into carport_test.category(category)
+       values ('brædt'),
+              ('lægte'),
+              ('reglar'),
+              ('spærtræ'),
+              ('stolpe');
+
+
 
 -- material;
 
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (360, 200, 25, 1, 1, 1, 174.43);
+VALUES (360, 20.0, 2.5, 1, 1, 1, 174.43);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (540, 200, 25, 1, 1, 1, 262.03);
+VALUES (540, 20.0, 2.5, 1, 1, 1, 262.03);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (360, 125, 25, 1, 1, 1, 108.90);
+VALUES (360, 12.5, 2.5, 1, 1, 1, 108.90);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (540, 125, 25, 1, 1, 1, 163.35);
+VALUES (540, 12.5, 2.5, 1, 1, 1, 163.35);
 
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (420, 73, 38, 0, 2, 1, 120.13);
+VALUES (420, 7.3, 3.8, 0, 2, 1, 120.13);
 
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (270, 95, 45, 0, 3, 1, 5628);
+VALUES (270, 9.5, 4.5, 0, 3, 1, 5628);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (240, 95, 45, 0, 3, 1, 56.28);
+VALUES (240, 9.5, 4.5, 0, 3, 1, 56.28);
 
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (480, 195, 45, 0, 4, 1, 205.44);
+VALUES (480, 19.5, 4.5, 0, 4, 1, 205.44);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (600, 195, 45, 0, 4, 1, 257.70);
+VALUES (600, 19.5, 4.5, 0, 4, 1, 257.70);
 
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (300, 97, 97, 1, 5, 1, 134.85);
+VALUES (300, 9.7, 9.7, 1, 5, 1, 134.85);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (210, 100, 19, 1, 1, 1, 20.16);
+VALUES (210, 10.0, 1.9, 1, 1, 1, 20.16);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (540, 100, 19, 1, 5, 1, 51.84);
+VALUES (540, 10.0, 1.9, 1, 5, 1, 51.84);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (360, 100, 19, 1, 5, 1, 34.56);
+VALUES (360, 10.0, 1.9, 1, 5, 1, 34.56);
 
 INSERT INTO `carport`.`roof_tile` (`name`, `length`, `width`, `unit`, `price`)
 VALUES ('Plastmo Ecolite blåtonet', 600, 109, 1, 633.00);
@@ -102,10 +128,10 @@ INSERT INTO `carport`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `p
 VALUES ('firkantskiver', 40, 40, 11, 1, 149.50); -- firkantskiver
 INSERT INTO `carport`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`)
 VALUES ('hulbånd', 20, 10000, 1, 3, 339); -- hulbånd
-INSERT INTO `carport`.`fitting` (`height`, `unit`, `price`)
-VALUES (190, 1, 76.95); -- universal
-INSERT INTO `carport`.`fitting` (`height`, `unit`, `price`)
-VALUES (190, 1, 76.95); -- universal
+INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
+VALUES ('universal', 190, 1, 76.95); -- universal
+INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
+VALUES ('universal', 190, 1, 76.95); -- universal
 INSERT INTO `carport`.`fitting` (`name`, `width`, `height`, `unit`, `price`)
 VALUES ('stalddørsgreb', 75, 50, 4, 183.95); -- stalddørsgreb
 INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
@@ -127,14 +153,6 @@ INSERT INTO `carport_test`.`unit` (`unit`)
 VALUES ('sæt');
 
 
--- category;
-
-insert into carport_test.category(category)
-values ('brædt'),
-       ('lægte'),
-       ('reglar'),
-       ('spærtræ'),
-       ('stolpe');
 
 -- membership;
 
@@ -167,35 +185,35 @@ VALUES ('admin', 'admin', 'admin', '1234', 'admin', 1234, 2, 3, 3200),
 -- material;
 
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (360, 200, 25, 1, 1, 1, 174.43);
+VALUES (360, 20.0, 2.5, 1, 1, 1, 174.43);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (540, 200, 25, 1, 1, 1, 262.03);
+VALUES (540, 20.0, 2.5, 1, 1, 1, 262.03);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (360, 125, 25, 1, 1, 1, 108.90);
+VALUES (360, 12.5, 2.5, 1, 1, 1, 108.90);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (540, 125, 25, 1, 1, 1, 163.35);
+VALUES (540, 12.5, 2.5, 1, 1, 1, 163.35);
 
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (420, 73, 38, 0, 2, 1, 120.13);
+VALUES (420, 7.3, 3.8, 0, 2, 1, 120.13);
 
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (270, 95, 45, 0, 3, 1, 5628);
+VALUES (270, 9.5, 4.5, 0, 3, 1, 5628);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (240, 95, 45, 0, 3, 1, 56.28);
+VALUES (240, 9.5, 4.5, 0, 3, 1, 56.28);
 
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (480, 195, 45, 0, 4, 1, 205.44);
+VALUES (480, 19.5, 4.5, 0, 4, 1, 205.44);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (600, 195, 45, 0, 4, 1, 257.70);
+VALUES (600, 19.5, 4.5, 0, 4, 1, 257.70);
 
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (300, 97, 97, 1, 5, 1, 134.85);
+VALUES (300, 9.7, 9.7, 1, 5, 1, 134.85);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (210, 100, 19, 1, 5, 1, 20.16);
+VALUES (210, 10.0, 1.9, 1, 5, 1, 20.16);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (540, 100, 19, 1, 5, 1, 51.84);
+VALUES (540, 10.0, 1.9, 1, 5, 1, 51.84);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (360, 100, 19, 1, 5, 1, 34.56);
+VALUES (360, 10.0, 1.9, 1, 5, 1, 34.56);
 
 INSERT INTO `carport_test`.`roof_tile` (`name`, `length`, `width`, `unit`, `price`)
 VALUES ('Plastmo Ecolite blåtonet', 600, 109, 1, 633.00);
@@ -219,10 +237,10 @@ INSERT INTO `carport_test`.`fitting` (`name`, `width`, `length`, `height`, `unit
 VALUES ('firkantskiver', 40, 40, 11, 1, 149.50); -- firkantskiver
 INSERT INTO `carport_test`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`)
 VALUES ('hulbånd', 20, 10000, 1, 3, 339); -- hulbånd
-INSERT INTO `carport_test`.`fitting` (`height`, `unit`, `price`)
-VALUES (190, 1, 76.95); -- universal
-INSERT INTO `carport_test`.`fitting` (`height`, `unit`, `price`)
-VALUES (190, 1, 76.95); -- universal
+INSERT INTO `carport_test`.`fitting` (`name`,`height`, `unit`, `price`)
+VALUES ('universal',190, 1, 76.95); -- universal
+INSERT INTO `carport_test`.`fitting` (`name`,`height`, `unit`, `price`)
+VALUES ('universal', 190, 1, 76.95); -- universal
 INSERT INTO `carport_test`.`fitting` (`name`, `width`, `height`, `unit`, `price`)
 VALUES ('stalddørsgreb', 75, 50, 4, 183.95); -- stalddørsgreb
 INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`)
