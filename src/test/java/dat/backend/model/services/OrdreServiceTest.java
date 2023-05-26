@@ -153,56 +153,33 @@ public class OrdreServiceTest {
     }
 
 
+
+
     @Test
-    void calcWoodWasteTest() {
+    void calcWoodWasteTest2() {
         List<Wood> woods = new ArrayList<>();
         woods.add(new Wood(1, "testbrædt1", 270, 174.43, "stk", "brædt", 200, 25, true));  // Wood with length 10
         woods.add(new Wood(2, "testbrædt2", 240, 262.03, "stk", "brædt", 200, 25, true));  // Wood with length 20
         woods.add(new Wood(3, "testbrædt3", 360, 108.9, "stk", "brædt", 125, 25, true));  // Wood with length 30
         woods.add(new Wood(1, "testbrædt4", 480, 174.43, "stk", "brædt", 200, 25, true));  // Wood with length 10
         woods.add(new Wood(2, "testbrædt5", 540, 262.03, "stk", "brædt", 200, 25, true));  // Wood with length 20
-        OrderItem orderItemBrædt1 = new OrderItem
-                //HJÆÆÆÆÆÆÆÆÆÆÆÆÆLP
-        List<Wood> woodList = getSterns();
-
-
-    }
-
-
-
-    @Test
-    public void testCalculateWoodWaste() {
-        // Create a sample list of Wood objects
-        List<Wood> woods = new ArrayList<>();
-
-        TreeMap<Integer, List<Wood>> woodMap = new TreeMap<>();
-        woods.add(new Wood(1, "testbrædt1", 360, 174.43, "stk", "brædt", 200, 25, true));  // Wood with length 10
-        woods.add(new Wood(2, "testbrædt2", 540, 262.03, "stk", "brædt", 200, 25, true));  // Wood with length 20
-        woods.add(new Wood(3, "testbrædt3", 360, 108.9, "stk", "brædt", 125, 25, true));  // Wood with length 30
-        woods.add(new Wood(1, "testbrædt4", 360, 174.43, "stk", "brædt", 200, 25, true));  // Wood with length 10
-        woods.add(new Wood(2, "testbrædt5", 540, 262.03, "stk", "brædt", 200, 25, true));  // Wood with length 20
-        woods.add(new Wood(3, "testbrædt6", 360, 108.9, "stk", "brædt", 125, 25, true));  // Wood with length 30
-        // Set the target length
+        OrderItemTask testTask = OrderItemTask.STERN_UPPER_SIDES;
         int targetLength = 1000;
 
-        // Call the method being tested
-        List<Wood> bestCombination = findSterns(targetLength, woods);
-        woodMap.put(0, bestCombination);
+        List<OrderItem> orderItemList = getSterns(targetLength, woods, testTask);
+        Assertions.assertNotNull(orderItemList);
+        for (OrderItem orderItem : orderItemList) {
+            System.out.println(orderItem);
+        }
 
-        // Get the first entry from the TreeMap (the best combination with the lowest difference)
-        Map.Entry<Integer, List<Wood>> entry = woodMap.firstEntry();
-        int totalLength = entry.getValue().get(0).getLength();
+        int totalLength = orderItemList.stream().mapToInt(orderItem -> orderItem.getMaterial().getLength()).sum();
         int woodWaste = Math.abs(targetLength - totalLength);
-
-
-        // Assert the expected output
-        String expectedOutput = "Best Wood Combination: " + bestCombination + ". Your wood waste will be " + woodWaste + ".";
-        String actualOutput = "Best Wood Combination: " + bestCombination + ". Your wood waste will be " + woodWaste + ".";
-        Assertions.assertEquals(expectedOutput, actualOutput);
-        Assertions.assertEquals(1160, woodWaste);
+        System.out.println("Wood Waste: " + woodWaste);
+        assertEquals(20, woodWaste);
     }
 
-
 }
+
+
 
 
