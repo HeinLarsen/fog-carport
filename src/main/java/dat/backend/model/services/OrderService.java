@@ -212,7 +212,7 @@ public class OrderService {
         int amountOfTiles = 0;
         for (RoofTile roofTile : roofTiles)
         {
-            amountOfTiles = (int) Math.ceil((double) carport.getLength() / roofTile.getWidth());
+            amountOfTiles = (int) Math.ceil((double) carport.getLength() / roofTile.getWidthInt());
         }
 
         int amountOfScrews = amountOfTiles * 12;
