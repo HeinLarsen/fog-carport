@@ -122,11 +122,11 @@ public class MaterialMapperTest {
     }
 
     @Test
-    void generateOrder() throws DatabaseException {
+    void generateOrderItems() throws DatabaseException {
         Carport carport = new Carport(780, 600, new Shed(210, 530));
 //        Carport carport = new Carport(480, 300);
 
-        List<OrderItem> list = OrderService.generateOrder(carport, connectionPool);
+        List<OrderItem> list = OrderService.generateOrderItems(carport, connectionPool);
         for (OrderItem orderItem : list) {
             System.out.println(orderItem);
         }
