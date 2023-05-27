@@ -56,7 +56,7 @@ public class OrderService {
         return orderByUserId;
     }
 
-    public static List<OrderItem> generateOrder(Carport carport, ConnectionPool connectionPool) throws DatabaseException {
+    public static List<OrderItem> generateOrderItems(Carport carport, ConnectionPool connectionPool) throws DatabaseException {
         List<Wood> woods = MaterialFacade.getAllWood(connectionPool);
         List<RoofTile> roofTiles = MaterialFacade.getAllRoofTiles(connectionPool);
         List<Screw> screws = MaterialFacade.getAllScrews(connectionPool);
