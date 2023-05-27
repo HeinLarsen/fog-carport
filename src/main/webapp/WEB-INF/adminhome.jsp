@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page errorPage="../error.jsp" isErrorPage="false" %>
 
+
 <t:pagetemplate>
     <jsp:attribute name="header">
          Admin Page
@@ -49,7 +50,7 @@
                                     shed: ${ordersstatus.shed}</td>
                                 <td>${ordersstatus.created}</td>
                                 <td>${ordersstatus.status}</td>
-                                <td>${user.firstName} ${user.lastName}</td>
+                                <td>${ordersstatus.userID}</td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -71,7 +72,7 @@
                                 <td>${order.orderID}</td>
                                 <td>${order.length} cm x ${order.width} cm, shed: ${order.shed}</td>
                                 <td>${order.status}</td>
-                                <td>${user.firstName} ${user.lastName}</td>
+                                <td>${order.userID}</td>
                             </tr>
                         </c:forEach>
                     </table>

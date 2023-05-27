@@ -18,12 +18,13 @@ public class OrderMapper {
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {
                     int ID = rs.getInt("ID");
+                    int userId = rs.getInt("user_id");
                     Timestamp timestamp = rs.getTimestamp("created");
                     Status status = Status.valueOf(rs.getString("status"));
                     int length = rs.getInt("length");
                     int width = rs.getInt("width");
                     boolean shed = rs.getBoolean("shed");
-                    order = new Order(ID, timestamp, status, length, width, shed);
+                    order = new Order(ID, userId, timestamp, status, length, width, shed);
                     orders.add(order);
                 }
             }
@@ -42,12 +43,13 @@ public class OrderMapper {
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {
                     int ID = rs.getInt("ID");
+                    int userId = rs.getInt("user_id");
                     Timestamp timestamp = rs.getTimestamp("created");
                     Status status = Status.valueOf(rs.getString("status"));
                     int length = rs.getInt("length");
                     int width = rs.getInt("width");
                     boolean shed = rs.getBoolean("shed");
-                    order = new Order(ID, timestamp, status, length, width, shed);
+                    order = new Order(ID, userId, timestamp, status, length, width, shed);
                 }
             }
         } catch (SQLException e) {
@@ -68,12 +70,13 @@ public class OrderMapper {
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {
                     int ID = rs.getInt("ID");
+                    int user_id = rs.getInt("user_id");
                     Timestamp timestamp = rs.getTimestamp("created");
                     Status status = Status.valueOf(rs.getString("status"));
                     int length = rs.getInt("length");
                     int width = rs.getInt("width");
                     boolean shed = rs.getBoolean("shed");
-                    order = new Order(ID, timestamp, status, length, width, shed);
+                    order = new Order(ID, user_id, timestamp, status, length, width, shed);
                     orders.add(order);
                 }
             }
@@ -122,12 +125,13 @@ public class OrderMapper {
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()) {
                     int ID = rs.getInt("ID");
+                    int userId = rs.getInt("user_id");
                     Timestamp timestamp = rs.getTimestamp("created");
                     Status orderStatus = Status.valueOf(rs.getString("status"));
                     int length = rs.getInt("length");
                     int width = rs.getInt("width");
                     boolean shed = rs.getBoolean("shed");
-                    order = new Order(ID, timestamp, orderStatus, length, width, shed);
+                    order = new Order(ID, userId, timestamp, orderStatus, length, width, shed);
                     orders.add(order);
                 }
             }

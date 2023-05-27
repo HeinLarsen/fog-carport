@@ -95,33 +95,35 @@
 
             <div class="box">
                 <h2>Bruger info:</h2>
-                <br>
-                Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
-                <br>
-                Email: ${requestScope.user.email}
-                <br>
-                Telefon nummer: ${requestScope.user.phoneNumber}
-                <br>
-                Adresse: ${requestScope.user.address}
-                <br>
-                Postnummer: ${requestScope.user.zip}
-                <br>
-                Medlemskab:
-                <c:choose>
-                    <c:when test="${requestScope.user.membershipId eq 1}">
-                        Basic
-                    </c:when>
-                    <c:when test="${requestScope.user.membershipId eq 2}">
-                        Member
-                    </c:when>
-                    <c:when test="${requestScope.user.membershipId eq 3}">
-                        Worker
-                    </c:when>
-                    <c:otherwise>
-                        Unknown
-                    </c:otherwise>
-                </c:choose>
-                <br/>
+                <div class="box">
+                    <br>
+                    Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
+                    <br>
+                    Email: ${requestScope.user.email}
+                    <br>
+                    Telefon nummer: ${requestScope.user.phoneNumber}
+                    <br>
+                    Adresse: ${requestScope.user.address}
+                    <br>
+                    Postnummer: ${requestScope.user.zip}
+                    <br>
+                    Medlemskab:
+                    <c:choose>
+                        <c:when test="${requestScope.user.membershipId eq 1}">
+                            Basic
+                        </c:when>
+                        <c:when test="${requestScope.user.membershipId eq 2}">
+                            Member
+                        </c:when>
+                        <c:when test="${requestScope.user.membershipId eq 3}">
+                            Worker
+                        </c:when>
+                        <c:otherwise>
+                            Unknown
+                        </c:otherwise>
+                    </c:choose>
+                    <br/>
+                </div>
             </div>
 
             <div class="box">
