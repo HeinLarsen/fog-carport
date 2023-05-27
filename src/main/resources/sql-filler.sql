@@ -114,30 +114,30 @@ VALUES ('Plastmo Ecolite blåtonet', 360, 109, 1, 266);
 INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
 VALUES ('plastmo bundskruer 200 stk', 0, 30, 2, 441);
 INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
-VALUES ('skruer 200 stk.', 4.5, 60, 2, 307.95); -- skruer
+VALUES ('skruer 200 stk.', 4.5, 6, 2, 307.95); -- skruer
 INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
-VALUES ('Skruer 400 stk.', 4.5, 70, 2, 149.95); -- skruer
+VALUES ('Skruer 400 stk.', 4.5, 7, 2, 149.95); -- skruer
 INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
-VALUES ('beslagskruer 250 stk.', 4.5, 50, 2, 160.95); -- skruer
+VALUES ('beslagskruer 250 stk.', 4.5, 5, 2, 160.95); -- skruer
 INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
-VALUES ('Skruer 300 stk.', 4.0, 50, 2, 263.95); -- beslagskruer
+VALUES ('Skruer 300 stk.', 4.0, 5, 2, 263.95); -- beslagskruer
 INSERT INTO `carport`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
-VALUES ('bræddebolt', 10, 120, 2, 464); -- bræddebolt
+VALUES ('bræddebolt', 1, 1.2, 2, 464); -- bræddebolt
 
 INSERT INTO `carport`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`)
-VALUES ('firkantskiver', 40, 40, 11, 1, 149.50); -- firkantskiver
+VALUES ('firkantskiver', 4, 4, 1.1, 1, 149.50); -- firkantskiver
 INSERT INTO `carport`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`)
-VALUES ('hulbånd', 20, 10000, 1, 3, 339); -- hulbånd
+VALUES ('hulbånd', 2, 1000, 0.1, 3, 339); -- hulbånd
 INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
-VALUES ('universal', 190, 1, 76.95); -- universal
+VALUES ('universal', 1.9, 1, 76.95); -- universal
 INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
-VALUES ('universal', 190, 1, 76.95); -- universal
+VALUES ('universal', 1.9, 1, 76.95); -- universal
 INSERT INTO `carport`.`fitting` (`name`, `width`, `height`, `unit`, `price`)
-VALUES ('stalddørsgreb', 75, 50, 4, 183.95); -- stalddørsgreb
+VALUES ('stalddørsgreb', 7.5, 5, 4, 183.95); -- stalddørsgreb
 INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
-VALUES ('t hængsel', 390, 2, 156.95); -- t hængsel
+VALUES ('t hængsel', 39.0, 2, 156.95); -- t hængsel
 INSERT INTO `carport`.`fitting` (`name`, `height`, `unit`, `price`)
-VALUES ('vinkelbeslag', 35, 1, 13.95); -- vinkelbeslag
+VALUES ('vinkelbeslag', 3.5, 1, 13.95); -- vinkelbeslag
 
 
 
@@ -209,7 +209,7 @@ VALUES (600, 19.5, 4.5, 0, 4, 1, 257.70);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
 VALUES (300, 9.7, 9.7, 1, 5, 1, 134.85);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (210, 10.0, 1.9, 1, 5, 1, 20.16);
+VALUES (210, 10.0, 1.9, 1, 1, 1, 20.16);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
 VALUES (540, 10.0, 1.9, 1, 5, 1, 51.84);
 INSERT INTO `carport_test`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
@@ -223,30 +223,30 @@ VALUES ('Plastmo Ecolite blåtonet', 360, 109, 1, 266);
 INSERT INTO `carport_test`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
 VALUES ('plastmo bundskruer 200 stk', 0, 30, 2, 441);
 INSERT INTO `carport_test`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
-VALUES ('skruer 200 stk.', 4.5, 60, 2, 307.95); -- skruer
+VALUES ('skruer 200 stk.', 4.5, 6, 2, 307.95); -- skruer
 INSERT INTO `carport_test`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
-VALUES ('Skruer 400 stk.', 4.5, 70, 2, 149.95); -- skruer
+VALUES ('Skruer 400 stk.', 4.5, 7, 2, 149.95); -- skruer
 INSERT INTO `carport_test`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
-VALUES ('beslagskruer 250 stk.', 4.5, 50, 2, 160.95); -- skruer
+VALUES ('beslagskruer 250 stk.', 4.5, 5, 2, 160.95); -- skruer
 INSERT INTO `carport_test`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
-VALUES ('Skruer 300 stk.', 4.0, 50, 2, 263.95); -- beslagskruer
+VALUES ('Skruer 300 stk.', 4.0, 5, 2, 263.95); -- beslagskruer
 INSERT INTO `carport_test`.`screw` (`name`, `diameter`, `length`, `unit`, `price`)
-VALUES ('bræddebolt', 10, 120, 2, 464); -- bræddebolt
+VALUES ('bræddebolt', 1, 1.2, 2, 464); -- bræddebolt
 
 INSERT INTO `carport_test`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`)
-VALUES ('firkantskiver', 40, 40, 11, 1, 149.50); -- firkantskiver
+VALUES ('firkantskiver', 4, 4, 1.1, 1, 149.50); -- firkantskiver
 INSERT INTO `carport_test`.`fitting` (`name`, `width`, `length`, `height`, `unit`, `price`)
-VALUES ('hulbånd', 20, 10000, 1, 3, 339); -- hulbånd
-INSERT INTO `carport_test`.`fitting` (`name`,`height`, `unit`, `price`)
-VALUES ('universal',190, 1, 76.95); -- universal
-INSERT INTO `carport_test`.`fitting` (`name`,`height`, `unit`, `price`)
-VALUES ('universal', 190, 1, 76.95); -- universal
+VALUES ('hulbånd', 2, 1000, 0.1, 3, 339); -- hulbånd
+INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`)
+VALUES ('universal', 1.9, 1, 76.95); -- universal
+INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`)
+VALUES ('universal', 1.9, 1, 76.95); -- universal
 INSERT INTO `carport_test`.`fitting` (`name`, `width`, `height`, `unit`, `price`)
-VALUES ('stalddørsgreb', 75, 50, 4, 183.95); -- stalddørsgreb
+VALUES ('stalddørsgreb', 7.5, 5, 4, 183.95); -- stalddørsgreb
 INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`)
-VALUES ('t hængsel', 390, 2, 156.95); -- t hængsel
+VALUES ('t hængsel', 39.0, 2, 156.95); -- t hængsel
 INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`)
-VALUES ('vinkelbeslag', 35, 1, 13.95); -- vinkelbeslag
+VALUES ('vinkelbeslag', 3.5, 1, 13.95); -- vinkelbeslag
 
 
 

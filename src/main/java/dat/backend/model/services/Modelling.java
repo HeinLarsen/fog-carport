@@ -58,7 +58,7 @@ public class Modelling {
 
     public static void generateMaterialList(List<OrderItem> orderItems) {
         // get max length;
-        int maxSpotLength = 0;
+        double maxSpotLength = 0;
         for (OrderItem orderItem : orderItems) {
             if (cmToMm(orderItem.getMaterial().getLength()) > maxSpotLength) {
                 maxSpotLength = cmToMm(orderItem.getMaterial().getLength());
@@ -136,7 +136,7 @@ public class Modelling {
         csg.view(shape);
     }
 
-    private static int cmToMm(int cm) {
+    private static double cmToMm(double cm) {
         return cm * 10;
     }
 
