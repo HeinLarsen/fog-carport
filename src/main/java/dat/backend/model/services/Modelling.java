@@ -5,23 +5,27 @@ import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Predicate;
 
 public class Modelling {
     private static JavaCSG csg = JavaCSGFactory.createDefault();
-    ;
 
 
-    public static void generateFiles(Order order) {
-//        generateBuildList(order);
+    public static void generateFiles(Order order) throws IOException {
+        save(generateBuildList(order), "buildList", order);
 
-        generateMaterialList(order);
+        save(generateMaterialList(order), "materialList", order);
 
 
     }
 
-    private static void generateMaterialList(Order order) {
+    private static void save(Geometry3D shape, String name, Order order) throws IOException {
+        csg.saveSTL("src/main/webapp/models/" + name + "-" + order.getOrderID() + ".stl", shape);
+    }
+
+    private static Geometry3D generateMaterialList(Order order) throws IOException {
         List<Spot> spots = new ArrayList<>();
         for (OrderItem item : order.getOrderItems()) {
             if (item.getMaterial() instanceof Wood) {
@@ -32,10 +36,10 @@ public class Modelling {
                 }
             }
         }
-        yAxisPacking(spots);
+        return yAxisPacking(spots);
     }
 
-    private static void generateBuildList(Order order) {
+    private static Geometry3D generateBuildList(Order order) throws IOException {
         List<Spot> spots = new ArrayList<>();
 
         int iterations = 2;
@@ -51,22 +55,23 @@ public class Modelling {
 
         spots.addAll(generateSpot(order.getLength(), getItem(order.getOrderItems(), item -> item.getDescription().equals(OrderItemTask.STERN_LOWER_ENDS.getTask())), iterations));
 
-        spots.addAll(generateSpot(order.getLength(), getItem(order.getOrderItems(), item -> item.getDescription().equals(OrderItemTask.WATERBOARD_ENDS.getTask())), iterations));
+        OrderItem waterboardOrderItem = getItem(order.getOrderItems(), item -> item.getDescription().equals(OrderItemTask.WATERBOARD_ENDS.getTask()));
+        spots.addAll(generateSpot(order.getLength(), waterboardOrderItem, iterations));
 
-        spots.addAll(generateSpot(order.getWidth(), getItem(order.getOrderItems(), item -> item.getDescription().equals(OrderItemTask.WATERBOARD_SIDES.getTask())), iterations));
+        Wood wood = (Wood) waterboardOrderItem.getMaterial();
+        spots.addAll(generateSpot(order.getWidth() - wood.getWidth(), getItem(order.getOrderItems(), item -> item.getDescription().equals(OrderItemTask.WATERBOARD_SIDES.getTask())), iterations));
 
         OrderItem sparOrderItem = getItem(order.getOrderItems(), item -> item.getDescription().equals(OrderItemTask.SPAR.getTask()));
         spots.addAll(generateSpot(order.getWidth(), sparOrderItem, sparOrderItem.getQuantity()));
 
         OrderItem poleOrderItem = getItem(order.getOrderItems(), item -> item.getDescription().equals(OrderItemTask.POLE.getTask()));
-
         for (int i = 0; i < poleOrderItem.getQuantity(); i++) {
-            Wood wood = (Wood) poleOrderItem.getMaterial();
+            Wood poleWood = (Wood) poleOrderItem.getMaterial();
             var shape = generateCarportPoles(poleOrderItem, getItem(order.getOrderItems(), item -> item.getDescription().equals(OrderItemTask.RIM.getTask())));
-            spots.add(new Spot(wood.getLength() - 90, wood.getWidth(), shape));
+            spots.add(new Spot(poleWood.getLength() - 90, poleWood.getWidth(), shape));
         }
 
-        yAxisPacking(spots);
+        return yAxisPacking(spots);
     }
 
     private static ArrayList<Spot> generateSpot(double target, OrderItem item, int iterations) {
@@ -106,7 +111,7 @@ public class Modelling {
                 .orElse(null);
     }
 
-    private static void yAxisPacking(List<Spot> spots) {
+    private static Geometry3D yAxisPacking(List<Spot> spots) throws IOException {
         double maxSpotLength = 1200;
 
         List<List<Spot>> rows = new ArrayList<>();
@@ -144,12 +149,12 @@ public class Modelling {
             }
         }
 
-        printing(rows);
+        return printing(rows);
 
 
     }
 
-    private static void printing(List<List<Spot>> rows) {
+    private static Geometry3D printing(List<List<Spot>> rows) throws IOException {
         Geometry3D shape = csg.box3D(0, 0, 0, false);
         double horizontalOffset = 0;
 
@@ -167,6 +172,7 @@ public class Modelling {
         shape = csg.scale3D(scaleFactor, scaleFactor, scaleFactor).transform(shape);
 
         csg.view(shape);
+        return shape;
     }
 
 
@@ -197,64 +203,6 @@ public class Modelling {
     }
 
 
-//    private static void yAxisPacking(List<OrderItem> orderItems) {
-//        double maxSpotLength = 1200;
-//        List<Spot> spots = new ArrayList<>();
-//
-//        for (OrderItem orderItem : orderItems) {
-//            for (int i = 0; i < orderItem.getQuantity(); i++) {
-//                if (orderItem.getMaterial() instanceof Wood) {
-//                    Wood wood = (Wood) orderItem.getMaterial();
-//                    boolean addedToExistingSpot = false;
-//
-//                    Iterator<Spot> spotIterator = spots.iterator();
-//                    while (spotIterator.hasNext()) {
-//                        Spot spot = spotIterator.next();
-//                        List<Wood> spotWoods = spot.getWoods();
-//
-//                        // calculate length of spot
-//                        double spotLength = 0;
-//                        for (Wood spotWood : spotWoods) {
-//                            spotLength += spotWood.getLength();
-//                        }
-//
-//                        if (spotLength + wood.getLength() < maxSpotLength) {
-//                            spot.addWood(wood);
-//                            addedToExistingSpot = true;
-//                            break; // Exit the loop since wood was added to an existing spot
-//                        }
-//                    }
-//
-//                    if (!addedToExistingSpot) {
-//                        Spot newSpot = new Spot(maxSpotLength, wood.getWidth(), wood);
-//                        spots.add(newSpot);
-//                    }
-//                }
-//            }
-//        }
-//
-//        JavaCSG csg = JavaCSGFactory.createDefault();
-//        var shape = csg.box3D(0,0, 0, false); // var must be initialized but cannot be null: solution = create empty box
-//
-//        double horizontalGap = 0;
-//
-//        for (int i = 0; i < spots.size(); i++) {
-//            List<Wood> woods = spots.get(i).getWoods();
-//            double verticalGap = 0;
-//            for (int j = 0; j < woods.size(); j++) {
-//                Wood wood = woods.get(j);
-//                double spotLength = (wood.getLength())/2 + (maxSpotLength/2)/maxSpotLength;
-//                Geometry3D box = csg.box3D(wood.getWidth(), wood.getLength(), wood.getHeight(), false);
-//                var square = csg.translate3D(horizontalGap, spotLength + verticalGap, 0).transform(box);
-//                shape = csg.union3D(shape, square);
-//                verticalGap += wood.getLength() + 5;
-//            }
-//            horizontalGap += spots.get(i).getWidth() + 10;
-//        }
-//        double scaleFactor = 0.18;
-//        shape = csg.scale3D(scaleFactor, scaleFactor, scaleFactor).transform(shape);
-//        csg.view(shape);
-//
-//    }
+
 
 }

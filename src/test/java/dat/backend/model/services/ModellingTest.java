@@ -6,6 +6,7 @@ import dat.backend.model.persistence.ConnectionPool;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -115,7 +116,7 @@ public class ModellingTest {
     }
 
     @Test
-    public void generate3D() throws DatabaseException {
+    public void generate3D() throws DatabaseException, IOException {
 
         Carport carport = new Carport(780, 600, new Shed(210, 530));
 //        Carport carport = new Carport(480, 300);
