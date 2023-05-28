@@ -1,17 +1,20 @@
 package dat.backend.model.entities;
 
+import org.abstractica.javacsg.Geometry3D;
+
+import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Spot {
     private double height;
     private double width;
-    private List<Wood> woods = new ArrayList<>();
+    private Geometry3D shape;
 
-    public Spot(double height, double width, Wood wood) {
+    public Spot(double height, double width, Geometry3D shape) {
         this.height = height;
         this.width = width;
-        this.woods.add(wood);
+        this.shape = shape;
     }
 
     public double getHeight() {
@@ -22,24 +25,11 @@ public class Spot {
         return width;
     }
 
-    public List<Wood> getWoods() {
-        return woods;
+    public Geometry3D getShape() {
+        return shape;
     }
 
-    public void addWood(Wood wood) {
-        this.woods.add(wood);
-        calculateMaxWidth();
-    }
-
-    private void calculateMaxWidth() {
-        double maxWidth = 0;
-        for (Wood wood : woods) {
-            if (wood.getWidth() > maxWidth) {
-                maxWidth = wood.getWidth();
-            }
-        }
-        if (maxWidth > this.width) {
-            this.width = maxWidth;
-        }
+    public void setWidth(double maxWidth) {
+        this.width = maxWidth;
     }
 }
