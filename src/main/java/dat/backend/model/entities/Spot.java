@@ -9,9 +9,8 @@ public class Spot {
     private List<Wood> woods = new ArrayList<>();
 
     public Spot(double height, double width, Wood wood) {
-        double gap = 50;
-        this.height = height + (gap * 2);
-        this.width = width + (gap * 2);
+        this.height = height;
+        this.width = width;
         this.woods.add(wood);
     }
 
@@ -36,7 +35,7 @@ public class Spot {
         double maxWidth = 0;
         for (Wood wood : woods) {
             if (wood.getWidth() > maxWidth) {
-                maxWidth = wood.getWidth() + 100;
+                maxWidth = wood.getWidth();
             }
         }
         if (maxWidth > this.width) {
