@@ -64,8 +64,8 @@ public class OrderService {
         List<OrderItem> orderItems = new ArrayList<>();
 
         // Get and put sterns
-        orderItems.addAll(getSterns(carport.getLength(), woods, OrderItemTask.STERN_UPPER_SIDES));
-        orderItems.addAll(getSterns(carport.getWidth(), woods, OrderItemTask.STERN_UPPER_ENDS));
+        orderItems.addAll(getUpperSterns(carport.getLength(), woods, OrderItemTask.STERN_UPPER_SIDES));
+        orderItems.addAll(getUpperSterns(carport.getWidth(), woods, OrderItemTask.STERN_UPPER_ENDS));
         orderItems.addAll(getSterns(carport.getLength(), woods, OrderItemTask.STERN_LOWER_SIDES));
         orderItems.addAll(getSterns(carport.getWidth(), woods, OrderItemTask.STERN_LOWER_ENDS));
 
@@ -510,9 +510,36 @@ public class OrderService {
         return orderItem;
     }
 
+    public static List<OrderItem> getUpperSterns(int target, List<Wood> woods, OrderItemTask task) {
+        List<Wood> filteredWoods = filterWoods(woods, wood ->
+                wood.isPressureTreated() && wood.getCategory().equals("brædt") && wood.getWidth() == 12.5
+        );
+
+        List<Wood> result = findSterns(target, filteredWoods);
+        List<OrderItem> orderItems = new ArrayList<>();
+
+        Set<Wood> processedWoods = new HashSet<>();
+        for (Wood wood : result) {
+            if (processedWoods.contains(wood)) {
+                continue;
+            }
+
+            int quantity = Collections.frequency(result, wood);
+            double price = wood.getPrice() * quantity;
+
+            OrderItem orderItem = new OrderItem(quantity, price, task.getTask());
+            orderItem.setMaterial(wood);
+            orderItems.add(orderItem);
+
+            processedWoods.add(wood);
+        }
+
+        return orderItems;
+    }
+
     public static List<OrderItem> getSterns(int target, List<Wood> woods, OrderItemTask task) {
         List<Wood> filteredWoods = filterWoods(woods, wood ->
-                wood.isPressureTreated() && wood.getCategory().equals("brædt")
+                wood.isPressureTreated() && wood.getCategory().equals("brædt") && wood.getWidth() == 20.0
         );
 
         List<Wood> result = findSterns(target, filteredWoods);
