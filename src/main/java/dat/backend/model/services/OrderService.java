@@ -1,6 +1,5 @@
 package dat.backend.model.services;
 
-import com.thoughtworks.qdox.model.expression.Or;
 import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.*;
@@ -631,15 +630,15 @@ public static int calculateWoodWaste(int targetLength, List<Wood> woods) {
     }
 
 
-    //I dette metode skal vi have regnet carports bredde samt længde ud, beregningsmetode kommer her.
-    public void addOrder(Order order) {
-
-    }
-
-    public void updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException {
+    public static Order updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException {
         order.setStatus("approved");
 
         OrderFacade.approveOrder(order, connectionPool);
+        return order;
+    }
+
+    public void cancelOrder(int id, Enum Status, ConnectionPool connectionPool) throws DatabaseException {
+        OrderFacade.cancelOrder(id, Status, connectionPool);
     }
 
 }

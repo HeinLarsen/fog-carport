@@ -43,7 +43,6 @@ public class AdminViewUser extends HttpServlet {
 
                 request.getRequestDispatcher("WEB-INF/adminviewuser.jsp").forward(request, response);
 
-
                 return;
             } else {
                 request.getRequestDispatcher("error.jsp").forward(request, response);

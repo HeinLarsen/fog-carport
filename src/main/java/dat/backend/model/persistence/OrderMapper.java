@@ -115,6 +115,24 @@ public class OrderMapper {
         }
     }
 
+    protected static boolean cancelOrder(int id, Enum status, ConnectionPool connectionPool) throws DatabaseException{
+        String sql = "update `order` set status = ? where ID = ?";
+        try(Connection connection = connectionPool.getConnection()) {
+            try(PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, status.toString());
+                ps.setInt(2, id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e, "Error approving order");
+        }if(status == Status.CANCELLED){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
     protected static ArrayList<Order> getOrdersByStatus(Status status, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "select * from `order` where status = ?";
         ArrayList<Order> orders = new ArrayList<>();

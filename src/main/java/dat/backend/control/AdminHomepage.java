@@ -37,16 +37,17 @@ public class AdminHomepage extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
+
         try {
             if (u != null && u.getRoleId() == 2){
                 List<Order> orders = OrderService.getAllOrders(connectionPool);
                 List<User> usersList = UserService.getAllUsers(connectionPool);
                 List<Order> ordersPending = OrderService.getOrdersByStatus(Status.PENDING, connectionPool);
 
+
                 request.setAttribute("ordersList", orders);
                 request.setAttribute("usersList", usersList);
                 request.setAttribute("ordersPending", ordersPending);
-
 
                 request.getRequestDispatcher("WEB-INF/adminhome.jsp").forward(request, response);
             }else if (u != null && u.getRoleId() == 1){

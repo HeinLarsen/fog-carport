@@ -126,18 +126,20 @@
                 </div>
             </div>
 
+
             <div class="box">
                 <h2>Pris: </h2>
-                    ${requestScope.order.getPrice()}
+                    ${requestScope.order.calculatePrice()}
             </div>
 
-            <div class="box">
-                <h2>Kontrolpanel:</h2>
-                <button type="submit">Godkend</button>
-                <button type="submit">Annuller</button>
-                <button type="submit">Slet ordre</button>
-
-            </div>
+            <form action="admineditorder" method="post">
+                <div class="box">
+                    <h2>Kontrolpanel:</h2>
+                    <button type="submit" name="status" value="APPROVED">Godkend</button>
+                    <button type="submit">Annuller</button>
+                    <button type="submit">Slet ordre</button>
+                </div>
+            </form>
 
             <div class="box">
                 <h2>Filer: </h2>

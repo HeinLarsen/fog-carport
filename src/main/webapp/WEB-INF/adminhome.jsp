@@ -44,7 +44,7 @@
                             <th class="sticky-header">Kunde</th>
                         </tr>
                         <c:forEach items="${requestScope.ordersPending}" var="ordersstatus">
-                            <tr onclick="location.href='admineditorder?id=${ordersstatus.orderID}'">
+                            <tr onclick="location.href='admineditorder?id=${ordersstatus.orderID}&userid=${ordersstatus.userID}'">
                                 <td>${ordersstatus.orderID}</td>
                                 <td>${ordersstatus.length} cm x ${ordersstatus.width} cm,
                                     shed: ${ordersstatus.shed}</td>
@@ -68,7 +68,7 @@
                             <th class="sticky-header">Kunde</th>
                         </tr>
                         <c:forEach items="${requestScope.ordersList}" var="order">
-                            <tr onclick="location.href='admineditorder?id=${order.orderID}'">
+                            <tr onclick="location.href='admineditorder?id=${order.orderID}&userid=${order.userID}'">
                                 <td>${order.orderID}</td>
                                 <td>${order.length} cm x ${order.width} cm, shed: ${order.shed}</td>
                                 <td>${order.status}</td>
