@@ -4,6 +4,7 @@ import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.*;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -630,11 +631,12 @@ public class OrderService {
     }
 
 
-    public static Order updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException {
+    public static Order updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException, IOException {
         order.setStatus("approved");
-
         OrderFacade.approveOrder(order, connectionPool);
+        Modelling.generateFiles(order);
         return order;
+
     }
 
     public void cancelOrder(int id, Enum Status, ConnectionPool connectionPool) throws DatabaseException {
