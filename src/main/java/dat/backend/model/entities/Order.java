@@ -9,8 +9,8 @@ public class Order {
         private Enum status;
         private int length;
         private int width;
-        private int shedLength;
-        private int shedWidth;
+        private int shedLength = 0;
+        private int shedWidth = 0;
         private boolean shed;
         private int userID;
         private ArrayList<OrderItem> orderItems;
@@ -36,7 +36,20 @@ public class Order {
                 this.shed = shed;
                 this.shedLength = shedLength;
                 this.shedWidth = shedWidth;
+        }
 
+        public Order(int length, int width, int shedLength, int shedWidth, boolean shed){
+                this.length = length;
+                this.width = width;
+                this.shed = shed;
+                this.shedLength = shedLength;
+                this.shedWidth = shedWidth;
+        }
+
+        public Order(int length, int length1, boolean b) {
+                this.length = length;
+                this.width = length1;
+                this.shed = b;
         }
 
         public void addOrderItem(OrderItem orderItems){
@@ -55,6 +68,14 @@ public class Order {
 
         public int getWidth() {
                 return width;
+        }
+
+        public int getShedLength() {
+                return shedLength;
+        }
+
+        public int getShedWidth() {
+                return shedWidth;
         }
 
         public boolean isShed() {

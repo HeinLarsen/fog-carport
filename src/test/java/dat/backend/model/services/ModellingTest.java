@@ -24,7 +24,7 @@ public class ModellingTest {
 
     private static ConnectionPool connectionPool;
 
-   /* @BeforeAll
+   @BeforeAll
     public static void setUpClass()
     {
         connectionPool = new ConnectionPool(USER, PASSWORD, URL);
@@ -114,19 +114,19 @@ public class ModellingTest {
             connection.close();
         }
     }
-
-    @Test
-    public void generate3D() throws DatabaseException, IOException {
-
-        Carport carport = new Carport(780, 600, new Shed(210, 530));
-//        Carport carport = new Carport(480, 300);
-//        Carport carport = new Carport(780, 600);
-        ArrayList<OrderItem> list = (ArrayList<OrderItem>) OrderService.generateOrderItems(carport, connectionPool);
-        java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-23 10:10:10.0");
-
-        Order order = new Order(1, timestamp, Status.APPROVED, 780, 600, true, 210, 530);
-        order.addOrderItems(list);
-
-        Modelling.generateFiles(order);
-    }*/
+//
+//    @Test
+//    public void generate3D() throws DatabaseException, IOException {
+//
+//        Carport carport = new Carport(780, 600, new Shed(210, 530));
+////        Carport carport = new Carport(480, 300);
+////        Carport carport = new Carport(780, 600);
+//        ArrayList<OrderItem> list = (ArrayList<OrderItem>) OrderService.generateOrderItems(carport, connectionPool);
+//        java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-23 10:10:10.0");
+//
+//        Order order = new Order(1, timestamp, Status.APPROVED, 780, 600, true, 210, 530);
+//        order.addOrderItems(list);
+//
+//        Modelling.generateFiles(order);
+//    }
 }

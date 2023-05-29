@@ -55,6 +55,24 @@ public class OrderService {
         return orderByUserId;
     }
 
+    //I dette metode skal vi have regnet carports bredde samt længde ud, beregningsmetode kommer her.
+    public static void addOrder(int userId, Carport carport, ConnectionPool connectionPool) throws DatabaseException {
+        List<OrderItem> orderItems = generateOrderItems(carport, connectionPool);
+        Order order = null;
+        if (carport.hasShed()) {
+            Shed shed = carport.getShed();
+            order = new Order(carport.getLength(), carport.getLength(), shed.getLength(), shed.getWidth(), true);
+        } else {
+            order = new Order(carport.getLength(), carport.getLength(), false);
+        }
+        order.addOrderItems((ArrayList<OrderItem>) orderItems);
+
+        int orderId = OrderFacade.createOrder(order, userId, connectionPool);
+        OrderItemFacade.createOrderItem((ArrayList<OrderItem>) orderItems, orderId, connectionPool);
+
+
+    }
+
     public static List<OrderItem> generateOrderItems(Carport carport, ConnectionPool connectionPool) throws DatabaseException {
         List<Wood> woods = MaterialFacade.getAllWood(connectionPool);
         List<RoofTile> roofTiles = MaterialFacade.getAllRoofTiles(connectionPool);
@@ -628,6 +646,8 @@ public class OrderService {
     private static double calculatePrice(Wood wood, int quantity) {
         return wood.getPrice() * quantity;
     }
+
+
 
 
     public static Order updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException {

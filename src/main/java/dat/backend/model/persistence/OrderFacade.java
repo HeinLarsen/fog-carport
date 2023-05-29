@@ -24,8 +24,8 @@ public class OrderFacade {
         return OrderMapper.getOrdersByUserId(userId, connectionPool);
     }
 
-    public static void createOrder(Order order, int userId, ConnectionPool connectionPool) throws DatabaseException {
-        OrderMapper.createOrder(order, userId, connectionPool);
+    public static int createOrder(Order order, int userId, ConnectionPool connectionPool) throws DatabaseException {
+        return OrderMapper.createOrder(order, userId, connectionPool);
     }
 
     public static void approveOrder(Order order, ConnectionPool connectionPool) throws DatabaseException {
