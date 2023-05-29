@@ -145,7 +145,7 @@
                 <h2>Filer: </h2>
             </div>
         </div>
-        <a href=""
+        <a href="src/main/webapp/models/*.stl" download></a>
 
 
     </jsp:body>

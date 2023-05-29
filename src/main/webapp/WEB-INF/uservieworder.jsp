@@ -32,6 +32,7 @@
                 </div>
             </div>
         </div>
+        <a href="src/main/webapp/models/*.stl" download></a>
 
     </jsp:body>
 
