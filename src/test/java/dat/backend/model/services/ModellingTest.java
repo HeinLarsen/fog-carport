@@ -20,11 +20,11 @@ public class ModellingTest {
 
     private final static String USER = "dev";
     private final static String PASSWORD = "3r!DE32*/fDe";
-    private final static String URL = "jdbc:mysql://167.71.46.141/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
+    private final static String URL = "jdbc:mysql://167.71.46.141/carport?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
 
     private static ConnectionPool connectionPool;
 
-    @BeforeAll
+   @BeforeAll
     public static void setUpClass()
     {
         connectionPool = new ConnectionPool(USER, PASSWORD, URL);
@@ -33,7 +33,7 @@ public class ModellingTest {
         {
             try (Statement stmt = testConnection.createStatement()) {
                 // Create test database - if not exist
-                stmt.execute("CREATE DATABASE  IF NOT EXISTS carport_test;");
+               /* stmt.execute("CREATE DATABASE  IF NOT EXISTS carport_test;");
 
                 stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.unit LIKE carport.unit;");
                 stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.category LIKE carport.category;");
@@ -93,7 +93,7 @@ public class ModellingTest {
                 stmt.execute( "INSERT INTO `carport_test`.`fitting` (`name`,`height`, `unit`, `price`) VALUES ('universal',190, 1, 76.95);");
                 stmt.execute( "INSERT INTO `carport_test`.`fitting` (`name`, `width`, `height`, `unit`, `price`) VALUES ('stalddørsgreb', 75, 50, 4, 183.95);");
                 stmt.execute( "INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`) VALUES ('t hængsel', 390, 2, 156.95);");
-                stmt.execute( "INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`) VALUES ('vinkelbeslag', 35, 1, 13.95);");
+                stmt.execute( "INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`) VALUES ('vinkelbeslag', 35, 1, 13.95);");*/
 
             }
         }
@@ -118,15 +118,14 @@ public class ModellingTest {
     @Test
     public void generate3D() throws DatabaseException, IOException {
 
-        Carport carport = new Carport(780, 600, new Shed(210, 530));
-//        Carport carport = new Carport(480, 300);
-//        Carport carport = new Carport(780, 600);
-        ArrayList<OrderItem> list = (ArrayList<OrderItem>) OrderService.generateOrderItems(carport, connectionPool);
-        java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-23 10:10:10.0");
+       // Carport carport = new Carport(780, 600, new Shed(210, 530));
+       // Carport carport = new Carport(480, 300);
+        Carport carport = new Carport(780, 600);
+       ArrayList<OrderItem> list = (ArrayList<OrderItem>) OrderService.generateOrderItems(carport, connectionPool);
+       java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-23 10:10:10.0");
+       Order order = new Order(1, timestamp, Status.APPROVED, 780, 600, true, 210, 530);
+       order.addOrderItems(list);
 
-        Order order = new Order(1, timestamp, Status.APPROVED, 780, 600, true, 210, 530);
-        order.addOrderItems(list);
-
-        Modelling.generateFiles(order);
-    }
+       Modelling.generateFiles(order);
+   }
 }

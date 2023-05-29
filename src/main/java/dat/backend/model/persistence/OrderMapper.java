@@ -88,19 +88,7 @@ public class OrderMapper {
         return orders;
     }
 
-    protected static void createOrder(Order order, int userId, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "insert into `order` (created, status, user_id) values (?, ?, ?)";
-        try(Connection connection = connectionPool.getConnection()) {
-            try(PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setTimestamp(1, order.getCreated());
-                ps.setString(2, order.getStatus().toString());
-                ps.setInt(3, userId);
-                ps.executeUpdate();
-            }
-        } catch (SQLException e) {
-            throw new DatabaseException(e, "Error creating order");
-        }
-    }
+
 
     protected static void approveOrder(Order order, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "update `order` set status = ? where ID = ?";
@@ -159,18 +147,20 @@ public class OrderMapper {
         return orders;
     }
 
-   protected static int insertorder(int id, int userId, double length, double width, boolean shed, ConnectionPool connectionPool) throws DatabaseException{
-        String sql = "insert into `order` (id, length, width, shed, user_id) values (?, ?, ?, ?)";
+   protected static int createOrder(Order order, int userId, ConnectionPool connectionPool) throws DatabaseException{
+        String sql = "insert into `order` (length, width, shed, shed_length, shed_width, user_id) values (?, ?, ?, ?, ?, ?)";
+        int id = -1;
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setInt(1, id);
-                ps.setDouble(2, length);
-                ps.setDouble(3, width);
-                ps.setBoolean(4, shed);
-                ps.setInt(5, userId);
+                ps.setInt(1, order.getLength());
+                ps.setInt(2, order.getWidth());
+                ps.setBoolean(3, order.isShed());
+                ps.setInt(4, order.getShedLength());
+                ps.setInt(5, order.getShedWidth());
+                ps.setInt(6, userId);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1) {
-                    throw new DatabaseException("No order with id = " + id + " found in database");
+                    throw new DatabaseException("Error creating order");
                 }
                 try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                     if (generatedKeys.next()) {

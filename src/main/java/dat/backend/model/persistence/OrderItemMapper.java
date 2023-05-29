@@ -152,7 +152,7 @@ public class OrderItemMapper {
 
     protected static void createOrderItemScrew(OrderItem orderItem, int orderId, int screwId, ConnectionPool connectionPool) throws DatabaseException
     {
-        String sql = "insert into order_item_screw (quantity, price, order_id, description, item_id) values (?, ?, ?, ?, ?)";
+        String sql = "insert into order_item_screw (order_id, quantity, description, price, item_id) values (?, ?, ?, ?, ?)";
 
         try (Connection connection = connectionPool.getConnection())
         {
@@ -172,7 +172,7 @@ public class OrderItemMapper {
         }
     }
         protected static void createOrderItemFitting(OrderItem orderItem, int orderId, int fittingId, ConnectionPool connectionPool) throws DatabaseException {
-            String sql = "insert into order_item_fitting (quantity, price, order_id, description, item_id) values (?, ?, ?, ?, ?)";
+            String sql = "insert into order_item_fitting (order_id, quantity, description, price, item_id) values (?, ?, ?, ?, ?)";
             try(Connection connection = connectionPool.getConnection()) {
                 try(PreparedStatement ps = connection.prepareStatement(sql)) {
                     ps.setInt(1, orderId);
@@ -188,7 +188,7 @@ public class OrderItemMapper {
             }
         }
     protected static void createOrderItemRoofTile(OrderItem orderItem, int orderId, int rooftileId, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "insert into order_item_roof_tile (quantity, price, order_id, description, item_id) values (?, ?, ?, ?, ?)";
+        String sql = "insert into order_item_roof_tile (order_id, quantity, description, price, item_id) values (?, ?, ?, ?, ?)";
 
         try(Connection connection = connectionPool.getConnection()) {
             try(PreparedStatement ps = connection.prepareStatement(sql)) {
