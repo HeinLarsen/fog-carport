@@ -21,6 +21,11 @@
             <br>
             <t2>Admin vil nu behandle din ordre. Der vil være lidt behandlingstid.</t2>
             <br>
+
+            <br>
+            <a href="index.jsp">Tilbage til forsiden og se mere på ordren. </a>
+            </br>
+
         </div>
 
 
