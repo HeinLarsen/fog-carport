@@ -48,7 +48,7 @@
     </nav>
 </header>
 
-<div id="body" class="container mt-4" style="min-height: 400px;">
+<div id="body" class="container mt-4 mb-3" style="min-height: 400px;">
     <h1 class="align-center"><jsp:invoke fragment="header"/></h1>
     <jsp:doBody/>
 </div>

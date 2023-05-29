@@ -35,4 +35,8 @@ public class OrderFacade {
     public static void deleteOrder(int id, ConnectionPool connectionPool) throws DatabaseException {
         OrderMapper.deleteOrder(id, connectionPool);
     }
+
+    public static void cancelOrder(int id, Enum Status, ConnectionPool connectionPool) throws DatabaseException {
+        OrderMapper.cancelOrder(id, Status, connectionPool);
+    }
 }

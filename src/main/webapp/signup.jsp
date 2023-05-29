@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="zip col-5">
-                    <label for="zip">by:</label>
+                    <label for="zip">Postnummer:</label>
                     <input class="m_left" type="text" id="zip" name="zip">
                 </div>
 

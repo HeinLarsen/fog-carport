@@ -90,22 +90,50 @@ padding-left: 3%;
 
 
 /* styling for admin homepage */
-
 .griddy {
 
     text-align: center;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
 }
 
+.sticky-header {
+    position: sticky;
+    top: 0;
+    background-color:#808080;
+    z-index: 1;
+}
+
+th.sticky-header {
+    background-color: lightgrey;
+}
 
 .homepage_grid_box{
     background-color: lightgray;
 }
+
+.box_width{
+    width: 85%;
+}
+
+.homepage_grid_box:nth-child(2) {
+    margin-left: -60px; /* Rykke venstre margin på Ubehandlet ordre liste kolonnen */
+}
+
+.scrollable-table {
+    max-height: 208px;
+    overflow-y: auto;
+    border: 1px solid silver;
+}
+
 
 
 /* styling for admingviewuser */
 
 /* har fået griddy klassen fra admin homepage */
 
+/* styling for index homepage */
+.dropdown-container {
+    margin-bottom: 15px; /* Juster dette til den ønskede mellemrumshøjde */
+}

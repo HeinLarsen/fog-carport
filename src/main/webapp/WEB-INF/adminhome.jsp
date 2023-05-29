@@ -4,72 +4,82 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page errorPage="../error.jsp" isErrorPage="false" %>
 
+
 <t:pagetemplate>
     <jsp:attribute name="header">
          Admin Page
     </jsp:attribute>
 
     <jsp:body>
-    <div class="griddy">
-        <div class="box homepage_grid_box">
-        <t2>Kunde liste:</t2>
-            <table class="table table-striped table-bordered">
-                <tr>
-                    <th>ID</th>
-                    <th>Email</th>
-                    <th>Navn</th>
-                </tr>
-                <c:forEach items="${requestScope.usersList}" var="user">
-                    <tr onclick="location.href='adminviewuser?id=${user.id}'">
-                            <td>${user.id}</td>
-                            <td>${user.email}</td>
-                            <td>${user.firstName} ${user.lastName}</td>
+        <div class="griddy">
+            <div class="box homepage_grid_box box_width">
+                <h3>Kunde liste:</h3>
+                <div class="scrollable-table">
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th class="sticky-header" style="background-color: lightgrey">ID</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Email</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Navn</th>
                         </tr>
-                </c:forEach>
-            </table>
+                        <c:forEach items="${requestScope.usersList}" var="user">
+                            <tr onclick="location.href='adminviewuser?id=${user.id}'">
+                                <td>${user.id}</td>
+                                <td>${user.email}</td>
+                                <td>${user.firstName} ${user.lastName}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
+
+            <div class="box homepage_grid_box">
+                <h3>Ubehandlet order liste:</h3>
+                <div class="scrollable-table">
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th class="sticky-header" style="background-color: lightgrey">ID</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Order</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Oprettelses dato</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Status</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Kunde</th>
+                        </tr>
+                        <c:forEach items="${requestScope.ordersPending}" var="ordersstatus">
+                            <tr onclick="location.href='admineditorder?id=${ordersstatus.orderID}&userid=${ordersstatus.userID}'">
+                                <td>${ordersstatus.orderID}</td>
+                                <td>${ordersstatus.length} cm x ${ordersstatus.width} cm,
+                                    shed: ${ordersstatus.shed}</td>
+                                <td>${ordersstatus.created}</td>
+                                <td>${ordersstatus.status}</td>
+                                <td>${ordersstatus.userID}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
+
+            <div class="box homepage_grid_box box_width">
+                <h3>Order liste:</h3>
+                <div class="scrollable-table">
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th class="sticky-header" style="background-color: lightgrey">ID</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Order</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Status</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Kunde</th>
+                        </tr>
+                        <c:forEach items="${requestScope.ordersList}" var="order">
+                            <tr onclick="location.href='admineditorder?id=${order.orderID}&userid=${order.userID}'">
+                                <td>${order.orderID}</td>
+                                <td>${order.length} cm x ${order.width} cm, shed: ${order.shed}</td>
+                                <td>${order.status}</td>
+                                <td>${order.userID}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
         </div>
-
-
-
-        <div class="box homepage_grid_box">
-            <t2>Order liste:</t2>
-            <table class="table table-striped table-bordered">
-                <tr>
-                    <th>ID</th>
-                    <th>Order</th>
-                    <th>Status</th>
-                </tr>
-                <c:forEach items="${requestScope.orders}" var="order">
-                    <tr>
-                        <td>${order.orderID}</td>
-                        <td>${order.length} ${order.width} ${order.shed}</td>
-                        <td>${order.status}</td>
-                        <td><a href="/admineditorder?id=${order.orderID}">Se ordre </a></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
-
-
-        <div class="box homepage_grid_box">
-            <t2>Ubehandlet order liste:</t2>
-            <table class="table table-striped table-bordered">
-                <tr>
-                    <th>ID</th>
-                    <th>Order</th>
-                    <th>Status</th>
-                </tr>
-                <c:forEach items="${requestScope.ordersPending}" var="ordersstatus">
-                    <tr>
-                        <td>ID</td>
-                        <td>Ordre</td>
-                        <td>Status</td>
-                        <td><a href="/admineditorder?id=${ordersstatus.orderID}">Redigerer ordre</a></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
-</div>
     </jsp:body>
+
 
 </t:pagetemplate>
