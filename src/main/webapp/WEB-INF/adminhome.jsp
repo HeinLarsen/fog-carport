@@ -17,9 +17,9 @@
                 <div class="scrollable-table">
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th class="sticky-header">ID</th>
-                            <th class="sticky-header">Email</th>
-                            <th class="sticky-header">Navn</th>
+                            <th class="sticky-header" style="background-color: lightgrey">ID</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Email</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Navn</th>
                         </tr>
                         <c:forEach items="${requestScope.usersList}" var="user">
                             <tr onclick="location.href='adminviewuser?id=${user.id}'">
@@ -37,11 +37,11 @@
                 <div class="scrollable-table">
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th class="sticky-header">ID</th>
-                            <th class="sticky-header">Order</th>
-                            <th class="sticky-header">Oprettelses dato</th>
-                            <th class="sticky-header">Status</th>
-                            <th class="sticky-header">Kunde</th>
+                            <th class="sticky-header" style="background-color: lightgrey">ID</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Order</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Oprettelses dato</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Status</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Kunde</th>
                         </tr>
                         <c:forEach items="${requestScope.ordersPending}" var="ordersstatus">
                             <tr onclick="location.href='admineditorder?id=${ordersstatus.orderID}&userid=${ordersstatus.userID}'">
@@ -62,10 +62,10 @@
                 <div class="scrollable-table">
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th class="sticky-header">ID</th>
-                            <th class="sticky-header">Order</th>
-                            <th class="sticky-header">Status</th>
-                            <th class="sticky-header">Kunde</th>
+                            <th class="sticky-header" style="background-color: lightgrey">ID</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Order</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Status</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Kunde</th>
                         </tr>
                         <c:forEach items="${requestScope.ordersList}" var="order">
                             <tr onclick="location.href='admineditorder?id=${order.orderID}&userid=${order.userID}'">

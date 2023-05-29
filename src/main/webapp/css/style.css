@@ -105,6 +105,10 @@ padding-left: 3%;
     z-index: 1;
 }
 
+th.sticky-header {
+    background-color: lightgrey;
+}
+
 .homepage_grid_box{
     background-color: lightgray;
 }

@@ -35,7 +35,20 @@
                         <select>
                             <option value="" selected disabled> Carport bredde</option>
                             <option value="option1">300cm</option>
-                            <option value="option2">250cm</option>
+                            <option value="option1">320cm</option>
+                            <option value="option2">340cm</option>
+                            <option value="option1">360cm</option>
+                            <option value="option1">380cm</option>
+                            <option value="option1">400cm</option>
+                            <option value="option1">420cm</option>
+                            <option value="option1">440cm</option>
+                            <option value="option1">460cm</option>
+                            <option value="option1">480cm</option>
+                            <option value="option1">500cm</option>
+                            <option value="option1">520cm</option>
+                            <option value="option1">540cm</option>
+                            <option value="option1">560cm</option>
+                            <option value="option1">580cm</option>
                             <option value="option3">600cm</option>
                         </select>
                     </div>
@@ -47,7 +60,20 @@
                         <select>
                             <option value="" selected disabled> Carport længde</option>
                             <option value="option1">480cm</option>
-                            <option value="option2">550cm</option>
+                            <option value="option1">500cm</option>
+                            <option value="option2">520cm</option>
+                            <option value="option1">540cm</option>
+                            <option value="option1">560cm</option>
+                            <option value="option1">580cm</option>
+                            <option value="option1">600cm</option>
+                            <option value="option1">620cm</option>
+                            <option value="option1">640cm</option>
+                            <option value="option1">660cm</option>
+                            <option value="option1">680cm</option>
+                            <option value="option1">700cm</option>
+                            <option value="option1">720cm</option>
+                            <option value="option1">740cm</option>
+                            <option value="option1">760cm</option>
                             <option value="option3">780cm</option>
                         </select>
                     </div>
@@ -59,8 +85,10 @@
                         <select>
                             <option value="" selected disabled> Skur bredde</option>
                             <option value="option1">200cm</option>
-                            <option value="option2">250cm</option>
-                            <option value="option3">280cm</option>
+                            <option value="option1">220cm</option>
+                            <option value="option2">240cm</option>
+                            <option value="option1">260cm</option>
+                            <option value="option1">280cm</option>
                         </select>
                     </div>
                 </div>
@@ -70,7 +98,10 @@
                         <select>
                             <option value="" selected disabled> Skur længde</option>
                             <option value="option1">100cm</option>
-                            <option value="option2">150cm</option>
+                            <option value="option1">120cm</option>
+                            <option value="option2">140cm</option>
+                            <option value="option1">160cm</option>
+                            <option value="option1">180cm</option>
                             <option value="option3">200cm</option>
                         </select>
                     </div>
