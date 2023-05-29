@@ -3,11 +3,11 @@ package dat.backend.model.entities;
 public abstract class AMaterial {
     private int id;
     private String name;
-    private int length;
+    private double length;
     private double price;
     private String unit;
 
-    public AMaterial(int id, String name, int length, double price, String unit){
+    public AMaterial(int id, String name, double length, double price, String unit){
         this.id = id;
         this.name = name;
         this.length = length;
@@ -25,7 +25,7 @@ public abstract class AMaterial {
         return name;
     }
 
-    public int getLength(){
+    public double getLength(){
         return length;
     }
 

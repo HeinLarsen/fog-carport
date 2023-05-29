@@ -57,16 +57,16 @@ CREATE TABLE IF NOT EXISTS `carport`.`wood`
 (
     `id`                  INT         NOT NULL AUTO_INCREMENT,
     `name`                VARCHAR(45) NULL,
-    `width`               INT         NOT NULL,
-    `length`              INT         NOT NULL,
-    `height`              INT         NOT NULL,
+    `width`               DOUBLE      NOT NULL,
+    `length`              DOUBLE       NOT NULL,
+    `height`              DOUBLE      NOT NULL,
     `is_pressure_treated` TINYINT     NOT NULL DEFAULT 0,
     `category`            INT         NOT NULL,
     `unit`                INT         NOT NULL,
     `price`               DOUBLE      NULL,
     PRIMARY KEY (`id`),
-    INDEX `fk_wood_unit_idx` (`unit` ASC) VISIBLE,
-    INDEX `fk_wood_category1_idx` (`category` ASC) VISIBLE,
+    INDEX `fk_wood_unit_idx` (`unit` ASC),
+    INDEX `fk_wood_category1_idx` (`category` ASC),
     CONSTRAINT `fk_wood_unit`
         FOREIGN KEY (`unit`)
             REFERENCES `carport`.`unit` (`id`)
@@ -90,12 +90,12 @@ CREATE TABLE IF NOT EXISTS `carport`.`roof_tile`
 (
     `id`     INT         NOT NULL AUTO_INCREMENT,
     `name`   VARCHAR(45) NULL,
-    `width`  INT         NOT NULL,
-    `length` INT         NOT NULL,
+    `width`  DOUBLE         NOT NULL,
+    `length` DOUBLE         NOT NULL,
     `unit`   INT         NOT NULL,
     `price`  DOUBLE      NULL,
     PRIMARY KEY (`id`),
-    INDEX `fk_roof_tile_unit1_idx` (`unit` ASC) VISIBLE,
+    INDEX `fk_roof_tile_unit1_idx` (`unit` ASC),
     CONSTRAINT `fk_roof_tile_unit1`
         FOREIGN KEY (`unit`)
             REFERENCES `carport`.`unit` (`id`)
@@ -115,11 +115,11 @@ CREATE TABLE IF NOT EXISTS `carport`.`screw`
     `id`       INT         NOT NULL AUTO_INCREMENT,
     `name`     VARCHAR(45) NULL,
     `diameter` INT         NOT NULL,
-    `length`   INT         NOT NULL,
+    `length`   DOUBLE         NOT NULL,
     `unit`     INT         NOT NULL,
     `price`    DOUBLE      NULL,
     PRIMARY KEY (`id`),
-    INDEX `fk_roof_tile_unit1_idx` (`unit` ASC) VISIBLE,
+    INDEX `fk_roof_tile_unit1_idx` (`unit` ASC),
     CONSTRAINT `fk_roof_tile_unit10`
         FOREIGN KEY (`unit`)
             REFERENCES `carport`.`unit` (`id`)
@@ -138,13 +138,13 @@ CREATE TABLE IF NOT EXISTS `carport`.`fitting`
 (
     `id`     INT         NOT NULL AUTO_INCREMENT,
     `name`   VARCHAR(45) NULL,
-    `width`  INT         NULL,
-    `length` INT         NULL,
-    `height` INT         NOT NULL,
+    `width`  DOUBLE         NULL,
+    `length` DOUBLE         NULL,
+    `height` DOUBLE         NOT NULL,
     `unit`   INT         NOT NULL,
     `price`  DOUBLE      NULL,
     PRIMARY KEY (`id`),
-    INDEX `fk_roof_tile_unit1_idx` (`unit` ASC) VISIBLE,
+    INDEX `fk_roof_tile_unit1_idx` (`unit` ASC),
     CONSTRAINT `fk_roof_tile_unit100`
         FOREIGN KEY (`unit`)
             REFERENCES `carport`.`unit` (`id`)
@@ -215,9 +215,9 @@ CREATE TABLE IF NOT EXISTS `carport`.`user`
     `membership`   INT         NOT NULL DEFAULT 1,
     `role`         INT         NOT NULL DEFAULT 1,
     PRIMARY KEY (`id`),
-    INDEX `fk_user_zip1_idx` (`zip` ASC) VISIBLE,
-    INDEX `fk_user_memership1_idx` (`membership` ASC) VISIBLE,
-    INDEX `fk_user_role1_idx` (`role` ASC) VISIBLE,
+    INDEX `fk_user_zip1_idx` (`zip` ASC),
+    INDEX `fk_user_memership1_idx` (`membership` ASC),
+    INDEX `fk_user_role1_idx` (`role` ASC),
     CONSTRAINT `fk_user_zip1`
         FOREIGN KEY (`zip`)
             REFERENCES `carport`.`zip` (`zip`)
@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `carport`.`order`
     `created` TIMESTAMP                                 NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `status`  ENUM ('PENDING', 'APPROVED', 'CANCELlED') NOT NULL DEFAULT 'PENDING',
     PRIMARY KEY (`id`),
-    INDEX `fk_order_user1_idx` (`user_id` ASC) VISIBLE,
+    INDEX `fk_order_user1_idx` (`user_id` ASC),
     CONSTRAINT `fk_order_user1`
         FOREIGN KEY (`user_id`)
             REFERENCES `carport`.`user` (`id`)
@@ -276,8 +276,8 @@ CREATE TABLE IF NOT EXISTS `carport`.`order_item_wood`
     `price`       DOUBLE      NOT NULL,
     `item_id`     INT         NOT NULL,
     PRIMARY KEY (`id`),
-    INDEX `fk_order_item_order1_idx` (`order_id` ASC) VISIBLE,
-    INDEX `fk_order_item_wood_wood1_idx` (`item_id` ASC) VISIBLE,
+    INDEX `fk_order_item_order1_idx` (`order_id` ASC),
+    INDEX `fk_order_item_wood_wood1_idx` (`item_id` ASC),
     CONSTRAINT `fk_order_item_order1`
         FOREIGN KEY (`order_id`)
             REFERENCES `carport`.`order` (`id`)
@@ -306,8 +306,8 @@ CREATE TABLE IF NOT EXISTS `carport`.`order_item_roof_tile`
     `price`       DOUBLE      NOT NULL,
     `item_id`     INT         NOT NULL,
     PRIMARY KEY (`id`),
-    INDEX `fk_order_item_order1_idx` (`order_id` ASC) VISIBLE,
-    INDEX `fk_order_item_roof_tile_roof_tile1_idx` (`item_id` ASC) VISIBLE,
+    INDEX `fk_order_item_order1_idx` (`order_id` ASC),
+    INDEX `fk_order_item_roof_tile_roof_tile1_idx` (`item_id` ASC),
     CONSTRAINT `fk_order_item_order10`
         FOREIGN KEY (`order_id`)
             REFERENCES `carport`.`order` (`id`)
@@ -336,8 +336,8 @@ CREATE TABLE IF NOT EXISTS `carport`.`order_item_screw`
     `price`       DOUBLE      NOT NULL,
     `item_id`     INT         NOT NULL,
     PRIMARY KEY (`id`),
-    INDEX `fk_order_item_order1_idx` (`order_id` ASC) VISIBLE,
-    INDEX `fk_order_item_screw_screw1_idx` (`item_id` ASC) VISIBLE,
+    INDEX `fk_order_item_order1_idx` (`order_id` ASC),
+    INDEX `fk_order_item_screw_screw1_idx` (`item_id` ASC),
     CONSTRAINT `fk_order_item_order100`
         FOREIGN KEY (`order_id`)
             REFERENCES `carport`.`order` (`id`)
@@ -366,8 +366,8 @@ CREATE TABLE IF NOT EXISTS `carport`.`order_item_fitting`
     `price`       DOUBLE      NOT NULL,
     `item_id`     INT         NOT NULL,
     PRIMARY KEY (`id`),
-    INDEX `fk_order_item_order1_idx` (`order_id` ASC) VISIBLE,
-    INDEX `fk_order_item_fitting_fitting1_idx` (`item_id` ASC) VISIBLE,
+    INDEX `fk_order_item_order1_idx` (`order_id` ASC),
+    INDEX `fk_order_item_fitting_fitting1_idx` (`item_id` ASC),
     CONSTRAINT `fk_order_item_order1000`
         FOREIGN KEY (`order_id`)
             REFERENCES `carport`.`order` (`id`)
@@ -378,7 +378,8 @@ CREATE TABLE IF NOT EXISTS `carport`.`order_item_fitting`
             REFERENCES `carport`.`fitting` (`id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
-)
+);
+
 create database if not exists carport_test;
 create table if not exists carport_test.category like carport.category;
 create table if not exists carport_test.fitting like carport.fitting;
@@ -397,7 +398,6 @@ create table if not exists carport_test.wood like carport.wood;
 create table if not exists carport_test.zip like carport.zip;
 
 
-    ENGINE = InnoDB;
 
 
 SET SQL_MODE = @OLD_SQL_MODE;

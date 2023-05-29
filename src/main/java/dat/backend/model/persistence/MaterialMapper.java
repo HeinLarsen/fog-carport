@@ -23,10 +23,10 @@ public class MaterialMapper {
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
                     String category = rs.getString("category");
-                    int width = rs.getInt("width");
-                    int length = rs.getInt("length");
-                    int height = rs.getInt("height");
-                    double price = rs.getInt("price");
+                    double width = rs.getDouble("width");
+                    double length = rs.getDouble("length");
+                    double height = rs.getDouble("height");
+                    double price = rs.getDouble("price");
                     boolean isPressureTreated = rs.getBoolean("is_pressure_treated");
                     wood.add(new Wood(id, name, length, price, unit, category, width, height, isPressureTreated));
                 }
@@ -47,7 +47,7 @@ public class MaterialMapper {
                     int id = rs.getInt("id");
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
-                    int length = rs.getInt("length");
+                    double length = rs.getDouble("length");
                     double price = rs.getInt("price");
                     int diameter = rs.getInt("diameter");
                     screws.add(new Screw(id, name, length, price, unit, diameter));
@@ -70,8 +70,8 @@ public class MaterialMapper {
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
                     double price = rs.getInt("price");
-                    int width = rs.getInt("width");
-                    int length = rs.getInt("length");
+                    double width = rs.getDouble("width");
+                    double length = rs.getDouble("length");
                     roofTiles.add(new RoofTile(id, name, length, price, unit, width));
                 }
             }
@@ -92,9 +92,9 @@ public class MaterialMapper {
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
                     double price = rs.getInt("price");
-                    int width = rs.getInt("width");
-                    int length = rs.getInt("length");
-                    int height = rs.getInt("height");
+                    double width = rs.getDouble("width");
+                    double length = rs.getDouble("length");
+                    double height = rs.getDouble("height");
                     fittings.add(new Fitting(id, name, length, price, unit, width, height));
                 }
             }
@@ -115,9 +115,9 @@ public class MaterialMapper {
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
                     String category = rs.getString("category");
-                    int width = rs.getInt("width");
-                    int length = rs.getInt("length");
-                    int height = rs.getInt("height");
+                    double width = rs.getDouble("width");
+                    double length = rs.getDouble("length");
+                    double height = rs.getDouble("height");
                     double price = rs.getInt("price");
                     boolean isPressureTreated = rs.getBoolean("is_pressure_treated");
                     wood = new Wood(id, name, length, price, unit, category, width, height, isPressureTreated);
@@ -140,8 +140,8 @@ public class MaterialMapper {
                 while(rs.next()) {
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
-                    int length = rs.getInt("length");
-                    double price = rs.getInt("price");
+                    double length = rs.getDouble("length");
+                    double price = rs.getDouble("price");
                     int diameter = rs.getInt("diameter");
                     screw = new Screw(id, name, length, price, unit, diameter);
                 }
@@ -163,8 +163,8 @@ public class MaterialMapper {
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
                     double price = rs.getInt("price");
-                    int width = rs.getInt("width");
-                    int length = rs.getInt("length");
+                    double width = rs.getDouble("width");
+                    double length = rs.getDouble("length");
                     roofTile = new RoofTile(id, name, length, price, unit, width);
                 }
             }
@@ -184,10 +184,10 @@ public class MaterialMapper {
                 while(rs.next()) {
                     String name = rs.getString("name");
                     String unit = rs.getString("unit");
-                    double price = rs.getInt("price");
-                    int width = rs.getInt("width");
-                    int length = rs.getInt("length");
-                    int height = rs.getInt("height");
+                    double price = rs.getDouble("price");
+                    double width = rs.getDouble("width");
+                    double length = rs.getDouble("length");
+                    double height = rs.getInt("height");
                     fitting = new Fitting(id, name, length, price, unit, width, height);
                 }
             }
