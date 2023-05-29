@@ -24,7 +24,7 @@ public class ModellingTest {
 
     private static ConnectionPool connectionPool;
 
-   /* @BeforeAll
+    @BeforeAll
     public static void setUpClass()
     {
         connectionPool = new ConnectionPool(USER, PASSWORD, URL);
@@ -128,5 +128,5 @@ public class ModellingTest {
         order.addOrderItems(list);
 
         Modelling.generateFiles(order);
-    }*/
+    }
 }
