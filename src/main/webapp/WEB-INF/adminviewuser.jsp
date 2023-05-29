@@ -12,13 +12,11 @@
     <jsp:body>
 
         <div class="mt-5 align-center griddy">
-            <div class="box">
+            <div class="box homepage_grid_box box_width">
                 <h2>Bruger info:</h2>
                 <div class="box">
                     <br>
                     Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
-
-
                     <br>
                     Email: ${requestScope.user.email}
                     <br>
@@ -28,50 +26,48 @@
                     <br>
                     Postnummer: ${requestScope.user.zip}
                     <br>
-                    Medlemskab: ${requestScope.user.membershipId}
+                    Medlemskab:
+                    <c:choose>
+                        <c:when test="${requestScope.user.membershipId eq 1}">
+                            Basic
+                        </c:when>
+                        <c:when test="${requestScope.user.membershipId eq 2}">
+                            Member
+                        </c:when>
+                        <c:when test="${requestScope.user.membershipId eq 3}">
+                            Worker
+                        </c:when>
+                        <c:otherwise>
+                            Unknown
+                        </c:otherwise>
+                    </c:choose>
                     <br/>
-
                 </div>
             </div>
 
-            <div class="box">
-                <h2>Order:</h2>
-
-                <c:forEach items="${requestScope.orders}" var="order">
-                <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Bestilt:</th>
-                        <th>Oprettelses dato</th>
-                        <th>Status</th>
-                        <th>Pris</th>
-                        <th>Se Ordre</th>
-                    </tr>
-
-                    <td>
-                        <p>${order.orderID}</p>
-                    <td>
-                        <p>${order.length}</p>
-                        <p>${order.width}</p>
-                        <p>${order.shed}</p>
-                    <td>
-                        <p>${order.status}</p>
-                    <td>
-                        <p>${order.created}</p>
-                    <td>
-                        <p>${order.totalPrice}kr,-</p>
-                    </td>
-
-                    <a href="showuserinfosorder?id=${order.orderID}" value="${order.orderID}"
-                       class="btn btn-primary">Redigere</a>
-
-                    </thead>
-                </table>
+            <div class="box homepage_grid_box">
+                <h3>Order liste:</h3>
+                <div class="scrollable-table">
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th class="sticky-header">ID</th>
+                            <th class="sticky-header">Order</th>
+                            <th class="sticky-header">Oprettelses dato</th>
+                            <th class="sticky-header">Status</th>
+                        </tr>
+                        <c:forEach items="${requestScope.orderList}" var="order">
+                            <tr onclick="location.href='admineditorder?id=${order.orderID}'">
+                                <td>${order.orderID}</td>
+                                <td>${order.length} cm x ${order.width} cm, shed: ${order.shed}</td>
+                                <td>${order.created}</td>
+                                <td>${order.status}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
             </div>
-            </c:forEach>
         </div>
-        </div>
+
 
     </jsp:body>
 

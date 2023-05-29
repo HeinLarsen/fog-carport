@@ -12,7 +12,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "Signup", value = "/signup")
-public class Signup extends HttpServlet {
+public class  Signup extends HttpServlet {
     private ConnectionPool connectionPool;
 
     @Override

@@ -1,11 +1,9 @@
 package dat.backend.model.services;
 
-import com.thoughtworks.qdox.model.expression.Or;
 import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.*;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -632,16 +630,15 @@ public class OrderService {
     }
 
 
-    //I dette metode skal vi have regnet carports bredde samt længde ud, beregningsmetode kommer her.
-    public void addOrder(Order order) {
-
-    }
-
-    public void updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException, IOException {
+    public static Order updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException {
         order.setStatus("approved");
-        Modelling.generateFiles(order);
 
         OrderFacade.approveOrder(order, connectionPool);
+        return order;
+    }
+
+    public void cancelOrder(int id, Enum Status, ConnectionPool connectionPool) throws DatabaseException {
+        OrderFacade.cancelOrder(id, Status, connectionPool);
     }
 
     public void deleteOrder(int id, ConnectionPool connectionPool) throws DatabaseException {
