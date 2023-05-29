@@ -204,5 +204,61 @@ public class OrderItemMapper {
             throw new DatabaseException(e, "Error creating order item");
         }
     }
+
+    protected static boolean deleteOrderItemRoofTile(int id, ConnectionPool connectionPool) throws DatabaseException{
+        String sql = "delete from order_item_roof_tile where order_id = ?";
+        try(Connection connection = connectionPool.getConnection()) {
+            try(PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException(e, "Error deleting order item");
+        }
+        return true;
+    }
+
+    protected static boolean deleteOrderItemScrew(int id, ConnectionPool connectionPool) throws DatabaseException{
+        String sql = "delete from order_item_screw where order_id = ?";
+        try(Connection connection = connectionPool.getConnection()) {
+            try(PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException(e, "Error deleting order item");
+        }
+        return true;
+    }
+
+    protected static boolean deleteOrderItemWood(int id, ConnectionPool connectionPool) throws DatabaseException{
+        String sql = "delete from order_item_wood where order_id = ?";
+        try(Connection connection = connectionPool.getConnection()) {
+            try(PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException(e, "Error deleting order item");
+        }
+        return true;
+    }
+
+    protected static boolean deleteOrderItemFitting(int id, ConnectionPool connectionPool) throws DatabaseException{
+        String sql = "delete from order_item_fitting where order_id = ?";
+        try(Connection connection = connectionPool.getConnection()) {
+            try(PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException(e, "Error deleting order item");
+        }
+        return true;
+    }
 }
 

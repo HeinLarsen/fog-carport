@@ -4,7 +4,6 @@ import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrderItemFacade {
     public static ArrayList<OrderItem> getOrderItemsByOrderId(int id, ConnectionPool connectionPool) throws DatabaseException {
@@ -31,5 +30,11 @@ public class OrderItemFacade {
 
         }
 
+    }
+    public static void deleteOrderItems(int id, ConnectionPool connectionPool) throws DatabaseException{
+        OrderItemMapper.deleteOrderItemScrew(id, connectionPool);
+        OrderItemMapper.deleteOrderItemFitting(id, connectionPool);
+        OrderItemMapper.deleteOrderItemWood(id, connectionPool);
+        OrderItemMapper.deleteOrderItemRoofTile(id, connectionPool);
     }
 }

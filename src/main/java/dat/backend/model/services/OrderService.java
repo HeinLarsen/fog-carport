@@ -1,6 +1,5 @@
 package dat.backend.model.services;
 
-import com.thoughtworks.qdox.model.expression.Or;
 import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.*;
@@ -651,10 +650,23 @@ public class OrderService {
 
 
 
-    public void updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException {
+    public static Order updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException {
         order.setStatus("approved");
 
         OrderFacade.approveOrder(order, connectionPool);
+        return order;
+    }
+
+    public void cancelOrder(int id, Enum Status, ConnectionPool connectionPool) throws DatabaseException {
+        OrderFacade.cancelOrder(id, Status, connectionPool);
+    }
+
+    public void deleteOrder(int id, ConnectionPool connectionPool) throws DatabaseException {
+        OrderFacade.deleteOrder(id, connectionPool);
+    }
+
+    public void deleteOrderItems(int id, ConnectionPool connectionPool) throws DatabaseException {
+        OrderItemFacade.deleteOrderItems(id, connectionPool);
     }
 
 }

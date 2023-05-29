@@ -23,7 +23,7 @@ public class UserService {
 
     public static void createUser2(String firstName, String lastName, String email, String password, String address, int phoneNumber,  int zip, ConnectionPool connectionPool) throws DatabaseException
     {
-      UserFacade.createUser2( firstName, lastName, email, password, address, phoneNumber, zip, connectionPool);
+     UserFacade.createUser2(firstName, lastName, email, password, address, phoneNumber, zip, connectionPool);
 
 
     }
