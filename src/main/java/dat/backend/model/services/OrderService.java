@@ -642,4 +642,12 @@ public class OrderService {
         OrderFacade.approveOrder(order, connectionPool);
     }
 
+    public void deleteOrder(int id, ConnectionPool connectionPool) throws DatabaseException {
+        OrderFacade.deleteOrder(id, connectionPool);
+    }
+
+    public void deleteOrderItems(int id, ConnectionPool connectionPool) throws DatabaseException {
+        OrderItemFacade.deleteOrderItems(id, connectionPool);
+    }
+
 }
