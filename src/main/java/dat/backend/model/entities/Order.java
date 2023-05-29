@@ -12,11 +12,13 @@ public class Order {
         private int shedLength;
         private int shedWidth;
         private boolean shed;
+        private int userID;
         private ArrayList<OrderItem> orderItems;
 
 
-        public Order(int orderID, Timestamp created, Enum status, int length, int width, boolean shed){
-                this.orderID =orderID;
+        public Order(int orderID, int userID, Timestamp created, Enum status, int length, int width, boolean shed){
+                this.orderID = orderID;
+                this.userID = userID;
                 this.created = created;
                 this.status = status;
                 this.length = length;
@@ -47,9 +49,9 @@ public class Order {
 
         }
 
-        public int getLength() {
-                return length;
-        }
+        public int getUserID() { return userID; }
+
+        public int getLength() { return length; }
 
         public int getWidth() {
                 return width;
