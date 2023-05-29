@@ -122,7 +122,7 @@ th.sticky-header {
 }
 
 .scrollable-table {
-    max-height: 208px;
+    max-height: 40vw;
     overflow-y: auto;
     border: 1px solid silver;
 }
