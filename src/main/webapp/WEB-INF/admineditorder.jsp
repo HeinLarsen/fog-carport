@@ -31,11 +31,12 @@
                             <th class="sticky-header"></th>
 
                             <c:forEach items="${requestScope.orderItemWood}" var="wood">
-                                <td>${wood.width} ${wood.hight}</td>
-                                <td>${wood.length}</td>
-                                <td>${orderitem.quantity}</td>
-                                <td>${wood.unit} </td>
+                                <td>${wood.material.length} ${wood.material.unit}</td>
+                                <td>${wood.material.name}</td>
+                                <td>${wood.quantity}</td>
+                                <td>${wood.price}</td>
                                 <td>${wood.description}</td>
+
                             </c:forEach>
                         </tr>
 
@@ -47,13 +48,13 @@
                             <th class="sticky-header"></th>
 
                             <c:forEach items="${requestScope.orderItemRoofTile}" var="rooftile">
-                            <td>${rooftile.width} ${rooftile.hight}</td>
-                            <td>${rooftile.length}</td>
-                            <td>${rooftile.amount}</td>
-                            <td>${rooftile.unit} </td>
-                            <td>${rooftile.description}</td>
+                            <td>${rooftile.material.id}</td>
+                            <td>${rooftile.material.unit}</td>
+                            <td>${rooftile.material.length} </td>
+                            <td>${rooftile.material.price}</td>
+                            <td>${rooftile.quantity}</td
                             </c:forEach>
-                        <tr>
+                        </tr>
 
                         <tr>
                             <th class="sticky-header">Skruer</th>
@@ -63,10 +64,11 @@
                             <th class="sticky-header"></th>
 
                             <c:forEach items="${requestScope.orderItemScrew}" var="screw">
-                            <td>${screw.diameter}</td>
-                            <td>${screw.name}</td>
-                            <td>${screw.amount}</td>
-                            <td>${screw.description}</td>
+                            <td>${screw.material.id}</td>
+                            <td>${screw.material.name}</td>
+                            <td>${screw.quantity}</td>
+                            <td>${screw.material.price}</td>
+                        
                             </c:forEach>
 
                         <tr>
@@ -79,10 +81,10 @@
                             <th class="sticky-header"></th>
 
                             <c:forEach items="${requestScope.orderItemFitting}" var="fitting">
-                                <td>${fitting.name}</td>
-                                <td>${fitting.width} ${fitting.hight}</td>
-                                <td>${fitting.diameter}</td>
-                                <td>${fitting.amount}</td>
+                                <td>${fitting.material.name}</td>
+                                <td>${fitting.material.length} ${fitting.material.unit}</td>
+                                <td>${fitting.material.price}</td>
+                                <td>${fitting.quantity}</td>
                                 <td>${fitting.description}</td>
                             </c:forEach>
                         </tr>
@@ -129,7 +131,7 @@
 
             <div class="box">
                 <h2>Pris: </h2>
-                    ${requestScope.order.calculatePrice()}
+                    //insæt pris her
             </div>
 
             <form action="admineditorder" method="post">
@@ -142,11 +144,13 @@
             </form>
 
             <div class="box">
-                <h2>Filer: </h2>
+                <h2>Filer:
+                    <a href="src/main/webapp/models/buildList-${requestScope.user.id}.stl" download>download ordre</a>
+                    <a href="src/main/webapp/models/materialList-${requestScope.user.id}.stl" download>download ordre</a>
+                </h2>
             </div>
         </div>
-        <a href="src/main/webapp/models/buildList-1.stl" download>download ordre</a>
-        <a href="src/main/webapp/models/materialList-1.stl" download>download ordre</a>
+
 
 
     </jsp:body>

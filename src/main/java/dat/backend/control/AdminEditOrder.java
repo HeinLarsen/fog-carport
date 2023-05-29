@@ -30,19 +30,19 @@ public class AdminEditOrder extends HttpServlet {
         HttpSession session = request.getSession();
 
         User u = (User) session.getAttribute("user");
-        Order o = (Order) session.getAttribute("order");
         int orderId = Integer.parseInt(request.getParameter("id"));
         int userId = Integer.parseInt(request.getParameter("userid"));
-        String status = request.getParameter("status");
+
+
 
         request.setAttribute("user", u);
-        request.setAttribute("order", o);
+
 
         try {
             if (u != null && u.getRoleId() == 2) {
                 User userinfo = UserService.getUser(userId, connectionPool);
                 Order order = OrderService.getOrderById(orderId, connectionPool);
-                Order approvedOrder = OrderService.updateOrder(order, status, connectionPool);
+
 
 
                 ArrayList<OrderItem> orderItemWood = new ArrayList<>();
@@ -69,10 +69,7 @@ public class AdminEditOrder extends HttpServlet {
                 request.setAttribute("orderItemRoofTile", orderItemRoofTile);
                 request.setAttribute("user", userinfo);
 
-                if(o.getStatus().equals("PENDING")){
-                 request.setAttribute("status", "APPROVED");
 
-                 }
 
                 request.getRequestDispatcher("WEB-INF/admineditorder.jsp").forward(request, response);
             } else {
@@ -85,6 +82,7 @@ public class AdminEditOrder extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         doGet(request, response);
     }
 }
