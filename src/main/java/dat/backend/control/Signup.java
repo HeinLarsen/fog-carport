@@ -1,6 +1,7 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.UserFacade;
@@ -32,12 +33,14 @@ public class  Signup extends HttpServlet {
         String firstName =request.getParameter("first_name");
         String lastname = request.getParameter("last_name");
         String email = request.getParameter("email");
-        String password = request.getParameter("adgangskode");
+        String password = request.getParameter("password");
         String address = request.getParameter("address");
         int phoneNumber = Integer.parseInt(request.getParameter("phone_number"));
         int zip = Integer.parseInt(request.getParameter("zip"));
+        String city = request.getParameter("city");
+        User u = new User(firstName, lastname, email, password, address, phoneNumber, zip, city);
         try {
-            UserService.createUser2(firstName, lastname, email, password, address, phoneNumber, zip, connectionPool);
+            UserService.createUser2(u, connectionPool);
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         } catch (DatabaseException e) {
             request.setAttribute("errormessage", e.getMessage());
