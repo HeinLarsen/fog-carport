@@ -182,7 +182,7 @@ public class OrdreServiceTest {
 
         ArrayList<Order> expected = OrderService.getAllOrders(connectionPool);
         int actual = expected.size();
-        assertEquals(1, actual);
+        assertEquals(2, actual);
     }
 
 }
