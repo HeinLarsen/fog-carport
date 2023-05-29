@@ -116,7 +116,8 @@ class UserMapperTest
     @Test
     void createUser() throws DatabaseException
     {
-        User newUser = UserMapper.createUser("Tobias", "Tonndorff", "Tobias@Tonndorff.dk", "1234", "kollegiebakken 15A", 21177311,  2800, connectionPool);
+        User u = new User("Tobias", "Tonndorff", "Tobias@Tonndorff.dk", "1234", "kollegiebakken 15A", 21177311,  2800, "city");
+        User newUser = UserMapper.createUser(u, connectionPool);
         User expectedUser = UserMapper.getUser(4, connectionPool);
         assertEquals(expectedUser, newUser);
 
@@ -127,7 +128,7 @@ class UserMapperTest
     void updateUserTest() throws DatabaseException
    {
          User expectedUser = UserService.getUser(3, connectionPool);
-         User updatedUser = UserService.updateUser(3, "Anders", "larsen", "Ander@Larsen.dk", "Lars1234", "Somewhere in allerød", 123456789, 1, 0, 2800, connectionPool);
+         User updatedUser = UserService.updateUser(3, "Anders", "larsen", "Ander@Larsen.dk", "Lars1234", "Somewhere in allerød", 123456789, 1, 0, 2800, "hillerød", connectionPool);
        System.out.println(expectedUser);
          System.out.println(updatedUser);
             assertNotEquals(expectedUser, updatedUser);
