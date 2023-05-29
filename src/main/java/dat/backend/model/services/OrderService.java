@@ -137,6 +137,8 @@ public class OrderService {
         return orderItems;
     }
 
+
+
     private static OrderItem calculateWoodPlankLengthForZShape(List<Wood> woods, OrderItemTask task) {
         // Constants for door height and width
         int height = 210; // cm
@@ -632,7 +634,6 @@ public class OrderService {
 
 
     public static Order updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException, IOException {
-        order.setStatus("approved");
         OrderFacade.approveOrder(order, connectionPool);
         Modelling.generateFiles(order);
         return order;

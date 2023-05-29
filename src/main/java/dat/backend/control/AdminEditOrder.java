@@ -42,7 +42,7 @@ public class AdminEditOrder extends HttpServlet {
             if (u != null && u.getRoleId() == 2) {
                 User userinfo = UserService.getUser(userId, connectionPool);
                 Order order = OrderService.getOrderById(orderId, connectionPool);
-                //Order approveOrder = OrderService.updateOrder(order, status, connectionPool);
+                Order approvedOrder = OrderService.updateOrder(order, status, connectionPool);
 
 
                 ArrayList<OrderItem> orderItemWood = new ArrayList<>();
@@ -69,10 +69,10 @@ public class AdminEditOrder extends HttpServlet {
                 request.setAttribute("orderItemRoofTile", orderItemRoofTile);
                 request.setAttribute("user", userinfo);
 
-                //if(o.getStatus().equals("PENDING")){
-                // request.setAttribute("status", "APPROVED");
+                if(o.getStatus().equals("PENDING")){
+                 request.setAttribute("status", "APPROVED");
 
-                // }
+                 }
 
                 request.getRequestDispatcher("WEB-INF/admineditorder.jsp").forward(request, response);
             } else {
