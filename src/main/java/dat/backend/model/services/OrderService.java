@@ -607,29 +607,6 @@ public class OrderService {
         return woodMap.firstEntry().getValue();
     }
 
-////TODO: Use the woodMap from the method above to find the cufOffLength when given a target length
-//public static double calculateWoodWaste(int targetLength, List<Wood> woods) {
-//    List<OrderItem> bestCombination = getSterns(targetLength, woods, OrderItemTask.STERN_UPPER_SIDES);
-//
-//    //figure out to insert order.getLength() instead of 0
-//    double totalLength = 0;
-//
-//    // Calculate the total length of the best wood combination
-//    for (OrderItem orderItem : bestCombination) {
-//        totalLength = bestCombination.get(0).getMaterial().getLength() * bestCombination.get(0).getQuantity();
-//    }
-//
-//    // Calculate the difference between the target length and the total length
-//    double woodWaste = Math.abs(targetLength - totalLength);
-//
-//    System.out.println("Best Wood Combination: " + bestCombination);
-//    System.out.println("Wood Waste: " + woodWaste);
-//    return woodWaste;
-//}
-
-
-
-
 
     private static List<Wood> filterWoods(List<Wood> woods, Predicate<Wood> predicate) {
         return woods.stream()
