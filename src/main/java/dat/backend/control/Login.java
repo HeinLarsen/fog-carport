@@ -55,7 +55,6 @@ public class Login extends HttpServlet
 
                 session = request.getSession();
                 session.setAttribute("user", user); // adding user object to session scope
-                System.out.println("User logged in: " + user);
                 request.getRequestDispatcher("/index").forward(request, response);
             }
         }

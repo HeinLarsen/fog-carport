@@ -69,27 +69,22 @@
                 <h2>Skur</h2>
                 <div class="dropdown-container">
                     <div class="dropdown">
-                        <select>
+                        <select name="shedwidth">
                             <option value="" selected disabled> Skur bredde</option>
-                            <option value="option1">200cm</option>
-                            <option value="option1">220cm</option>
-                            <option value="option2">240cm</option>
-                            <option value="option1">260cm</option>
-                            <option value="option1">280cm</option>
+                            <c:forEach items="${requestScope.shedwidth}" var="shedwidth">
+                                <option value="${shedwidth}"  <c:if test="${shedwidth == requestScope.shedwidth}">selected</c:if> >${shedwidth} cm</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </div>
 
                 <div class="dropdown-container">
                     <div class="dropdown">
-                        <select>
-                            <option value="" selected disabled> Skur længde</option>
-                            <option value="option1">100cm</option>
-                            <option value="option1">120cm</option>
-                            <option value="option2">140cm</option>
-                            <option value="option1">160cm</option>
-                            <option value="option1">180cm</option>
-                            <option value="option3">200cm</option>
+                        <select name="shedlength">
+                            <option value="" selected disabled> Skur bredde</option>
+                            <c:forEach items="${requestScope.shedlength}" var="shedlength">
+                                <option value="${shedlength}"  <c:if test="${shedlength == requestScope.shedlength}">selected</c:if> >${shedlength} cm</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </div>
