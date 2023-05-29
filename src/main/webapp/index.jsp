@@ -43,9 +43,9 @@
         <form action="order" method="post">
             <div class="align-center">
                 <div class="dropdown-container">
+                    <h4>Carport bredde</h4>
                     <div class="dropdown">
                         <select name="carportwidth">
-                           <option value="" selected disabled> Carport bredde</option>
                             <c:forEach items="${requestScope.width}" var="width">
                                 <option value="${width}" <c:if test="${width == requestScope.carportwidth}">selected</c:if> >${width} cm</option>
                             </c:forEach>
@@ -56,11 +56,11 @@
 
 
                 <div class="dropdown-container">
+                    <h4>Carport længde</h4>
                     <div class="dropdown">
                         <select name="carportlength">
-                             <option value="" selected disabled> Carport længde</option>
                             <c:forEach items="${requestScope.length}" var="length">
-                                <option value="${length}"  <c:if test="${length == requestScope.carportlength}">selected</c:if> >${length} cm</option>
+                                <option value="${length}" <c:if test="${length == requestScope.carportlength}">selected</c:if> >${length} cm</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -68,26 +68,28 @@
 
                 <h2>Skur</h2>
                 <div class="dropdown-container">
+                    <h4>Skur bredde</h4>
                     <div class="dropdown">
                         <select name="shedwidth">
-                            <option value="" selected disabled> Skur bredde</option>
-                            <c:forEach items="${requestScope.shedwidth}" var="shedwidth">
-                                <option value="${shedwidth}"  <c:if test="${shedwidth == requestScope.shedwidth}">selected</c:if> >${shedwidth} cm</option>
+                            <c:forEach items="${requestScope.shedWidth}" var="shedwidth">
+                                <option value="${shedwidth}" <c:if test="${shedwidth == requestScope.shedwidth}">selected</c:if>>${shedwidth} cm</option>
                             </c:forEach>
                         </select>
                     </div>
                 </div>
 
                 <div class="dropdown-container">
+                    <h4>Skur længde</h4>
                     <div class="dropdown">
                         <select name="shedlength">
-                            <option value="" selected disabled> Skur bredde</option>
-                            <c:forEach items="${requestScope.shedlength}" var="shedlength">
-                                <option value="${shedlength}"  <c:if test="${shedlength == requestScope.shedlength}">selected</c:if> >${shedlength} cm</option>
+                            <c:forEach items="${requestScope.shedLength}" var="shedlength">
+                                <option value="${shedlength}" <c:if test="${shedlength == requestScope.shedlength}">selected</c:if>>${shedlength} cm</option>
                             </c:forEach>
                         </select>
                     </div>
                 </div>
+
+
 
                 <button class="btn btn-danger" type="submit">Bestil</button>
 
