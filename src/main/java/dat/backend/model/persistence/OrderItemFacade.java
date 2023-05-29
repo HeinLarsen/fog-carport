@@ -4,7 +4,6 @@ import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrderItemFacade
 {
@@ -17,26 +16,33 @@ public class OrderItemFacade
         return orderItems;
     }
 
-    public static void createOrderItem(OrderItem orderItem, ArrayList<OrderItem> orderItems, int orderId, ConnectionPool connectionPool) throws DatabaseException
+    public static void createOrderItem( ArrayList<OrderItem> orderItems, int orderId, ConnectionPool connectionPool) throws DatabaseException
     {
         for (OrderItem item : orderItems)
         {
             int itemId = item.getMaterial().getId();
             if (item.getMaterial() instanceof Wood)
             {
-                OrderItemMapper.createOrderItemWood(orderItem, orderItems, orderId, itemId, connectionPool);
+                OrderItemMapper.createOrderItemWood(item, orderId, itemId, connectionPool);
             } else if (item.getMaterial() instanceof Screw)
             {
-                OrderItemMapper.createOrderItemScrew(orderItem ,orderItems, orderId, itemId, connectionPool);
+                OrderItemMapper.createOrderItemScrew(item, orderId, itemId, connectionPool);
             } else if (item.getMaterial() instanceof Fitting)
             {
-                OrderItemMapper.createOrderItemFitting(orderItem, orderItems, orderId, itemId, connectionPool);
+                OrderItemMapper.createOrderItemFitting(item, orderId, itemId, connectionPool);
             } else if (item.getMaterial() instanceof RoofTile)
             {
-                OrderItemMapper.createOrderItemRoofTile(orderItem, orderItems, orderId, itemId, connectionPool);
+                OrderItemMapper.createOrderItemRoofTile(item, orderId, itemId, connectionPool);
             }
 
 
         }
+
+    }
+    public static void deleteOrderItems(int id, ConnectionPool connectionPool) throws DatabaseException{
+        OrderItemMapper.deleteOrderItemScrew(id, connectionPool);
+        OrderItemMapper.deleteOrderItemFitting(id, connectionPool);
+        OrderItemMapper.deleteOrderItemWood(id, connectionPool);
+        OrderItemMapper.deleteOrderItemRoofTile(id, connectionPool);
     }
 }

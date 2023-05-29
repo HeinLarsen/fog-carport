@@ -201,3 +201,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,java,osx,windows,maven
+/src/main/webapp/3d-Models/
+/src/main/webapp/models/buildList-1.stl/
+/src/main/webapp/models/materialList-1.stl/

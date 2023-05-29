@@ -9,6 +9,8 @@ public class Order {
         private Enum status;
         private int length;
         private int width;
+        private int shedLength;
+        private int shedWidth;
         private boolean shed;
         private int userID;
         private ArrayList<OrderItem> orderItems;
@@ -22,6 +24,18 @@ public class Order {
                 this.length = length;
                 this.width = width;
                 this.shed = shed;
+
+        }
+
+        public Order(int orderID, Timestamp created, Enum status, int length, int width, boolean shed, int shedLength, int shedWidth){
+                this.orderID =orderID;
+                this.created = created;
+                this.status = status;
+                this.length = length;
+                this.width = width;
+                this.shed = shed;
+                this.shedLength = shedLength;
+                this.shedWidth = shedWidth;
 
         }
 

@@ -186,4 +186,19 @@ public class OrderMapper {
         }
        return id;
    }
+
+    protected static boolean deleteOrder(int id, ConnectionPool connectionPool) throws DatabaseException{
+        String sql = "delete from 'order' where ID = ?";
+        try(Connection connection = connectionPool.getConnection()) {
+            try(PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e, "Error deleting order");
+        }
+        return true;
+    }
+
+
 }
