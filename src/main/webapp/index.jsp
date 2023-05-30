@@ -46,7 +46,7 @@
                     <h4>Carport bredde</h4>
                     <div class="dropdown">
                         <select name="carportwidth">
-                            <c:forEach items="${requestScope.width}" var="width">
+                            <c:forEach items="${requestScope.carportWidthList}" var="width">
                                 <option value="${width}" <c:if test="${width == requestScope.carportwidth}">selected</c:if> >${width} cm</option>
                             </c:forEach>
 
@@ -59,7 +59,7 @@
                     <h4>Carport længde</h4>
                     <div class="dropdown">
                         <select name="carportlength">
-                            <c:forEach items="${requestScope.length}" var="length">
+                            <c:forEach items="${requestScope.carportLengthList}" var="length">
                                 <option value="${length}" <c:if test="${length == requestScope.carportlength}">selected</c:if> >${length} cm</option>
                             </c:forEach>
                         </select>
@@ -71,7 +71,7 @@
                     <h4>Skur bredde</h4>
                     <div class="dropdown">
                         <select name="shedwidth">
-                            <c:forEach items="${requestScope.shedWidth}" var="shedwidth">
+                            <c:forEach items="${requestScope.shedWidthList}" var="shedwidth">
                                 <option value="${shedwidth}" <c:if test="${shedwidth == requestScope.shedwidth}">selected</c:if>>${shedwidth} cm</option>
                             </c:forEach>
                         </select>
@@ -82,7 +82,7 @@
                     <h4>Skur længde</h4>
                     <div class="dropdown">
                         <select name="shedlength">
-                            <c:forEach items="${requestScope.shedLength}" var="shedlength">
+                            <c:forEach items="${requestScope.shedLengthList}" var="shedlength">
                                 <option value="${shedlength}" <c:if test="${shedlength == requestScope.shedlength}">selected</c:if>>${shedlength} cm</option>
                             </c:forEach>
                         </select>

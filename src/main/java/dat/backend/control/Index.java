@@ -83,10 +83,10 @@ public class Index extends HttpServlet {
         shedWidth.add(260);
         shedWidth.add(280);
 
-        request.setAttribute("length", carportLength);
-        request.setAttribute("width", carportWidth);
-        request.setAttribute("shedLength", shedLength);
-        request.setAttribute("shedWidth", shedWidth);
+        request.setAttribute("carportLengthList", carportLength);
+        request.setAttribute("carportWidthList", carportWidth);
+        request.setAttribute("shedLengthList", shedLength);
+        request.setAttribute("shedWidthList", shedWidth);
 
 
         request.getRequestDispatcher("index.jsp").forward(request, response);
