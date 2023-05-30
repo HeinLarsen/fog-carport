@@ -15,16 +15,15 @@ public class UserService {
       return UserFacade.login(email, password, connectionPool);
     }
 
-    public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, ConnectionPool connectionPool) throws DatabaseException
+    public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, String city, ConnectionPool connectionPool) throws DatabaseException
     {
-       User user = UserFacade.updateUser(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, connectionPool);
+       User user = UserFacade.updateUser(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, city, connectionPool);
        return user;
     }
 
-    public static void createUser2(String firstName, String lastName, String email, String password, String address, int phoneNumber,  int zip, ConnectionPool connectionPool) throws DatabaseException
-    {
-     UserFacade.createUser2(firstName, lastName, email, password, address, phoneNumber, zip, connectionPool);
-
+    public static void createUser(User u, ConnectionPool connectionPool) throws DatabaseException {
+        UserFacade.createZipCity(u, connectionPool);
+        UserFacade.createUser(u, connectionPool);
 
     }
 

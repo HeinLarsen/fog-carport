@@ -5,14 +5,22 @@ autonumber
 
 Admin -> adminHomepage.jsp: Navigate to see specific order
 adminHomepage.jsp -> OrderServlet: Forward
-OrderServlet -> OrderMapper: Post
+OrderServlet -> OrderService: post
+OrderService -> OrderFacade: post
+OrderFacade -> OrderMapper: post
 OrderMapper -> SQL: Query
 SQL --> OrderMapper: ResultSet
-OrderMapper -> OrderServlet: Order data result
-OrderServlet -> UserMapper: Post
+OrderMapper -> OrderFacade: Order data result
+Orderfacade -> OrderService: Order data result
+OrderService -> OrderServlet: Order data result
+OrderServlet -> UserService: Post
+UserService -> UserFacade: Post
+UserFacade -> UserMapper
 UserMapper -> SQL: Query
 SQL --> UserMapper: ResultSet
-UserMapper -> OrderServlet: Customer + Order Results
+UserMapper -> UserFacade: Customer data result
+UserFacade -> UserService: Customer data result
+UserService -> OrderServlet: Customer + Order Results
 OrderServlet -> order.jsp: Forward to see specific order
 
 @enduml

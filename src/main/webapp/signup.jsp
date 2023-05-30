@@ -55,6 +55,11 @@
                     <input class="m_left" type="text" id="zip" name="zip">
                 </div>
 
+              <div class="city col-5">
+                <label for="city">By:</label>
+                <input class="m_left" type="text" id="city" name="city">
+              </div>
+
                 <div class="signup col-5">
                     <button type="submit" class="btn btn-success">Opret</button>
                 </div>

@@ -3,6 +3,7 @@ package dat.backend.model.persistence;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -15,7 +16,7 @@ public class UserMapper {
     public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         ArrayList<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT user.*, zip.city FROM user join zip on user.zip = zip.zip";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
@@ -30,7 +31,8 @@ public class UserMapper {
                     int roleId = rs.getInt("role");
                     int membershipId = rs.getInt("membership");
                     int zip = rs.getInt("zip");
-                    User user = new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip);
+                    String city = rs.getString("city");
+                    User user = new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, city);
                     users.add(user);
                 }
             }
@@ -43,7 +45,7 @@ public class UserMapper {
     public static User getUser(int id, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         User user = null;
-        String sql = "SELECT * FROM user WHERE id = ?";
+        String sql = "SELECT user.*, zip.city FROM user join zip on user.zip = zip.zip WHERE id = ?";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, id);
@@ -58,7 +60,8 @@ public class UserMapper {
                     int roleId = rs.getInt("role");
                     int membershipId = rs.getInt("membership");
                     int zip = rs.getInt("zip");
-                    user = new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip);
+                    String city = rs.getString("city");
+                    user = new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, city);
                 } else {
                     throw new DatabaseException("No user with id = " + id + " found in database");
                 }
@@ -69,7 +72,7 @@ public class UserMapper {
         return user;
     }
 
-    public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, ConnectionPool connectionPool) throws DatabaseException {
+    public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, String city, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ?, address = ?, phone_number = ?, zip = ?, membership = ? WHERE id = ?";
         try (Connection connection = connectionPool.getConnection()) {
@@ -92,33 +95,33 @@ public class UserMapper {
             ex.printStackTrace();
             throw new DatabaseException(ex, "Could not update user in database");
         }
-        return new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip);
+        return new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, city);
     }
 
 
-    public static User createUser(String firstName, String lastName, String email, String password, String address, int phoneNumber, int zip, ConnectionPool connectionPool) throws DatabaseException {
+    public static User createUser(User u, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "INSERT INTO user (first_name, last_name, email, password, address, phone_number, zip) VALUES (?,?,?,?,?,?,?)";
         User user;
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setString(1, firstName);
-                ps.setString(2, lastName);
-                ps.setString(3, email);
-                ps.setString(4, password);
-                ps.setString(5, address);
-                ps.setInt(6, phoneNumber);
-                ps.setInt(7, zip);
+                ps.setString(1, u.getFirstName());
+                ps.setString(2, u.getLastName());
+                ps.setString(3, u.getEmail());
+                ps.setString(4, u.getPassword());
+                ps.setString(5, u.getAddress());
+                ps.setInt(6, u.getPhoneNumber());
+                ps.setInt(7, u.getZip());
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1) {
-                    throw new DatabaseException("No user with email = " + email + " found in database");
+                    throw new DatabaseException("No user with email = " + u.getEmail() + " found in database");
                 }
                 try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int id = generatedKeys.getInt(1);
                         int roleId = 1;
                         int membershipId = 1;
-                        user = new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip);
+                        user = new User(id, u.getFirstName(), u.getLastName(), u.getEmail(), u.getPassword(), u.getAddress(), u.getPhoneNumber(), roleId, membershipId, u.getZip(), u.getCity());
                     } else {
                         throw new DatabaseException("Failed to get ID for created user");
                     }
@@ -131,34 +134,10 @@ public class UserMapper {
         return user;
     }
 
-    public static void createUser2(String firstName, String lastName, String email, String password, String address, int phoneNumber, int zip, ConnectionPool connectionPool) throws DatabaseException {
-        Logger.getLogger("web").log(Level.INFO, "");
-        String sql = "INSERT INTO user (first_name, last_name, email, password, address, phone_number, zip) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setString(1, firstName);
-                ps.setString(2, lastName);
-                ps.setString(3, email);
-                ps.setString(4, password);
-                ps.setString(5, address);
-                ps.setInt(6, phoneNumber);
-                ps.setInt(7, zip);
-                int rowsAffected = ps.executeUpdate();
-                if (rowsAffected == 0) {
-                    throw new DatabaseException("User with email" + email + "was not created");
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw new DatabaseException(ex, "Could not create user in database");
-        }
-    }
-
-
     //call this with a false login in userMapperTest
     public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
-        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+        String sql = "SELECT user.*, zip.city FROM user join zip on user.zip = zip.zip WHERE email = ? AND password = ?";
         User user = null;
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -174,7 +153,8 @@ public class UserMapper {
                     int roleId = rs.getInt("role");
                     int membershipId = rs.getInt("membership");
                     int zip = rs.getInt("zip");
-                    user = new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip);
+                    String city = rs.getString("city");
+                    user = new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, city);
 
 
                 }
@@ -187,5 +167,31 @@ public class UserMapper {
         }
         return user;
 
+    }
+
+    public static void createZipCity(User u, ConnectionPool connectionPool) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        String sql = "SELECT * FROM zip WHERE zip = ? AND city = ?";
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, u.getZip());
+                ps.setString(2, u.getCity());
+                ResultSet rs = ps.executeQuery();
+                if (!rs.next()) {
+                    String sql2 = "INSERT INTO zip (zip, city) VALUES (?,?)";
+                    try (PreparedStatement ps2 = connection.prepareStatement(sql2)) {
+                        ps2.setInt(1, u.getZip());
+                        ps2.setString(2, u.getCity());
+                        int rowsAffected = ps2.executeUpdate();
+                        if (rowsAffected != 1) {
+                            throw new DatabaseException("No zip with zip = " + u.getZip() + " found in database");
+                        }
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DatabaseException(ex, "Could not create zip in database");
+        }
     }
 }

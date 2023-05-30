@@ -20,15 +20,15 @@ public class UserFacade
         return UserMapper.getUser(id, connectionPool);
     }
 
-    public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, ConnectionPool connectionPool) throws DatabaseException
+    public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, String city, ConnectionPool connectionPool) throws DatabaseException
     {
-       User user = UserMapper.updateUser(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, connectionPool);
+       User user = UserMapper.updateUser(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, city, connectionPool);
        return user;
     }
 
-   public static void createUser2( String firstName, String lastName, String email, String password, String address, int phoneNumber, int zip, ConnectionPool connectionPool) throws DatabaseException
+   public static void createUser(User u, ConnectionPool connectionPool) throws DatabaseException
     {
-       UserMapper.createUser(firstName, lastName, email, password, address, phoneNumber, zip, connectionPool);
+       UserMapper.createUser(u, connectionPool);
 
     }
 
@@ -39,4 +39,7 @@ public class UserFacade
     }
 
 
+    public static void createZipCity(User u, ConnectionPool connectionPool) throws DatabaseException {
+        UserMapper.createZipCity(u, connectionPool);
+    }
 }
