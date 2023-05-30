@@ -17,11 +17,11 @@
                 <div class="scrollable-table">
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th class="sticky-header">Materiale</th>
-                            <th class="sticky-header">Længde</th>
-                            <th class="sticky-header">Antal</th>
-                            <th class="sticky-header">Enhed</th>
-                            <th class="sticky-header">Beskrivelse</th>
+                            <th class="sticky-header" style="background-color: white">Materiale</th>
+                            <th class="sticky-header" style="background-color: white">Længde</th>
+                            <th class="sticky-header" style="background-color: white">Antal</th>
+                            <th class="sticky-header" style="background-color: white">Enhed</th>
+                            <th class="sticky-header" style="background-color: white">Beskrivelse</th>
                         </tr>
                         <tr>
                             <th class="header">Træ</th>
@@ -88,13 +88,12 @@
                         </tr>
                         <c:forEach items="${requestScope.orderItemFitting}" var="fitting">
                             <tr>
-                                <td>${fitting.material.name}</td>
-                                <td>${fitting.material.length} ${fitting.material.unit}</td>
-                                <td>${fitting.material.price}</td>
+                                <td>${fitting.material.name} ${fitting.material.length} ${fitting.material.unit}</td>
+                                <td></td>
                                 <td>${fitting.quantity}</td>
+                                <td>${fitting.material.unit}</td>
                                 <td>${fitting.description}</td>
                             </tr>
-
                         </c:forEach>
 
                         <div>

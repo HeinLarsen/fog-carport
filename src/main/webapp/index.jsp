@@ -12,33 +12,33 @@
 
         <c:if test="${sessionScope.user != null}">
             <div class="index_grid">
-            <div class="box mt-5">
-                <h3>Order liste:</h3>
-                <div>
-                    <c:if test="${sessionScope.order == null}">
-                        <p>Her kan du se din fremtidige ordre. </p>
-                    </c:if>
-                </div>
-
-                <div>
-                    <c:if test="${sessionScope.order != null}">
-                        <div class="box homepage_grid_box box_width">
+                <div class="box mt-4">
+                    <h3>Order liste:</h3>
+                    <div>
+                        <c:if test="${sessionScope.userOrders == null}">
+                            <p>Her kan du se din fremtidige ordre. </p>
+                        </c:if>
+                    </div>
+                    <div>
+                        <c:if test="${sessionScope.userOrders != null}">
                             <div class="scrollable-table">
                                 <table class="table table-striped table-bordered">
                                     <tr>
-                                        <th class="sticky-header" style="background-color: lightgrey">ID</th>
-                                        <th class="sticky-header" style="background-color: lightgrey">Order</th>
-                                        <th class="sticky-header" style="background-color: lightgrey">Status</th>
+                                        <th class="sticky-header" style="background-color: white">ID</th>
+                                        <th class="sticky-header" style="background-color: white">Order</th>
+                                        <th class="sticky-header" style="background-color: white">Status</th>
                                     </tr>
-                                    <c:forEach items="${requestScope.orderbyid}" var="order">
-                                        <tr onclick="location.href='uservieworder?id=${order.orderID}'">
+                                    <c:forEach items="${sessionScope.userOrders}" var="order">
+                                        <tr onclick="location.href='uservieworder?id=${order.orderID}&userid=${order.userID}'">
+                                            <td>${order.orderID}</td>
                                             <td>${order.length} cm x ${order.width} cm, ${order.shed}</td>
+                                            <td>${order.status}</td>
                                         </tr>
                                     </c:forEach>
                                 </table>
                             </div>
-                        </div>
-                    </c:if>
+                        </c:if>
+                    </div>
                 </div>
             </div>
         </c:if>
@@ -52,13 +52,14 @@
                         <select name="carportwidth">
                             <c:forEach items="${requestScope.carportWidthList}" var="width">
                                 <option value="${width}"
-                                        <c:if test="${width == requestScope.carportwidth}">selected</c:if> >${width} cm
+                                        <c:if test="${width == requestScope.carportwidth}">selected</c:if> >${width}
+                                    cm
                                 </option>
                             </c:forEach>
 
                         </select>
                     </div>
-                </div>
+
 
 
                 <div class="dropdown-container">
@@ -103,6 +104,7 @@
                         </select>
                     </div>
                 </div>
+
 
                 <button class="btn btn-danger" type="submit">Bestil</button>
 

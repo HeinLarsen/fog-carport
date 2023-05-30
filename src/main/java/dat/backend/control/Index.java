@@ -8,12 +8,14 @@ import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.services.OrderService;
+import dat.backend.model.services.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "Index", value = "/index")
 public class Index extends HttpServlet {
@@ -30,7 +32,6 @@ public class Index extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-
 
         ArrayList<Integer> carportLength = new ArrayList<>();
         ArrayList<Integer> carportWidth = new ArrayList<>();
@@ -89,6 +90,21 @@ public class Index extends HttpServlet {
         request.setAttribute("carportWidthList", carportWidth);
         request.setAttribute("shedLengthList", shedLength);
         request.setAttribute("shedWidthList", shedWidth);
+        ArrayList<Order> userOrders = null;
+
+        if (user != null) {
+            try {
+                userOrders = OrderService.getOrdersByUserId(user.getId(), connectionPool);
+                for (Order o : userOrders) {
+                    System.out.println(o);
+                }
+            } catch (DatabaseException e) {
+                e.printStackTrace();
+            }
+        }
+        session.setAttribute("userOrders", userOrders);
+
+
 
 
         request.getRequestDispatcher("index.jsp").forward(request, response);

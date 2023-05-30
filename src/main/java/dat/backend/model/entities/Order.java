@@ -16,7 +16,7 @@ public class Order {
         private ArrayList<OrderItem> orderItems;
 
 
-        public Order(int orderID, int userID, Timestamp created, Enum status, int length, int width, boolean shed){
+        public Order(int orderID, int userID, Timestamp created, Enum status, int length, int width, boolean shed) {
                 this.orderID = orderID;
                 this.userID = userID;
                 this.created = created;
@@ -27,8 +27,8 @@ public class Order {
 
         }
 
-        public Order(int orderID, Timestamp created, Enum status, int length, int width, boolean shed, int shedLength, int shedWidth){
-                this.orderID =orderID;
+        public Order(int orderID, Timestamp created, Enum status, int length, int width, boolean shed, int shedLength, int shedWidth) {
+                this.orderID = orderID;
                 this.created = created;
                 this.status = status;
                 this.length = length;
@@ -38,7 +38,7 @@ public class Order {
                 this.shedWidth = shedWidth;
         }
 
-        public Order(int length, int width, int shedLength, int shedWidth, boolean shed){
+        public Order(int length, int width, int shedLength, int shedWidth, boolean shed) {
                 this.length = length;
                 this.width = width;
                 this.shed = shed;
@@ -52,19 +52,23 @@ public class Order {
                 this.shed = b;
         }
 
-        public void addOrderItem(OrderItem orderItems){
+        public void addOrderItem(OrderItem orderItems) {
                 this.orderItems.add(orderItems);
 
         }
 
-        public void addOrderItems(ArrayList<OrderItem> orderItems){
+        public void addOrderItems(ArrayList<OrderItem> orderItems) {
                 this.orderItems = orderItems;
 
         }
 
-        public int getUserID() { return userID; }
+        public int getUserID() {
+                return userID;
+        }
 
-        public int getLength() { return length; }
+        public int getLength() {
+                return length;
+        }
 
         public int getWidth() {
                 return width;
@@ -82,22 +86,22 @@ public class Order {
                 return shed;
         }
 
-        public int getOrderID(){
+        public int getOrderID() {
                 return orderID;
 
         }
 
-        public Timestamp getCreated(){
+        public Timestamp getCreated() {
                 return created;
 
         }
 
-        public Enum getStatus(){
+        public Enum getStatus() {
                 return status;
 
         }
 
-        public double getTotalPrice(){
+        public double getTotalPrice() {
                 double sum = 0;
                 for (OrderItem i : orderItems) {
                         sum += i.getPrice();
@@ -106,12 +110,13 @@ public class Order {
                 return sum;
         }
 
-        public ArrayList<OrderItem> getOrderItems(){
+        public ArrayList<OrderItem> getOrderItems() {
                 return orderItems;
         }
 
         public void setStatus(String status) {
                 this.status = Status.valueOf(status);
         }
+
 }
 

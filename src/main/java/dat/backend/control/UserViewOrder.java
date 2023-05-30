@@ -1,8 +1,8 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.entities.*;
 import dat.backend.model.entities.Order;
-import dat.backend.model.entities.User;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.services.OrderService;
 import dat.backend.model.services.UserService;
@@ -30,17 +30,38 @@ public class UserViewOrder extends HttpServlet {
 
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
-        int userId = Integer.parseInt(request.getParameter("id"));
+        int orderId = Integer.parseInt(request.getParameter("id"));
+        int userId = Integer.parseInt(request.getParameter("userid"));
+
+        request.setAttribute("user", u);
 
         try {
-            if (u != null && u.getRoleId() == 2) {
+            if (u != null && u.getRoleId() == 1) {
                 User userinfo = UserService.getUser(userId, connectionPool);
-                List<Order> orderListByUserId = OrderService.getOrdersByUserId(userId, connectionPool);
-                for (Order o : orderListByUserId) {
-                    System.out.println(o);
+                Order order = OrderService.getOrderById(orderId, connectionPool);
+
+                ArrayList<OrderItem> orderItemWood = new ArrayList<>();
+                ArrayList<OrderItem> orderItemScrew = new ArrayList<>();
+                ArrayList<OrderItem> orderItemFitting = new ArrayList<>();
+                ArrayList<OrderItem> orderItemRoofTile = new ArrayList<>();
+
+                for (OrderItem oi : order.getOrderItems()) {
+                    if (oi.getMaterial() instanceof Wood) {
+                        orderItemWood.add(oi);
+                    } else if (oi.getMaterial() instanceof Screw) {
+                        orderItemScrew.add(oi);
+                    } else if (oi.getMaterial() instanceof Fitting) {
+                        orderItemFitting.add(oi);
+                    } else if (oi.getMaterial() instanceof RoofTile) {
+                        orderItemRoofTile.add(oi);
+                    }
                 }
 
-                request.setAttribute("orderList", orderListByUserId);
+                request.setAttribute("orderbyid", order);
+                request.setAttribute("orderItemWood", orderItemWood);
+                request.setAttribute("orderItemScrew", orderItemScrew);
+                request.setAttribute("orderItemFitting", orderItemFitting);
+                request.setAttribute("orderItemRoofTile", orderItemRoofTile);
                 request.setAttribute("user", userinfo);
 
                 request.getRequestDispatcher("WEB-INF/uservieworder.jsp").forward(request, response);

@@ -11,19 +11,16 @@ th, td {
 }
 
 .box {
-    background-color: lightgray;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* stilling for signup page */
 .index_grid{
-
     text-align: center;
     display: grid;
     grid-template-columns: 2fr 3fr;
     grid-gap: 15px;
 }
-
 
 /* stilling for signup page */
 .signup_form {
@@ -119,16 +116,10 @@ th, td {
 .sticky-header {
     position: sticky;
     top: 0;
-    background-color: #808080;
     z-index: 1;
 }
 
-th.sticky-header {
-    background-color: lightgrey;
-}
-
 .homepage_grid_box {
-    background-color: lightgray;
 }
 
 .box_width {

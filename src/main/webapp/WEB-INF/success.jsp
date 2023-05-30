@@ -12,6 +12,7 @@
     <jsp:body>
 
         <div class="box align-center">
+
             <br>
             <t1>Tak for din ordre!</t1>
             <br>
