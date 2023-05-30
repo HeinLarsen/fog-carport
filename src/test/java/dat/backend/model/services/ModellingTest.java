@@ -20,7 +20,7 @@ public class ModellingTest {
 
     private final static String USER = "dev";
     private final static String PASSWORD = "3r!DE32*/fDe";
-    private final static String URL = "jdbc:mysql://178.128.160.211/carport?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
+    private final static String URL = "jdbc:mysql://178.128.160.211/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
 
     private static ConnectionPool connectionPool;
 
@@ -33,7 +33,7 @@ public class ModellingTest {
         {
             try (Statement stmt = testConnection.createStatement()) {
                 // Create test database - if not exist
-               /* stmt.execute("CREATE DATABASE  IF NOT EXISTS carport_test;");
+                stmt.execute("CREATE DATABASE  IF NOT EXISTS carport_test;");
 
                 stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.unit LIKE carport.unit;");
                 stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.category LIKE carport.category;");
@@ -93,7 +93,7 @@ public class ModellingTest {
                 stmt.execute( "INSERT INTO `carport_test`.`fitting` (`name`,`height`, `unit`, `price`) VALUES ('universal',190, 1, 76.95);");
                 stmt.execute( "INSERT INTO `carport_test`.`fitting` (`name`, `width`, `height`, `unit`, `price`) VALUES ('stalddørsgreb', 75, 50, 4, 183.95);");
                 stmt.execute( "INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`) VALUES ('t hængsel', 390, 2, 156.95);");
-                stmt.execute( "INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`) VALUES ('vinkelbeslag', 35, 1, 13.95);");*/
+                stmt.execute( "INSERT INTO `carport_test`.`fitting` (`name`, `height`, `unit`, `price`) VALUES ('vinkelbeslag', 35, 1, 13.95);");
 
             }
         }
