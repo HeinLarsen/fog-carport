@@ -5,6 +5,8 @@ import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Predicate;
@@ -24,7 +26,8 @@ public class Modelling {
 
     private static void save(Geometry3D shape, String name, Order order, String savePath) throws IOException {
         System.out.println(savePath + name + "-" + order.getOrderID() + ".stl");
-        csg.saveSTL(savePath + name + "-" + order.getOrderID() + ".stl", shape);
+         csg.saveSTL(savePath + name + "-" + order.getOrderID() + ".stl", shape);
+
     }
 
     private static Geometry3D generateMaterialList(Order order) throws IOException {
