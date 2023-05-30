@@ -26,7 +26,7 @@ public class UserFacade
        return user;
     }
 
-   public static void createUser2(User u, ConnectionPool connectionPool) throws DatabaseException
+   public static void createUser(User u, ConnectionPool connectionPool) throws DatabaseException
     {
        UserMapper.createUser(u, connectionPool);
 

@@ -24,16 +24,18 @@ class UserFacade {
 + {static} ArrayList<User> getAllUsers()
 + {static} User getUser()
 + {static} void updateUser()
-+ {static} void createUser()
++ {static} void createUser2()
 + {static} void login()
++ {static} void createZipCity();
 }
 
 class UserMapper {
 # {static} ArrayList<User> getAllUsers()
 # {static} User getUser()
-# {static} void updateUser()
-# {static} void createUser()
-# {static} void login()
+# {static} User updateUser()
+# {static} User createUser()
+# {static} User login()
+
 }
 
 class Carport{
@@ -60,11 +62,22 @@ Enum OrderItemTask{
 class OrderItemFacade {
 + {static} ArrayList<OrderItem> getOrderItemsByOrderId()
 + {static} void createOrderItem()
++ {static} void deleteORderItems()
 }
 
 class OrderItemMapper {
-# {static} OrderItem getOrderItemsByOrderId()
-# {static} void createOrderItem()
+# {static} ArrayList<OrderItem> getorderItemsWoodByOrderId()
+# {static} ArrayList<OrderItem> getorderItemsScrewByOrderId()
+# {static} ArrayList<OrderItem> getorderItemsFittingByOrderId()
+# {static} ArrayList<OrderItem> getorderItemsRoofTileByOrderId()
+# {static} void createOrderItemWood()
+# {static} void createOrderItemScrew()
+# {static} void createOrderItemFitting()
+# {static} void createOrderItemRoofTile()
+# {static} boolean deleteOrderItemWood()
+# {static} boolean deleteOrderItemScrew()
+# {static} boolean deleteOrderItemFitting()
+# {static} boolean deleteOrderItemRoofTile()
 }
 
 class Order {
@@ -84,30 +97,48 @@ int userID
 
 class OrderFacade {
 + {static} ArrayList<Order> getAllOrders()
++ {static} ArrayList<Order> getOrdersByStatus()
 + {static} Order getOrderById()
 + {static} ArrayList<Order> getOrdersByUserId()
 + {static} void createOrder()
 + {static} void approveOrder()
-+ {static} ArrayList<Order> getOrdersByStatus()
++ {static} void deleteOrder()
++ {static} void cancelOrder()
 }
 
 class OrderMapper {
 # {static} ArrayList<Order> getAllOrders()
 # {static} Order getOrderById()
 # {static} ArrayList<Order> getOrdersByUserId()
-# {static} void createOrder()
 # {static} void approveOrder()
+# {static} boolean cancleOrder()
 # {static} ArrayList<Order> getOrdersByStatus()
+# {static} int createOrder()
+# {static} boolean deleteOrder()
 }
 
 class MaterialFacade {
 + {static} ArrayList<Material> getAllMaterials()
 + {static} Material getMaterialById()
++ {static} Wood getWoodById()
++ {static} Screw getScrewById()
++ {static} Fitting getFittingById()
++ {static} RoofTile getRoofTileById()
++ {static} ArrayList<Wood> getAllWood()
++ {static} ArrayList<Screw> getAllScrew()
++ {static} ArrayList<Fitting> getAllFitting()
++ {static} ArrayList<RoofTile> getAllRoofTile()
 }
 
 class MaterialMapper {
-# {static} ArrayList<Material> getAllMaterials()
-# {static} Material getMaterialById()
+# {static} ArrayList<Wood> getAllWood()}
+# {static} ArrayList<Screw> getAllScrew()
+# {static} ArrayList<Fitting> getAllFitting()
+# {static} ArrayList<RoofTile> getAllRoofTile()
+# {static} Wood getWoodById()
+# {static} Screw getScrewById()
+# {static} Fitting getFittingById()
+# {static} RoofTile getRoofTileById()
 }
 
 class GenerateStl {
