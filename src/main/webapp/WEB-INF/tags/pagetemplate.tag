@@ -21,10 +21,10 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light box">
+    <nav class="navbar p-0 navbar-expand-lg navbar-light bg-light box">
         <div class="container">
             <a class="navbar-brand" href="index.jsp">
-                <img src="${pageContext.request.contextPath}/images/Fog-logo.png" width="150;" class="img-fluid"/>
+                <img src="${pageContext.request.contextPath}/images/Fog-logo.png" width="70;" class="img-fluid"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

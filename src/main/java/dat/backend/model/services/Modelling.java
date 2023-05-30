@@ -171,7 +171,7 @@ public class Modelling {
         double scaleFactor = 0.18;
         shape = csg.scale3D(scaleFactor, scaleFactor, scaleFactor).transform(shape);
 
-        csg.view(shape);
+
         return shape;
     }
 

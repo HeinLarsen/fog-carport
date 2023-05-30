@@ -26,7 +26,7 @@ public class OrdreServiceTest {
 
     private final static String USER = "dev";
     private final static String PASSWORD = "3r!DE32*/fDe";
-    private final static String URL = "jdbc:mysql://178.128.160.211/carport_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
+    private final static String URL = "jdbc:mysql://178.128.160.211/carport?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
 
     private static ConnectionPool connectionPool;
 
@@ -41,7 +41,7 @@ public class OrdreServiceTest {
         try (Connection testConnection = connectionPool.getConnection()) {
             try (Statement stmt = testConnection.createStatement()) {
 
-                stmt.execute("CREATE DATABASE  IF NOT EXISTS carport_test;");
+              /*  stmt.execute("CREATE DATABASE  IF NOT EXISTS carport_test;");
 
                 stmt.execute("CREATE TABLE IF NOT EXISTS carport_test.order LIKE carport.order;");
 
@@ -124,7 +124,7 @@ public class OrdreServiceTest {
                 stmt.execute("INSERT INTO `carport_test`.`order_item_wood` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'hejhej', '10', '1');");
                 stmt.execute("INSERT INTO `carport_test`.`order_item_fitting` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'hejhej', '10', '1');");
                 stmt.execute("INSERT INTO `carport_test`.`order_item_screw` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'hejhej', '10', '1');");
-                stmt.execute("INSERT INTO `carport_test`.`order_item_roof_tile` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'hejhej', '10', '1');");
+                stmt.execute("INSERT INTO `carport_test`.`order_item_roof_tile` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'hejhej', '10', '1');");*/
             }
         } catch (SQLException e) {
             e.printStackTrace();

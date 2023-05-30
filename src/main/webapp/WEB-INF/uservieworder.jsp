@@ -147,6 +147,8 @@
             </div>
 
         </div>
+        <a href="src/main/webapp/models/buildList-1.stl" download>download ordre</a>
+        <a href="src/main/webapp/models/materialList-1.stl" download>download ordre</a>
 
 
     </jsp:body>
