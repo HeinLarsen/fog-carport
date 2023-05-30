@@ -88,37 +88,6 @@ public class Index extends HttpServlet {
         request.setAttribute("shedLength", shedLength);
         request.setAttribute("shedWidth", shedWidth);
 
-        int carLength = Integer.parseInt(request.getParameter("carportlength"));
-        int carWidth = Integer.parseInt(request.getParameter("carportwidth"));
-        int shedL = Integer.parseInt(request.getParameter("shedlength"));
-        int shedW = Integer.parseInt(request.getParameter("shedwidth"));
-
-        if (shedL == 0 && shedW == 0) {
-            if (user == null) {
-
-                session.setAttribute("carportlength", carportLength);
-                session.setAttribute("carportwidth", carportWidth);
-                session.setAttribute("shedlength", shedLength);
-                session.setAttribute("shedwidth", shedWidth);
-
-                request.setAttribute("errorMessage", "Du skal være logget ind for at bestille.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            } else {
-                Shed shed = new Shed(shedL, shedW);
-                Carport carport = new Carport(carLength, carWidth, shed);
-                User u = (User) session.getAttribute("user");
-                int userId = Integer.parseInt(request.getParameter("id"));
-                try {
-                    OrderService.addOrder(userId, carport, connectionPool);
-                    request.getRequestDispatcher("WEB-INF/success.jsp").forward(request, response);
-                } catch (DatabaseException e) {
-                    e.printStackTrace();
-                }
-            }
-        } else if (shedL == 0 || shedW == 0) {
-            request.setAttribute("errorMessage", "Vælg venligst både skur-længde og skur-bredde.");
-
-        }
 
         request.getRequestDispatcher("index.jsp").forward(request, response);
 

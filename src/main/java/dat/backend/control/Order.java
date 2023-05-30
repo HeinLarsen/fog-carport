@@ -35,31 +35,43 @@ public class Order extends HttpServlet {
 
         User user = (User) session.getAttribute("user");
 
+        request.setAttribute("length", carportLength);
+        request.setAttribute("width", carportWidth);
+        request.setAttribute("shedLength", shedLength);
+        request.setAttribute("shedWidth", shedWidth);
 
-        try {
 
-            int userId = Integer.parseInt(request.getParameter("id"));
-            int carLength = Integer.parseInt(request.getParameter("carportlength"));
-            int carWidth = Integer.parseInt(request.getParameter("carportwidth"));
-            int shedL = Integer.parseInt(request.getParameter("shedlength"));
-            int shedW = Integer.parseInt(request.getParameter("shedwidth"));
+        int carLength = Integer.parseInt(request.getParameter("carportlength"));
+        int carWidth = Integer.parseInt(request.getParameter("carportwidth"));
+        int shedL = Integer.parseInt(request.getParameter("shedlength"));
+        int shedW = Integer.parseInt(request.getParameter("shedwidth"));
 
-            Shed shed = new Shed(shedL, shedW);
-            Carport carport = new Carport(carLength, carWidth, shed);
+        if (shedL == 0 && shedW == 0) {
+            if (user == null) {
 
-            Order o = (Order) session.getAttribute("order");
-            OrderService.addOrder(userId, carport, connectionPool);
-            if (o == null){
-                response.sendRedirect("index.jsp");
+                session.setAttribute("carportlength", carportLength);
+                session.setAttribute("carportwidth", carportWidth);
+                session.setAttribute("shedlength", shedLength);
+                session.setAttribute("shedwidth", shedWidth);
+
+                request.setAttribute("errorMessage", "Du skal være logget ind for at bestille.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
-                response.sendRedirect("uservieworder?id=" + userId);
-
+                Shed shed = new Shed(shedL, shedW);
+                Carport carport = new Carport(carLength, carWidth, shed);
+                User u = (User) session.getAttribute("user");
+                int userId = Integer.parseInt(request.getParameter("id"));
+                try {
+                    OrderService.addOrder(userId, carport, connectionPool);
+                    request.getRequestDispatcher("WEB-INF/success.jsp").forward(request, response);
+                } catch (DatabaseException e) {
+                    e.printStackTrace();
+                }
             }
-        }catch (DatabaseException e) {
-            request.setAttribute("errormessage", e.getMessage());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+        } else if (shedL == 0 || shedW == 0) {
+            request.setAttribute("errorMessage", "Vælg venligst både skur-længde og skur-bredde.");
+
         }
-    }
 
 }
 

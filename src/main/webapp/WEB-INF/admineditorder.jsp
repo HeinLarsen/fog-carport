@@ -17,18 +17,18 @@
                 <div class="scrollable-table">
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th class="sticky-header">Materiale</th>
-                            <th class="sticky-header">Længde</th>
-                            <th class="sticky-header">Antal</th>
-                            <th class="sticky-header">Enhed</th>
-                            <th class="sticky-header">Beskrivelse</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Materiale</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Længde</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Antal</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Enhed</th>
+                            <th class="sticky-header" style="background-color: lightgrey">Beskrivelse</th>
                         </tr>
                         <tr>
-                            <th class="sticky-header">Træ</th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
+                            <th class="sticky-header" style="background-color: lightgrey">Træ</th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
 
                             <c:forEach items="${requestScope.orderItemWood}" var="wood">
                                 <td>${wood.width} ${wood.hight}</td>
@@ -40,11 +40,11 @@
                         </tr>
 
                         <tr>
-                            <th class="sticky-header">Tagplader</th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
+                            <th class="sticky-header" style="background-color: lightgrey">Tagplader</th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
 
                             <c:forEach items="${requestScope.orderItemRoofTile}" var="rooftile">
                             <td>${rooftile.width} ${rooftile.hight}</td>
@@ -56,11 +56,11 @@
                         <tr>
 
                         <tr>
-                            <th class="sticky-header">Skruer</th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
+                            <th class="sticky-header" style="background-color: lightgrey">Skruer</th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
 
                             <c:forEach items="${requestScope.orderItemScrew}" var="screw">
                             <td>${screw.diameter}</td>
@@ -72,11 +72,11 @@
                         <tr>
 
                         <tr>
-                            <th class="sticky-header">Beslag</th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
-                            <th class="sticky-header"></th>
+                            <th class="sticky-header" style="background-color: lightgrey">Beslag</th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="sticky-header" style="background-color: lightgrey"></th>
 
                             <c:forEach items="${requestScope.orderItemFitting}" var="fitting">
                                 <td>${fitting.name}</td>
