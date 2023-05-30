@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OrderItemMapperTest {
     private final static String USER = "dev";
     private final static String PASSWORD = "3r!DE32*/fDe";
-    private final static String URL = "jdbc:mysql://167.71.46.141/carport_test";
+    private final static String URL = "jdbc:mysql://178.128.160.211/carport_test";
 
     private static ConnectionPool connectionPool;
 

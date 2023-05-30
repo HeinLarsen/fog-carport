@@ -30,13 +30,12 @@ public class AdminEditOrder extends HttpServlet {
         HttpSession session = request.getSession();
 
         User u = (User) session.getAttribute("user");
-        Order o = (Order) session.getAttribute("order");
+
         int orderId = Integer.parseInt(request.getParameter("id"));
         int userId = Integer.parseInt(request.getParameter("userid"));
         String status = request.getParameter("status");
 
         request.setAttribute("user", u);
-        request.setAttribute("order", o);
 
         try {
             if (u != null && u.getRoleId() == 2) {
