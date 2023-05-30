@@ -16,6 +16,16 @@ th, td {
 }
 
 /* stilling for signup page */
+.index_grid{
+
+    text-align: center;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-gap: 15px;
+}
+
+
+/* stilling for signup page */
 .signup_form {
     max-width: 550px;
     margin-inline: auto;

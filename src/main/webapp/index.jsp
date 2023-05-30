@@ -11,7 +11,8 @@
     <jsp:body>
 
         <c:if test="${sessionScope.user != null}">
-            <div class="box homepage_grid_box box_width">
+            <div class="index_grid">
+            <div class="box mt-5">
                 <h3>Order liste:</h3>
                 <div>
                     <c:if test="${sessionScope.order == null}">
@@ -43,7 +44,7 @@
         </c:if>
 
 
-        <form action="order" method="post">
+        <form class="mt-5" action="order" method="post">
             <div class="align-center">
                 <div class="dropdown-container">
                     <h4>Carport bredde</h4>
@@ -74,7 +75,7 @@
                     </div>
                 </div>
 
-                <h2>Skur</h2>
+                <h2 class="mt-5">Skur</h2>
                 <div class="dropdown-container">
                     <h4>Skur bredde</h4>
                     <div class="dropdown">
