@@ -1,0 +1,197 @@
+()@startuml
+'https://plantuml.com/class-diagram
+
+!pragma layout smetana
+
+class User {
+- int ID
+- String firstFame
+- String lastName
+- String email
+- int zip
+- int phone
+- String address
+- String city
+- int role
+- int membership
+- ArrayList<Order> orders
++ void addOrder(Order order)
++ void removeOrder(int id)
++ void addOrders(ArrayList<Order> orders)
+}
+
+class UserFacade {
++ {static} ArrayList<User> getAllUsers()
++ {static} User getUser()
++ {static} void updateUser()
++ {static} void createUser()
++ {static} void login()
+}
+
+class UserMapper {
+# {static} ArrayList<User> getAllUsers()
+# {static} User getUser()
+# {static} void updateUser()
+# {static} void createUser()
+# {static} void login()
+}
+
+class Carport{
+- int length
+- int width
+- Shed shed
+}
+
+class OrderItem {
+- int ID
+- int guantity
+- int price
+- String description
+- AMaterial material
+- int length
+- int width
++ void addMaterial(Material material)
+}
+
+Enum OrderItemTask{
+- String task
+}
+
+class OrderItemFacade {
++ {static} ArrayList<OrderItem> getOrderItemsByOrderId()
++ {static} void createOrderItem()
+}
+
+class OrderItemMapper {
+# {static} OrderItem getOrderItemsByOrderId()
+# {static} void createOrderItem()
+}
+
+class Order {
+- int orderID
+- Timestamp timestamp
+- Enum status
+- int length
+- int width
+- int shedlength
+- int shedwidth
+- boolean shed-
+int userID
+- ArrayList<OrderItem> OrderItems
++ void AddOrderItem(Order order)
++ void AddOrderItems(ArrayList<Order> orders)
+}
+
+class OrderFacade {
++ {static} ArrayList<Order> getAllOrders()
++ {static} Order getOrderById()
++ {static} ArrayList<Order> getOrdersByUserId()
++ {static} void createOrder()
++ {static} void approveOrder()
++ {static} ArrayList<Order> getOrdersByStatus()
+}
+
+class OrderMapper {
+# {static} ArrayList<Order> getAllOrders()
+# {static} Order getOrderById()
+# {static} ArrayList<Order> getOrdersByUserId()
+# {static} void createOrder()
+# {static} void approveOrder()
+# {static} ArrayList<Order> getOrdersByStatus()
+}
+
+class MaterialFacade {
++ {static} ArrayList<Material> getAllMaterials()
++ {static} Material getMaterialById()
+}
+
+class MaterialMapper {
+# {static} ArrayList<Material> getAllMaterials()
+# {static} Material getMaterialById()
+}
+
+class GenerateStl {
++ {static} void generateStl()
+}
+
+class OrderService {
++ {static} Order getOrderById()
++ {static} void createOrder()
++ {static} ArrayList<Order> getAllOrders()
++ {static} ArrayList<Order> getAllOrdersPending()
+}
+
+class UserService() {
++ {static} void createUser()
++ {static} void updateUser()
++ {static} User getUserById()
++ {static} ArrayList<User> getAllUsers()
++ {static} User login()
+}
+
+abstract class Material {
+- int id
+- String name
+- int length
+- double price
+- String unit
+
+}
+
+abstract class ExtraDimensionMaterial {
+- int width
+- int height
+}
+
+class shed{
+- int length
+- int width
+}
+
+class spot{
+- double hight
+- double width
+- Gemoetry3D shape
+}
+
+class RoofTile {
+}
+
+class Wood {
+}
+
+class Fitting {
+}
+
+abstract class ExtraDiameterMaterial {
+- int diameter
+}
+
+class ScrewPack {
+- int quantity
+}
+
+class Screw {
+}
+
+Enum Status {
+    PENDING
+    APPROVED
+    CANCELLED
+}
+
+Material <|-- ExtraDimensionMaterial
+ExtraDimensionMaterial <|-- RoofTile
+ExtraDimensionMaterial <|-- Wood
+ExtraDimensionMaterial <|-- Fitting
+Material <|-- ExtraDiameterMaterial
+ExtraDiameterMaterial <|-- ScrewPack
+ExtraDiameterMaterial <|-- Screw
+
+Order *-- OrderItem
+OrderItem *-- OrderItemTask
+OrderItem *-- Material
+Order *-- Status
+User *-- Order
+
+@enduml
