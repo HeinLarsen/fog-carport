@@ -152,8 +152,8 @@
 
       <div class="box">
         <h2>Filer:
-          <a href="src/main/webapp/models/buildList-${requestScope.user.id}.stl" download>download ordre</a>
-          <a href="src/main/webapp/models/materialList-${requestScope.user.id}.stl" download>download ordre</a>
+          <a href<%=request.getContextPath()%>="/models/buildList-${requestScope.orderbyid}stl" download>download ordre</a>
+          <a href=<%=request.getContextPath()%>"/models/materialList-${requestScope.orderbyid}.stl" download>download ordre</a>
         </h2>
       </div>
     </div>
