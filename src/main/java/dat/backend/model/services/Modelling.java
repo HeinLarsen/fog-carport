@@ -19,7 +19,7 @@ public class Modelling {
         save(generateBuildList(order), "buildList", order, savePath);
 
         save(generateMaterialList(order), "materialList", order, savePath);
-        
+
     }
 
     private static void save(Geometry3D shape, String name, Order order, String savePath) throws IOException {

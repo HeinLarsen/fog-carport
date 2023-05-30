@@ -24,7 +24,7 @@
             <br>
 
             <br>
-            <a href="index.jsp">Tilbage til forsiden og se mere på ordren. </a>
+            <a href="${pageContext.request.contextPath}/index">Tilbage til forsiden og se mere på ordren. </a>
             </br>
 
         </div>

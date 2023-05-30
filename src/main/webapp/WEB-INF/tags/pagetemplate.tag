@@ -23,7 +23,7 @@
 <header>
     <nav class="navbar p-0 navbar-expand-lg navbar-light bg-light box">
         <div class="container">
-            <a class="navbar-brand" href="/index">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/index">
                 <img src="${pageContext.request.contextPath}/images/Fog-logo.png" width="70;" class="img-fluid"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
