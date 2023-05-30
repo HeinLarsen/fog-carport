@@ -12,28 +12,163 @@
     <jsp:body>
 
         <div class="mt-5 align-center griddy">
-            <div class="box">
-                <h2>Bruger info:</h2>
-                <div class="box">
-                    <br>
-                    Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
-                    <br>
-                    Email: ${requestScope.user.email}
-                    <br>
-                    Telefon nummer: ${requestScope.user.phoneNumber}
-                    <br>
-                    Adresse: ${requestScope.user.address}
-                    <br>
-                    Postnummer: ${requestScope.user.zip}
-                    <br>
-                    Medlemskab: ${requestScope.user.membershipId}
-                    <br/>
+            <div class="box homepage_grid_box">
+                <h2>Stykliste:</h2>
+                <div class="scrollable-table">
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th class="sticky-header" style="background-color: white">Materiale</th>
+                            <th class="sticky-header" style="background-color: white">Længde</th>
+                            <th class="sticky-header" style="background-color: white">Antal</th>
+                            <th class="sticky-header" style="background-color: white">Enhed</th>
+                            <th class="sticky-header" style="background-color: white">Beskrivelse</th>
+                        </tr>
+                        <tr>
+                            <th class="header">Træ</th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                        </tr>
+                        <c:forEach items="${requestScope.orderItemWood}" var="wood">
+                            <tr>
+                                <td>${wood.material.height} x ${wood.material.width}cm. ${wood.material.category}</td>
+                                <td>${wood.material.length}</td>
+                                <td>${wood.quantity}</td>
+                                <td>${wood.material.unit}</td>
+                                <td>${wood.description}</td>
+                            </tr>
+                        </c:forEach>
+
+                        <tr>
+                            <th class="header">Tagplader</th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                        </tr>
+                        <c:forEach items="${requestScope.orderItemRoofTile}" var="rooftile">
+
+                            <tr>
+                                <td>${rooftile.material.name}</td>
+                                <td>${rooftile.material.length}</td>
+                                <td>${rooftile.quantity}</td>
+                                <td>${rooftile.material.unit}</td>
+                                <td>${rooftile.description}</td>
+                            </tr>
+                        </c:forEach>
+
+                        <tr>
+                            <th class="header">Skruer</th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                        </tr>
+                        <c:forEach items="${requestScope.orderItemScrew}" var="screw">
+                            <tr>
+                                <td>${screw.material.name}</td>
+                                <td></td>
+                                <td>${screw.quantity}</td>
+                                <td>${screw.material.unit}</td>
+                                <td>${screw.description}</td>
+                            </tr>
+                        </c:forEach>
+
+                        <tr>
+                            <th class="header">Beslag</th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                        </tr>
+                        <c:forEach items="${requestScope.orderItemFitting}" var="fitting">
+                            <tr>
+                                <td>${fitting.material.name} ${fitting.material.length} ${fitting.material.unit}</td>
+                                <td></td>
+                                <td>${fitting.quantity}</td>
+                                <td>${fitting.material.unit}</td>
+                                <td>${fitting.description}</td>
+                            </tr>
+                        </c:forEach>
+
+                        <div></div>
+
+                    </table>
 
                 </div>
             </div>
+
+
+            <div class="box">
+                <h2>Status på Ordren:</h2>
+                <br>
+                    ${requestScope.orderbyid.status}
+                <br>
+            </div>
+
+
+            <div class="box">
+                <h2>Bruger info:</h2>
+                <br>
+                Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
+                <br>
+                Email: ${requestScope.user.email}
+                <br>
+                Telefon nummer: ${requestScope.user.phoneNumber}
+                <br>
+                Adresse: ${requestScope.user.address}
+                <br>
+                Postnummer: ${requestScope.user.zip}
+                <br>
+                Medlemskab:
+                <c:choose>
+                    <c:when test="${requestScope.user.membershipId eq 1}">
+                        Basic
+                    </c:when>
+                    <c:when test="${requestScope.user.membershipId eq 2}">
+                        Member
+                    </c:when>
+                    <c:when test="${requestScope.user.membershipId eq 3}">
+                        Worker
+                    </c:when>
+                    <c:otherwise>
+                        Unknown
+                    </c:otherwise>
+                </c:choose>
+                <br>
+
+            </div>
+
+
+            <div class="box">
+                <br>
+                <h2>Pris: </h2>
+                    ${requestScope.orderbyid.getTotalPrice()} kr.
+                <br>
+            </div>
+
+            <div class="box">
+                <br>
+                <h2>Download filer:</h2>
+                <c:choose>
+                    <c:when test="${orderbyid.status == 'APPROVED'}">
+                        <br>
+                        <a href="${pageContext.request.contextPath}/webapp/models/buildList-${requestScope.orderbyid.orderID}.stl"
+                           download>Buildlist</a></br>
+                        <a href="${pageContext.request.contextPath}/webapp/models/materialList-${requestScope.orderbyid.orderID}.stl"
+                           download>Materialeliste</a></br>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Filerne er ikke tilgængelige endnu.</p>
+                    </c:otherwise>
+                </c:choose>
+                <br>
+            </div>
+
         </div>
-        <a href="src/main/webapp/models/buildList-1.stl" download>download ordre</a>
-        <a href="src/main/webapp/models/materialList-1.stl" download>download ordre</a>
+
+
 
     </jsp:body>
 

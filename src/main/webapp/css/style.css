@@ -2,86 +2,103 @@
 table {
     border-collapse: collapse;
     border: 1px solid silver;
-    padding:15px;
+    padding: 15px;
 }
 
 th, td {
     border: 1px solid silver;
-    padding:15px;
+    padding: 15px;
 }
 
-.box{
-    background-color: lightgray;
+.box {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* stilling for signup page */
-.signup_form{
+.index_grid{
+    text-align: center;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-gap: 15px;
+}
+
+/* stilling for signup page */
+.signup_form {
     max-width: 550px;
     margin-inline: auto;
 }
 
-.align-center{
+.align-center {
     text-align: center;
 }
 
-.address{
-padding-left: 3%;
-}
-
-.last_name{
-    padding-left: 2%;
-}
-
-.first_name{
+.address {
     padding-left: 3%;
 }
 
-
-.email{
+.last_name {
     padding-left: 3%;
 }
 
-.password{
-    padding-left: 2%;
-}
-
-.zip{
+.first_name {
     padding-left: 3%;
 }
 
-.signup{
+.email {
+    padding-left: 3%;
+}
+
+.phone_number {
+    padding-left: 3%;
+}
+
+.password {
+    padding-left: 3%;
+}
+
+.zip {
+    padding-left: 3%;
+}
+
+.city {
+    padding-left: 3%;
+}
+
+.signup {
     margin-top: 2%;
     padding-left: 9%;
     margin-left: 8%;
 }
 
 /* stylling for login */
-.login{
+.login {
     margin-top: 3%;
 }
 
+.btn {
+    margin-left: 20%;
+}
 
-
-.signupKnap{
+.signupKnap {
     padding-left: 10%;
 }
-.d-inline{
+
+.d-inline {
     padding-left: 10%;
 }
 
 /* styling for admin homepage */
-.kunde{
+.kunde {
     margin-top: 3%;
     padding-left: 5%;
 }
 
-.order{
+.order {
     margin-top: 3%;
     padding-left: 5%;
 }
 
-.ubehandletorder{
+.ubehandletorder {
     margin-top: 3%;
     padding-left: 5%;
 }
@@ -103,15 +120,10 @@ padding-left: 3%;
     z-index: 1;
 }
 
-th.sticky-header {
-    background-color: lightgrey;
+.homepage_grid_box {
 }
 
-.homepage_grid_box{
-    background-color: lightgray;
-}
-
-.box_width{
+.box_width {
     width: 85%;
 }
 
@@ -124,7 +136,6 @@ th.sticky-header {
     overflow-y: auto;
     border: 1px solid silver;
 }
-
 
 
 /* styling for admingviewuser */

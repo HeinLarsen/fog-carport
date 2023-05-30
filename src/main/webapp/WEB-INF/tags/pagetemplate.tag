@@ -23,7 +23,7 @@
 <header>
     <nav class="navbar p-0 navbar-expand-lg navbar-light bg-light box">
         <div class="container">
-            <a class="navbar-brand" href="index.jsp">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/index">
                 <img src="${pageContext.request.contextPath}/images/Fog-logo.png" width="70;" class="img-fluid"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -32,15 +32,13 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 1</a>
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 2</a>
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/signup.jsp">sign up</a>
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/signup.jsp">Opret</a>
 
                     <c:if test="${sessionScope.user == null }">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
                     </c:if>
                     <c:if test="${sessionScope.user != null }">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log ud</a>
                     </c:if>
                 </div>
             </div>

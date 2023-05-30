@@ -38,17 +38,12 @@ public class AdminEditOrder extends HttpServlet {
         int orderId = Integer.parseInt(request.getParameter("id"));
         int userId = Integer.parseInt(request.getParameter("userid"));
 
-
-
         request.setAttribute("user", u);
-
 
         try {
             if (u != null && u.getRoleId() == 2) {
                 User userinfo = UserService.getUser(userId, connectionPool);
                 Order order = OrderService.getOrderById(orderId, connectionPool);
-
-
 
                 ArrayList<OrderItem> orderItemWood = new ArrayList<>();
                 ArrayList<OrderItem> orderItemScrew = new ArrayList<>();
@@ -73,8 +68,6 @@ public class AdminEditOrder extends HttpServlet {
                 request.setAttribute("orderItemFitting", orderItemFitting);
                 request.setAttribute("orderItemRoofTile", orderItemRoofTile);
                 request.setAttribute("user", userinfo);
-
-
 
                 request.getRequestDispatcher("WEB-INF/admineditorder.jsp").forward(request, response);
             } else {

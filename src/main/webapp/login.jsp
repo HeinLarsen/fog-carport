@@ -13,10 +13,10 @@
     <jsp:body>
 
 
-
         <form class="box signup_form" action="login" method="post">
-
+            <br>
             <div class="row justify-content-center mt-5">
+
                 <div class=" col-5">
                     <label for="email">Email: </label>
                     <input type="text" id="email" name="email"/>
@@ -33,12 +33,13 @@
 
             </div>
 
+            </br>
 
             <div class="row justify-content-center mt-3">
 
                 <div class="signupKnap col-auto">
                     <p class="d-inline">Du kan oprette dig her: </p>
-                        <a href="signup.jsp" class="btn btn-primary mb-2">Opret profil</a>
+                    <a href="signup.jsp" class="btn btn-primary mb-2">Opret profil</a>
                     </p>
                 </div>
 

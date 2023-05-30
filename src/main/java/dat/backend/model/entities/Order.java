@@ -16,7 +16,7 @@ public class Order {
         private ArrayList<OrderItem> orderItems;
 
 
-        public Order(int orderID, int userID, Timestamp created, Enum status, int length, int width, boolean shed){
+        public Order(int orderID, int userID, Timestamp created, Enum status, int length, int width, boolean shed) {
                 this.orderID = orderID;
                 this.userID = userID;
                 this.created = created;
@@ -27,8 +27,8 @@ public class Order {
 
         }
 
-        public Order(int orderID, Timestamp created, Enum status, int length, int width, boolean shed, int shedLength, int shedWidth){
-                this.orderID =orderID;
+        public Order(int orderID, Timestamp created, Enum status, int length, int width, boolean shed, int shedLength, int shedWidth) {
+                this.orderID = orderID;
                 this.created = created;
                 this.status = status;
                 this.length = length;
@@ -97,28 +97,21 @@ public class Order {
 
         }
 
-        public ArrayList<OrderItem> getOrderItems(){
+        public double getTotalPrice() {
+                double sum = 0;
+                for (OrderItem i : orderItems) {
+                        sum += i.getPrice();
+                }
+                System.out.println(sum);
+                return sum;
+        }
+
+        public ArrayList<OrderItem> getOrderItems() {
                 return orderItems;
         }
 
         public void setStatus(String status) {
                 this.status = Status.valueOf(status);
-        }
-
-        @Override
-        public String toString() {
-                return "Order{" +
-                        "orderID=" + orderID +
-                        ", created=" + created +
-                        ", status=" + status +
-                        ", length=" + length +
-                        ", width=" + width +
-                        ", shedLength=" + shedLength +
-                        ", shedWidth=" + shedWidth +
-                        ", shed=" + shed +
-                        ", userID=" + userID +
-                        ", orderItems=" + orderItems +
-                        '}';
         }
 }
 
