@@ -24,11 +24,11 @@
                             <th class="sticky-header" style="background-color: lightgrey">Beskrivelse</th>
                         </tr>
                         <tr>
-                            <th class="sticky-header" style="background-color: lightgrey">Træ</th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="header">Træ</th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
 
                             <c:forEach items="${requestScope.orderItemWood}" var="wood">
                                 <td>${wood.material.height} x ${wood.material.width}. ${wood.material.category}</td>
@@ -40,11 +40,11 @@
                         </tr>
 
                         <tr>
-                            <th class="sticky-header" style="background-color: lightgrey">Tagplader</th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="header">Tagplader</th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
 
                             <c:forEach items="${requestScope.orderItemRoofTile}" var="rooftile">
                             <td>${rooftile.material.name}</td>
@@ -56,11 +56,11 @@
                         <tr>
 
                         <tr>
-                            <th class="sticky-header" style="background-color: lightgrey">Skruer</th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="header">Skruer</th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
 
                             <c:forEach items="${requestScope.orderItemScrew}" var="screw">
                             <td>${screw.material.name}</td>
@@ -73,11 +73,11 @@
                         <tr>
 
                         <tr>
-                            <th class="sticky-header" style="background-color: lightgrey">Beslag</th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
-                            <th class="sticky-header" style="background-color: lightgrey"></th>
+                            <th class="header">Beslag</th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
 
                             <c:forEach items="${requestScope.orderItemFitting}" var="fitting">
                                 <td>${fitting.material.name}</td>
@@ -98,8 +98,8 @@
             <div class="box">
                 <h2>Status på Ordren:</h2>
                 <br>
-                        ${requestScope.order.status}
-                </br>
+                    ${requestScope.orderbyid.status}
+                <br>
             </div>
 
 
@@ -139,16 +139,19 @@
 
             <div class="box">
                 <h2>Pris: </h2>
-                    ${requestScope.order.calculatePrice()}
+                    ${requestScope.orderbyid.getTotalPrice()} kr.
             </div>
 
             <div class="box">
-                <h2>Filer: </h2>
+                <h2>Download filer: </h2>
+                <div>
+                    <a href="${pageContext.request.contextPath}/webapp/models/buildList-${requestScope.orderbyid.orderID}.stl"
+                       download>Buildlist</a></div>
+                <div>
+                    <a href="${pageContext.request.contextPath}/webapp/models/materialList-${requestScope.orderbyid.orderID}.stl"
+                       download>Matrialeliste</a></div>
             </div>
-
         </div>
-        <a href="src/main/webapp/models/buildList-1.stl" download>download ordre</a>
-        <a href="src/main/webapp/models/materialList-1.stl" download>download ordre</a>
 
 
     </jsp:body>

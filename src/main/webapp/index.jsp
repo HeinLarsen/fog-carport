@@ -11,31 +11,34 @@
     <jsp:body>
 
         <c:if test="${sessionScope.user != null}">
-            <h2>Order</h2>
-            <div class="box">
-            <c:if test="${sessionScope.order == null}">
-                <p>Her kan du se din fremtidige ordre. </p>
-
-            </c:if>
-
-            <c:if test="${sessionScope.order != null}">
-
-                <div class="box homepage_grid_box box_width">
+            <div class="box homepage_grid_box box_width">
                 <h3>Order liste:</h3>
-                <div class="scrollable-table">
-                <table class="table table-striped table-bordered">
-                    <tr>
-                        <th class="sticky-header" style="background-color: lightgrey">ID</th>
-                        <th class="sticky-header" style="background-color: lightgrey">Order</th>
-                        <th class="sticky-header" style="background-color: lightgrey">Status</th>
-                    </tr>
-                    <c:forEach items="${requestScope.orderList}" var="order">
-                        <tr onclick="location.href='uservieworder?id=${order.orderID}'">
-                            <td>${order.length} cm x ${order.width} cm, ${order.shed}</td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </c:if>
+                <div>
+                    <c:if test="${sessionScope.order == null}">
+                        <p>Her kan du se din fremtidige ordre. </p>
+                    </c:if>
+                </div>
+
+                <div>
+                    <c:if test="${sessionScope.order != null}">
+                        <div class="box homepage_grid_box box_width">
+                            <div class="scrollable-table">
+                                <table class="table table-striped table-bordered">
+                                    <tr>
+                                        <th class="sticky-header" style="background-color: lightgrey">ID</th>
+                                        <th class="sticky-header" style="background-color: lightgrey">Order</th>
+                                        <th class="sticky-header" style="background-color: lightgrey">Status</th>
+                                    </tr>
+                                    <c:forEach items="${requestScope.orderbyid}" var="order">
+                                        <tr onclick="location.href='uservieworder?id=${order.orderID}'">
+                                            <td>${order.length} cm x ${order.width} cm, ${order.shed}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </div>
+                        </div>
+                    </c:if>
+                </div>
             </div>
         </c:if>
 
@@ -47,7 +50,9 @@
                     <div class="dropdown">
                         <select name="carportwidth">
                             <c:forEach items="${requestScope.carportWidthList}" var="width">
-                                <option value="${width}" <c:if test="${width == requestScope.carportwidth}">selected</c:if> >${width} cm</option>
+                                <option value="${width}"
+                                        <c:if test="${width == requestScope.carportwidth}">selected</c:if> >${width} cm
+                                </option>
                             </c:forEach>
 
                         </select>
@@ -60,7 +65,10 @@
                     <div class="dropdown">
                         <select name="carportlength">
                             <c:forEach items="${requestScope.carportLengthList}" var="length">
-                                <option value="${length}" <c:if test="${length == requestScope.carportlength}">selected</c:if> >${length} cm</option>
+                                <option value="${length}"
+                                        <c:if test="${length == requestScope.carportlength}">selected</c:if> >${length}
+                                    cm
+                                </option>
                             </c:forEach>
                         </select>
                     </div>
@@ -72,7 +80,10 @@
                     <div class="dropdown">
                         <select name="shedwidth">
                             <c:forEach items="${requestScope.shedWidthList}" var="shedwidth">
-                                <option value="${shedwidth}" <c:if test="${shedwidth == requestScope.shedwidth}">selected</c:if>>${shedwidth} cm</option>
+                                <option value="${shedwidth}"
+                                        <c:if test="${shedwidth == requestScope.shedwidth}">selected</c:if>>${shedwidth}
+                                    cm
+                                </option>
                             </c:forEach>
                         </select>
                     </div>
@@ -83,23 +94,20 @@
                     <div class="dropdown">
                         <select name="shedlength">
                             <c:forEach items="${requestScope.shedLengthList}" var="shedlength">
-                                <option value="${shedlength}" <c:if test="${shedlength == requestScope.shedlength}">selected</c:if>>${shedlength} cm</option>
+                                <option value="${shedlength}"
+                                        <c:if test="${shedlength == requestScope.shedlength}">selected</c:if>>${shedlength}
+                                    cm
+                                </option>
                             </c:forEach>
                         </select>
                     </div>
                 </div>
 
-
-
                 <button class="btn btn-danger" type="submit">Bestil</button>
+
 
             </div>
         </form>
-
-
-        <c:if test="${sessionScope.user != null}">
-            <p>You are logged in with the role of "${sessionScope.user.roleId}".</p>
-        </c:if>
 
 
     </jsp:body>

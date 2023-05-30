@@ -62,7 +62,7 @@ public class OrderService {
         Order order = null;
         if (carport.hasShed()) {
             Shed shed = carport.getShed();
-            order = new Order(carport.getLength(), carport.getLength(), shed.getLength(), shed.getWidth(), true);
+            order = new Order(carport.getLength(), carport.getWidth(), shed.getLength(), shed.getWidth(), true);
         } else {
             order = new Order(carport.getLength(), carport.getLength(), false);
         }

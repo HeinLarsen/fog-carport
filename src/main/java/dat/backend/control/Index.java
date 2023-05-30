@@ -76,12 +76,14 @@ public class Index extends HttpServlet {
         shedLength.add(160);
         shedLength.add(180);
         shedLength.add(200);
+        shedLength.add(210);
 
         shedWidth.add(0);
         shedWidth.add(220);
         shedWidth.add(240);
         shedWidth.add(260);
         shedWidth.add(280);
+        shedWidth.add(530);
 
         request.setAttribute("carportLengthList", carportLength);
         request.setAttribute("carportWidthList", carportWidth);

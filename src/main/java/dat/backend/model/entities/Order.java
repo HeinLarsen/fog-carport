@@ -97,6 +97,15 @@ public class Order {
 
         }
 
+        public double getTotalPrice(){
+                double sum = 0;
+                for (OrderItem i : orderItems) {
+                        sum += i.getPrice();
+                }
+                System.out.println(sum);
+                return sum;
+        }
+
         public ArrayList<OrderItem> getOrderItems(){
                 return orderItems;
         }

@@ -50,7 +50,6 @@ public class Order extends HttpServlet {
 
         if (shedLength == 0 && shedWidth == 0) {
             if (user == null) {
-                request.setAttribute("errorMessage", "Du skal være logget ind for at bestille.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 Carport carport = new Carport(carportLength, carportWidth);
@@ -77,6 +76,7 @@ public class Order extends HttpServlet {
             }
         } else if (shedLength == 0 || shedWidth == 0) {
             request.setAttribute("errorMessage", "Vælg venligst både skur-længde og skur-bredde.");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
 
         }
     }

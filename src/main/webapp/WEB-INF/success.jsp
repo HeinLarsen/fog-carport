@@ -11,15 +11,15 @@
     </jsp:attribute>
     <jsp:body>
 
-        <div class="box">
+        <div class="box align-center">
             <br>
-            <t2>Tak for din ordre!</t2>
-            <br>
-            <br>
-            <t2>Din ordre er nu sendt til behandling.</t2>
+            <t1>Tak for din ordre!</t1>
             <br>
             <br>
-            <t2>Admin vil nu behandle din ordre. Der vil være lidt behandlingstid.</t2>
+            <t1>Din ordre er nu sendt til behandling.</t1>
+            <br>
+            <br>
+            <t1>Admin vil nu behandle din ordre. Der vil være lidt behandlingstid.</t1>
             <br>
 
             <br>
