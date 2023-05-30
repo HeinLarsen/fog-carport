@@ -6,7 +6,7 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-       Sign up
+       Opret login
     </jsp:attribute>
 
     <jsp:body>
