@@ -146,9 +146,9 @@
           <h2>Kontrolpanel:</h2>
           <input type="hidden" value="${requestScope.orderbyid.orderID}" name="order">
           <input type="hidden" value="${requestScope.user.id}" name="userid">
-          <button type="submit" name="status" value="APPROVED">Godkend</button>
-          <button type="submit">Annuller</button>
-          <button type="submit">Slet ordre</button>
+          <button class="btn btn-success" type="submit" name="status" value="APPROVED">Godkend</button>
+          <button class="btn btn-primary" type="submit" name="status" value="CANCELLED">Annuller</button>
+          <button class="btn btn-danger" type="submit" name="status" value="DELETED">Slet ordre</button>
         </div>
       </form>
 

@@ -19,7 +19,7 @@ public class Modelling {
         System.out.println(order);
         save(generateBuildList(order), "buildList", order, savePath);
 
-//        save(generateMaterialList(order), "materialList", order, savePath);
+        save(generateMaterialList(order), "materialList", order, savePath);
 
 
     }

@@ -116,9 +116,21 @@ public class AdminEditOrder extends HttpServlet {
                     e.printStackTrace();
                 }
 
-                // Update any necessary data or send a response asynchronously if needed
 
             });
+        } else if (status.equals("CANCELLED")) {
+            try {
+                OrderService.cancelOrder(order.getOrderID(), Status.CANCELLED, connectionPool);
+            } catch (DatabaseException e) {
+                e.printStackTrace();
+            }
+        } else if (status.equals("DELETED")) {
+            try {
+                OrderService.deleteOrderItems(order.getOrderID(), connectionPool);
+                OrderService.deleteOrder(order.getOrderID(), connectionPool);
+            } catch (DatabaseException e) {
+                e.printStackTrace();
+            }
         }
 
         request.setAttribute("user", u);
