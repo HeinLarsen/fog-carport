@@ -71,7 +71,6 @@ public class OrderService {
         int orderId = OrderFacade.createOrder(order, userId, connectionPool);
         OrderItemFacade.createOrderItem((ArrayList<OrderItem>) orderItems, orderId, connectionPool);
 
-
     }
 
     public static List<OrderItem> generateOrderItems(Carport carport, ConnectionPool connectionPool) throws DatabaseException {
@@ -649,22 +648,23 @@ public class OrderService {
     }
 
 
-    public static Order updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException, IOException {
+    public static Order approveOrder(Order order, String savePath, ConnectionPool connectionPool) throws DatabaseException, IOException {
+        order.setStatus(String.valueOf(Status.APPROVED));
         OrderFacade.approveOrder(order, connectionPool);
-        Modelling.generateFiles(order);
+        Modelling.generateFiles(order, savePath);
         return order;
 
     }
 
-    public void cancelOrder(int id, Enum Status, ConnectionPool connectionPool) throws DatabaseException {
+    public static void cancelOrder(int id, Enum Status, ConnectionPool connectionPool) throws DatabaseException {
         OrderFacade.cancelOrder(id, Status, connectionPool);
     }
 
-    public void deleteOrder(int id, ConnectionPool connectionPool) throws DatabaseException {
+    public static void deleteOrder(int id, ConnectionPool connectionPool) throws DatabaseException {
         OrderFacade.deleteOrder(id, connectionPool);
     }
 
-    public void deleteOrderItems(int id, ConnectionPool connectionPool) throws DatabaseException {
+    public static void deleteOrderItems(int id, ConnectionPool connectionPool) throws DatabaseException {
         OrderItemFacade.deleteOrderItems(id, connectionPool);
     }
 

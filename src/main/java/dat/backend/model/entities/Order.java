@@ -38,7 +38,7 @@ public class Order {
                 this.shedWidth = shedWidth;
         }
 
-        public Order(int length, int width, int shedLength, int shedWidth, boolean shed) {
+        public Order(int length, int width, int shedLength, int shedWidth, boolean shed){
                 this.length = length;
                 this.width = width;
                 this.shed = shed;
@@ -52,23 +52,19 @@ public class Order {
                 this.shed = b;
         }
 
-        public void addOrderItem(OrderItem orderItems) {
+        public void addOrderItem(OrderItem orderItems){
                 this.orderItems.add(orderItems);
 
         }
 
-        public void addOrderItems(ArrayList<OrderItem> orderItems) {
+        public void addOrderItems(ArrayList<OrderItem> orderItems){
                 this.orderItems = orderItems;
 
         }
 
-        public int getUserID() {
-                return userID;
-        }
+        public int getUserID() { return userID; }
 
-        public int getLength() {
-                return length;
-        }
+        public int getLength() { return length; }
 
         public int getWidth() {
                 return width;
@@ -86,17 +82,17 @@ public class Order {
                 return shed;
         }
 
-        public int getOrderID() {
+        public int getOrderID(){
                 return orderID;
 
         }
 
-        public Timestamp getCreated() {
+        public Timestamp getCreated(){
                 return created;
 
         }
 
-        public Enum getStatus() {
+        public Enum getStatus(){
                 return status;
 
         }
@@ -117,6 +113,5 @@ public class Order {
         public void setStatus(String status) {
                 this.status = Status.valueOf(status);
         }
-
 }
 

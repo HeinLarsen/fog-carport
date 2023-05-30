@@ -40,7 +40,7 @@ public class  Signup extends HttpServlet {
         String city = request.getParameter("city");
         User u = new User(firstName, lastname, email, password, address, phoneNumber, zip, city);
         try {
-            UserService.createUser2(u, connectionPool);
+            UserService.createUser(u, connectionPool);
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         } catch (DatabaseException e) {
             request.setAttribute("errormessage", e.getMessage());

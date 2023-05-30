@@ -116,6 +116,7 @@ th, td {
 .sticky-header {
     position: sticky;
     top: 0;
+    background-color:#808080;
     z-index: 1;
 }
 
