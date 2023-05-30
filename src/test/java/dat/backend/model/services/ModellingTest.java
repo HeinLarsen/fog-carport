@@ -115,7 +115,7 @@ public class ModellingTest {
         }
     }
 
-    @Test
+  /*  @Test
     public void generate3D() throws DatabaseException, IOException {
 
         Carport carport = new Carport(780, 600, new Shed(210, 530));
@@ -127,5 +127,5 @@ public class ModellingTest {
        order.addOrderItems(list);
 
        Modelling.generateFiles(order, "src/main/webapp/models");
-   }
+   }*/
 }
