@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `carport`.`order`
     `shed_length` INT                                   NOT NULL DEFAULT 0,
     `shed_width`  INT                                   NOT NULL DEFAULT 0,
     `created` TIMESTAMP                                 NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `status`  ENUM ('PENDING', 'APPROVED', 'CANCELlED') NOT NULL DEFAULT 'PENDING',
+    `status`  ENUM ('PENDING', 'APPROVED', 'CANCELLED') NOT NULL DEFAULT 'PENDING',
     PRIMARY KEY (`id`),
     INDEX `fk_order_user1_idx` (`user_id` ASC),
     CONSTRAINT `fk_order_user1`

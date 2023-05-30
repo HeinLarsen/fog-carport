@@ -5,6 +5,8 @@ import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Predicate;
@@ -17,7 +19,7 @@ public class Modelling {
         System.out.println(order);
         save(generateBuildList(order), "buildList", order, savePath);
 
-//        save(generateMaterialList(order), "materialList", order, savePath);
+        save(generateMaterialList(order), "materialList", order, savePath);
 
 
     }
