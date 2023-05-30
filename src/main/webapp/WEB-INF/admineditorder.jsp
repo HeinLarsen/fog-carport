@@ -87,10 +87,10 @@
             </tr>
             <c:forEach items="${requestScope.orderItemFitting}" var="fitting">
               <tr>
-                <td>${fitting.material.name}</td>
-                <td>${fitting.material.length} ${fitting.material.unit}</td>
-                <td>${fitting.material.price}</td>
+                <td>${fitting.material.name} ${fitting.material.length} ${fitting.material.unit}</td>
+                <td></td>
                 <td>${fitting.quantity}</td>
+                <td>${fitting.material.unit}</td>
                 <td>${fitting.description}</td>
               </tr>
 
@@ -144,6 +144,8 @@
       <form action="admineditorder" method="post">
         <div class="box">
           <h2>Kontrolpanel:</h2>
+          <input type="hidden" value="${requestScope.orderbyid.orderID}" name="order">
+          <input type="hidden" value="${requestScope.user.id}" name="userid">
           <button type="submit" name="status" value="APPROVED">Godkend</button>
           <button type="submit">Annuller</button>
           <button type="submit">Slet ordre</button>

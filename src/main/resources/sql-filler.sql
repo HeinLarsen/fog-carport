@@ -102,9 +102,9 @@ VALUES (300, 9.7, 9.7, 1, 5, 1, 134.85);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
 VALUES (210, 10.0, 1.9, 1, 1, 1, 20.16);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (540, 10.0, 1.9, 1, 5, 1, 51.84);
+VALUES (540, 10.0, 1.9, 1, 1, 1, 51.84);
 INSERT INTO `carport`.`wood` (`length`, `width`, `height`, `is_pressure_treated`, `category`, `unit`, `price`)
-VALUES (360, 10.0, 1.9, 1, 5, 1, 34.56);
+VALUES (360, 10.0, 1.9, 1, 1, 1, 34.56);
 
 INSERT INTO `carport`.`roof_tile` (`name`, `length`, `width`, `unit`, `price`)
 VALUES ('Plastmo Ecolite blåtonet', 600, 109, 1, 633.00);

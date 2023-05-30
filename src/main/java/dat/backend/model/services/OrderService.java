@@ -62,7 +62,7 @@ public class OrderService {
         Order order = null;
         if (carport.hasShed()) {
             Shed shed = carport.getShed();
-            order = new Order(carport.getLength(), carport.getLength(), shed.getLength(), shed.getWidth(), true);
+            order = new Order(carport.getLength(), carport.getWidth(), shed.getLength(), shed.getWidth(), true);
         } else {
             order = new Order(carport.getLength(), carport.getLength(), false);
         }
@@ -70,7 +70,6 @@ public class OrderService {
 
         int orderId = OrderFacade.createOrder(order, userId, connectionPool);
         OrderItemFacade.createOrderItem((ArrayList<OrderItem>) orderItems, orderId, connectionPool);
-
 
     }
 
@@ -649,9 +648,10 @@ public class OrderService {
     }
 
 
-    public static Order updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException, IOException {
-        OrderFacade.approveOrder(order, connectionPool);
-        Modelling.generateFiles(order);
+    public static Order approveOrder(Order order, String savePath, ConnectionPool connectionPool) throws DatabaseException, IOException {
+        order.setStatus(String.valueOf(Status.APPROVED));
+//        OrderFacade.approveOrder(order, connectionPool);
+        Modelling.generateFiles(order, savePath);
         return order;
 
     }

@@ -13,16 +13,18 @@ public class Modelling {
     private static JavaCSG csg = JavaCSGFactory.createDefault();
 
 
-    public static void generateFiles(Order order) throws IOException {
-        save(generateBuildList(order), "buildList", order);
+    public static void generateFiles(Order order, String savePath) throws IOException {
+        System.out.println(order);
+        save(generateBuildList(order), "buildList", order, savePath);
 
-        save(generateMaterialList(order), "materialList", order);
+//        save(generateMaterialList(order), "materialList", order, savePath);
 
 
     }
 
-    private static void save(Geometry3D shape, String name, Order order) throws IOException {
-        csg.saveSTL("src/main/webapp/models/" + name + "-" + order.getOrderID() + ".stl", shape);
+    private static void save(Geometry3D shape, String name, Order order, String savePath) throws IOException {
+        System.out.println(savePath + name + "-" + order.getOrderID() + ".stl");
+        csg.saveSTL(savePath + name + "-" + order.getOrderID() + ".stl", shape);
     }
 
     private static Geometry3D generateMaterialList(Order order) throws IOException {
