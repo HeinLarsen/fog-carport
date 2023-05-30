@@ -35,7 +35,7 @@ class UserMapper {
 # {static} User updateUser()
 # {static} User createUser()
 # {static} User login()
-
+# {static} void createZipCity();
 }
 
 class Carport{
@@ -147,17 +147,69 @@ class GenerateStl {
 
 class OrderService {
 + {static} Order getOrderById()
-+ {static} void createOrder()
++ {static} ArrayList<Order> getOrdersByStatus()
 + {static} ArrayList<Order> getAllOrders()
-+ {static} ArrayList<Order> getAllOrdersPending()
++ {static} ArrayList<Order> getOrdersByUserId()
++ {static} void addOrder()
++ {static} list<OrderItem> generateOrderItems()
+- {static} OrderItem calculateWoodPlankLEgnthForZShape()
+- {static} list<OrderItem> getShedSupports()
+- {static} list<OrderItem> getWaterboard()
+- {static} OrderItem getRoofTiles()
+- {static} OrderItem getRoofScrews()
+- {static} OrderItem getMetalBand()
+- {static} OrderItem getSternScrews()
+- {static} OrderItemgetFittingScrews()
+- {static} OrderItem getBolts()
+- {static} Orderitem getDiscs()
+- {static} OrderItem getScrewsForOuterClothing()
+- {static} OrderItem getScrewsForInnerClothing
+- {static} OrderItem getDorrHandle()
+- {static} OrderItem getHinges()
+- {static} OrderItem getAngleFittings()
+- {static} OrderItem getUniversalFitting()
+- {static} OrderItem getRims()
+- {static} OrderItem getShedClothing()
+- {static} OrderItem getPoles()
+- {static} OrderItem getSpars()
+- {static} List<OrderItem> getUpperSterns()
+- {static} List<OrderItem> getStern()
+- {static} List<Wood> findSterns()
+- {static} List<Wood> filterWoods()
+- {static} List<Screw> filterScrews()
+- {static} List<Fitting> filterFittings()
+- {static} double calculatePrice()
+- {static} Order updateOrder()
+- {static}v void cancleOrder()
+- {static} void deleteOrder()
+- {static} void deleteOrderItems()
 }
 
 class UserService() {
-+ {static} void createUser()
-+ {static} void updateUser()
-+ {static} User getUserById()
-+ {static} ArrayList<User> getAllUsers()
 + {static} User login()
++ {static} User updateUser()
++ {static} void createUser()
++ {static} User getUser()
++ {static} ArrayList<User> getUser()
+
+}
+
+class Autthentication{
++ {static} boolean isRoleAllowed
+}
+
+class Modelling{
++ {static} void generateFiles()
+- {static} void save()
+- {static} Geometry3D generateMaterialList()
+- {static} Geometry3D generateBuildList()
+- {static} ArrayList<Spot> generateSpot()
+- {static} Geometry3D generatebasicShape()
+- {static} Geometry3D generateCarportPoles()
+- {static} Orderitem getItem()
+- {static} void yAxisPacking()
+- {static} Geometry3D printing()
+- {static} boolean canSpotFitInRow()
 }
 
 abstract class Material {
@@ -182,7 +234,7 @@ class shed{
 class spot{
 - double hight
 - double width
-- Gemoetry3D shape
+- Geometry3D shape
 }
 
 class RoofTile {
@@ -210,6 +262,8 @@ Enum Status {
     APPROVED
     CANCELLED
 }
+
+
 
 Material <|-- ExtraDimensionMaterial
 ExtraDimensionMaterial <|-- RoofTile
