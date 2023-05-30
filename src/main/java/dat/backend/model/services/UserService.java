@@ -21,9 +21,9 @@ public class UserService {
        return user;
     }
 
-    public static void createUser2(User u, ConnectionPool connectionPool) throws DatabaseException {
+    public static void createUser(User u, ConnectionPool connectionPool) throws DatabaseException {
         UserFacade.createZipCity(u, connectionPool);
-        UserFacade.createUser2(u, connectionPool);
+        UserFacade.createUser(u, connectionPool);
 
     }
 
