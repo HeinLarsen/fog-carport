@@ -121,6 +121,7 @@ public class AdminEditOrder extends HttpServlet {
             try {
                 OrderService.deleteOrderItems(order.getOrderID(), connectionPool);
                 OrderService.deleteOrder(order.getOrderID(), connectionPool);
+                request.getRequestDispatcher("/adminhomepage").forward(request, response);
             } catch (DatabaseException e) {
                 e.printStackTrace();
             }
