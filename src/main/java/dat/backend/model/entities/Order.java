@@ -104,5 +104,21 @@ public class Order {
         public void setStatus(String status) {
                 this.status = Status.valueOf(status);
         }
+
+        @Override
+        public String toString() {
+                return "Order{" +
+                        "orderID=" + orderID +
+                        ", created=" + created +
+                        ", status=" + status +
+                        ", length=" + length +
+                        ", width=" + width +
+                        ", shedLength=" + shedLength +
+                        ", shedWidth=" + shedWidth +
+                        ", shed=" + shed +
+                        ", userID=" + userID +
+                        ", orderItems=" + orderItems +
+                        '}';
+        }
 }
 

@@ -4,6 +4,7 @@ import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.*;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -61,7 +62,7 @@ public class OrderService {
         Order order = null;
         if (carport.hasShed()) {
             Shed shed = carport.getShed();
-            order = new Order(carport.getLength(), carport.getLength(), shed.getLength(), shed.getWidth(), true);
+            order = new Order(carport.getLength(), carport.getWidth(), shed.getLength(), shed.getWidth(), true);
         } else {
             order = new Order(carport.getLength(), carport.getLength(), false);
         }
@@ -69,7 +70,6 @@ public class OrderService {
 
         int orderId = OrderFacade.createOrder(order, userId, connectionPool);
         OrderItemFacade.createOrderItem((ArrayList<OrderItem>) orderItems, orderId, connectionPool);
-
 
     }
 
@@ -648,24 +648,23 @@ public class OrderService {
     }
 
 
-
-
-    public static Order updateOrder(Order order, String status, ConnectionPool connectionPool) throws DatabaseException {
-        order.setStatus("approved");
-
+    public static Order approveOrder(Order order, String savePath, ConnectionPool connectionPool) throws DatabaseException, IOException {
+        order.setStatus(String.valueOf(Status.APPROVED));
         OrderFacade.approveOrder(order, connectionPool);
+        Modelling.generateFiles(order, savePath);
         return order;
+
     }
 
-    public void cancelOrder(int id, Enum Status, ConnectionPool connectionPool) throws DatabaseException {
+    public static void cancelOrder(int id, Enum Status, ConnectionPool connectionPool) throws DatabaseException {
         OrderFacade.cancelOrder(id, Status, connectionPool);
     }
 
-    public void deleteOrder(int id, ConnectionPool connectionPool) throws DatabaseException {
+    public static void deleteOrder(int id, ConnectionPool connectionPool) throws DatabaseException {
         OrderFacade.deleteOrder(id, connectionPool);
     }
 
-    public void deleteOrderItems(int id, ConnectionPool connectionPool) throws DatabaseException {
+    public static void deleteOrderItems(int id, ConnectionPool connectionPool) throws DatabaseException {
         OrderItemFacade.deleteOrderItems(id, connectionPool);
     }
 
