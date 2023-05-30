@@ -14,14 +14,9 @@ public class User
     private int roleId;
     private int membershipId;
     private int zip;
+    private String city;
 
-
-
-
-
-    public User(String firstName, String lastName, String email, String password, String address, int phoneNumber, int zip)
-    {
-
+    public User(String firstName, String lastName, String email, String password, String address, int phoneNumber, int zip, String city) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -29,11 +24,10 @@ public class User
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.zip = zip;
-
+        this.city = city;
     }
 
-    public User(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip)
-    {
+    public User(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, String city) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,7 +38,7 @@ public class User
         this.roleId = roleId;
         this.membershipId = membershipId;
         this.zip = zip;
-
+        this.city = city;
     }
 
     public int getId() {
@@ -86,6 +80,10 @@ public class User
     public int getZip() {
         return zip;
     }
+
+    public String getCity() {
+        return city;
+    }
     
     @Override
     public boolean equals(Object o)
@@ -112,4 +110,6 @@ public class User
                 ", medlemskab='" + membershipId + '\'' +
                 '}';
     }
+
+
 }

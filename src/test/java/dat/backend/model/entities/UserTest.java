@@ -17,8 +17,8 @@ class UserTest
     @BeforeEach
     void setup()
     {
-       user1 = new User(1, "John", "Doe", "test@email.com", "1234", "testvej 50", 12345678, 2, 2, 1111);
-       user2 = new User(2, "martin", "smart", "test2@email.com", "12345678", "testvej 51", 87654321, 3, 3, 2222);
+       user1 = new User(1, "John", "Doe", "test@email.com", "1234", "testvej 50", 12345678, 2, 2, 1111, "city");
+       user2 = new User(2, "martin", "smart", "test2@email.com", "12345678", "testvej 51", 87654321, 3, 3, 2222, "city");
     }
 
 
