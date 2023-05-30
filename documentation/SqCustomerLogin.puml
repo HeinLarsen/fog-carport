@@ -6,9 +6,13 @@ autonumber
 User -> homepage.jsp: Navigate to login
 homepage.jsp -> login.jsp: Login
 login.jsp -> LoginServlet: Post
-LoginServlet -> UserMapper: Valid
+LoginServlet -> UserService: Valid
+UserService -> UserFacade: data
+UserFacade -> UserMapper: data
 UserMapper -> SQL: Query
 SQL -> UserMapper: ResultSet
-UserMapper -> LoginServlet: Result
+UserMapper -> UserFacade: User
+UserFacade -> UserService: User
+UserService -> LoginServlet: Result
 LoginServlet -> homepage.jsp: Redirect to success page
 @enduml

@@ -5,10 +5,14 @@ autonumber
 
 User -> homepage.jsp: Order Carport
 homepage.jsp -> OrderServlet: Post
-OrderServlet -> OrderMapper: Valid
+OrderServlet -> OrderService: Valid
+OrderService -> OrderFacade:valid
+OrderFacade -> OrderMapper: Valid
 OrderMapper -> SQL: Query
 SQL -> OrderMapper: ResultSet
-OrderMapper -> OrderServlet: Result
+OrderMapper -> OrderFacade: Result
+OrderFacade -> OrderService: Result
+OrderService-> OrderServlet: Result
 OrderServlet -> success.jsp: Forward
 
 @enduml

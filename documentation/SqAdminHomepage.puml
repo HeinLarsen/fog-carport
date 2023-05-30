@@ -3,24 +3,46 @@
 
 autonumber
 
+'admin login'
+
 Admin -> homepage.jsp: Forward
 homepage.jsp --> login.jsp: Navigate to login
 login.jsp -> LoginServlet: Post
-LoginServlet -> UserMapper: Valid
+LoginServlet -> UserService: Valid
+UserService -> UserFacade: Post
+UserFacade -> UserMapper : post
 UserMapper -> SQL: Query
 SQL --> UserMapper: ResultSet
-UserMapper -> LoginServlet: Result
+UserMapper -> UserFacade: Result
+UserFacade -> UserService: Result
+UserService -> LoginServlet: Result
 LoginServlet -> AdminHomepageServlet: Forward
 
-AdminHomepageServlet -> OrderMapper: Post
+
+
+'Grab OrderData from the database'
+
+AdminHomepageServlet -> OrderService: Post
+OrderService -> OrderFacade: Post
+OrderFacade -> OrderMapper: Post
 OrderMapper -> SQL: Query
 SQL --> OrderMapper: ResultSet
-OrderMapper -> AdminHomepageServlet: Result
-AdminHomepageServlet -> UserMapper: Post
+OrderMapper -> OrderFacade: Result
+OrderFacade -> OrderService: Result
+OrderService-> AdminHomepageServlet: Result
 
+
+
+'Grab CustomerData from the database'
+
+AdminHomepageServlet -> UserService: Post
+UserService -> UserFacade: Post
+UserFacade -> UserMapper: Post
 UserMapper -> SQL: Query
 SQL --> UserMapper: ResultSet
-UserMapper -> AdminHomepageServlet: Customer + Order Results
+UserMapper -> UserFacade: Result
+UserFacade -> UserService: Result
+UserService -> AdminHomepageServlet: Customer + Order Results
 AdminHomepageServlet -> adminHomepage.jsp: Forward to admin homepage
 
 @enduml

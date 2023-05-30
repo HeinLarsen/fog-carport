@@ -12,14 +12,14 @@ UserMapper -> LoginServlet: Result
 LoginServlet -> homepage.jsp: Forward
 homepage.jsp -> User: Welcome
 
-User -> createorder.jsp: Navigate to make an order
+User -> createOrder.jsp: Navigate to make an order
 createOrder.jsp -> OrderServlet: Post
 OrderServlet -> OrderMapper: Validate
 OrderMapper -> SQL: Query
 SQL --> OrderMapper: ResultSet
 OrderMapper -> OrderServlet: Result
-OrderServlet -> createorder.jsp: Forward
-createorder.jsp -> orderdone.jsp: Order Done
+OrderServlet -> createOrder.jsp: Forward
+createOrder.jsp -> orderdone.jsp: Order Done
 orderdone.jsp -> User: Thanks for your order
 
 User -> orders.jsp: Approve order
