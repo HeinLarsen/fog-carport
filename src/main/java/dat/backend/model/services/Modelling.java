@@ -23,6 +23,7 @@ public class Modelling {
     }
 
     private static void save(Geometry3D shape, String name, Order order, String savePath) throws IOException {
+//        csg.view(shape);
          csg.saveSTL(savePath + name + "-" + order.getOrderID() + ".stl", shape);
 
     }
@@ -114,7 +115,7 @@ public class Modelling {
     }
 
     private static Geometry3D yAxisPacking(List<Spot> spots) throws IOException {
-        double maxSpotLength = 1200;
+        double maxSpotLength = 1050;
 
         List<List<Spot>> rows = new ArrayList<>();
 
@@ -166,11 +167,11 @@ public class Modelling {
                 Geometry3D box = spot.getShape();
                 box = csg.translate3D(horizontalOffset + spot.getWidth()/2, verticalOffset, 0).transform(box);
                 shape = csg.union3D(shape, box);
-                verticalOffset += spot.getHeight() + 10;
+                verticalOffset += spot.getHeight() + 2.5;
             }
-            horizontalOffset += getLargestWidthInRow(row) + 10;
+            horizontalOffset += getLargestWidthInRow(row) + 2.5;
         }
-        double scaleFactor = 0.18;
+        double scaleFactor = 0.22;
         shape = csg.scale3D(scaleFactor, scaleFactor, scaleFactor).transform(shape);
 
 
@@ -185,7 +186,7 @@ public class Modelling {
     private static boolean canSpotFitInRow(Spot spot, List<Spot> row, double maxSpotLength) {
         double totalHeight = 0;
         for (Spot rowSpot : row) {
-            totalHeight += rowSpot.getHeight() + 10;
+            totalHeight += rowSpot.getHeight() + 5;
         }
         return totalHeight + spot.getHeight() <= maxSpotLength;
     }
