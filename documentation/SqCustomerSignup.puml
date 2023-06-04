@@ -6,7 +6,7 @@ autonumber
 User -> success.jsp: Navigate to signup
 success.jsp -> signup.jsp: Signup
 signup.jsp -> SignupServlet: Post
-SignupServlet -> UserService
+SignupServlet -> UserService: Create
 UserService -> UserFacade: Create
 UserFacade -> UserMapper: Create
 UserMapper -> SQL: Query
