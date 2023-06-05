@@ -9,7 +9,7 @@
          Order Menu
     </jsp:attribute>
 
-  <jsp:body>
+    <jsp:body>
 
         <div class="mt-5 align-center griddy">
             <div class="box homepage_grid_box">
@@ -78,91 +78,93 @@
                         </c:forEach>
 
 
-            <tr>
-              <th class="header">Beslag</th>
-              <th class="header"></th>
-              <th class="header"></th>
-              <th class="header"></th>
-              <th class="header"></th>
-            </tr>
-            <c:forEach items="${requestScope.orderItemFitting}" var="fitting">
-              <tr>
-                <td>${fitting.material.name} ${fitting.material.length} ${fitting.material.unit}</td>
-                <td></td>
-                <td>${fitting.quantity}</td>
-                <td>${fitting.material.unit}</td>
-                <td>${fitting.description}</td>
-              </tr>
+                        <tr>
+                            <th class="header">Beslag</th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                            <th class="header"></th>
+                        </tr>
+                        <c:forEach items="${requestScope.orderItemFitting}" var="fitting">
+                            <tr>
+                                <td>${fitting.material.name} ${fitting.material.length} ${fitting.material.unit}</td>
+                                <td></td>
+                                <td>${fitting.quantity}</td>
+                                <td>${fitting.material.unit}</td>
+                                <td>${fitting.description}</td>
+                            </tr>
 
-            </c:forEach>
+                        </c:forEach>
 
-          </table>
+                    </table>
 
-        </div>
+                </div>
 
-      </div>
+            </div>
+
 
             <div class="box">
+                <h2>Bruger info:</h2>
+                Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
+                <br>
+                Email: ${requestScope.user.email}
+                <br>
+                Telefon nummer: ${requestScope.user.phoneNumber}
+                <br>
+                Adresse: ${requestScope.user.address}
+                <br>
+                Postnummer: ${requestScope.user.zip}
+                <br>
+                Medlemskab:
+                <c:choose>
+                    <c:when test="${requestScope.user.membershipId eq 1}">
+                        Basic
+                    </c:when>
+                    <c:when test="${requestScope.user.membershipId eq 2}">
+                        Member
+                    </c:when>
+                    <c:when test="${requestScope.user.membershipId eq 3}">
+                        Worker
+                    </c:when>
+                    <c:otherwise>
+                        Unknown
+                    </c:otherwise>
+                </c:choose>
+                </br>
+                <br>
+
+                <h2>Pris: </h2>
+                <br>
+                   <h5>${requestScope.orderbyid.getTotalPrice()} kr.</h5>
+                <br>
+
+                <form action="admineditorder" method="post">
+                    <h2>Kontrolpanel:</h2>
+                    <input type="hidden" value="${requestScope.orderbyid.orderID}" name="order">
+                    <input type="hidden" value="${requestScope.user.id}" name="userid">
+                    <button class="btn-success" type="submit" name="status" value="APPROVED">Godkend</button>
+                    <button class="btn-primary" type="submit" name="status" value="CANCELLED">Annuller</button>
+                    <button class="btn-danger" type="submit" name="status" value="DELETED">Slet ordre</button>
+                </form>
+                <br>
+
+
                 <div class="box">
-                    <h2>Bruger info:</h2>
+                    <h2>Filer:</h2>
+                    <h5>
+                    <a href="${pageContext.request.contextPath}/models/buildList-${requestScope.orderbyid.orderID}.stl"
+                       download="buildList-${requestScope.orderbyid.orderID}.stl">Buildlist</a>
                     <br>
-                    Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
-                    <br>
-                    Email: ${requestScope.user.email}
-                    <br>
-                    Telefon nummer: ${requestScope.user.phoneNumber}
-                    <br>
-                    Adresse: ${requestScope.user.address}
-                    <br>
-                    Postnummer: ${requestScope.user.zip}
-                    <br>
-                    Medlemskab:
-                    <c:choose>
-                        <c:when test="${requestScope.user.membershipId eq 1}">
-                            Basic
-                        </c:when>
-                        <c:when test="${requestScope.user.membershipId eq 2}">
-                            Member
-                        </c:when>
-                        <c:when test="${requestScope.user.membershipId eq 3}">
-                            Worker
-                        </c:when>
-                        <c:otherwise>
-                            Unknown
-                        </c:otherwise>
-                    </c:choose>
-                    </br>
-                    <br>
+                    <a href="${pageContext.request.contextPath}/models/materialList-${requestScope.orderbyid.orderID}.stl"
+                       download="materialList-${requestScope.orderbyid.orderID}.stl">Matrialeliste</a>
+                    </h5>
                     <br>
                 </div>
+                <br>
+
             </div>
-
-
-            <div class="box">
-                <h2>Pris: </h2>
-                    ${requestScope.orderbyid.getTotalPrice()} kr.
-            </div>
-
-      <form action="admineditorder" method="post">
-        <div class="box">
-          <h2>Kontrolpanel:</h2>
-          <input type="hidden" value="${requestScope.orderbyid.orderID}" name="order">
-          <input type="hidden" value="${requestScope.user.id}" name="userid">
-          <button class="btn btn-success" type="submit" name="status" value="APPROVED">Godkend</button>
-          <button class="btn btn-primary" type="submit" name="status" value="CANCELLED">Annuller</button>
-          <button class="btn btn-danger" type="submit" name="status" value="DELETED">Slet ordre</button>
         </div>
-      </form>
-
-      <div class="box">
-        <h2>Filer:
-          <a href="${pageContext.request.contextPath}/models/buildList-${requestScope.orderbyid.orderID}.stl" download="buildList-${requestScope.orderbyid.orderID}.stl">download buildlist</a>
-          <a href="${pageContext.request.contextPath}/models/materialList-${requestScope.orderbyid.orderID}.stl" download="materialList-${requestScope.orderbyid.orderID}.stl">download matrialeliste</a>
-        </h2>
-      </div>
-    </div>
 
 
-
-  </jsp:body>
+    </jsp:body>
 </t:pagetemplate>

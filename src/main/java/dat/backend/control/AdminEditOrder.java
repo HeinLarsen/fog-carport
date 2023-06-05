@@ -22,8 +22,7 @@ public class AdminEditOrder extends HttpServlet {
     private ConnectionPool connectionPool;
 
     private final ExecutorService executorService = Executors.newFixedThreadPool(10);
-
-
+    
     @Override
     public void init() throws ServletException {
         this.connectionPool = ApplicationStart.getConnectionPool();

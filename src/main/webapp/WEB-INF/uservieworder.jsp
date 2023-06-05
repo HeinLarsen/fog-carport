@@ -6,7 +6,7 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Brugeren kan se ordre detalje her:
+         Ordre detaljer:
     </jsp:attribute>
 
     <jsp:body>
@@ -103,14 +103,10 @@
             <div class="box">
                 <h2>Status på Ordren:</h2>
                 <br>
-                    ${requestScope.orderbyid.status}
+                <h4> ${requestScope.orderbyid.status} </h4>
                 <br>
-            </div>
 
-
-            <div class="box">
                 <h2>Bruger info:</h2>
-                <br>
                 Navn: ${requestScope.user.firstName} ${requestScope.user.lastName}
                 <br>
                 Email: ${requestScope.user.email}
@@ -138,36 +134,32 @@
                 </c:choose>
                 <br>
 
-            </div>
-
-
-            <div class="box">
                 <br>
                 <h2>Pris: </h2>
-                    ${requestScope.orderbyid.getTotalPrice()} kr.
                 <br>
-            </div>
+                <h5> ${requestScope.orderbyid.getTotalPrice()} kr. </h5>
+                <br>
 
-            <div class="box">
-                <br>
                 <h2>Download filer:</h2>
                 <c:choose>
                     <c:when test="${orderbyid.status == 'APPROVED'}">
-                        <br>
-                        <a href="${pageContext.request.contextPath}/webapp/models/buildList-${requestScope.orderbyid.orderID}.stl"
-                           download>Buildlist</a></br>
-                        <a href="${pageContext.request.contextPath}/webapp/models/materialList-${requestScope.orderbyid.orderID}.stl"
-                           download>Materialeliste</a></br>
+                        <h5>
+                            <br>
+                            <a href="${pageContext.request.contextPath}/webapp/models/buildList-${requestScope.orderbyid.orderID}.stl"
+                               download>Buildlist</a></br>
+                            <a href="${pageContext.request.contextPath}/webapp/models/materialList-${requestScope.orderbyid.orderID}.stl"
+                               download>Materialeliste</a></br>
+                        </h5>
                     </c:when>
                     <c:otherwise>
-                        <p>Filerne er ikke tilgængelige endnu.</p>
+                        <br>
+                        <h5>Filerne er ikke tilgængelige endnu.</h5>
                     </c:otherwise>
                 </c:choose>
                 <br>
             </div>
 
         </div>
-
 
 
     </jsp:body>

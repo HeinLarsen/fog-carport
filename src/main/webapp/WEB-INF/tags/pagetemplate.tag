@@ -32,9 +32,13 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/signup.jsp">Opret</a>
+                    <c:if test="${sessionScope.user.roleId == 2}">
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/adminhomepage">Homepage</a>
+                    </c:if>
+                    <p class="nav-item nav-link">${sessionScope.user.email}</p>
 
                     <c:if test="${sessionScope.user == null }">
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/signup.jsp">Opret</a>
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
                     </c:if>
                     <c:if test="${sessionScope.user != null }">

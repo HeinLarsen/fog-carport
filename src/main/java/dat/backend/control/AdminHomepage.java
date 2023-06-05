@@ -30,7 +30,7 @@ public class AdminHomepage extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class AdminHomepage extends HttpServlet {
         User u = (User) session.getAttribute("user");
 
         try {
-            if (u != null && u.getRoleId() == 2){
+            if (u != null && u.getRoleId() == 2) {
                 List<Order> orders = OrderService.getAllOrders(connectionPool);
                 List<User> usersList = UserService.getAllUsers(connectionPool);
                 List<Order> ordersPending = OrderService.getOrdersByStatus(Status.PENDING, connectionPool);
@@ -50,14 +50,13 @@ public class AdminHomepage extends HttpServlet {
                 request.setAttribute("ordersPending", ordersPending);
 
                 request.getRequestDispatcher("WEB-INF/adminhome.jsp").forward(request, response);
-            }else if (u != null && u.getRoleId() == 1){
-                request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
-            }else{
+            } else if (u != null && u.getRoleId() == 1) {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
 
-
-        }catch (Exception e){
+        } catch (Exception e) {
             request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
