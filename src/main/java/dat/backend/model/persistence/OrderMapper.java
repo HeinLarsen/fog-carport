@@ -29,7 +29,7 @@ public class OrderMapper {
                 }
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error getting all orders");
+            throw new DatabaseException(e, "Kunne ikke hente alle ordrer");
         }
         return orders;
     }
@@ -54,7 +54,7 @@ public class OrderMapper {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException(e, "Error getting all orders");
+            throw new DatabaseException(e, "Fejl ved hentning af ordre via id");
         }
         return order;
     }
@@ -82,7 +82,7 @@ public class OrderMapper {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException(e, "Error getting all user orders");
+            throw new DatabaseException(e, "Kunne ikke hente order via bruger id");
 
         }
         return orders;
@@ -99,7 +99,7 @@ public class OrderMapper {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error approving order");
+            throw new DatabaseException(e, "Kunne ikke godkende ordre");
         }
     }
 
@@ -112,7 +112,7 @@ public class OrderMapper {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error approving order");
+            throw new DatabaseException(e, "Kunne ikke annullere ordre");
         }if(status == Status.CANCELLED){
             return true;
         }else{
@@ -142,7 +142,7 @@ public class OrderMapper {
                 }
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error getting all orders");
+            throw new DatabaseException(e, "Fejl ved hentning af ordrer");
         }
         return orders;
     }
@@ -160,19 +160,19 @@ public class OrderMapper {
                 ps.setInt(6, userId);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1) {
-                    throw new DatabaseException("Error creating order");
+                    throw new DatabaseException("Kunne ikke oprette ordre");
                 }
                 try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         id = generatedKeys.getInt(1);
                     } else {
-                        throw new DatabaseException("Failed to get ID for created order");
+                        throw new DatabaseException("Kunne ikke finde id på ordre");
                     }
                 }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new DatabaseException(ex, "Could not create user in database");
+            throw new DatabaseException(ex, "Kunne ikke oprette ordre");
         }
        return id;
    }
@@ -186,7 +186,7 @@ public class OrderMapper {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException(e, "Error deleting order");
+            throw new DatabaseException(e, "Fejl ved slætning af ordre");
         }
         return true;
     }

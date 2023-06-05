@@ -3,7 +3,6 @@ package dat.backend.model.persistence;
 import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +31,7 @@ public class MaterialMapper {
                 }
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error getting all wood");
+            throw new DatabaseException(e, "Fejl ved at hente alt træ\n");
         }
         return wood;
     }
@@ -54,7 +53,7 @@ public class MaterialMapper {
                 }
             }
         } catch(SQLException e) {
-         throw new DatabaseException("Error getting all screws");
+         throw new DatabaseException("Fejl ved at hente alle skruer");
         }
         return screws;
     }
@@ -76,7 +75,7 @@ public class MaterialMapper {
                 }
             }
         } catch(SQLException e) {
-         throw new DatabaseException("Error getting all roof tiles");
+         throw new DatabaseException("Fejl ved hentning af alle tagsten");
         }
         return roofTiles;
     }
@@ -99,7 +98,7 @@ public class MaterialMapper {
                 }
             }
         } catch(SQLException e) {
-         throw new DatabaseException("Error getting all fittings");
+         throw new DatabaseException("Fejl ved hentning af alle fittings");
         }
         return fittings;
     }
@@ -125,7 +124,7 @@ public class MaterialMapper {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException(e, "Error getting wood by id");
+            throw new DatabaseException(e, "Fejl ved hentning af træ efter id\n");
         }
         return wood;
     }
@@ -147,7 +146,7 @@ public class MaterialMapper {
                 }
             }
         } catch(SQLException e) {
-         throw new DatabaseException("Error getting screw by id");
+         throw new DatabaseException("Fejl ved at hente skrue efter id");
         }
         return screw;
     }
@@ -169,7 +168,7 @@ public class MaterialMapper {
                 }
             }
         } catch(SQLException e) {
-         throw new DatabaseException("Error getting roof tile by id");
+         throw new DatabaseException("Fejl ved hentning af tagsten efter id");
         }
         return roofTile;
     }
@@ -193,7 +192,7 @@ public class MaterialMapper {
             }
         } catch(SQLException e) {
             e.printStackTrace();
-         throw new DatabaseException("Error getting fitting by id");
+         throw new DatabaseException("Fejl under tilpasning af id");
         }
         return fitting;
     }

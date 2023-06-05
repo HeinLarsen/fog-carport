@@ -227,9 +227,9 @@ class Modelling{
 - {static} Geometry3D generateMaterialList()
 - {static} Geometry3D generateBuildList()
 - {static} ArrayList<Spot> generateSpot()
-- {static} Geometry3D generatebasicShape()
+- {static} Geometry3D generateBasicShape()
 - {static} Geometry3D generateCarportPoles()
-- {static} Orderitem getItem()
+- {static} OrderItem getItem()
 - {static} void yAxisPacking()
 - {static} Geometry3D printing()
 - {static} boolean canSpotFitInRow()
@@ -291,6 +291,7 @@ ExtraDimensionMaterial <|-- Fitting
 Material <|-- ExtraDiameterMaterial
 ExtraDiameterMaterial <|-- ScrewPack
 ExtraDiameterMaterial <|-- Screw
+Carport <-- Shed
 
 Order *-- OrderItem
 OrderItem *-- OrderItemTask

@@ -23,7 +23,6 @@ public class Modelling {
     }
 
     private static void save(Geometry3D shape, String name, Order order, String savePath) throws IOException {
-//        csg.view(shape);
          csg.saveSTL(savePath + name + "-" + order.getOrderID() + ".stl", shape);
 
     }
@@ -157,7 +156,7 @@ public class Modelling {
 
     }
 
-    private static Geometry3D printing(List<List<Spot>> rows) throws IOException {
+    private static Geometry3D printing(List<List<Spot>> rows) {
         Geometry3D shape = csg.box3D(0, 0, 0, false);
         double horizontalOffset = 0;
 
