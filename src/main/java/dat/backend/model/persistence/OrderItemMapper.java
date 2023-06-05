@@ -32,7 +32,7 @@ public class OrderItemMapper {
                     String unit = rs.getString("unit");
                     boolean isPressureTreated = rs.getBoolean("is_pressure_treated");
                     int woodId = rs.getInt("woodId");
-                    OrderItem orderItem = new OrderItem(ID, quantity, price, description);
+                    OrderItem orderItem = new OrderItem(ID, quantity, price, OrderItemTask.getByValue(description));
                     Wood wood = new Wood(woodId, name, length, price, unit, category, width, height, isPressureTreated);
                     orderItem.setMaterial(wood);
                     orderItems.add(orderItem);
@@ -62,7 +62,7 @@ public class OrderItemMapper {
                     int height = rs.getInt("height");
                     String unit = rs.getString("unit");
                     int fittingId = rs.getInt("fittingId");
-                    OrderItem orderItem = new OrderItem(ID, quantity, price, description);
+                    OrderItem orderItem = new OrderItem(ID, quantity, price, OrderItemTask.getByValue(description));
                     Fitting fitting = new Fitting(fittingId, name, length, price, unit, width, height);
                     orderItem.setMaterial(fitting);
                     orderItems.add(orderItem);
@@ -91,7 +91,7 @@ public class OrderItemMapper {
                     int diameter = rs.getInt("diameter");
                     String unit = rs.getString("unit");
                     int screwId = rs.getInt("screwId");
-                    OrderItem orderItem = new OrderItem(ID, quantity, price, description);
+                    OrderItem orderItem = new OrderItem(ID, quantity, price, OrderItemTask.getByValue(description));
                     Screw screw = new Screw(screwId, name, length, price, unit, diameter);
                     orderItem.setMaterial(screw);
                     orderItems.add(orderItem);
@@ -120,7 +120,7 @@ public class OrderItemMapper {
                     int width = rs.getInt("width");
                     String unit = rs.getString("unit");
                     int roofTileId = rs.getInt("roofTileId");
-                    OrderItem orderItem = new OrderItem(ID, quantity, price, description);
+                    OrderItem orderItem = new OrderItem(ID, quantity, price, OrderItemTask.getByValue(description));
                     RoofTile roofTile = new RoofTile(roofTileId, name, length, price, unit, width);
                     orderItem.setMaterial(roofTile);
                     orderItems.add(orderItem);

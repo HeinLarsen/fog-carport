@@ -14,10 +14,6 @@ class User {
 - String city
 - int role
 - int membership
-- ArrayList<Order> orders
-+ void addOrder(Order order)
-+ void removeOrder(int id)
-+ void addOrders(ArrayList<Order> orders)
 }
 
 class UserFacade {
@@ -56,7 +52,34 @@ class OrderItem {
 }
 
 Enum OrderItemTask{
+STERN_UPPER_ENDS
+STERN_UPPER_SIDES
+STERN_LOWER_ENDS
+STERN_LOWER_SIDES
+RIM
+RIM_SHED
+SHED_Z
+SPAR
+POLE
+WATERBOARD_SIDES
+WATERBOARD_ENDS
+ROOF_TILE
+ROOF_TILE_SCREWS
+FITTING_SPAR_RIM
+CROSSWIND
+SCREW_STERN_WATERBOARD
+SCREW_UNIVERSAL_CROWSSWIND
+SCREW_RIM_POLE
+SCREW_OUTER_CLOTHING
+SCREW_INNER_CLOTHING
+SHED_CLOTHING
+SHED_DOOR_LOCK
+SHED_T_HINGE
+SHED_SUPPORT_POSTS_SIDES
+SHED_SUPPORT_POSTS_GABLE
+SHED_ANGLE_BRACKET
 - String task
++ String getTask()
 }
 
 class OrderItemFacade {
@@ -88,8 +111,8 @@ class Order {
 - int width
 - int shedlength
 - int shedwidth
-- boolean shed-
-int userID
+- boolean shed
+- int userID
 - ArrayList<OrderItem> OrderItems
 + void AddOrderItem(Order order)
 + void AddOrderItems(ArrayList<Order> orders)
@@ -248,10 +271,6 @@ class Fitting {
 
 abstract class ExtraDiameterMaterial {
 - int diameter
-}
-
-class ScrewPack {
-- int quantity
 }
 
 class Screw {

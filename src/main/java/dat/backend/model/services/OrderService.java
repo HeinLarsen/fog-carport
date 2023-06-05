@@ -172,7 +172,7 @@ public class OrderService {
 
         // Find the shortest wood plank that can be used
         Wood wood = Collections.min(filteredWoods, Comparator.comparing(Wood::getLength));
-        OrderItem orderItem = new OrderItem(1, wood.getPrice(), task.getTask());
+        OrderItem orderItem = new OrderItem(1, wood.getPrice(), task);
         orderItem.setMaterial(wood);
         return  orderItem;
 
@@ -193,7 +193,7 @@ public class OrderService {
 
             int quantity = Collections.frequency(result, wood);
             double price = wood.getPrice() * quantity;
-            OrderItem orderItem = new OrderItem(quantity, price, task.getTask());
+            OrderItem orderItem = new OrderItem(quantity, price, task);
             orderItem.setMaterial(wood);
             orderItems.add(orderItem);
 
@@ -219,7 +219,7 @@ public class OrderService {
         RoofTile bestRoofTile = roofTileMap.firstEntry().getValue();
         int tilesRequired = (int) Math.ceil((double) carport.getLength() / bestRoofTile.getWidth());
         double totalPrice = tilesRequired * bestRoofTile.getPrice();
-        OrderItem orderItem = new OrderItem(tilesRequired, totalPrice, task.getTask());
+        OrderItem orderItem = new OrderItem(tilesRequired, totalPrice, task);
         orderItem.setMaterial(bestRoofTile);
         return orderItem;
     }
@@ -245,7 +245,7 @@ public class OrderService {
             }
         }
 
-        OrderItem orderItem = new OrderItem(amountOfScrews, price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfScrews, price, task);
         orderItem.setMaterial(filteredScrews.get(0));
         return orderItem;
     }
@@ -264,7 +264,7 @@ public class OrderService {
         {
             metalBand.add(filteredFitting);
         }
-        OrderItem orderItem = new OrderItem(totalAmountOfMetalBand , price, task.getTask());
+        OrderItem orderItem = new OrderItem(totalAmountOfMetalBand , price, task);
         orderItem.setMaterial(filteredFittings.get(0));
         return orderItem;
     }
@@ -279,7 +279,7 @@ public class OrderService {
         sternScrews.add(filteredScrew);
     }
 
-    OrderItem orderItem = new OrderItem(amountOfSternScrews, price, task.getTask());
+    OrderItem orderItem = new OrderItem(amountOfSternScrews, price, task);
     orderItem.setMaterial(fliteredScrews.get(0));
     return orderItem;
     }
@@ -296,7 +296,7 @@ public class OrderService {
             fittingScrews.add(filteredScrew);
         }
 
-        OrderItem orderItem = new OrderItem(amountOfFittingScrews, price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfFittingScrews, price, task);
         orderItem.setMaterial(filteredScrews.get(0));
         return orderItem;
     }
@@ -313,7 +313,7 @@ public class OrderService {
             bolts.add(filteredScrew);
         }
 
-        OrderItem orderItem = new OrderItem(amountOfBolts, price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfBolts, price, task);
         orderItem.setMaterial(filteredScrews.get(0));
         return orderItem;
     }
@@ -331,7 +331,7 @@ public class OrderService {
             discs.add(fitting);
         }
 
-        OrderItem orderItem = new OrderItem(amountOfDiscs, price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfDiscs, price, task);
         orderItem.setMaterial(fittings1.get(0));
         return orderItem;
     }
@@ -347,7 +347,7 @@ public class OrderService {
             screwsForOuterClothing.add(filteredScrew);
         }
 
-        OrderItem orderItem = new OrderItem(amountOfScrews, price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfScrews, price, task);
         orderItem.setMaterial(filteredScrews.get(0));
         return orderItem;
     }
@@ -363,7 +363,7 @@ public class OrderService {
             screwsForOuterClothing.add(filteredScrew);
         }
 
-        OrderItem orderItem = new OrderItem(amountOfScrews, price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfScrews, price, task);
         orderItem.setMaterial(filteredScrews.get(0));
         return orderItem;
     }
@@ -380,7 +380,7 @@ public class OrderService {
             doorHandle.add(filteredFitting);
         }
 
-        OrderItem orderItem = new OrderItem(filteredFittings.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(filteredFittings.size(), price, task);
         orderItem.setMaterial(filteredFittings.get(0));
         return orderItem;
     }
@@ -396,7 +396,7 @@ public class OrderService {
             hinges.add(filteredFitting);
         }
 
-        OrderItem orderItem = new OrderItem(amountOfHinges, price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfHinges, price, task);
         orderItem.setMaterial(filteredFittings.get(0));
         return orderItem;
 
@@ -413,7 +413,7 @@ public class OrderService {
             angleFittings.add(filteredFitting);
         }
 
-        OrderItem orderItem = new OrderItem(amountOfAngleFittings, price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfAngleFittings, price, task);
         orderItem.setMaterial(filteredFittings.get(0));
         return orderItem;
     }
@@ -430,7 +430,7 @@ public class OrderService {
         {
             universialFitting.add(filteredFitting);
         }
-        OrderItem orderItem = new OrderItem(amountOfUniversialFitting, price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfUniversialFitting, price, task);
         orderItem.setMaterial(filteredFittings.get(0));
         return orderItem;
     }
@@ -448,7 +448,7 @@ public class OrderService {
         int quantity = (bestWood.getLength() / 2 >= length) ? 1 : 2;
         double price = bestWood.getPrice() * quantity;
 
-        OrderItem orderItem = new OrderItem(quantity, price, task.getTask());
+        OrderItem orderItem = new OrderItem(quantity, price, task);
         orderItem.setMaterial(bestWood);
         return orderItem;
     }
@@ -463,7 +463,7 @@ public class OrderService {
         int amountOfClothing = (int) Math.ceil(totalLength / 7.5);
         double price = calculatePrice(filteredWoods.get(0), amountOfClothing);
 
-        OrderItem orderItem = new OrderItem(amountOfClothing, price, task.getTask());
+        OrderItem orderItem = new OrderItem(amountOfClothing, price, task);
         orderItem.setMaterial(filteredWoods.get(0));
         return orderItem;
     }
@@ -500,7 +500,7 @@ public class OrderService {
             }
         }
 
-        OrderItem orderItem = new OrderItem(poles.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(poles.size(), price, task);
         orderItem.setMaterial(poles.get(0));
         return orderItem;
     }
@@ -522,7 +522,7 @@ public class OrderService {
             }
         }
 
-        OrderItem orderItem = new OrderItem(spars.size(), price, task.getTask());
+        OrderItem orderItem = new OrderItem(spars.size(), price, task);
         orderItem.setMaterial(spars.get(0));
         return orderItem;
     }
@@ -544,7 +544,7 @@ public class OrderService {
             int quantity = Collections.frequency(result, wood);
             double price = wood.getPrice() * quantity;
 
-            OrderItem orderItem = new OrderItem(quantity, price, task.getTask());
+            OrderItem orderItem = new OrderItem(quantity, price, task);
             orderItem.setMaterial(wood);
             orderItems.add(orderItem);
 
@@ -571,7 +571,7 @@ public class OrderService {
             int quantity = Collections.frequency(result, wood);
             double price = wood.getPrice() * quantity;
 
-            OrderItem orderItem = new OrderItem(quantity, price, task.getTask());
+            OrderItem orderItem = new OrderItem(quantity, price, task);
             orderItem.setMaterial(wood);
             orderItems.add(orderItem);
 

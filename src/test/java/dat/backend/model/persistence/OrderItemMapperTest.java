@@ -1,6 +1,7 @@
 package dat.backend.model.persistence;
 
 import dat.backend.model.entities.OrderItem;
+import dat.backend.model.entities.OrderItemTask;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.OrderItemFacade;
@@ -16,9 +17,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OrderItemMapperTest {
-    private final static String USER = "dev";
-    private final static String PASSWORD = "3r!DE32*/fDe";
-    private final static String URL = "jdbc:mysql://178.128.160.211/carport_test";
+    private final static String USER = "root";
+    private final static String PASSWORD = "password";
+    private final static String URL = "jdbc:mysql://localhost:3306/carport_test";
 
     private static ConnectionPool connectionPool;
 
@@ -98,7 +99,7 @@ public class OrderItemMapperTest {
 
     @Test
     void createOrderItem() throws DatabaseException {
-        OrderItem orderItem = new OrderItem(1, 1, 1, "test");
+        OrderItem orderItem = new OrderItem(1, 1, 1, OrderItemTask.RIM);
         ArrayList<OrderItem> itemList = new ArrayList<>();
         OrderItemFacade.createOrderItem(itemList, 1, connectionPool);
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);
@@ -107,7 +108,7 @@ public class OrderItemMapperTest {
 
     @Test
     void createWrongOrderItem() throws DatabaseException{
-        OrderItem orderItem = new OrderItem(1, 1, 1, "test");
+        OrderItem orderItem = new OrderItem(1, 1, 1, OrderItemTask.RIM);
         ArrayList<OrderItem> itemList = new ArrayList<>();
         OrderItemFacade.createOrderItem(itemList,1, connectionPool);
         ArrayList<OrderItem> orderItems = OrderItemFacade.getOrderItemsByOrderId(1, connectionPool);

@@ -40,4 +40,13 @@ public enum OrderItemTask {
     public String getTask() {
         return this.task;
     }
+
+    public static OrderItemTask getByValue(String value) {
+        for (OrderItemTask task : OrderItemTask.values()) {
+            if (task.getTask().equalsIgnoreCase(value)) {
+                return task;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant found for value: " + value);
+    }
 }

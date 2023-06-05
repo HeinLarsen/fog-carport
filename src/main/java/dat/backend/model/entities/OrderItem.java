@@ -4,31 +4,22 @@ public class OrderItem {
     private int ID;
     private int quantity;
     private double price;
-    private String description;
+    private OrderItemTask description;
     private AMaterial material;
-    private int length;
-    private int width;
 
-    public OrderItem(int ID, int quantity, double price, String description) {
+    public OrderItem(int ID, int quantity, double price, OrderItemTask description) {
         this.ID = ID;
         this.quantity = quantity;
         this.price = price;
         this.description = description;
     }
 
-    public OrderItem(int quantity, double price, String description) {
+    public OrderItem(int quantity, double price, OrderItemTask description) {
         this.quantity = quantity;
         this.price = price;
         this.description = description;
     }
 
-    public OrderItem(int quantity, double price, String description, int length, int width){
-        this.quantity = quantity;
-        this.price = price;
-        this.description = description;
-        this.length = length;
-        this.width = width;
-    }
 
     public int getID() {
         return ID;
@@ -51,7 +42,7 @@ public class OrderItem {
     }
 
     public String getDescription() {
-        return description;
+        return description.getTask();
     }
 
     @Override

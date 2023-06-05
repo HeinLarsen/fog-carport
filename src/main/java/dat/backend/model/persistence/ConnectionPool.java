@@ -13,9 +13,9 @@ public class ConnectionPool
     // TODO: Change access credentials for MySql server as needed below:
 
     private HikariDataSource ds;
-    private static String USER = "dev";
-    private static String PASSWORD = "3r!DE32*/fDe";
-    private static String URL = "jdbc:mysql://178.128.160.211/carport";
+    private static String USER = "root";
+    private static String PASSWORD = "password";
+    private static String URL = "jdbc:mysql://localhost:3306/carport";
 
     public ConnectionPool()
     {

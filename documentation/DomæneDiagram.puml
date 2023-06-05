@@ -3,42 +3,29 @@
 !pragma layout smetana
 
 object User
+object Status
 object Role
 object Membership
 object Order
-object Homepage
-object Enum
+object OrderItem
 object Fittings
 object Wood
 object Screws
 object RoofTiles
 
- Order --> Enum
- Order --> Fittings
- Order --> Wood
- Order --> Screws
- Order --> RoofTiles
+Order --> OrderItem
+OrderItem --> Status
+OrderItem --> Fittings
+OrderItem --> Wood
+OrderItem --> Screws
+OrderItem --> RoofTiles
 
- User --> Role
- User --> Membership
- User --> Order
- User --> Homepage
+User --> Role
+User --> Membership
+User --> Order
 
- Homepage --> LoginServlet
- Homepage --> CreatUserServlet
- Homepage --> OrderServlet
 
- LoginServlet --> SQL
- CreatUserServlet --> SQL
- OrderServlet --> SQL
 
- SQL --> OrderMapper
- SQL --> UserMapper
- SQL --> MaterialMapper
 
-object Homepage {
-Login Opret
-Order Customize
- }
 
 @enduml
