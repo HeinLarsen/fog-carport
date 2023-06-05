@@ -13,7 +13,7 @@ public class UserMapper {
 
 // TODO refactor return types to return the data we receive from the database instead of void
 
-    public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException {
+    protected static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         ArrayList<User> users = new ArrayList<>();
         String sql = "SELECT user.*, zip.city FROM user join zip on user.zip = zip.zip";
@@ -42,7 +42,7 @@ public class UserMapper {
         return users;
     }
 
-    public static User getUser(int id, ConnectionPool connectionPool) throws DatabaseException {
+    protected static User getUser(int id, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         User user = null;
         String sql = "SELECT user.*, zip.city FROM user join zip on user.zip = zip.zip WHERE id = ?";
@@ -72,7 +72,7 @@ public class UserMapper {
         return user;
     }
 
-    public static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, String city, ConnectionPool connectionPool) throws DatabaseException {
+    protected static User updateUser(int id, String firstName, String lastName, String email, String password, String address, int phoneNumber, int roleId, int membershipId, int zip, String city, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ?, address = ?, phone_number = ?, zip = ?, membership = ? WHERE id = ?";
         try (Connection connection = connectionPool.getConnection()) {
@@ -99,7 +99,7 @@ public class UserMapper {
     }
 
 
-    public static User createUser(User u, ConnectionPool connectionPool) throws DatabaseException {
+   protected static User createUser(User u, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "INSERT INTO user (first_name, last_name, email, password, address, phone_number, zip) VALUES (?,?,?,?,?,?,?)";
         User user;
@@ -135,7 +135,7 @@ public class UserMapper {
     }
 
     //call this with a false login in userMapperTest
-    public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
+    protected static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "SELECT user.*, zip.city FROM user join zip on user.zip = zip.zip WHERE email = ? AND password = ?";
         User user = null;
@@ -169,7 +169,7 @@ public class UserMapper {
 
     }
 
-    public static void createZipCity(User u, ConnectionPool connectionPool) throws DatabaseException {
+    protected static void createZipCity(User u, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "SELECT * FROM zip WHERE zip = ? AND city = ?";
         try (Connection connection = connectionPool.getConnection()) {

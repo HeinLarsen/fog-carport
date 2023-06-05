@@ -21,11 +21,11 @@ public class UserService {
        return user;
     }
 
-    public static void createUser(User u, ConnectionPool connectionPool) throws DatabaseException {
-        UserFacade.createZipCity(u, connectionPool);
-        UserFacade.createUser(u, connectionPool);
+        public static void createUser(User u, ConnectionPool connectionPool) throws DatabaseException {
+            UserFacade.createZipCity(u, connectionPool);
+            UserFacade.createUser(u, connectionPool);
 
-    }
+        }
 
     public static User getUser(int id, ConnectionPool connectionPool) throws DatabaseException
     {
