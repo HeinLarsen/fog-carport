@@ -121,10 +121,10 @@ public class OrdreServiceTest {
 
 
                 stmt.execute("INSERT INTO `carport_test`.`order` (`user_id`, `length`, `width`, `shed`) VALUES (1, '20', '5', '0');");
-                stmt.execute("INSERT INTO `carport_test`.`order_item_wood` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'hejhej', '10', '1');");
-                stmt.execute("INSERT INTO `carport_test`.`order_item_fitting` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'hejhej', '10', '1');");
-                stmt.execute("INSERT INTO `carport_test`.`order_item_screw` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'hejhej', '10', '1');");
-                stmt.execute("INSERT INTO `carport_test`.`order_item_roof_tile` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'hejhej', '10', '1');");
+                stmt.execute("INSERT INTO `carport_test`.`order_item_wood` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'Til vindkryds på spær', '10', '1');");
+                stmt.execute("INSERT INTO `carport_test`.`order_item_fitting` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'Til vindkryds på spær', '10', '1');");
+                stmt.execute("INSERT INTO `carport_test`.`order_item_screw` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'Til vindkryds på spær', '10', '1');");
+                stmt.execute("INSERT INTO `carport_test`.`order_item_roof_tile` (`order_id`, `quantity`, `description`, `price`, `item_id` ) VALUES (1, '3', 'Til vindkryds på spær', '10', '1');");
             }
         } catch (SQLException e) {
             e.printStackTrace();

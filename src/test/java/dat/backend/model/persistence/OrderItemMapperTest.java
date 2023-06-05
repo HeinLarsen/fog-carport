@@ -47,18 +47,18 @@ public class OrderItemMapperTest {
                 stmt.execute("ALTER TABLE order_item_fitting AUTO_INCREMENT = 1;");
 
                 //order_item_fitting
-                stmt.execute("insert into carport_test.order_item_fitting values (1, 1, 1, 'firkantskiver', 149.5, 1)");
-                stmt.execute("insert into carport_test.order_item_fitting values (2, 2, 1, 'firkantskiver', 149.5, 1)");
+                stmt.execute("insert into carport_test.order_item_fitting values (1, 1, 1, 'Til vindkryds på spær', 149.5, 1)");
+                stmt.execute("insert into carport_test.order_item_fitting values (2, 2, 1, 'Til vindkryds på spær', 149.5, 1)");
                 //order_item_screw
-                stmt.execute("insert into carport_test.order_item_screw values (1, 1, 1, 'skruer 200', 307.95, 2)");
-                stmt.execute("insert into carport_test.order_item_screw values (2, 2, 1, 'skruer 200', 307.95, 2)");
+                stmt.execute("insert into carport_test.order_item_screw values (1, 1, 1, 'Skruer til tagplader', 307.95, 2)");
+                stmt.execute("insert into carport_test.order_item_screw values (2, 2, 1, 'Skruer til tagplader', 307.95, 2)");
                 //order_item_roof_tile
-                stmt.execute("insert into carport_test.order_item_roof_tile values (1, 1, 1, 'Plastmo Ecolite blåtonet', 633, 1)");
-                stmt.execute("insert into carport_test.order_item_roof_tile values (2, 2, 1, 'Plastmo Ecolite blåtonet', 266, 2)");
+                stmt.execute("insert into carport_test.order_item_roof_tile values (1, 1, 1, 'tagplader monteres på spær', 633, 1)");
+                stmt.execute("insert into carport_test.order_item_roof_tile values (2, 2, 1, 'tagplader monteres på spær', 266, 2)");
 
                 //order_item_wood
-                stmt.execute("insert into carport_test.order_item_wood values (1, 1, 1, 'stolpe', 262.03, 2)");
-                stmt.execute("insert into carport_test.order_item_wood values (2, 2, 1,'brædt', 174.43, 1)");
+                stmt.execute("insert into carport_test.order_item_wood values (1, 1, 1, 'Til vindkryds på spær', 262.03, 2)");
+                stmt.execute("insert into carport_test.order_item_wood values (2, 2, 1,'Til vindkryds på spær', 174.43, 1)");
 
             }
         }
