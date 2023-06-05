@@ -39,7 +39,7 @@ public class OrderItemMapper {
                 }
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error getting all order items");
+            throw new DatabaseException(e, "Kunne ikke hente orderItemsWood med det givne id");
         }
         return orderItems;
     }
@@ -69,7 +69,7 @@ public class OrderItemMapper {
                 }
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error getting all order items");
+            throw new DatabaseException(e, "Kunne ikke hente orderItemsFitting med det givne ordre id");
         }
         return orderItems;
     }
@@ -98,7 +98,7 @@ public class OrderItemMapper {
                 }
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error getting all order items");
+            throw new DatabaseException(e, "Kunne ikke hente orderItemsScrew med det givne ordre id");
         }
         return orderItems;
     }
@@ -127,7 +127,7 @@ public class OrderItemMapper {
                 }
             }
         } catch (SQLException e) {
-            throw new DatabaseException(e, "Error getting all order items");
+            throw new DatabaseException(e, "Kunne ikke hente orderItemsRoofTile med det givne ordre id");
         }
         return orderItems;
     }
@@ -146,7 +146,7 @@ public class OrderItemMapper {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException(e, "Error creating order item");
+            throw new DatabaseException(e, "Kunne ikke oprette orderItemWood i databasen");
         }
     }
 
@@ -168,7 +168,7 @@ public class OrderItemMapper {
         } catch (SQLException e)
         {
             e.printStackTrace();
-            throw new DatabaseException(e, "Error creating order item");
+            throw new DatabaseException(e, "Kunne ikke oprette orderItemScrew i databasen");
         }
     }
         protected static void createOrderItemFitting(OrderItem orderItem, int orderId, int fittingId, ConnectionPool connectionPool) throws DatabaseException {
@@ -184,7 +184,7 @@ public class OrderItemMapper {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-                throw new DatabaseException(e, "Error creating order item");
+                throw new DatabaseException(e, "Kunne ikke oprette orderItemFitting i databasen");
             }
         }
     protected static void createOrderItemRoofTile(OrderItem orderItem, int orderId, int rooftileId, ConnectionPool connectionPool) throws DatabaseException {
@@ -201,7 +201,7 @@ public class OrderItemMapper {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException(e, "Error creating order item");
+            throw new DatabaseException(e, "Kunne ikke oprette orderItemRoofTile i databasen");
         }
     }
 
@@ -214,7 +214,7 @@ public class OrderItemMapper {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException(e, "Error deleting order item");
+            throw new DatabaseException(e, "Kunne ikke slette orderItemRoofTile i databasen");
         }
         return true;
     }
@@ -228,7 +228,7 @@ public class OrderItemMapper {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException(e, "Error deleting order item");
+            throw new DatabaseException(e, "Kunne ikke slette orderItemScrew i databasen");
         }
         return true;
     }
@@ -242,7 +242,7 @@ public class OrderItemMapper {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException(e, "Error deleting order item");
+            throw new DatabaseException(e, "Kunne ikke slette orderItemWood i databasen");
         }
         return true;
     }
@@ -256,7 +256,7 @@ public class OrderItemMapper {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException(e, "Error deleting order item");
+            throw new DatabaseException(e, "Kunne ikke slette orderItemFitting i databasen");
         }
         return true;
     }

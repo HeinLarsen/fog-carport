@@ -37,7 +37,7 @@ public class UserMapper {
                 }
             }
         } catch (SQLException ex) {
-            throw new DatabaseException(ex, "Could not get all users from database");
+            throw new DatabaseException(ex, "Kunne ikke hente alle brugere fra databasen");
         }
         return users;
     }
@@ -63,11 +63,11 @@ public class UserMapper {
                     String city = rs.getString("city");
                     user = new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, city);
                 } else {
-                    throw new DatabaseException("No user with id = " + id + " found in database");
+                    throw new DatabaseException("Ingen bruger med id: = " + id + " blev fundet i databasen");
                 }
             }
         } catch (SQLException ex) {
-            throw new DatabaseException(ex, "Could not get user from database");
+            throw new DatabaseException(ex, "Kunne ikke hente brugeren fra databasen");
         }
         return user;
     }
@@ -88,12 +88,12 @@ public class UserMapper {
                 ps.setInt(9, id);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1) {
-                    throw new DatabaseException("No user with id = " + id + " found in database");
+                    throw new DatabaseException("Ingen bruger med id: = " + id + " blev fundet i databasen");
                 }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new DatabaseException(ex, "Could not update user in database");
+            throw new DatabaseException(ex, "Kunne ikke opdatere brugeren i databasen");
         }
         return new User(id, firstName, lastName, email, password, address, phoneNumber, roleId, membershipId, zip, city);
     }
@@ -114,7 +114,7 @@ public class UserMapper {
                 ps.setInt(7, u.getZip());
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1) {
-                    throw new DatabaseException("No user with email = " + u.getEmail() + " found in database");
+                    throw new DatabaseException("Ingen bruger med emailen: = " + u.getEmail() + " blev fundet i databasen");
                 }
                 try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
@@ -123,13 +123,13 @@ public class UserMapper {
                         int membershipId = 1;
                         user = new User(id, u.getFirstName(), u.getLastName(), u.getEmail(), u.getPassword(), u.getAddress(), u.getPhoneNumber(), roleId, membershipId, u.getZip(), u.getCity());
                     } else {
-                        throw new DatabaseException("Failed to get ID for created user");
+                        throw new DatabaseException("kunne ikke oprette bruger i databasen");
                     }
                 }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new DatabaseException(ex, "Could not create user in database");
+            throw new DatabaseException(ex, "Kunne ikke oprette brugeren i databasen");
         }
         return user;
     }
@@ -162,7 +162,7 @@ public class UserMapper {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new DatabaseException(ex, "Could not login user in database");
+            throw new DatabaseException(ex, "Kunne ikke logge på, prøv igen");
 
         }
         return user;
@@ -184,14 +184,14 @@ public class UserMapper {
                         ps2.setString(2, u.getCity());
                         int rowsAffected = ps2.executeUpdate();
                         if (rowsAffected != 1) {
-                            throw new DatabaseException("No zip with zip = " + u.getZip() + " found in database");
+                            throw new DatabaseException("Intet postnummer med id: = " + u.getZip() + " blev fundet i databasen");
                         }
                     }
                 }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new DatabaseException(ex, "Could not create zip in database");
+            throw new DatabaseException(ex, "Kunne ikke oprette postnummer i databasen");
         }
     }
 }
