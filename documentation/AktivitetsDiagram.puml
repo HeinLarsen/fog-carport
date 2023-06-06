@@ -1,42 +1,60 @@
 @startuml
-'https://plantuml.com/activity-diagram-beta
+'https://plantuml.com/object-diagram
+!pragma layout smetana
 
-|Website|
-start
-:Customize;
-:Signup;
-|Backend|
-:User Data;
-|Backend|
-|Database|
-:Create User;
-stop
-|Website|
-start
-:Login;
-|Backend|
-:Validate Credentials;
-|Website|
-:Make order;
-|Database|
-:Get Material Data;
-|Backend|
-:Generate Order;
-|Database|
-:Save Order;
-|Website|
-:Approve Order;
-|Database|
-:Calculate Price;
-|Backend|
-:Generate Price;
-:Generate Invoice;
-|Website|
-:Invoice;
-|Backend|
-:Generate material list + stl file;
-|Website|
-:Download file;
-stop
+object Game
+object Player
+object BankAccount
+object Die
+object Card
+
+object Piece
+object Board
+
+object Field
+object Property
+object Prison
+object Tax
+object Parking
+object Start
+object Chance
+
+object ShippingLine
+object Brewery
+
+object Building
+object Deed
+object Bank
+object Consequence
+object Business
+object Plot
+
+Game *-- Board
+Game *-- "2..6" Player
+
+Board *-- Piece
+Player *-- Piece
+Player *-- BankAccount
+Board *-- "2" Die
+Board *-- "40" Field : has-a
+
+Field <|-- Property
+Field <|-- Consequence
+Property <|-- Business
+Property <|-- Plot
+Plot *-- Building
+Property *-- Deed
+Player *-- Deed
+Business <|-- ShippingLine
+Business <|-- Brewery
+
+Consequence <|-- Start : is - a
+Consequence <|-- Chance
+Consequence <|-- Parking
+Consequence <|-- Tax
+Consequence <|-- Prison
+
+Board  *-- "100" Card
+Player *-- "0..10" Card
 
 @enduml

@@ -8,21 +8,23 @@ object Role
 object Membership
 object Order
 object OrderItem
-object Fittings
+object Material
+object Fitting
 object Wood
-object Screws
-object RoofTiles
+object Screw
+object RoofTile
 
-Order --> OrderItem
-OrderItem --> Status
-OrderItem --> Fittings
-OrderItem --> Wood
-OrderItem --> Screws
-OrderItem --> RoofTiles
+Order "1" -- "*" OrderItem
+OrderItem "1" -- "1" Status
+OrderItem "1" -- "1" Material
+Material -- Fitting : is-a
+Material -- Wood : is-a
+Material -- Screw : is-a
+Material -- RoofTile : is-a
 
-User --> Role
-User --> Membership
-User --> Order
+User "1" -- "1" Role
+User "1" -- "1" Membership
+User "1" -- "*" Order
 
 
 
