@@ -1,33 +1,42 @@
 @startuml
-'https://plantuml.com/object-diagram
-!pragma layout smetana
+'https://plantuml.com/activity-diagram-beta
 
-object User
-object Status
-object Role
-object Membership
-object Order
-object OrderItem
-object Material
-object Fitting
-object Wood
-object Screw
-object RoofTile
-
-Order "1" -- "*" OrderItem
-OrderItem "1" -- "1" Status
-OrderItem "1" -- "1" Material
-Material -- Fitting : is-a
-Material -- Wood : is-a
-Material -- Screw : is-a
-Material -- RoofTile : is-a
-
-User "1" -- "1" Role
-User "1" -- "1" Membership
-User "1" -- "*" Order
-
-
-
-
+|Website|
+start
+:Customize;
+:Signup;
+|Backend|
+:User Data;
+|Backend|
+|Database|
+:Create User;
+stop
+|Website|
+start
+:Login;
+|Backend|
+:Validate Credentials;
+|Website|
+:Make order;
+|Database|
+:Get Material Data;
+|Backend|
+:Generate Order;
+|Database|
+:Save Order;
+|Website|
+:Approve Order;
+|Database|
+:Calculate Price;
+|Backend|
+:Generate Price;
+:Generate Invoice;
+|Website|
+:Invoice;
+|Backend|
+:Generate material list + stl file;
+|Website|
+:Download file;
+stop
 
 @enduml
